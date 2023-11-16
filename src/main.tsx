@@ -5,9 +5,9 @@ import Nav from './components/Nav';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
-
-
 import './css/styles.css';
+
+
 const router = createBrowserRouter([
   {
     element: <Nav />,
@@ -23,9 +23,8 @@ const router = createBrowserRouter([
       {
         path: "/react-weather-app/hourly",
         element: <Hourly />,
-      }
-    ]
-    
+      },
+    ],
   },
 ]);
 

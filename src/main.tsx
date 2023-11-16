@@ -1,7 +1,7 @@
-import Daily from './components/Daily';
-import Home from './components/Home';
-import Hourly from './components/Hourly';
-import Nav from './components/Nav';
+import Daily from './routes/Daily';
+import Home from './routes/Home';
+import Hourly from './routes/Hourly';
+import Nav from './routes/Nav';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';

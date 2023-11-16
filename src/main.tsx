@@ -1,7 +1,7 @@
 import Daily from './routes/Daily';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
-import Nav from './routes/Nav';
+import Navbar from './components/Navbar';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
@@ -10,7 +10,7 @@ import './css/styles.css';
 
 const router = createBrowserRouter([
   {
-    element: <Nav />,
+    element: <Navbar />,
     children: [
       {
         path: "/react-weather-app/",

@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-export default function Nav() {
+ function Navbar() {
     return (
-        <div>Nav
+        <div>Navbar
             <Outlet />
         </div>
     )
 }
+
+export default Navbar;

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { GiRocketThruster } from 'react-icons/gi';
 import StyledNav from './Nav/Nav';
-
+import StyledNavbarContainer from './NavbarContainer/NavbarContainer.styles';
 
 /**
  * Renders the navigation bar component.
@@ -34,7 +34,7 @@ function Navbar() {
         <>
             <IconContext.Provider value={{color: "#fff"}}>
                 <StyledNav>
-                    <div className="navbar-container container">
+                    <StyledNavbarContainer>
                         <Link to="/react-weather-app"
                             className="navbar-logo"
                             onClick={closeMobileMenu}>
@@ -76,7 +76,7 @@ function Navbar() {
                                 </NavLink>
                             </li>
                         </ul>
-                    </div>
+                    </StyledNavbarContainer>
                 </StyledNav>
             </IconContext.Provider>
         </>

@@ -15,15 +15,12 @@ function Navbar() {
     return (
         <>
             <IconContext.Provider value={{color: "#fff"}}>
-                <nav className="navBar">
+                <nav className="navbar">
                     <div className="navbar-container container">
                         <Link to="/react-weather-app"
                             className="navbar-logo"
-                            >
-                            <GiRocketThruster 
-                                className="navbar-icon" 
-                                onClick={closeMobileMenu}
-                            />
+                            onClick={closeMobileMenu}>
+                            <GiRocketThruster className="navbar-icon" />
                             Weather
                         </Link>
                         <div className="menu-icon" onClick={handleClick}>
@@ -36,8 +33,7 @@ function Navbar() {
                                     className={({ isActive } ) => 
                                         "nav-links" + (isActive ? " activated" : "")
                                         }
-                                        onClick={closeMobileMenu}
-                                    >
+                                        onClick={closeMobileMenu}>
                                     Home
                                 </NavLink>
                             </li>
@@ -47,8 +43,7 @@ function Navbar() {
                                     className={({ isActive } ) => 
                                         "nav-links" + (isActive ? " activated" : "")
                                         }
-                                        onClick={closeMobileMenu}
-                                    >
+                                        onClick={closeMobileMenu}>
                                     Daily
                                 </NavLink>
                             </li>
@@ -58,8 +53,7 @@ function Navbar() {
                                     className={({ isActive } ) => 
                                         "nav-links" + (isActive ? " activated" : "")
                                         }
-                                        onClick={closeMobileMenu}
-                                    >
+                                        onClick={closeMobileMenu}>
                                     Hourly
                                 </NavLink>
                             </li>

@@ -5,7 +5,7 @@
 
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { GiRocketThruster } from 'react-icons/gi';
 import StyledNav from './Nav/Nav';

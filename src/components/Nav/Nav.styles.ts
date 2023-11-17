@@ -5,7 +5,7 @@
 import style from 'styled-components';
 
 export const StyledNav = style.nav`
-    background: #19191a;
+    background: grey;
     height: 80px;
     display: flex;
     justify-content: center;

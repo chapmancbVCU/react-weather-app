@@ -12,8 +12,8 @@ import StyledNav from './Nav/Nav';
 
 
 /**
- * 
- * @returns 
+ * Renders the navigation bar component.
+ * @returns React.Fragment that contains the navigation bar.
  */
 function Navbar() {
     const [click, setClick] = useState(false);

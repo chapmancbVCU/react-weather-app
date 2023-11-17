@@ -1,8 +1,12 @@
-
+/**
+ * @file Contains functions related to rendering the current conditions.
+ * @author Chad Chapman
+ */
 
 /**
- * 
- * @returns 
+ * Renders the current conditions forecast component.
+ * @returns React.Fragment that contains the current conditions forecast 
+ * component.
  */
 function Home() {
     return (

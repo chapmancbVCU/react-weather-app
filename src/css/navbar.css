@@ -1,3 +1,43 @@
+/******************************************************************************
+ * DESCRIPTION: Stylesheet for Navigation bar for items that should not be    *
+ *              styled with styled components.                                *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
+
+.activated {
+    color: #09bef0;
+}
+  
+.fa-bars {
+    color: #fff;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.navbar-icon {
+    margin-right: 0.5rem;
+}
+
+.nav-item {
+    height: 80px;
+    border-bottom: 2px solid transparent;
+}
+  
+.nav-item:hover {
+    border-bottom: 2px solid #09bef0;
+}
+
+.nav-links {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+}
+
 .navbar-logo {
     color: #fff;
     justify-self: start;
@@ -6,56 +46,50 @@
     font-size: 2rem;
     display: flex;
     align-items: center;
-  }
+}
 
-  .navbar-icon {
-    margin-right: 0.5rem;
-  }
-
-  .nav-menu {
+.nav-menu {
     display: flex;
     align-items: center;
     justify-content: center;
     list-style: none;
     text-align: center;
     justify-content: flex-end;
-  }
+}
   
-  .nav-item {
-    height: 80px;
-    border-bottom: 2px solid transparent;
-  }
-  
-  .nav-item:hover {
-    border-bottom: 2px solid #09bef0;
-  }
-
-  .nav-links {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    height: 100%;
-  }
-  
-  .activated {
-    color: #09bef0;
-  }
-  
-  .fa-bars {
-    color: #fff;
-  }
-  
-  .menu-icon {
-    display: none;
-  }
-  
-  @media screen and (max-width: 960px) {
+@media screen and (max-width: 960px) {
     .NavbarItems {
       position: relative;
     }
   
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-item:hover {
+        border: none;
+    }
+    
+    .nav-links {
+        text-align: center;
+        padding: 2rem;
+        width: 100%;
+        display: table;
+      }
+    
+    .nav-links:hover {
+        color: #09bef0;
+        transform: scale(1.2);
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(25%, 50%);
+    }
+
     .nav-menu {
       display: flex;
       flex-direction: column;
@@ -75,34 +109,6 @@
       z-index: 1;
     }
   
-    .nav-links {
-      text-align: center;
-      padding: 2rem;
-      width: 100%;
-      display: table;
-    }
-  
-    .nav-links:hover {
-      color: #09bef0;
-      transform: scale(1.2);
-      transition: all 0.3s ease;
-    }
-  
-    .nav-item:hover {
-      border: none;
-    }
-  
-    .nav-item {
-      width: 100%;
-    }
-  
-    .navbar-logo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translate(25%, 50%);
-    }
-  
     .menu-icon {
       display: block;
       position: absolute;
@@ -112,4 +118,4 @@
       font-size: 1.8rem;
       cursor: pointer;
     }
-  }
+}

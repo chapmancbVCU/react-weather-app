@@ -1,3 +1,7 @@
+/**
+ * @file Styles for Navigation bar styled component.
+ * @author Chad Chapman
+ */
 import style from 'styled-components';
 
 export const StyledNav = style.nav`

@@ -18,7 +18,16 @@ import StyledNav from './Nav/Nav';
 function Navbar() {
     const [click, setClick] = useState(false);
 
+    /**
+     * Calls the setClick function and sets click to false.
+     * @returns boolean value when click is set to false.
+     */
     const closeMobileMenu = () => setClick(false);
+
+    /**
+     * Responsible for handling clicks of the menu button.
+     * @returns boolean value that is opposite of current value of click.
+     */
     const handleClick = () => setClick(!click);
 
     return (

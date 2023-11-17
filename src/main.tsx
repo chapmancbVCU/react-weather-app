@@ -3,30 +3,22 @@
  * contains the routing.
  * @author Chad Chapman 
  */
+import { AppLayout } from './components/AppLayout';
 import Daily from './routes/Daily';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
-import Navbar from './components/Navbar';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { 
   createBrowserRouter, 
-  Outlet, 
   RouterProvider
 } from 'react-router-dom';
 import './css/styles.css';
 
 
-const AppLayout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
-  )
-}
-
-
+/**
+ * This function is responsible for routing within this application.
+ */
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -47,6 +39,11 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+/**
+ * Main entry point for the application.  Routing for the application occurs 
+ * here.
+ */
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />

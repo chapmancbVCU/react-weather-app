@@ -102,7 +102,7 @@
     }
   
     .nav-menu.active {
-      background: #19191a;
+      background: rgb(119, 119, 119);
       left: 0;
       opacity: 1;
       transition: all 0.6s ease;

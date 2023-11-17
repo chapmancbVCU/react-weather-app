@@ -2,15 +2,29 @@ import Daily from './routes/Daily';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
 import Navbar from './components/Navbar';
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { 
+  createBrowserRouter, 
+  Outlet, 
+  RouterProvider
+} from 'react-router-dom';
 import './css/styles.css';
+
+
+const AppLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  )
+}
 
 
 const router = createBrowserRouter([
   {
-    element: <Navbar />,
+    element: <AppLayout />,
     children: [
       {
         path: "/react-weather-app/",

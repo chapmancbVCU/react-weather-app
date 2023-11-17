@@ -8,6 +8,7 @@ import { IconContext } from 'react-icons/lib';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { GiRocketThruster } from 'react-icons/gi';
+import '../css/navbar.css';
 import StyledNav from './Nav/Nav';
 import StyledNavbarContainer from './NavbarContainer/NavbarContainer.styles';
 

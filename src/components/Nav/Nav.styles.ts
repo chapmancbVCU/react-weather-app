@@ -1,0 +1,13 @@
+import style from 'styled-components';
+
+export const StyledNav = style.nav`
+    background: #19191a;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+`

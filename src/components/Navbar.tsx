@@ -24,7 +24,7 @@ function Navbar() {
     return (
         <>
             <IconContext.Provider value={{color: "#fff"}}>
-                <StyledNav className="navbar">
+                <StyledNav>
                     <div className="navbar-container container">
                         <Link to="/react-weather-app"
                             className="navbar-logo"

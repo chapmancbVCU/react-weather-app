@@ -1,3 +1,9 @@
+
+
+/**
+ * 
+ * @returns 
+ */
 function Daily() {
     return (
         <div>Daily</div>

@@ -1,3 +1,8 @@
+
+/**
+ * 
+ * @returns 
+ */
 function Hourly() {
     return (
         <div>Hourly</div>

@@ -1,3 +1,8 @@
+/**
+ * @file Contains functions related to rendering the navigation bar.
+ * @author Chad Chapman
+ */
+
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import React, { useState } from 'react';
@@ -5,7 +10,10 @@ import { Link, NavLink } from 'react-router-dom';
 import { GiRocketThruster } from 'react-icons/gi';
 
 
-
+/**
+ * 
+ * @returns 
+ */
 function Navbar() {
     const [click, setClick] = useState(false);
 

@@ -1,3 +1,8 @@
+/**
+ * @file Main entry point of the React Weather App application. It also 
+ * contains the routing.
+ * @author Chad Chapman 
+ */
 import Daily from './routes/Daily';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';

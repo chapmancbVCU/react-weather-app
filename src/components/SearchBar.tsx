@@ -1,5 +1,4 @@
 import { Form, useLoaderData } from 'react-router-dom';
-import { useEffect } from 'react';
 import '../css/searchbar.css';
 
 function SearchBar() {

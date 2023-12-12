@@ -21,7 +21,9 @@ interface HourlyPageProps {
  */
 const Hourly : FC<HourlyPageProps> =({ weather }) => {
     return (
-        <div>Hourly</div>
+        <>
+            <div>Hourly</div>
+        </>
     )
 };
 

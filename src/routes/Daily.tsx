@@ -21,7 +21,9 @@ interface DailyPageProps {
  */
 const Daily : FC<DailyPageProps> = ({ weather }) => {
     return (
-        <div>Daily</div>
+        <>
+            <div>Daily</div>
+        </>
     )
 };
 

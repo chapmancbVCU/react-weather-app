@@ -2,13 +2,24 @@
  * @file Contains functions related to rendering the hourly forecast.
  * @author Chad Chapman
  */
+import React, { FC } from 'react';
+import { Weather } from "../ts/Weather";
+
+
+/**
+ * @interface HourlyPageProps The interface that describes props
+ * that are shared between components.
+ */
+interface HourlyPageProps {
+    weather: Weather;
+}
 
 
 /**
  * Renders the hourly forecast component.
  * @returns React.Fragment that contains the hourly forecast component.
  */
-function Hourly() {
+const Hourly : FC<HourlyPageProps> =({ weather }) => {
     return (
         <div>Hourly</div>
     )

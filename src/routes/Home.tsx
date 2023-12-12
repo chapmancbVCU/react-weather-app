@@ -14,12 +14,13 @@ interface HomePageProps {
     weather: Weather;
 }
 
+
 /**
  * Renders the current conditions forecast component.
  * @returns React.Fragment that contains the current conditions forecast 
  * component.
  */
-const Home : FC<HomePageProps> = ({weather}) => {
+const Home : FC<HomePageProps> = ({ weather }) => {
     let foo = weather.getAPI();
     console.log(foo);
     return (

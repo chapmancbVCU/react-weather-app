@@ -33,18 +33,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/react-weather-app/daily",
-        element: <Daily />,
+        element: <Daily weather={weather}/>,
       },
       {
         path: "/react-weather-app/hourly",
-        element: <Hourly />,
+        element: <Hourly weather={weather}/>,
       },
     ],
   },
 ]);
 
 
-/**
+/*
  * Main entry point for the application.  Routing for the application occurs 
  * here.
  */

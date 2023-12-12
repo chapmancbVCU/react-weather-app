@@ -2,17 +2,30 @@
  * @file Contains functions related to rendering the current conditions.
  * @author Chad Chapman
  */
-import { DateTimeUtility } from '../ts/DateTimeUtility';
-import { Weather } from './ts/Weather';
+import React, { FC } from 'react';
+import { Weather } from "../ts/Weather";
+
+
+/**
+ * @interface HomePageProps The interface that describes props
+ * that are shared between components.
+ */
+interface HomePageProps {
+    weather: Weather;
+}
+
 /**
  * Renders the current conditions forecast component.
  * @returns React.Fragment that contains the current conditions forecast 
  * component.
  */
-function Home() {
-    console.log('foo')
+const Home : FC<HomePageProps> = ({weather}) => {
+    let foo = weather.getAPI();
+    console.log(foo);
     return (
-        <div>Home</div>
+        <>
+            <div>Home {foo.getWeatherKey()}</div>
+        </> 
     )
 };
 

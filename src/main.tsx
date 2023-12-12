@@ -3,7 +3,7 @@
  * contains the routing.
  * @author Chad Chapman 
  */
-import { AppLayout } from './components/AppLayout';
+import AppLayout  from './components/AppLayout';
 import Daily from './routes/Daily';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
@@ -14,6 +14,10 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import './css/styles.css';
+import { Weather } from './ts/Weather.ts';
+
+
+const weather = new Weather();
 
 
 /**
@@ -25,7 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/react-weather-app/",
-        element: <Home />,
+        element: <Home weather={weather}/>,
       },
       {
         path: "/react-weather-app/daily",

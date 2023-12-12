@@ -10,4 +10,8 @@ export class Weather {
         this.apiKeys = new API();
         console.log(this.apiKeys.getWeatherKey());
     }
+
+     getAPI() {
+        return this.apiKeys;
+    }
 }

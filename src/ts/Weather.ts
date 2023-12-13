@@ -1,3 +1,4 @@
+// @ts-ignore
 import { API } from "./API";
 /**
  * @class The Weather class is responsible for getting weather data.

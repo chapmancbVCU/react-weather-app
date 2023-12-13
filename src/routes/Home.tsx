@@ -2,7 +2,7 @@
  * @file Contains functions related to rendering the current conditions.
  * @author Chad Chapman
  */
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Weather } from "../ts/Weather";
 
 

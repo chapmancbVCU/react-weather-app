@@ -2,7 +2,7 @@
  * @file Contains functions related to rendering the hourly forecast.
  * @author Chad Chapman
  */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Weather } from "../ts/Weather";
 
 

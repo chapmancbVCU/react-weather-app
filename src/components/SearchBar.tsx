@@ -3,7 +3,7 @@ import '../css/searchbar.css';
 
 function SearchBar() {
 
-    const q = useLoaderData();
+    //const q = useLoaderData();
     
     return (
         <div className="search-bar">

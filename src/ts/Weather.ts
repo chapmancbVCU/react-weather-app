@@ -133,4 +133,22 @@ export class Weather {
     setLongitude(longitude: number) {
         this.longitude = longitude;
     }
+
+
+    /**
+     * Sets the value of the units to be used based on user's location.
+     * @param {String} countryName The name of the user's nation based on 
+     * location detection.
+     */
+    setUnits(countryName:string) {
+        if (countryName.includes('United States of America') ||
+            countryName.includes('Myanmar') ||
+            countryName.includes('Liberia')) {
+            this.initialUnits = 'IMPERIAL';
+            this.units = 'IMPERIAL'
+        } else {
+            this.initialUnits = 'METRIC';
+            this.units = 'METRIC';
+        }
+    }
 }

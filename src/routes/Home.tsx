@@ -32,20 +32,32 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ weather }) => {
-    useEffect(() => {
-        foo();
-    })
     const [city, setCity] = useState(Object);
-    const foo = async () => {
-        const temp = await weather.getCityInfo();
-        console.log(temp);
-        setCity(temp);
+    const [countryName, setCountry] = useState(Object);
+
+
+    const setCityName = async () => {
+        const cityName = await weather.getCityInfo();
+        console.log(cityName);
+        setCity(cityName);
     }
 
+    const setCountryName = async () => {
+        const countryName = await weather.getInitialCountryName();
+        setCountry(countryName);
+    }
+
+    useEffect(() => {
+        setCityName();
+        setCountryName();
+    });
+
+    
     return (
         <>
-            <div>Home</div>
-            {typeof city === 'string' ? city : null}
+            <h1>Home</h1>
+            <p>City: {typeof city === 'string' ? city : null}</p>
+            <p>Nation: {typeof countryName === 'string' ? countryName : null}</p>
         </> 
     )
 };

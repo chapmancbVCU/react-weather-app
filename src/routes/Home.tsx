@@ -32,6 +32,10 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ weather }) => {
+    /**
+     * @prop Name of city for current or remote location we are getting the 
+     * weather forecast.
+     */
     const [city, setCity] = useState(Object);
     const [countryName, setCountry] = useState(Object);
 

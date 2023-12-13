@@ -2,7 +2,7 @@
  * @file Contains functions related to rendering the current conditions.
  * @author Chad Chapman
  */
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Weather } from "../ts/Weather";
 
 
@@ -14,6 +14,17 @@ interface HomePageProps {
     weather: Weather;
 }
 
+// useEffect(() => {
+    
+// })
+// function foo(weather: Weather) {
+//     try {
+//         let haha = weather.getCityInfo();
+//         return haha;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 /**
  * Renders the current conditions forecast component.
@@ -21,11 +32,20 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ weather }) => {
-    let foo = weather.getAPI();
-    console.log(foo);
+    useEffect(() => {
+        foo();
+    })
+    const [city, setCity] = useState(Object);
+    const foo = async () => {
+        const temp = await weather.getCityInfo();
+        console.log(temp);
+        setCity(temp);
+    }
+
     return (
         <>
-            <div>Home {foo.getWeatherKey()}</div>
+            <div>Home</div>
+            {typeof city === 'string' ? city : null}
         </> 
     )
 };

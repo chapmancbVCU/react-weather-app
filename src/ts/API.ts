@@ -5,22 +5,35 @@
 export class API {
 
     // Instance variables
-    //private weatherKey:string;
+    private city: string;
+    private latitude: number;
+    private longitude: number;
+    private requestURL: string;
+    private requestType: string;
+    private units: string;
     
     
     /**
      * Default constructor.
      */
-    constructor() {
-        const fetchData = async () => {
-            const res = await fetch('http://localhost:3000/api?type=simple&&foo=bar');
-            const data = await res.json();
-            console.log(data.data);
-        }
+    constructor(city: string, latitude: number, longitude: number, 
+            requestUrl: string, requestType: string, units: string) {
+        this.city = city;
+        this.latitude = 0;
+        this.longitude = 0;
+        this.requestURL = "";
+        this.requestType = "";
+        this.units = "";
+        
 
-        fetchData();
+        this.fetchData();
     }
 
+    async fetchData() {
+        const res = await fetch('http://localhost:3000/api?type=simple&&foo=bar');
+        const data = await res.json();
+        console.log(data.data);
+    }
 
     /**
      * Getter function for open weather API key.

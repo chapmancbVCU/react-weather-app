@@ -8,7 +8,6 @@ export class API {
     private city: string;
     private latitude: number;
     private longitude: number;
-    private requestURL: string;
     private requestType: string;
     private units: string;
     
@@ -17,20 +16,43 @@ export class API {
      * Default constructor.
      */
     constructor(city: string, latitude: number, longitude: number, 
-            requestUrl: string, requestType: string, units: string) {
-        this.city = city;
-        this.latitude = 0;
-        this.longitude = 0;
-        this.requestURL = "";
-        this.requestType = "";
-        this.units = "";
+            requestType: string, units: string) {
+        // Setup request type and set other instance variables accordingly.
+        this.requestType = requestType;
         
-
-        this.fetchData();
+        if(this.requestType === "SIMPLE") {
+            this.city = city;
+            this.latitude = 0;
+            this.longitude = 0;
+            this.units = "";
+            this.fetchSimpleData();
+            console.log("simple");
+        } else if(this.requestType === "COMPLETE") {
+            this.city = "";
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.units = units;
+            this.fetchCompleteData();
+            console.log("complete");
+        } else {
+            this.city = "error";
+            this.latitude = -50000;
+            this.longitude = -50000;
+            this.units = "error";
+            console.log("simple");
+            console.log("Invalid request type for weather.  " + 
+                "Must be SIMPLE or COMPLETE");
+        }
     }
 
-    async fetchData() {
-        const res = await fetch('http://localhost:3000/api?type=simple&&foo=bar');
+    async fetchCompleteData() {
+        const res = await fetch(`http://localhost:3000/api?type=${this.requestType}&&city=${this.city}`);
+        const data = await res.json();
+        console.log(data.data);
+    }
+
+    async fetchSimpleData() {
+        const res = await fetch(`http://localhost:3000/api?type=${this.requestType}&&city=${this.city}`);
         const data = await res.json();
         console.log(data.data);
     }

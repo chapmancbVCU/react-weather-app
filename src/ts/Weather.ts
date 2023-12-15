@@ -22,7 +22,7 @@ export class Weather {
      * Creates instance of Weather object.
      */
     constructor() {
-        this.apiKeys = new API("Newport News", 12, 33, "test_url", "simple", 
+        this.apiKeys = new API("Newport News", 12, 33, "simple", 
             "IMPERIAL");
         this.geoLocationInfo = this.getGeoLocationInformation();
         this.city = this.getLocalityInformation(this.geoLocationInfo);

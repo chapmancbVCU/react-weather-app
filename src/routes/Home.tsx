@@ -14,17 +14,6 @@ interface HomePageProps {
     weather: Weather;
 }
 
-// useEffect(() => {
-    
-// })
-// function foo(weather: Weather) {
-//     try {
-//         let haha = weather.getCityInfo();
-//         return haha;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
 
 /**
  * Renders the current conditions forecast component.
@@ -38,6 +27,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
      */
     const [city, setCity] = useState(Object);
     const [countryName, setCountry] = useState(Object);
+    const [data, setData] = useState([]);
 
 
     const setCityName = async () => {
@@ -51,7 +41,21 @@ const Home : FC<HomePageProps> = ({ weather }) => {
         setCountry(countryName);
     }
 
+    const setWeatherData = async () => {
+        // fetch('http://localhost:3000/api' )
+        //     .then(response => response.json())
+        //     .then(res => {
+        //         if(res && res.data) {
+        //             console.log(res.data);
+        //         }
+        //     })
+        // const res = await fetch('http://localhost:3000/api?type=simple&&foo=bar');
+        // const data = await res.json();
+        // console.log(data.data);
+    }
+
     useEffect(() => {
+        setWeatherData();
         setCityName();
         setCountryName();
     });

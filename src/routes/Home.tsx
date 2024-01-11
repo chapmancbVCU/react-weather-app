@@ -32,7 +32,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
 
     const setCityName = async () => {
         const cityName = await weather.getCityInfo();
-        console.log(cityName);
+        console.log("City Name: " + cityName);
         setCity(cityName);
     }
 
@@ -42,23 +42,16 @@ const Home : FC<HomePageProps> = ({ weather }) => {
     }
 
     const setWeatherData = async () => {
-        // fetch('http://localhost:3000/api' )
-        //     .then(response => response.json())
-        //     .then(res => {
-        //         if(res && res.data) {
-        //             console.log(res.data);
-        //         }
-        //     })
-        // const res = await fetch('http://localhost:3000/api?type=simple&&foo=bar');
-        // const data = await res.json();
-        // console.log(data.data);
+        const cityData = await weather.getCityData(city);
+        setData(cityData);
+        console.log("foo: " + cityData.data);
     }
 
     useEffect(() => {
-        setWeatherData();
         setCityName();
         setCountryName();
-    });
+        setWeatherData();
+    }, []);
 
     
     return (

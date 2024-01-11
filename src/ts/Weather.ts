@@ -22,8 +22,7 @@ export class Weather {
      * Creates instance of Weather object.
      */
     constructor() {
-        this.apiKeys = new API("Newport News", 12, 33, "SIMPLE", 
-            "IMPERIAL");
+        
         this.geoLocationInfo = this.getGeoLocationInformation();
         this.city = this.getLocalityInformation(this.geoLocationInfo);
         this.initialCountryName = this.getCountryInformation(this.geoLocationInfo);
@@ -33,9 +32,25 @@ export class Weather {
         this.latitude = 0;
         this.longitude = 0;
         this.units = "";
+
+        //this.apiKeys = null; //new API(this.getCityInfo(), 12, 33, "SIMPLE", "IMPERIAL");
     }
 
     
+    /**
+     * Returns the limited weather data using api call based on city name.
+     * @param {String} city The locality whose weather we want to retrieve.
+     * @returns The limited local weather data.
+     */
+    async getCityData(city: any) {
+        try {
+            const response = await fetch(`http://chad-ubuntu-pc:3000/api?type=SIMPLE&&city=${city}`);
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     /**
      * Get the name of city that is detected using geolocation based on 
      * localhost's location.
@@ -106,7 +121,7 @@ export class Weather {
             const data = await response.json();
             const country = data.countryName;
             if(country.includes('United States of America')) {
-                return data.locality + ", " + data.principalSubdivision;
+                return `${data.locality}, ${data.principalSubdivision}`;
             } else {
                 return data.city + ", " + data.countryName;
             }

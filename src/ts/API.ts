@@ -15,7 +15,7 @@ export class API {
     /**
      * Default constructor.
      */
-    constructor(city: string, latitude: number, longitude: number, 
+    constructor(city: any, latitude: number, longitude: number, 
             requestType: string, units: string) {
         // Setup request type and set other instance variables accordingly.
         this.requestType = requestType;
@@ -52,7 +52,7 @@ export class API {
     }
 
     async fetchSimpleData() {
-        const res = await fetch(`http://localhost:3000/api?type=${this.requestType}&&city=${this.city}`);
+        const res = await fetch(`http://chad-ubuntu-pc:3000/api?type=${this.requestType}&&city=${this.city}`);
         const data = await res.json();
         console.log(data.data);
     }

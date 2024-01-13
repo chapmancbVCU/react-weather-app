@@ -52,7 +52,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
         setCityName();
         setCountryName();
         setWeatherData();
-        console.log("foobar: " + data.data.coord.lat);  
+        // console.log("foobar: " + data.data.coord.lat);  
     }, []);
 
     
@@ -61,7 +61,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
             <h1>Home</h1>
             <p>City: {typeof city === 'string' ? city : null}</p>
             <p>Nation: {typeof country === 'string' ? country : null}</p>
-            <p>Lat: {data.data.coord.lat}</p>
+            {/* <p>Lat: {data.data.coord.lat}</p> */}
         </> 
     )
 };

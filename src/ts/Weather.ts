@@ -110,6 +110,15 @@ export class Weather {
 
 
     /**
+     * Getter function for returning city data as a JSON object.
+     * @returns JSON object containing city data.
+     */
+    getJSONCityData() {
+        return this.JSONCityData;
+    }
+
+    
+    /**
      * Retrieves locality information of user upon initialization of page.
      * @param {String} geoLocationInfo JSON string that contains information 
      * about user's current location.
@@ -128,6 +137,15 @@ export class Weather {
         } catch (error) {
             console.log(error);
         }
+    }
+
+
+    /**
+     * Setter function for simple weather data in the form of a JSON object.
+     * @param {JSON} cityData JSON object containing weather data. 
+     */
+    setJSONCityData(cityData:string) {
+        this.JSONCityData = cityData;
     }
 
 

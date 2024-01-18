@@ -27,12 +27,12 @@ const Home : FC<HomePageProps> = ({ weather }) => {
      */
     const [city, setCity] = useState(Object);
     const [country, setCountry] = useState(Object);
-    const [data, setData] = useState(JSON);
+    const [data, setData] = useState("");
 
 
     const setCityName = async () => {
         const cityName = await weather.getCityInfo();
-        console.log("City Name: " + cityName);
+        //console.log("City Name: " + cityName);
         setCity(cityName);
     }
 
@@ -42,10 +42,10 @@ const Home : FC<HomePageProps> = ({ weather }) => {
     }
 
     const setWeatherData = async () => {
-        console.log(city);
-        const cityData = await weather.getCityData(city);
+        //console.log(city);
+        const cityData = await JSON.stringify(weather.getJSONCityData());
         setData(cityData);
-        console.log("foo: " + cityData.data.coord.lat); 
+        //console.log("foo: " + cityData.data.coord.lat); 
     }
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
             <h1>Home</h1>
             <p>City: {typeof city === 'string' ? city : null}</p>
             <p>Nation: {typeof country === 'string' ? country : null}</p>
-            {/* <p>Lat: {data.data.coord.lat}</p> */}
+            <p>Lat: {typeof data === 'string' ? data : null}</p>
         </> 
     )
 };

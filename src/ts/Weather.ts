@@ -6,7 +6,6 @@ import { API } from "./API";
  */
 export class Weather {
     // Instance variables
-    private apiKeys: API;
     private city: object;
     private geoLocationInfo: string;
     private initialCountryName: any;

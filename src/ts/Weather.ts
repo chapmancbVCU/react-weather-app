@@ -79,12 +79,23 @@ export class Weather {
 
 
     /**
+     * Getter function for returning descriptive weather data as a JSON object.
+     * @returns JSON object containing descriptive weather data.
+     */
+    getJSONDescriptiveWeatherData() {
+        return this.JSONDescriptiveWeatherData;
+    }
+
+
+    /**
      * Getter function for retrieving the users country.
      * @returns The nation where the user resides.
      */
     getInitialCountryName() {
         return this.initialCountryName;
     }
+
+
     /**
      * Detect location of localhost so we can get local weather on page load.
      * @returns The string representation of locality information in form of 
@@ -119,6 +130,15 @@ export class Weather {
 
     
     /**
+     * Getter function for the latitude.
+     * @returns The latitude of the user or search query
+     */
+    getLatitude() {
+        return this.latitude;
+    }
+
+
+    /**
      * Retrieves locality information of user upon initialization of page.
      * @param {String} geoLocationInfo JSON string that contains information 
      * about user's current location.
@@ -141,11 +161,68 @@ export class Weather {
 
 
     /**
+     * Getter function for the longitude.
+     * @returns The longitude of the user or search query
+     */
+    getLongitude() {
+        return this.longitude;
+    }
+
+
+    /**
+     * Getter function that retrieves the units.  This value can be METRIC or 
+     * IMPERIAL.
+     * @returns The units name that the user as selected or detected based on 
+     * the user's location.
+     */
+    getUnits() {
+        return this.units;
+    }
+
+
+    /**
+     * Returns the detailed weather data of the user's location or search 
+     * query.
+     * @param {Number} latitude The latitude of user's location or search 
+     * query.
+     * @param {Number} longitude The longitued of user's location or search 
+     * query.
+     * @returns Detailed weather data. 
+     */
+    async getWeatherData(latitude: number, longitude: number) {
+        let units = '';
+        if(this.getUnits() === 'IMPERIAL') {
+            units = 'imperial';
+        } else {
+            units = 'metric';
+        }        
+        try {
+            const response = await fetch(`http://chad-ubuntu-pc:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
+            const weatherData = await response.json();
+            return weatherData;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    /**
      * Setter function for simple weather data in the form of a JSON object.
      * @param {JSON} cityData JSON object containing weather data. 
      */
     setJSONCityData(cityData:string) {
         this.JSONCityData = cityData;
+    }
+
+
+    /**
+     * Setter function for descriptive weather data in the form of a JSON 
+     * object.
+     * @param {JSON} descriptiveWeatherData JSON object containing descriptive 
+     * weather data.
+     */
+    setJSONDescriptiveWeatherData(descriptiveWeatherData:string) {
+        this.JSONDescriptiveWeatherData = descriptiveWeatherData;
     }
 
 

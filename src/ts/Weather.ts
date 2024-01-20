@@ -31,8 +31,6 @@ export class Weather {
         this.latitude = 0;
         this.longitude = 0;
         this.units = "";
-
-        //this.apiKeys = null; //new API(this.getCityInfo(), 12, 33, "SIMPLE", "IMPERIAL");
     }
 
     
@@ -43,7 +41,7 @@ export class Weather {
      */
     async getCityData(city: any) {
         try {
-            const response = await fetch(`http://chad-ubuntu-pc:3000/api?type=SIMPLE&&city=${city}`);
+            const response = await fetch(`http://localhost:3000/api?type=SIMPLE&&city=${city}`);
             return await response.json();
         } catch (error) {
             console.log(error);
@@ -87,7 +85,7 @@ export class Weather {
         return this.initialUnits;
     }
 
-    
+
     /**
      * Getter function for returning descriptive weather data as a JSON object.
      * @returns JSON object containing descriptive weather data.
@@ -207,7 +205,7 @@ export class Weather {
             units = 'metric';
         }        
         try {
-            const response = await fetch(`http://chad-ubuntu-pc:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
+            const response = await fetch(`http://localhost:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
             const weatherData = await response.json();
             return weatherData;
         } catch (error) {

@@ -37,11 +37,13 @@ export class Weather {
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {String} city The locality whose weather we want to retrieve.
+     * @param {String} hostname The hostname/IP Address for the Weather API 
+     * server.
      * @returns The limited local weather data as a JSON string.
      */
-    async getCityData(city: any) {
+    async getCityData(city: any, hostname: string) {
         try {
-            const response = await fetch(`http://localhost:3000/api?type=SIMPLE&&city=${city}`);
+            const response = await fetch(`http://${hostname}:3000/api?type=SIMPLE&&city=${city}`);
             return await response.json();
         } catch (error) {
             console.log(error);
@@ -195,9 +197,11 @@ export class Weather {
      * query.
      * @param {Number} longitude The longitued of user's location or search 
      * query.
+     * @param {String} hostname The hostname/IP Address for the Weather API 
+     * server.
      * @returns Detailed weather data as a JSON string.
      */
-    async getWeatherData(latitude: number, longitude: number) {
+    async getWeatherData(latitude: number, longitude: number, hostname: string) {
         let units = '';
         if(this.getUnits() === 'IMPERIAL') {
             units = 'imperial';
@@ -205,7 +209,7 @@ export class Weather {
             units = 'metric';
         }        
         try {
-            const response = await fetch(`http://localhost:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
+            const response = await fetch(`http://${hostname}:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
             const weatherData = await response.json();
             return weatherData;
         } catch (error) {

@@ -22,17 +22,17 @@ const weather = new Weather();
 try {
   const localityInfo = await weather.getCityInfo();
   console.log(localityInfo);
-  const cityData = await weather.getCityData(localityInfo);
+  const cityData = await weather.getCityData(localityInfo, "localhost");
   console.log(cityData)
   const countryName = await weather.getInitialCountryName();
   weather.setUnits(countryName);
 
   weather.setJSONCityData(cityData);
 
-  const descriptiveWeatherData = 
-    await weather.getWeatherData(weather.getLatitude(), weather.getLongitude());
-  weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
-  console.log(descriptiveWeatherData);
+  // const descriptiveWeatherData = 
+  //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
+  // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
+  // console.log(descriptiveWeatherData);
 
 
 } catch (error) {

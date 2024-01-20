@@ -78,6 +78,17 @@ export class Weather {
 
 
     /**
+     * Getter function for initial unit system.  It can be either IMPERIAL or 
+     * METRIC.
+     * @returns The initial units that were set upon location detection when 
+     * the user loads the page.
+     */
+    getInitialUnits() {
+        return this.initialUnits;
+    }
+
+    
+    /**
      * Getter function for returning descriptive weather data as a JSON object.
      * @returns JSON object containing descriptive weather data.
      */

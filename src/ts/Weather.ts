@@ -37,7 +37,7 @@ export class Weather {
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {String} city The locality whose weather we want to retrieve.
-     * @returns The limited local weather data.
+     * @returns The limited local weather data as a JSON string.
      */
     async getCityData(city: any) {
         try {
@@ -195,7 +195,7 @@ export class Weather {
      * query.
      * @param {Number} longitude The longitued of user's location or search 
      * query.
-     * @returns Detailed weather data. 
+     * @returns Detailed weather data as a JSON string.
      */
     async getWeatherData(latitude: number, longitude: number) {
         let units = '';

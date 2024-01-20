@@ -209,7 +209,7 @@ export class Weather {
             units = 'metric';
         }        
         try {
-            const response = await fetch(`http://${hostname}:3000/api?type=COMPLETE&lat=${latitude}&lon=${longitude}&units=${units}`);
+            const response = await fetch(`http://${hostname}:3000/api?type=ONECALL&lat=${latitude}&lon=${longitude}&units=${units}`);
             const weatherData = await response.json();
             return weatherData;
         } catch (error) {

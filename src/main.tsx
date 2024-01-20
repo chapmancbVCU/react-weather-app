@@ -20,7 +20,7 @@ import { Weather } from './ts/Weather.ts';
 const weather = new Weather();
 
 try {
-  const localityInfo = weather.getCityInfo();
+  const localityInfo = await weather.getCityInfo();
   console.log(localityInfo);
   const cityData = await weather.getCityData(localityInfo);
   console.log(cityData)

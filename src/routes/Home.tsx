@@ -58,8 +58,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
     
     return (
         <>
-            <h1>Home</h1>
-            <p>City: {typeof city === 'string' ? city : null}</p>
+            <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
             <p>Nation: {typeof country === 'string' ? country : null}</p>
             <p>Lat: {typeof data === 'string' ? data : null}</p>
         </> 

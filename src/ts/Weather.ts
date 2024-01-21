@@ -195,7 +195,7 @@ export class Weather {
      * query.
      * @param {Number} latitude The latitude of user's location or search 
      * query.
-     * @param {Number} longitude The longitued of user's location or search 
+     * @param {Number} longitude The longitude of user's location or search 
      * query.
      * @param {String} hostname The hostname/IP Address for the Weather API 
      * server.

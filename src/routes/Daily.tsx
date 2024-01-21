@@ -23,7 +23,7 @@ interface DailyPageProps {
 const Daily : FC<DailyPageProps> = ({ weather }) => {
     return (
         <>
-            <div>Daily</div>
+            <h2 className='page-title'>Your 7 Day Forecast</h2>
         </>
     )
 };

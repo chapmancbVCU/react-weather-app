@@ -219,9 +219,9 @@ export class Weather {
 
     /**
      * Setter function for simple weather data in the form of a JSON object.
-     * @param {JSON} cityData JSON object containing weather data. 
+     * @param {string} cityData JSON string containing weather data. 
      */
-    setJSONCityData(cityData:string): void {
+    setJSONCityData(cityData:string|any): void {
         this.JSONCityData = cityData;
     }
 
@@ -229,10 +229,10 @@ export class Weather {
     /**
      * Setter function for descriptive weather data in the form of a JSON 
      * object.
-     * @param {JSON} descriptiveWeatherData JSON object containing descriptive 
+     * @param {string} descriptiveWeatherData JSON string containing descriptive 
      * weather data.
      */
-    setJSONDescriptiveWeatherData(descriptiveWeatherData:string): void {
+    setJSONDescriptiveWeatherData(descriptiveWeatherData:string|any): void {
         this.JSONDescriptiveWeatherData = descriptiveWeatherData;
     }
 

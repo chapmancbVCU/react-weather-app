@@ -57,11 +57,11 @@ const Home : FC<HomePageProps> = ({ weather }) => {
 
     
     return (
-        <>
+        <div className='clear-sky content'>
             <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
             <p>Nation: {typeof country === 'string' ? country : null}</p>
             <p>Lat: {typeof data === 'string' ? data : null}</p>
-        </> 
+        </div> 
     )
 };
 

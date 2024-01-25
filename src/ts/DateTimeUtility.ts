@@ -44,7 +44,7 @@ export class DateTimeUtility {
      */
     getDateInfo(localDateTime: String) {
         const dateInfo = document.querySelector('#date-info');
-        dateInfo.textContent = this.getDayOfWeek(localDateTime) + ', ' + 
+        dateInfo!.textContent = this.getDayOfWeek(localDateTime) + ', ' + 
             this.getFullMonthName(localDateTime) + ' ' + 
             this.getDayOfMonth(localDateTime) + ', ' + 
             localDateTime.slice(12, 16);
@@ -72,7 +72,7 @@ export class DateTimeUtility {
      * an ISO string.
      * @returns Full day of week name.
      */
-    getDayOfWeek(dateTimeStamp: String) {
+    getDayOfWeek(dateTimeStamp: String): String|void {
         let days = [['Sunday', 'Sun'], ['Monday', 'Mon'], ['Tuesday', 'Tue'],
             ['Wednesday', 'Wed'], ['Thursday', 'Thu'], ['Friday', 'Fri'],
             ['Saturday', 'Sat']];
@@ -125,9 +125,9 @@ export class DateTimeUtility {
      * @param {HTMLDivElement} timeContainer The element whose text we will 
      * set with the time.
      */
-    getTimeInfo(localDateTime, timeContainer) {
-        let hours = localDateTime.slice(17, 19);
-        let minutes = localDateTime.slice(20, 22);
+    getTimeInfo(localDateTime: String, timeContainer: any) {
+        let hours: any = localDateTime.slice(17, 19);
+        let minutes: any = localDateTime.slice(20, 22);
 
         if (minutes < 10) {
             minutes = minutes.slice(0, 1);

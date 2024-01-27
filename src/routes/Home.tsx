@@ -2,6 +2,7 @@
  * @file Contains functions related to rendering the current conditions.
  * @author Chad Chapman
  */
+import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC, useEffect, useState } from 'react';
 import { Weather } from "../ts/Weather";
 
@@ -12,6 +13,7 @@ import { Weather } from "../ts/Weather";
  */
 interface HomePageProps {
     weather: Weather;
+    dateTimeUtility: DateTimeUtility;
 }
 
 
@@ -32,7 +34,6 @@ const Home : FC<HomePageProps> = ({ weather }) => {
 
     const setCityName = async () => {
         const cityName = await weather.getCityInfo();
-        //console.log("City Name: " + cityName);
         setCity(cityName);
     }
 
@@ -42,17 +43,14 @@ const Home : FC<HomePageProps> = ({ weather }) => {
     }
 
     const setWeatherData = async () => {
-        //console.log(city);
         const cityData = await JSON.stringify(weather.getJSONCityData());
         setData(cityData);
-        //console.log("foo: " + cityData.data.coord.lat); 
     }
 
     useEffect(() => {
         setCityName();
         setCountryName();
-        setWeatherData();
-        // console.log("foobar: " + data.data.coord.lat);  
+        setWeatherData(); 
     }, []);
 
     
@@ -60,8 +58,15 @@ const Home : FC<HomePageProps> = ({ weather }) => {
         <div className='clear-sky content'>
             <div className='forecast'>
                 <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
-                <p>Nation: {typeof country === 'string' ? country : null}</p>
-                <p>Lat: {typeof data === 'string' ? data : null}</p>
+                <div className='current-conditions-container'>
+                    <div className='current-conditions-left'>
+
+                    </div>
+                    <div className='current-conditions-right'></div>
+                </div>             
+            </div>
+            <div className='forecast'>
+                <p>Data: {typeof data === 'string' ? data : null}</p>
             </div>
         </div> 
     )

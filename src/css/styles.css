@@ -30,6 +30,21 @@ body, html {
   height: 100%;
 }
 
+.current-conditions-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-conditions-left {
+  border: solid black 1px;
+  min-height: 30px;
+}
+
+.current-conditions-right {
+  border: solid black 1px;
+  min-height: 30px;
+}
+
 .forecast {
   border: 3px solid black;
   border-radius: 5px;
@@ -53,8 +68,19 @@ body, html {
   height: 100%;
 }
 
+@media only screen and (min-width: 900px) {
+  .current-conditions-container {
+    flex-direction: row;
+  }
+  .current-conditions-left {
+    width: 50%;
+  }
+  
+  .current-conditions-right {
+    width: 50%;
+  }
+}
 
+@media only screen and (min-width: 800px) {
 
-
-
-
+}

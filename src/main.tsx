@@ -5,6 +5,7 @@
  */
 import AppLayout  from './components/AppLayout';
 import Daily from './routes/Daily';
+import { DateTimeUtility } from './ts/DateTimeUtility.ts'; 
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
 import React from 'react';
@@ -16,7 +17,7 @@ import {
 import './css/styles.css';
 import { Weather } from './ts/Weather.ts';
 
-
+const dateTimeUtility = new DateTimeUtility();
 const weather = new Weather();
 
 try {
@@ -29,10 +30,10 @@ try {
 
   weather.setJSONCityData(cityData);
 
-  // const descriptiveWeatherData = 
-  //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
-  // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
-  // console.log(descriptiveWeatherData);
+  const descriptiveWeatherData = 
+    await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
+  weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
+  console.log(descriptiveWeatherData);
 
 
 } catch (error) {
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/react-weather-app/",
-        element: <Home weather={weather}/>,
+        element: <Home weather={weather}
+          dateTimeUtility={dateTimeUtility}/>,
       },
       {
         path: "/react-weather-app/daily",

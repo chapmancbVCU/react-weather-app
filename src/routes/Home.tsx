@@ -29,8 +29,8 @@ const Home : FC<HomePageProps> = ({ weather }) => {
      */
     const [city, setCity] = useState(Object);
     const [country, setCountry] = useState(Object);
-    const [data, setData] = useState("");
-
+    const [freeTierData, setFreeTierData] = useState("");
+    const [oneCallData, setOneCallData] = useState("");
 
     const setCityName = async () => {
         const cityName = await weather.getCityInfo();
@@ -42,15 +42,21 @@ const Home : FC<HomePageProps> = ({ weather }) => {
         setCountry(countryName);
     }
 
-    const setWeatherData = async () => {
-        const cityData = await JSON.stringify(weather.getJSONCityData());
-        setData(cityData);
+    const setFreeTierWeatherData = async () => {
+        const data = await JSON.stringify(weather.getJSONCityData());
+        setFreeTierData(data);
+    }
+
+    const setOneCallWeatherData = async () => {
+        const data = await JSON.stringify(weather.getJSONDescriptiveWeatherData());
+        setOneCallData(data);
     }
 
     useEffect(() => {
         setCityName();
         setCountryName();
-        setWeatherData(); 
+        setFreeTierWeatherData(); 
+        setOneCallWeatherData();
     }, []);
 
     
@@ -66,7 +72,11 @@ const Home : FC<HomePageProps> = ({ weather }) => {
                 </div>             
             </div>
             <div className='forecast'>
-                <p>Data: {typeof data === 'string' ? data : null}</p>
+                <h3>Free Tier Data</h3>
+                <p>{typeof freeTierData === 'string' ? freeTierData : null}</p>
+                <br></br>
+                <h3>One Call Data</h3>
+                <p>{typeof oneCallData === 'string' ? oneCallData : null}</p>
             </div>
         </div> 
     )

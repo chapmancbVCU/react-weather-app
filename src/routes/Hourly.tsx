@@ -4,6 +4,7 @@
  */
 import { FC } from 'react';
 import { Weather } from "../ts/Weather";
+import { DateTimeUtility } from '../ts/DateTimeUtility';
 
 
 /**
@@ -11,6 +12,7 @@ import { Weather } from "../ts/Weather";
  * that are shared between components.
  */
 interface HourlyPageProps {
+    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -20,7 +22,7 @@ interface HourlyPageProps {
  * @returns React.Fragment that contains the hourly forecast component.
  */
 // @ts-ignore
-const Hourly : FC<HourlyPageProps> =({ weather }) => {
+const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }) => {
     return (
         <>
             <h2 className='page-title'>Hourly Forecast</h2>

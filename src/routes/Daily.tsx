@@ -2,6 +2,7 @@
  * @file Contains functions related to rendering the daily forecast.
  * @author Chad Chapman
  */
+import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC } from 'react';
 import { Weather } from "../ts/Weather";
 
@@ -11,6 +12,7 @@ import { Weather } from "../ts/Weather";
  * that are shared between components.
  */
 interface DailyPageProps {
+    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -20,7 +22,7 @@ interface DailyPageProps {
  * @returns React.Fragment that contains the daily forecast component.
  */
 // @ts-ignore
-const Daily : FC<DailyPageProps> = ({ weather }) => {
+const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }) => {
     return (
         <>
             <h2 className='page-title'>Your 7 Day Forecast</h2>

@@ -42,7 +42,7 @@ export class Weather {
      */
     async getCityData(city: any, hostname: string): Promise<string|void> {
         try {
-            const response = await fetch(`http://${hostname}:3000/api?type=SIMPLE&&city=${city}`);
+            const response = await fetch(`http://${hostname}:3000/api?type=SIMPLE&city=${city}`);
             return await response.json();
         } catch (error) {
             console.log(error);

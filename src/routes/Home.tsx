@@ -12,8 +12,8 @@ import { Weather } from "../ts/Weather";
  * that are shared between components.
  */
 interface HomePageProps {
-    weather: Weather;
     dateTimeUtility: DateTimeUtility;
+    weather: Weather;
 }
 
 
@@ -22,7 +22,7 @@ interface HomePageProps {
  * @returns React.Fragment that contains the current conditions forecast 
  * component.
  */
-const Home : FC<HomePageProps> = ({ weather }) => {
+const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }) => {
     /**
      * @prop Name of city for current or remote location we are getting the 
      * weather forecast.
@@ -43,7 +43,7 @@ const Home : FC<HomePageProps> = ({ weather }) => {
     }
 
     const setFreeTierWeatherData = async () => {
-        const data = await JSON.stringify(weather.getJSONCityData());
+        const data = await weather.getJSONCityData();
         setFreeTierData(data);
     }
 

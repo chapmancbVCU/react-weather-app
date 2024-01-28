@@ -52,20 +52,3 @@ body, html {
   flex-flow: column;
   height: 100%;
 }
-
-@media only screen and (min-width: 900px) {
-  .current-conditions-container {
-    flex-direction: row;
-  }
-  .current-conditions-left {
-    width: 50%;
-  }
-  
-  .current-conditions-right {
-    width: 50%;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-
-}

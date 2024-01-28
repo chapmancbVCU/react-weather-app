@@ -49,6 +49,7 @@ export class Weather {
         }
     }
 
+    
     /**
      * Get the name of city that is detected using geolocation based on 
      * localhost's location.
@@ -77,35 +78,6 @@ export class Weather {
 
 
     /**
-     * Getter function for initial unit system.  It can be either IMPERIAL or 
-     * METRIC.
-     * @returns The initial units that were set upon location detection when 
-     * the user loads the page.
-     */
-    getInitialUnits(): string {
-        return this.initialUnits;
-    }
-
-
-    /**
-     * Getter function for returning descriptive weather data as a JSON object.
-     * @returns JSON object containing descriptive weather data.
-     */
-    getJSONDescriptiveWeatherData(): string {
-        return this.JSONDescriptiveWeatherData;
-    }
-
-
-    /**
-     * Getter function for retrieving the users country.
-     * @returns The nation where the user resides.
-     */
-    getInitialCountryName(): string {
-        return this.initialCountryName;
-    }
-
-
-    /**
      * Detect location of localhost so we can get local weather on page load.
      * @returns The string representation of locality information in form of 
      * URL that references an API.
@@ -129,6 +101,26 @@ export class Weather {
     }
 
 
+     /**
+     * Getter function for retrieving the users country.
+     * @returns The nation where the user resides.
+     */
+     getInitialCountryName(): string {
+        return this.initialCountryName;
+    }
+
+
+    /**
+     * Getter function for initial unit system.  It can be either IMPERIAL or 
+     * METRIC.
+     * @returns The initial units that were set upon location detection when 
+     * the user loads the page.
+     */
+    getInitialUnits(): string {
+        return this.initialUnits;
+    }
+
+
     /**
      * Getter function for returning city data as a JSON object.
      * @returns JSON object containing city data.
@@ -137,7 +129,16 @@ export class Weather {
         return this.JSONCityData;
     }
 
-    
+
+    /**
+     * Getter function for returning descriptive weather data as a JSON object.
+     * @returns JSON object containing descriptive weather data.
+     */
+    getJSONDescriptiveWeatherData(): string {
+        return this.JSONDescriptiveWeatherData;
+    }
+
+
     /**
      * Getter function for the latitude.
      * @returns The latitude of the user or search query

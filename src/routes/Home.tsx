@@ -28,27 +28,52 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }) => {
      * weather forecast.
      */
     const [city, setCity] = useState(Object);
+
+    /**
+     * @prop Name of country where city is located.
+     */
     const [country, setCountry] = useState(Object);
+
+    /**
+     * @prop Free tier data to display current conditions.
+     */
     const [freeTierData, setFreeTierData] = useState("");
+
+    /**
+     * @prop One call tier data for displaying hourly and daily forecast.
+     */
     const [oneCallData, setOneCallData] = useState("");
 
+    /**
+     * Sets state for current city.
+     */
     const setCityName = async () => {
         const cityName = await weather.getCityInfo();
         setCity(cityName);
     }
 
+    /**
+     * Sets state for country for where current city is located.
+     */
     const setCountryName = async () => {
         const countryName = await weather.getInitialCountryName();
         setCountry(countryName);
     }
 
+    /**
+     * Sets state for free tier data.
+     */
     const setFreeTierWeatherData = async () => {
         const data = await weather.getJSONCityData();
         setFreeTierData(data);
     }
 
+    /**
+     * Sets state for one call tier data.
+     */
     const setOneCallWeatherData = async () => {
-        const data = await JSON.stringify(weather.getJSONDescriptiveWeatherData());
+        const data = await JSON.stringify(
+            weather.getJSONDescriptiveWeatherData());
         setOneCallData(data);
     }
 

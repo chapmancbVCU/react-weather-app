@@ -17,9 +17,12 @@ import {
 import './css/styles.css';
 import { Weather } from './ts/Weather.ts';
 
+
+// Instantiate objects here so they are available across application.
 const dateTimeUtility = new DateTimeUtility();
 const weather = new Weather();
 
+// Perform initial query of current location upon start of application.
 try {
   const localityInfo = await weather.getCityInfo();
   console.log(localityInfo);
@@ -30,10 +33,10 @@ try {
 
   weather.setJSONCityData(cityData);
 
-  const descriptiveWeatherData = 
-    await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
-  weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
-  console.log(descriptiveWeatherData);
+  // const descriptiveWeatherData = 
+  //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
+  // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
+  // console.log(descriptiveWeatherData);
 
 
 } catch (error) {
@@ -49,16 +52,24 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/react-weather-app/",
-        element: <Home weather={weather}
-          dateTimeUtility={dateTimeUtility}/>,
+        element: <Home 
+          dateTimeUtility={dateTimeUtility}
+          weather={weather}
+        />,
       },
       {
         path: "/react-weather-app/daily",
-        element: <Daily weather={weather}/>,
+        element: <Daily 
+          dateTimeUtility={dateTimeUtility}
+          weather={weather}
+        />,
       },
       {
         path: "/react-weather-app/hourly",
-        element: <Hourly weather={weather}/>,
+        element: <Hourly 
+          dateTimeUtility={dateTimeUtility}
+          weather={weather}
+        />,
       },
     ],
   },

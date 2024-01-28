@@ -20,7 +20,7 @@ body, html {
 }
 
 .clear-sky {
-    background-image: url('../../public/images/clear-sky.jpg');
+    background-image: url('/images/clear-sky.jpg');
 }
 
 .content {

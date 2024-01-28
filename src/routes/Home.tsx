@@ -3,6 +3,7 @@
  * @author Chad Chapman
  */
 import { DateTimeUtility } from '../ts/DateTimeUtility';
+import '../css/currentConditions.css';
 import { FC, useEffect, useState } from 'react';
 import { Weather } from "../ts/Weather";
 
@@ -64,7 +65,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }) => {
      * Sets state for free tier data.
      */
     const setFreeTierWeatherData = async () => {
-        const data = await weather.getJSONCityData();
+        const data = await JSON.stringify(weather.getJSONCityData());
         setFreeTierData(data);
     }
 

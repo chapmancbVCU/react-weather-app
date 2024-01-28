@@ -6,6 +6,7 @@
 import AppLayout  from './components/AppLayout';
 import Daily from './routes/Daily';
 import { DateTimeUtility } from './ts/DateTimeUtility.ts'; 
+import ErrorPage from './routes/ErrorPage.tsx';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
 import React from 'react';
@@ -50,6 +51,7 @@ try {
 const router = createBrowserRouter([
     {
         element: <AppLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/react-weather-app/",

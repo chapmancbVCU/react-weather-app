@@ -6,6 +6,7 @@ import "../css/error.css";
 import { useRouteError } from "react-router-dom";
 import AppLayout from "../components/AppLayout";
 
+
 /**
  * Renders error page for weather application
  * @returns JSX.Element for the error page.
@@ -15,7 +16,6 @@ export default function ErrorPage(): JSX.Element {
   console.error(error);
 
   return (
-
     <>
         <AppLayout />
         <div className="error-message-container">

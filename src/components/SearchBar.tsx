@@ -50,9 +50,9 @@ function SearchBar(): JSX.Element {
                     hidden={true}
                 />
                 <div className="sr-only" aria-live="polite">
-                {/* {options.map((option: {name: string}) => (
+                {options.map((option: {name: string}) => (
                     <p>{option.name}</p>
-                ))} */}
+                ))}
                 
                 </div>
             </Form>

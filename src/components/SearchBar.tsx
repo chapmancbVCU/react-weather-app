@@ -8,8 +8,9 @@ import '../css/searchbar.css';
 
 
 /**
- * 
- * @returns 
+ * Responsible for rendering search bar, handling suggestions, and search 
+ * operations.
+ * @returns JSX.Element that contains the search bar.
  */
 function SearchBar(): JSX.Element {
 

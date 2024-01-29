@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar";
 
 /**
  * Renders the Navbar and Outlet components.
- * @returns React.Fragment that contains general layout for the page.
+ * @returns JSX.Element that contains general layout for the page.
  */
 function AppLayout(): JSX.Element {
     return (

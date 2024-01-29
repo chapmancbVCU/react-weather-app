@@ -19,7 +19,7 @@ interface DailyPageProps {
 
 /**
  * Renders the daily forecast component.
- * @returns React.Fragment that contains the daily forecast component.
+ * @returns JSX.Element that contains the daily forecast component.
  */
 // @ts-ignore
 const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {

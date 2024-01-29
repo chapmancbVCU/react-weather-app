@@ -20,7 +20,7 @@ interface HomePageProps {
 
 /**
  * Renders the current conditions forecast component.
- * @returns React.Fragment that contains the current conditions forecast 
+ * @returns JSX.Element that contains the current conditions forecast 
  * component.
  */
 const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {

@@ -11,7 +11,7 @@ import '../css/searchbar.css';
  * 
  * @returns 
  */
-function SearchBar() {
+function SearchBar(): JSX.Element {
 
     const [options, setOptions] = useState<[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');

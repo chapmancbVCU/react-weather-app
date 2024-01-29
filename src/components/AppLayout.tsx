@@ -11,15 +11,14 @@ import SearchBar from "./SearchBar";
  * Renders the Navbar and Outlet components.
  * @returns React.Fragment that contains general layout for the page.
  */
-function AppLayout() {
-
-  return (
-    <>
-      <Navbar />
-      <SearchBar />
-      <Outlet />
-    </>
-  )
+function AppLayout(): JSX.Element {
+    return (
+        <>
+            <Navbar />
+            <SearchBar />
+            <Outlet />
+        </>
+    )
 }
 
 export default AppLayout;

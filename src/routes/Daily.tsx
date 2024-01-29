@@ -22,7 +22,7 @@ interface DailyPageProps {
  * @returns React.Fragment that contains the daily forecast component.
  */
 // @ts-ignore
-const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }) => {
+const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
     return (
         <>
             <h2 className='page-title'>Your 7 Day Forecast</h2>

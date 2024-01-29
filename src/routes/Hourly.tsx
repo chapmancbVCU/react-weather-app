@@ -22,7 +22,7 @@ interface HourlyPageProps {
  * @returns React.Fragment that contains the hourly forecast component.
  */
 // @ts-ignore
-const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }) => {
+const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element => {
     return (
         <>
             <h2 className='page-title'>Hourly Forecast</h2>

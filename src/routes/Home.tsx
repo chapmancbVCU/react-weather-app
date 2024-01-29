@@ -23,7 +23,7 @@ interface HomePageProps {
  * @returns React.Fragment that contains the current conditions forecast 
  * component.
  */
-const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }) => {
+const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     /**
      * @prop Name of city for current or remote location we are getting the 
      * weather forecast.

@@ -50,6 +50,7 @@ try {
  */
 const router = createBrowserRouter([
     {
+        path: '/',
         element: <AppLayout />,
         errorElement: <ErrorPage />,
         children: [

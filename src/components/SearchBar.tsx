@@ -18,7 +18,7 @@ function SearchBar(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState<string>('');
     
     const getSearchOptions = (value: string) => {
-        fetch(`http://localhost:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
+        fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
             .then((res) => res.json())
             .then((data) => setOptions(data));
     }
@@ -50,9 +50,9 @@ function SearchBar(): JSX.Element {
                     hidden={true}
                 />
                 <div className="sr-only" aria-live="polite">
-                {options.map((option: {name: string}) => (
+                {/* {options.map((option: {name: string}) => (
                     <p>{option.name}</p>
-                ))}
+                ))} */}
                 
                 </div>
             </Form>

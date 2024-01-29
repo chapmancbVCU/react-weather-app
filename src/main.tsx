@@ -30,7 +30,7 @@ const weather = new Weather();
 try {
     const localityInfo = await weather.getCityInfo();
     console.log(localityInfo);
-    const cityData = await weather.getCityData(localityInfo, "localhost");
+    const cityData = await weather.getCityData(localityInfo);
     console.log(cityData)
     const countryName = await weather.getInitialCountryName();
     weather.setUnits(countryName);
@@ -38,7 +38,7 @@ try {
     weather.setJSONCityData(cityData);
 
     // const descriptiveWeatherData = 
-    //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude(), "localhost");
+    //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude());
     // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
     // console.log(descriptiveWeatherData);
 } catch (error) {

@@ -1,5 +1,3 @@
-// @ts-ignore
-import { API } from "./API";
 /**
  * @class The Weather class is responsible for getting weather data.
  * @author Chad Chapman
@@ -30,6 +28,7 @@ export class Weather {
         this.latitude = 0;
         this.longitude = 0;
         this.units = "";
+        // console.log(process.env.REACT_APP_WEATHER_API_SERVER_HOSTNAME)
     }
 
     
@@ -40,9 +39,10 @@ export class Weather {
      * server.
      * @returns The limited local weather data as a JSON string.
      */
-    async getCityData(city: any, hostname: string): Promise<string|void> {
+    async getCityData(city: any): Promise<string|void> {
         try {
-            const response = await fetch(`http://${hostname}:3000/api?type=SIMPLE&city=${city}`);
+            const response = await fetch(
+                `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
             return await response.json();
         } catch (error) {
             console.log(error);
@@ -201,7 +201,7 @@ export class Weather {
      * server.
      * @returns Detailed weather data as a JSON string.
      */
-    async getWeatherData(latitude: number, longitude: number, hostname: string): Promise<string|void> {
+    async getWeatherData(latitude: number, longitude: number): Promise<string|void> {
         let units = '';
         if(this.getUnits() === 'IMPERIAL') {
             units = 'imperial';
@@ -209,7 +209,7 @@ export class Weather {
             units = 'metric';
         }        
         try {
-            const response = await fetch(`http://${hostname}:3000/api?type=ONECALL&lat=${latitude}&lon=${longitude}&units=${units}`);
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=ONECALL&lat=${latitude}&lon=${longitude}&units=${units}`);
             const weatherData = await response.json();
             return weatherData;
         } catch (error) {

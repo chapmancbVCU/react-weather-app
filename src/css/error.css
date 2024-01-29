@@ -1,0 +1,15 @@
+/******************************************************************************
+ * DESCRIPTION: Stylesheet for error page messages.                           *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
+.error-message {
+    margin-top: 10px;
+}
+
+.error-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+

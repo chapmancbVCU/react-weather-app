@@ -19,12 +19,12 @@ function SearchBar(): JSX.Element {
     
     const getSearchOptions = (value: string) => {
         fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
-            .then((response) => response.json())
-            .then(res => {
-                if (res.data) {
-                    setOptions(res.data);
-                }
-            })
+        .then((response) => response.json())
+        .then(res => {
+            if (res.data) {
+                setOptions(res.data);
+            }
+        })
     }
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -19,8 +19,12 @@ function SearchBar(): JSX.Element {
     
     const getSearchOptions = (value: string) => {
         fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
-            .then((res) => res.json())
-            .then((data) => setOptions(data));
+            .then((response) => response.json())
+            .then(res => {
+                if (res.data) {
+                    setOptions(res.data);
+                }
+            })
     }
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +37,9 @@ function SearchBar(): JSX.Element {
         console.log(options)
     }
 
+    // const onOptionSelect = (option) => {
 
+    // }
     return (
         <div className="search-bar">
             <Form className="search-form">
@@ -49,12 +55,16 @@ function SearchBar(): JSX.Element {
                     aria-hidden
                     hidden={true}
                 />
-                <div className="sr-only" aria-live="polite">
-                {/* {options.map((option: {name: string}) => (
-                    <p>{option.name}</p>
-                ))} */}
-                
-                </div>
+                <div className="sr-only" aria-live="polite"></div>
+                <ul>
+                    {options.map((option: { name: string, state: string}, index: number) => (
+                        <li key={option.name + '-' + index}>
+                            {/* <button> */}
+                                {option.name}, {option.state}
+                            {/* </button> */}
+                        </li>
+                    ))}
+                </ul>
             </Form>
         </div>
     )

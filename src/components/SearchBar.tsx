@@ -4,6 +4,7 @@
  */
 import { ChangeEvent, useState } from 'react';
 import { Form, useLoaderData } from 'react-router-dom';
+import { optionType } from '../ts/Option';
 import '../css/searchbar.css';
 
 
@@ -37,9 +38,10 @@ function SearchBar(): JSX.Element {
         console.log(options)
     }
 
-    // const onOptionSelect = (option) => {
+    const onOptionSelect = (option: optionType) => {
+        console.log(option.name);
+    }
 
-    // }
     return (
         <div className="search-bar">
             <Form className="search-form">
@@ -57,11 +59,11 @@ function SearchBar(): JSX.Element {
                 />
                 <div className="sr-only" aria-live="polite"></div>
                 <ul>
-                    {options.map((option: { name: string, state: string}, index: number) => (
+                    {options.map((option: optionType, index: number) => (
                         <li key={option.name + '-' + index}>
-                            {/* <button> */}
+                            <button onClick={() => onOptionSelect(option)}>
                                 {option.name}, {option.state}
-                            {/* </button> */}
+                            </button>
                         </li>
                     ))}
                 </ul>

@@ -6,6 +6,9 @@
 .search-bar {
     border: solid black 1px;
     display: flex;
+    position: sticky;
+    top: 80px;
+    width: 100%;
 }
 
 

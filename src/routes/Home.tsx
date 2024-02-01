@@ -4,7 +4,7 @@
  */
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import '../css/currentConditions.css';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Weather } from "../ts/Weather";
 
 
@@ -87,7 +87,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         // console.log("One call data");
         // console.log(oneCallData);
         // console.log("\n\n\----------------------------------------\n\n")
-    }, [freeTierData]);
+    }, []);
 
     
     return (

@@ -3,7 +3,7 @@
  * @author Chad Chapman
  */
 import { DateTimeUtility } from '../ts/DateTimeUtility';
-import { FC } from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Weather } from "../ts/Weather";
 
 
@@ -22,9 +22,27 @@ interface DailyPageProps {
  */
 // @ts-ignore
 const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
+    /**
+     * @prop One call tier data for displaying hourly and daily forecast.
+     */
+    const [oneCallData, setOneCallData] = useState<any>();
+
+    /**
+     * Sets state for one call tier data.
+     */
+    const setOneCallWeatherData = async () => {
+        const data = await weather.getJSONDescriptiveWeatherData();
+        setOneCallData(data);
+    }
+
+    useEffect(() => {
+        setOneCallWeatherData()
+    }, []);
+
     return (
         <>
             <h2 className='page-title'>Your 7 Day Forecast</h2>
+            <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
         </>
     )
 };

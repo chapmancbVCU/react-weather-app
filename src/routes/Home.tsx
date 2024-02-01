@@ -148,7 +148,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <hr></hr>
                 <h3>One Call Data</h3>
                 {/* oneCallData? to prevent undefined property error */}
-                <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
+                {/* <p>{typeof oneCallData && oneCallData?.current.clouds}</p> */}
             </div>
         </div> 
     )

@@ -29,7 +29,6 @@ const weather = new Weather();
  */
 try {
     const localityInfo = await weather.getCityInfo();
-    console.log(localityInfo);
     const cityData = await weather.getCityData(localityInfo);
     const countryName = await weather.getInitialCountryName();
     weather.setUnits(countryName);

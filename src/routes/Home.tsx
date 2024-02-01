@@ -67,7 +67,6 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     const setFreeTierWeatherData =  () => {
         const data = weather.getJSONCityData();
         setFreeTierData(data);
-        console.log(freeTierData);
     }
 
     /**
@@ -84,6 +83,11 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setCountryName();
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
+        console.log(city + ", " + country);
+        console.log("Free tier data (ctrl+s if no output on page load):");
+        console.log(freeTierData);
+
+        console.log("\n\n\----------------------------------------\n\n")
     }, []);
 
     
@@ -91,7 +95,6 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         <div className='clear-sky content'>
             <div className='forecast'>
                 <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
-                <p>{typeof country === 'string' ? country : null}</p>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
 
@@ -103,7 +106,11 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <h3>Free Tier Data</h3>
                 <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                 <p>cod: {freeTierData && freeTierData.cod}</p>
-                <p>coord: Lat={freeTierData && freeTierData.coord.lat}, Lon={freeTierData && freeTierData.coord.lon}</p>
+                <br></br>
+                <h4>coord:</h4>
+                <p>lat:{freeTierData && freeTierData.coord.lat}</p>
+                <p>lon:{freeTierData && freeTierData.coord.lon}</p>
+                <br></br>
                 <p>dt: {freeTierData && freeTierData.dt}</p>
                 <p>id: {freeTierData && freeTierData.id}</p>
                 <br></br>

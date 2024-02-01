@@ -8,7 +8,7 @@ export class Weather {
     private geoLocationInfo: string;
     private initialCountryName: any;
     private initialUnits: string;
-    private JSONCityData: string;
+    private JSONCityData: any;
     private JSONDescriptiveWeatherData: string;
     private latitude: number;
     private longitude: number;
@@ -23,7 +23,7 @@ export class Weather {
         this.city = this.getLocalityInformation(this.geoLocationInfo);
         this.initialCountryName = this.getCountryInformation(this.geoLocationInfo);
         this.initialUnits = "";
-        this.JSONCityData = "";
+        this.JSONCityData = null!;
         this.JSONDescriptiveWeatherData = "";
         this.latitude = 0;
         this.longitude = 0;
@@ -39,11 +39,15 @@ export class Weather {
      * server.
      * @returns The limited local weather data as a JSON string.
      */
-    async getCityData(city: any): Promise<string|void> {
+    async getCityData(city: any){
         try {
             const response = await fetch(
                 `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
-            return await response.json();
+            const res = await response.json()
+            if (res.data) {
+                return res.data;
+            }
+            //return await response.json();
         } catch (error) {
             console.log(error);
         }
@@ -125,7 +129,7 @@ export class Weather {
      * Getter function for returning city data as a JSON object.
      * @returns JSON object containing city data.
      */
-    getJSONCityData(): string {
+    getJSONCityData(): any {
         return this.JSONCityData;
     }
 

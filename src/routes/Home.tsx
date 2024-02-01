@@ -43,7 +43,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     /**
      * @prop One call tier data for displaying hourly and daily forecast.
      */
-    const [oneCallData, setOneCallData] = useState("");
+    const [oneCallData, setOneCallData] = useState<any>();
 
     /**
      * Sets state for current city.
@@ -73,8 +73,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      * Sets state for one call tier data.
      */
     const setOneCallWeatherData = async () => {
-        const data = await JSON.stringify(
-            weather.getJSONDescriptiveWeatherData());
+        const data = await weather.getJSONDescriptiveWeatherData();
         setOneCallData(data);
     }
 
@@ -86,7 +85,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
-
+        console.log("One call data");
+        console.log(oneCallData);
         console.log("\n\n\----------------------------------------\n\n")
     }, []);
 
@@ -143,9 +143,10 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <p>deg: {freeTierData && freeTierData.wind.deg}</p>
                 <p>gust: {freeTierData && freeTierData.wind.gust}</p>
                 <p>speed: {freeTierData && freeTierData.wind.speed}</p>
+                <br></br>
                 <hr></hr>
                 <h3>One Call Data</h3>
-                <p>{typeof oneCallData === 'string' ? oneCallData : null}</p>
+                <p>{typeof oneCallData && oneCallData.current.clouds}</p>
             </div>
         </div> 
     )

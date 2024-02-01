@@ -35,10 +35,9 @@ try {
 
     weather.setJSONCityData(cityData);
 
-    // const descriptiveWeatherData = 
-    //   await weather.getWeatherData(weather.getLatitude(), weather.getLongitude());
-    // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
-    // console.log(descriptiveWeatherData);
+    const descriptiveWeatherData = 
+      await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
+    weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
 } catch (error) {
     console.log(error)
 }

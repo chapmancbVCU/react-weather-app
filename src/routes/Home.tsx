@@ -64,8 +64,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     /**
      * Sets state for free tier data.
      */
-    const setFreeTierWeatherData =  () => {
-        const data = weather.getJSONCityData();
+    const setFreeTierWeatherData = async () => {
+        const data = await weather.getJSONCityData();
         setFreeTierData(data);
     }
 
@@ -85,10 +85,10 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
-        console.log("One call data");
-        console.log(oneCallData);
-        console.log("\n\n\----------------------------------------\n\n")
-    }, []);
+        // console.log("One call data");
+        // console.log(oneCallData);
+        // console.log("\n\n\----------------------------------------\n\n")
+    }, [freeTierData]);
 
     
     return (
@@ -136,7 +136,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <h4>weather: Array[1]</h4>
                 <p>description: {freeTierData && freeTierData.weather[0].description}</p>
                 <p>icon:</p>
-                <div><img src={`https://openweathermap.org/img/wn/${freeTierData.weather[0].icon}@2x.png`}></img></div>
+                {/* freeTierData? to prevent undefined property error */}
+                <div><img src={`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`}></img></div>
                 <p>id: {freeTierData && freeTierData.weather[0].id}</p>
                 <p>main: {freeTierData && freeTierData.weather[0].main}</p>
                 <br></br>
@@ -147,7 +148,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <br></br>
                 <hr></hr>
                 <h3>One Call Data</h3>
-                <p>{typeof oneCallData && oneCallData.current.clouds}</p>
+                {/* oneCallData? to prevent undefined property error */}
+                <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
             </div>
         </div> 
     )

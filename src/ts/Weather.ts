@@ -28,7 +28,6 @@ export class Weather {
         this.latitude = 0;
         this.longitude = 0;
         this.units = "";
-        // console.log(process.env.REACT_APP_WEATHER_API_SERVER_HOSTNAME)
     }
 
     
@@ -47,7 +46,6 @@ export class Weather {
             if (res.data) {
                 return res.data;
             }
-            //return await response.json();
         } catch (error) {
             console.log(error);
         }

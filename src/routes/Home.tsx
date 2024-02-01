@@ -13,7 +13,6 @@ import { Weather } from "../ts/Weather";
  * that are shared between components.
  */
 interface HomePageProps {
-    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 

@@ -20,7 +20,6 @@ import { Weather } from './ts/Weather.ts';
 
 
 // Instantiate objects here so they are available across application.
-const dateTimeUtility = new DateTimeUtility();
 const weather = new Weather();
 
 /*
@@ -53,23 +52,17 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/react-weather-app/",
-                element: <Home 
-                dateTimeUtility={dateTimeUtility}
-                weather={weather}
+                element: <Home weather={weather}
                 />,
             },
                 {
                 path: "/react-weather-app/daily",
-                element: <Daily 
-                dateTimeUtility={dateTimeUtility}
-                weather={weather}
+                element: <Daily weather={weather}
                 />,
             },
             {
                 path: "/react-weather-app/hourly",
-                element: <Hourly 
-                dateTimeUtility={dateTimeUtility}
-                weather={weather}
+                element: <Hourly weather={weather}
                 />,
             },
         ],

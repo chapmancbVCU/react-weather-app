@@ -12,7 +12,6 @@ import { DateTimeUtility } from '../ts/DateTimeUtility';
  * that are shared between components.
  */
 interface HourlyPageProps {
-    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -22,7 +21,7 @@ interface HourlyPageProps {
  * @returns JSX.Element that contains the hourly forecast component.
  */
 // @ts-ignore
-const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element => {
+const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     return (
         <>
             <h2 className='page-title'>Hourly Forecast</h2>

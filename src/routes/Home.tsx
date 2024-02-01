@@ -135,7 +135,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <br></br>
                 <h4>weather: Array[1]</h4>
                 <p>description: {freeTierData && freeTierData.weather[0].description}</p>
-                <p>icon: {freeTierData && freeTierData.weather[0].icon}</p>
+                <p>icon:</p>
+                <div><img src={`https://openweathermap.org/img/wn/${freeTierData.weather[0].icon}@2x.png`}></img></div>
                 <p>id: {freeTierData && freeTierData.weather[0].id}</p>
                 <p>main: {freeTierData && freeTierData.weather[0].main}</p>
                 <br></br>

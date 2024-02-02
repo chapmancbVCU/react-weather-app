@@ -34,9 +34,7 @@ export class Weather {
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {string} city The locality whose weather we want to retrieve.
-     * @param {string} hostname The hostname/IP Address for the Weather API 
-     * server.
-     * @returns The limited local weather data as a JSON string.
+     * @returns The limited local weather data as a JSON Object.
      */
     async getCityData(city: any) {
         try {
@@ -182,26 +180,13 @@ export class Weather {
 
 
     /**
-     * Getter function that retrieves the units.  This value can be METRIC or 
-     * IMPERIAL.
-     * @returns The units name that the user as selected or detected based on 
-     * the user's location.
-     */
-    getUnits(): string {
-        return this.units;
-    }
-
-
-    /**
      * Returns the detailed weather data of the user's location or search 
      * query.
      * @param {number} latitude The latitude of user's location or search 
      * query.
      * @param {number} longitude The longitude of user's location or search 
      * query.
-     * @param {string} hostname The hostname/IP Address for the Weather API 
-     * server.
-     * @returns Detailed weather data as a JSON string.
+     * @returns Detailed weather data as a JSON object.
      */
     async getOneCallWeatherData(latitude: number, longitude: number) {
         let units = '';
@@ -219,6 +204,17 @@ export class Weather {
         } catch (error) {
             console.log(error);
         }
+    }
+
+
+    /**
+     * Getter function that retrieves the units.  This value can be METRIC or 
+     * IMPERIAL.
+     * @returns The units name that the user as selected or detected based on 
+     * the user's location.
+     */
+    getUnits(): string {
+        return this.units;
     }
 
 

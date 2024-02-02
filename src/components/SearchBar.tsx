@@ -14,10 +14,21 @@ import '../css/searchbar.css';
  * @returns JSX.Element that contains the search bar.
  */
 function SearchBar(): JSX.Element {
-
+    /**
+     * @prop The available location suggestions presented to the user.
+     */
     const [options, setOptions] = useState<[]>([]);
+
+    /**
+     * @prop The search term that the user enters into the search bar.
+     */
     const [searchTerm, setSearchTerm] = useState<string>('');
     
+    /**
+     * Retrieves suggested names for locations when user types query into 
+     * the search bar.
+     * @param value Input for search bar.
+     */
     const getSearchOptions = (value: string) => {
         fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
         .then((response) => response.json())
@@ -28,6 +39,12 @@ function SearchBar(): JSX.Element {
         })
     }
 
+    /**
+     * Detects input from search field and sets search term and search options 
+     * that will be presented to the user.
+     * @param e Event for when new input is detected in the search field.
+     * @returns 
+     */
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);

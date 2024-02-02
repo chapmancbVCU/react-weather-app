@@ -42,10 +42,13 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
 
     return (
-        <>
-            <h2 className='page-title'>Hourly Forecast</h2>
+        <div className='clear-sky content'>
+            <div className='forecast'>
+                <h2 className='page-title'>Hourly Forecast</h2>
+            </div>
+            
             <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
-        </>
+        </div>
     )
 };
 

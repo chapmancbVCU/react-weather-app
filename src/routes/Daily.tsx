@@ -3,6 +3,7 @@
  * @author Chad Chapman
  */
 import { DateTimeUtility } from '../ts/DateTimeUtility';
+import '../css/currentConditions.css';
 import { FC, useEffect, useState} from 'react';
 import { Weather } from "../ts/Weather";
 
@@ -40,10 +41,13 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     }, []);
 
     return (
-        <>
-            <h2 className='page-title'>Your 7 Day Forecast</h2>
+        <div className='clear-sky content'>
+            <div className='forecast'>
+                <h2 className='page-title'>Your 7 Day Forecast</h2>
+            </div>
+            
             <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
-        </>
+        </div>
     )
 };
 

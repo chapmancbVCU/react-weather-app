@@ -4,8 +4,9 @@
  */
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC, useEffect, useState } from 'react';
+import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
-
 
 
 /**
@@ -44,7 +45,10 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
-                <h2 className='page-title'>Hourly Forecast</h2>
+                <ForecastHeader>
+                    <UnitToggleSwitch weather={weather}/>
+                    <h2 className='page-title'>Hourly Forecast</h2>
+                </ForecastHeader>
             </div>
             
             <p>{typeof oneCallData && oneCallData?.current.clouds}</p>

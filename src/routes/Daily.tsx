@@ -5,6 +5,8 @@
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import '../css/currentConditions.css';
 import { FC, useEffect, useState} from 'react';
+import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
 
 
@@ -43,7 +45,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
-                <h2 className='page-title'>Your 7 Day Forecast</h2>
+                <ForecastHeader>
+                    <UnitToggleSwitch weather={weather}/>
+                    <h2 className='page-title'>Your 7 Day Forecast</h2>
+                </ForecastHeader>
             </div>
             
             <p>{typeof oneCallData && oneCallData?.current.clouds}</p>

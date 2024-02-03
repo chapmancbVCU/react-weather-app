@@ -26,6 +26,9 @@ const UnitToggleSwitch :
      */
     const [freeTierData, setFreeTierData] = useState<any>();
 
+    /**
+     * 
+     */
     const sliderCX = cx('slider', {
         'rounded': rounded
     });

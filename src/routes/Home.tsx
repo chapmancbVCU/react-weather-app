@@ -5,6 +5,7 @@
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import '../css/currentConditions.css';
 import { FC, useState, useEffect } from 'react';
+import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
 
@@ -94,10 +95,10 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
-                <div>
+                <ForecastHeader>
                     <UnitToggleSwitch weather={weather}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
-                </div>
+                </ForecastHeader>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
 

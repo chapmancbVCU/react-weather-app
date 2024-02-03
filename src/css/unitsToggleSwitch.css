@@ -1,0 +1,13 @@
+/******************************************************************************
+ * DESCRIPTION: Units toggle switch stylesheet for React Weather App.         *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
+
+
+ .toggle-switch-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+ }

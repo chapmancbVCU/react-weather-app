@@ -29,7 +29,7 @@ const weather = new Weather();
 try {
     const localityInfo = await weather.getCityInfo();
     const cityData = await weather.getCityData(localityInfo);
-    const countryName = await weather.getInitialCountryName();
+    const countryName = await weather.getCountryName();
     weather.setUnits(countryName);
 
     weather.setJSONCityData(cityData);

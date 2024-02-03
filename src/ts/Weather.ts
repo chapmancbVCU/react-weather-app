@@ -6,7 +6,7 @@ export class Weather {
     // Instance variables
     private city: object;
     private geoLocationInfo: string;
-    private initialCountryName: any;
+    private countryName: any;
     private initialUnits: string;
     private JSONCityData: any;
     private JSONDescriptiveWeatherData: any;
@@ -21,7 +21,7 @@ export class Weather {
     constructor() {
         this.geoLocationInfo = this.getGeoLocationInformation();
         this.city = this.getLocalityInformation(this.geoLocationInfo);
-        this.initialCountryName = this.getCountryInformation(this.geoLocationInfo);
+        this.countryName = this.getCountryInformation(this.geoLocationInfo);
         this.initialUnits = "";
         this.JSONCityData = null!;
         this.JSONDescriptiveWeatherData = null!;
@@ -105,8 +105,8 @@ export class Weather {
      * Getter function for retrieving the users country.
      * @returns The nation where the user resides.
      */
-     getInitialCountryName(): string {
-        return this.initialCountryName;
+     getCountryName(): string {
+        return this.countryName;
     }
 
 

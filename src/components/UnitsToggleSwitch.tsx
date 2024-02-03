@@ -14,7 +14,7 @@ import { Weather } from "../ts/Weather";
  */
 interface UnitsToggleSwitchProps {
     weather: Weather
-    rounded: rounded
+    rounded: boolean
 }
 
 

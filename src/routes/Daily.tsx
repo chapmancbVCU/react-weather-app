@@ -46,7 +46,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather}/>
+                    <UnitToggleSwitch weather={weather} rounded={true}/>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
                 </ForecastHeader>
             </div>

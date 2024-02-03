@@ -96,7 +96,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather}/>
+                    <UnitToggleSwitch weather={weather} rounded={true}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>
                 <div className='current-conditions-container'>

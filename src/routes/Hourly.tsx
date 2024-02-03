@@ -46,7 +46,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather}/>
+                    <UnitToggleSwitch weather={weather} rounded={true}/>
                     <h2 className='page-title'>Hourly Forecast</h2>
                 </ForecastHeader>
             </div>

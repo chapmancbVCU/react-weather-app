@@ -2,6 +2,7 @@
  * @file Supports ability to switch between metric and imperial units.
  * @author Chad Chapman
  */
+import cx from "classnames";
 import { FC, useEffect, useState } from "react";
 import "../css/unitsToggleSwitch.css"
 import { Weather } from "../ts/Weather";
@@ -13,17 +14,21 @@ import { Weather } from "../ts/Weather";
  */
 interface UnitsToggleSwitchProps {
     weather: Weather
+    rounded: rounded
 }
 
 
 const UnitToggleSwitch : 
-    FC<UnitsToggleSwitchProps> = ({ weather }): JSX.Element => {
+    FC<UnitsToggleSwitchProps> = ({ weather, rounded = false }): JSX.Element => {
 
     /**
      * @prop Free tier data to display current conditions.
      */
     const [freeTierData, setFreeTierData] = useState<any>();
 
+    const sliderCX = cx('slider', {
+        'rounded': rounded
+    });
     const [unitsLabel, setUnitsLabel] = useState("");
 
     /**
@@ -55,10 +60,11 @@ const UnitToggleSwitch :
             <div>
                 {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
             </div>
-            <label>
-                <input />
-                <span />
+            <label className="toggle-switch">
+                <input type="checkbox"/>
+                <span className={sliderCX}/>
             </label>
+            <div>Select Units</div>
         </div>
         
     );

@@ -91,7 +91,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         // console.log("One call data");
         // console.log(oneCallData);
         // console.log("\n\n\----------------------------------------\n\n")
-    }, [weather.getUnits()]);
+    }, [weather]);
 
     
     return (
@@ -99,6 +99,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
             <div className='forecast'>
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} rounded={true}/>
+                    <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>
                 <div className='current-conditions-container'>
@@ -109,7 +110,6 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 </div>             
             </div>
             <div className='forecast'>
-                <p>{weather.getUnits()}</p>
                 <h3>Free Tier Data</h3>
                 <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                 <p>cod: {freeTierData && freeTierData.cod}</p>

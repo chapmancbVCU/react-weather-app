@@ -26,13 +26,8 @@ const UnitToggleSwitch :
      */
     const [freeTierData, setFreeTierData] = useState<any>();
 
-    /**
-     * 
-     */
-    const sliderCX = cx('slider', {
-        'rounded': rounded
-    });
-    const [unitsLabel, setUnitsLabel] = useState("");
+    // value of input
+    const [isToggled, setIsToggled] = useState<boolean>(false);
 
     /**
      * Sets state for free tier data.
@@ -42,13 +37,30 @@ const UnitToggleSwitch :
         setFreeTierData(data);
     }
 
+    /**
+     * 
+     */
+    const sliderCX = cx('slider', {
+        'rounded': rounded
+    });
+    const [unitsLabel, setUnitsLabel] = useState("");
+
+    const handleToggleChange = (e: any) => {
+        console.log(e.target.checked)
+        weather.toggleUnits();
+        setWeatherUnits()
+    }
+    
     const setWeatherUnits = () => {
         const weatherUnits = weather.getUnits();
+        console.log(weatherUnits)
         let weatherUnitsLabel;
         if(weatherUnits === "IMPERIAL") {
             weatherUnitsLabel = "F";
+            setIsToggled(false);
         } else {
             weatherUnitsLabel = "C";
+            setIsToggled(true);
         }
         setUnitsLabel(weatherUnitsLabel);
     }
@@ -56,6 +68,7 @@ const UnitToggleSwitch :
     useEffect(() => {
         setFreeTierWeatherData();
         setWeatherUnits();
+        console.log(isToggled)
     }, []);
 
     return (
@@ -64,8 +77,8 @@ const UnitToggleSwitch :
                 {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
             </div>
             <label className="toggle-switch">
-                <input type="checkbox"/>
-                <span className={sliderCX}/>
+                <input type="checkbox" name='isToggled' id='isToggled' checked={isToggled} onChange={handleToggleChange}/>
+                <span className={sliderCX} />
             </label>
             <div>Select Units</div>
         </div>

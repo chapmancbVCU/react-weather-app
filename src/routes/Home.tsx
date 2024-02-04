@@ -79,6 +79,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     }
 
     useEffect(() => {
+        console.log("---test")
+        console.log(weather.getUnits())
         setCityName();
         setCountryName();
         setFreeTierWeatherData(); 
@@ -89,7 +91,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         // console.log("One call data");
         // console.log(oneCallData);
         // console.log("\n\n\----------------------------------------\n\n")
-    }, []);
+    }, [weather.getUnits()]);
 
     
     return (
@@ -107,6 +109,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 </div>             
             </div>
             <div className='forecast'>
+                <p>{weather.getUnits()}</p>
                 <h3>Free Tier Data</h3>
                 <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                 <p>cod: {freeTierData && freeTierData.cod}</p>

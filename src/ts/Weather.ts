@@ -275,4 +275,15 @@ export class Weather {
             this.units = 'METRIC';
         }
     }
+
+    /**
+     * Toggles the this.units instance variable between IMPERIAL and METRIC.
+     */
+    toggleUnits() {
+        if(this.units === 'IMPERIAL') {
+            this.units = 'METRIC';
+        } else {
+            this.units = 'IMPERIAL';
+        }
+    }
 }

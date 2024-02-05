@@ -103,7 +103,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      */
     const setTemperatureProp = (): void => {
         if (weather.getUnits() === "IMPERIAL") {
-            setTemperature(((freeTierData?.main.temp - 273.15) * 9/5 + 32).toFixed(0));
+            setTemperature(((
+                freeTierData?.main.temp - 273.15) * 9/5 + 32).toFixed(0));
         } else if (weather.getUnits() === "METRIC"){
             setTemperature((freeTierData?.main.temp - 273.15).toFixed(0));
         }
@@ -114,11 +115,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      * by the Weather class instance.
      */
     const setToggleCheckedState = (): void => {
-        if (weather.getUnits() === "IMPERIAL") {
-            setIsToggled(false);
-        } else if (weather.getUnits() === "METRIC"){
-            setIsToggled(true);
-        }
+        if (weather.getUnits() === "IMPERIAL") setIsToggled(false);
+        else if (weather.getUnits() === "METRIC")setIsToggled(true);
     }
 
     useEffect(() => {

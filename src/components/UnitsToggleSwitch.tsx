@@ -32,8 +32,7 @@ const UnitToggleSwitch :
      * Sets state for free tier data.
      */
     const setFreeTierWeatherData = async () => {
-        const data = await weather.getJSONCityData();
-        setFreeTierData(data);
+        setFreeTierData( await weather.getJSONCityData());
     }
 
     /**
@@ -47,11 +46,9 @@ const UnitToggleSwitch :
     const updateUnitsLabel = () => {
         const weatherUnits = weather.getUnits();
         let weatherUnitsLabel;
-        if (weatherUnits === "IMPERIAL") {
-            weatherUnitsLabel = "F";
-        } else if (weatherUnits === "METRIC" ){
-            weatherUnitsLabel = "C";
-        } else return;
+        if (weatherUnits === "IMPERIAL") weatherUnitsLabel = "F";
+        else if (weatherUnits === "METRIC" ) weatherUnitsLabel = "C";
+        else return;
         setUnitsLabel(weatherUnitsLabel);
     }
 

@@ -67,11 +67,8 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
      * by the Weather class instance.
      */
     const setToggleCheckedState = (): void => {
-        if (weather.getUnits() === "IMPERIAL") {
-            setIsToggled(false);
-        } else if (weather.getUnits() === "METRIC"){
-            setIsToggled(true);
-        }
+        if (weather.getUnits() === "IMPERIAL") setIsToggled(false);
+        else if (weather.getUnits() === "METRIC") setIsToggled(true); 
     }
 
     useEffect(() => {

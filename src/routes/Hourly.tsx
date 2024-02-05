@@ -29,6 +29,13 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
      */
     const [oneCallData, setOneCallData] = useState<any>();
 
+    const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const handleToggleChange = (e: any) => {
+        weather.toggleUnits();
+        setWeatherUnits();
+    }
+    
     /**
      * Sets state for one call tier data.
      */
@@ -37,16 +44,26 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         setOneCallData(data);
     }
 
+    const setWeatherUnits = () => {
+        if (weather.getUnits() === "IMPERIAL") {
+            setIsToggled(false);
+        } else if (weather.getUnits() === "METRIC"){
+            setIsToggled(true);
+        } else return;
+    }
+
     useEffect(() => {
-        setOneCallWeatherData()
-    }, []);
+        setOneCallWeatherData();
+        setWeatherUnits();
+    }, [weather, toggled]);
 
 
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather} rounded={true}/>
+                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
+                    <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Hourly Forecast</h2>
                 </ForecastHeader>
             </div>

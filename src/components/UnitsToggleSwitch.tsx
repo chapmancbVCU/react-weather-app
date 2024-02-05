@@ -15,7 +15,7 @@ import { Weather } from "../ts/Weather";
 interface UnitsToggleSwitchProps {
     weather: Weather
     rounded: boolean
-    isToggled: any
+    isToggled: boolean
     handleToggleChange: any
 }
 
@@ -27,9 +27,6 @@ const UnitToggleSwitch :
      * @prop Free tier data to display current conditions.
      */
     const [freeTierData, setFreeTierData] = useState<any>();
-
-    // value of input
-   // const [isToggled, setIsToggled] = useState<boolean>(false);
 
     /**
      * Sets state for free tier data.
@@ -46,53 +43,23 @@ const UnitToggleSwitch :
         'rounded': rounded
     });
     const [unitsLabel, setUnitsLabel] = useState("");
-
-    // const handleToggleChange = (e: any) => {
-    //     console.log(e.target.checked)
-    //     weather.toggleUnits();
-    //     setWeatherUnits()
-    // }
-    
-    const setWeatherUnits = () => {
-        const weatherUnits = weather.getUnits();
-        console.log(weatherUnits)
-        let weatherUnitsLabel;
-        if(weatherUnits === "IMPERIAL") {
-            weatherUnitsLabel = "F";
-            //setIsToggled(false);
-        } else {
-            weatherUnitsLabel = "C";
-            //setIsToggled(true);
-        }
-        setUnitsLabel(weatherUnitsLabel);
-    }
-
+   
     const updateUnitsLabel = () => {
         const weatherUnits = weather.getUnits();
         let weatherUnitsLabel;
         if (weatherUnits === "IMPERIAL") {
             weatherUnitsLabel = "F";
-            setIsToggledState(false)
         } else if (weatherUnits === "METRIC" ){
             weatherUnitsLabel = "C";
-            setIsToggledState(true)
-        } else {
-            return;
-        }
-        
+        } else return;
         setUnitsLabel(weatherUnitsLabel);
     }
-
-    const [isToggledState, setIsToggledState] = useState<boolean>(false);
-
 
     useEffect(() => {
         setFreeTierWeatherData();
         updateUnitsLabel();
-        //foo();
-        console.log("units")
         console.log(weather.getUnits())
-    }, [weather, isToggled, isToggledState]);
+    }, [weather, isToggled]);
 
     return (
         <div className="toggle-switch-container">
@@ -100,7 +67,7 @@ const UnitToggleSwitch :
                 {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
             </div>
             <label className="toggle-switch">
-                <input type="checkbox" name='isToggled' id='isToggled' checked={isToggledState} onChange={handleToggleChange}/>
+                <input type="checkbox" name='isToggled' id='isToggled' checked={isToggled} onChange={handleToggleChange}/>
                 <span className={sliderCX} />
             </label>
             <div>Select Units</div>

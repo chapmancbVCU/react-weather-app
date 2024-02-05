@@ -66,6 +66,8 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     useEffect(() => {
         setOneCallWeatherData();
         setToggleCheckedState();
+        console.log("One call data");
+        console.log(oneCallData);
     }, [weather, toggled]);
 
 
@@ -76,10 +78,9 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Hourly Forecast</h2>
+                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
                 </ForecastHeader>
             </div>
-            
-            <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
         </div>
     )
 };

@@ -68,7 +68,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     useEffect(() => {
         setOneCallWeatherData();
         setToggleCheckedState();
-        
+        console.log("One call data");
+        console.log(oneCallData);
     }, [weather, toggled]);
 
     return (
@@ -78,10 +79,9 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
+                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
                 </ForecastHeader>
             </div>
-            
-            <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
         </div>
     )
 };

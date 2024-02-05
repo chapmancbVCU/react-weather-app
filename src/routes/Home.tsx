@@ -79,16 +79,16 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     /**
      * Sets state for free tier data.
      */
-    const setFreeTierWeatherData = async () => {
-        const data = await weather.getJSONCityData();
+    const setFreeTierWeatherData =  () => {
+        const data = weather.getJSONCityData();
         setFreeTierData(data);
     }
 
     /**
      * Sets state for one call tier data.
      */
-    const setOneCallWeatherData = async () => {
-        const data = await weather.getJSONDescriptiveWeatherData();
+    const setOneCallWeatherData = () => {
+        const data =  weather.getJSONDescriptiveWeatherData();
         setOneCallData(data);
     }
 
@@ -114,8 +114,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
-        // console.log("One call data");
-        // console.log(oneCallData);
+        console.log("One call data");
+        console.log(oneCallData);
         // console.log("\n\n\----------------------------------------\n\n")
     }, [weather, toggled]);
 
@@ -182,7 +182,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <hr></hr>
                 <h3>One Call Data</h3>
                 {/* oneCallData? to prevent undefined property error */}
-                {/* <p>{typeof oneCallData && oneCallData?.current.clouds}</p> */}
+                <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
             </div>
         </div> 
     )

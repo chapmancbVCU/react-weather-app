@@ -46,8 +46,8 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     /**
      * Sets state for one call tier data.
      */
-    const setOneCallWeatherData = async () => {
-        const data = await weather.getJSONDescriptiveWeatherData();
+    const setOneCallWeatherData = (): void => {
+        const data =  weather.getJSONDescriptiveWeatherData();
         setOneCallData(data);
     }
 

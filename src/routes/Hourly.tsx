@@ -52,16 +52,14 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
      * Sets state for free tier data.
      */
     const setFreeTierWeatherData = (): void => {
-        const data = weather.getJSONCityData();
-        setFreeTierData(data);
+        setFreeTierData(weather.getJSONCityData());
     }
 
     /**
      * Sets state for one call tier data.
      */
     const setOneCallWeatherData = (): void => {
-        const data =  weather.getJSONDescriptiveWeatherData();
-        setOneCallData(data);
+        setOneCallData(weather.getJSONDescriptiveWeatherData());
     }
 
     /**

@@ -74,32 +74,28 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      * Sets state for current city.
      */
     const setCityName = async (): Promise<void> => {
-        const cityName = await weather.getCityInfo();
-        setCity(cityName);
+        setCity(await weather.getCityInfo());
     }
 
     /**
      * Sets state for country for where current city is located.
      */
     const setCountryName = async (): Promise<void> => {
-        const countryName = await weather.getCountryName();
-        setCountry(countryName);
+        setCountry(await weather.getCountryName());
     }
 
     /**
      * Sets state for free tier data.
      */
     const setFreeTierWeatherData = (): void => {
-        const data = weather.getJSONCityData();
-        setFreeTierData(data);
+        setFreeTierData(weather.getJSONCityData());
     }
 
     /**
      * Sets state for one call tier data.
      */
     const setOneCallWeatherData = (): void => {
-        const data =  weather.getJSONDescriptiveWeatherData();
-        setOneCallData(data);
+        setOneCallData(weather.getJSONDescriptiveWeatherData());
     }
 
     /**

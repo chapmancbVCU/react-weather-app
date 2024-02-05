@@ -46,11 +46,18 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      */
     const [oneCallData, setOneCallData] = useState<any>();
 
+    /**
+     * @prop Property for checkbox depending on whether or not it is
+     * checked.
+     */
     const [toggled, setIsToggled] = useState<boolean>(false);
 
-    const handleToggleChange = () => {
+    /**
+     * This function is called when state of units toggle switch is updated.
+     */
+    const handleToggleChange = (): void => {
         weather.toggleUnits();
-        setWeatherUnits();
+        setToggleCheckedState();
     }
 
     /**
@@ -85,12 +92,16 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setOneCallData(data);
     }
 
-    const setWeatherUnits = () => {
+    /**
+     * Sets value for variable toggled depending on what units is being used 
+     * by the Weather class instance.
+     */
+    const setToggleCheckedState = (): void => {
         if (weather.getUnits() === "IMPERIAL") {
             setIsToggled(false);
         } else if (weather.getUnits() === "METRIC"){
             setIsToggled(true);
-        } else return;
+        }
     }
 
     useEffect(() => {
@@ -98,7 +109,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setCountryName();
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
-        setWeatherUnits();
+        setToggleCheckedState();
 
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");

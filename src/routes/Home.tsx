@@ -105,7 +105,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         if (weather.getUnits() === "IMPERIAL") {
             setTemperature(((
                 freeTierData?.main.temp - 273.15) * 9/5 + 32).toFixed(0));
-        } else if (weather.getUnits() === "METRIC"){
+        } else if (weather.getUnits() === "METRIC") {
             setTemperature((freeTierData?.main.temp - 273.15).toFixed(0));
         }
     }
@@ -144,8 +144,12 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
-                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
+                    <UnitToggleSwitch weather={weather} 
+                        rounded={true} 
+                        isToggled={toggled} 
+                        handleToggleChange={handleToggleChange}/>
+                    <h2 className='page-title'>Current conditions in 
+                        {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
                     <p>{temperature}</p>
                 </ForecastHeader>
                 <div className='current-conditions-container'>

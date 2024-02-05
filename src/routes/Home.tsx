@@ -47,6 +47,11 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     const [oneCallData, setOneCallData] = useState<any>();
 
     /**
+     * @prop Property for current temperature.
+     */
+    const [temperature, setTemperature] = useState<string>("");
+
+    /**
      * @prop The current time.
      */
     const [time, setTime] = useState<Date>(new Date());
@@ -98,6 +103,17 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     }
 
     /**
+     * Updates the temperature prop depending on unit of measurement type.
+     */
+    const setTemperatureProp = (): void => {
+        if (weather.getUnits() === "IMPERIAL") {
+            setTemperature(((freeTierData?.main.temp - 273.15) * 9/5 + 32).toFixed(0));
+        } else if (weather.getUnits() === "METRIC"){
+            setTemperature((freeTierData?.main.temp - 273.15).toFixed(0));
+        }
+    }
+
+    /**
      * Sets value for variable toggled depending on what units is being used 
      * by the Weather class instance.
      */
@@ -115,6 +131,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
         setToggleCheckedState();
+        setTemperatureProp();
 
         // Set time to be rendered and refresh every second.
         setInterval(() => setTime(new Date()), 1000);
@@ -124,7 +141,9 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         console.log(freeTierData);
         console.log("One call data");
         console.log(oneCallData);
-    }, [weather, toggled]);
+
+        // If something isn't right add prop to dependency array.
+    }, [weather, toggled, temperature]);
 
     
     return (
@@ -133,6 +152,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
+                    <p>{temperature}</p>
                 </ForecastHeader>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>

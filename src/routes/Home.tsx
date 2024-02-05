@@ -11,8 +11,8 @@ import { Weather } from "../ts/Weather";
 
 
 /**
- * @interface HomePageProps The interface that describes props
- * that are shared between components.
+ * @interface HomePageProps The interface that describes props that are shared 
+ * between components.
  */
 interface HomePageProps {
     weather: Weather;
@@ -116,7 +116,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      */
     const setToggleCheckedState = (): void => {
         if (weather.getUnits() === "IMPERIAL") setIsToggled(false);
-        else if (weather.getUnits() === "METRIC")setIsToggled(true);
+        else if (weather.getUnits() === "METRIC") setIsToggled(true);
     }
 
     useEffect(() => {

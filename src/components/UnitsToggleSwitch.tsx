@@ -31,7 +31,7 @@ const UnitToggleSwitch :
     /**
      * Sets state for free tier data.
      */
-    const setFreeTierWeatherData = () => {
+    const setFreeTierWeatherData = (): void => {
         setFreeTierData(weather.getJSONCityData());
     }
 
@@ -45,13 +45,13 @@ const UnitToggleSwitch :
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
-    const [unitsLabel, setUnitsLabel] = useState("");
+    const [unitsLabel, setUnitsLabel] = useState<string>("");
    
     /**
      * Set the value for the units label prop to C or F.
      * @returns when nothing else to do.
      */
-    const updateUnitsLabel = () => {
+    const updateUnitsLabel = (): void => {
         if (weather.getUnits() === "IMPERIAL") setUnitsLabel("F");
         else if (weather.getUnits() === "METRIC" ) setUnitsLabel("C");
         else return;

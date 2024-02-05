@@ -15,7 +15,7 @@ import { Weather } from "../ts/Weather";
 interface UnitsToggleSwitchProps {
     weather: Weather
     rounded: boolean
-    isToggled: boolean
+    isToggled: any
     handleToggleChange: any
 }
 
@@ -70,34 +70,28 @@ const UnitToggleSwitch :
     const updateUnitsLabel = () => {
         const weatherUnits = weather.getUnits();
         let weatherUnitsLabel;
-        if(weatherUnits === "IMPERIAL") {
+        if (weatherUnits === "IMPERIAL") {
             weatherUnitsLabel = "F";
             setIsToggledState(false)
-            //setIsToggled(false);
-        } else {
+        } else if (weatherUnits === "METRIC" ){
             weatherUnitsLabel = "C";
             setIsToggledState(true)
-            //setIsToggled(true);
+        } else {
+            return;
         }
-
+        
         setUnitsLabel(weatherUnitsLabel);
     }
 
     const [isToggledState, setIsToggledState] = useState<boolean>(false);
-    const foo = () => {
-        if (weather.getUnits() === "IMPERIAL") {
-            setIsToggledState(false)
-        } else {
-            setIsToggledState(true)
-        }
-    }
+
 
     useEffect(() => {
         setFreeTierWeatherData();
         updateUnitsLabel();
         //foo();
-        // console.log("units")
-        // console.log(weather.getUnits())
+        console.log("units")
+        console.log(weather.getUnits())
     }, [weather, isToggled, isToggledState]);
 
     return (
@@ -106,7 +100,7 @@ const UnitToggleSwitch :
                 {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
             </div>
             <label className="toggle-switch">
-                <input type="checkbox" name='isToggled' id='isToggled' checked={isToggled} onChange={handleToggleChange}/>
+                <input type="checkbox" name='isToggled' id='isToggled' checked={isToggledState} onChange={handleToggleChange}/>
                 <span className={sliderCX} />
             </label>
             <div>Select Units</div>

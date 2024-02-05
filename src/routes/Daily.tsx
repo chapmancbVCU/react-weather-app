@@ -25,10 +25,18 @@ interface DailyPageProps {
  */
 // @ts-ignore
 const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
+    
     /**
      * @prop One call tier data for displaying hourly and daily forecast.
      */
     const [oneCallData, setOneCallData] = useState<any>();
+
+    const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const handleToggleChange = (e: any) => {
+        weather.toggleUnits();
+        setWeatherUnits();
+    }
 
     /**
      * Sets state for one call tier data.
@@ -38,27 +46,17 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         setOneCallData(data);
     }
 
-    const handleToggleChange = (e: any) => {
-        console.log('toggle state')
-        weather.toggleUnits();
-        console.log(weather.getUnits());
+    const setWeatherUnits = () => {
         if (weather.getUnits() === "IMPERIAL") {
             setIsToggled(false);
-        } else {
+        } else if (weather.getUnits() === "METRIC"){
             setIsToggled(true);
-        }
-        console.log(toggled)
-    }
-
-    const [toggled, setIsToggled] = useState<boolean>(false);
-
-    const setWeatherUnits = () => {
-       // console.log(weather.getUnits());
+        } else return;
     }
 
     useEffect(() => {
         setOneCallWeatherData();
-        setWeatherUnits;
+        setWeatherUnits();
     }, [weather, toggled]);
 
     return (

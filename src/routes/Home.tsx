@@ -46,6 +46,13 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
      */
     const [oneCallData, setOneCallData] = useState<any>();
 
+    const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const handleToggleChange = (e: any) => {
+        weather.toggleUnits();
+        setWeatherUnits();
+    }
+
     /**
      * Sets state for current city.
      */
@@ -78,25 +85,12 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setOneCallData(data);
     }
 
-    const handleToggleChange = (e: any) => {
-        console.log("checked")
-        console.log(e.target.checked)
-       // console.log('toggle state')
-        weather.toggleUnits();
-       // console.log(weather.getUnits());
+    const setWeatherUnits = () => {
         if (weather.getUnits() === "IMPERIAL") {
             setIsToggled(false);
-        } else {
+        } else if (weather.getUnits() === "METRIC"){
             setIsToggled(true);
-        }
-        //console.log(toggled)
-    }
-
-    const [toggled, setIsToggled] = useState<boolean>(false);
-
-    const setWeatherUnits = () => {
-        // console.log("Units - Home")
-        // console.log(weather.getUnits());
+        } else return;
     }
 
     useEffect(() => {
@@ -105,6 +99,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
         setWeatherUnits();
+
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);

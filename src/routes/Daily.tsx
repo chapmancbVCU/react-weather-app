@@ -38,15 +38,35 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         setOneCallData(data);
     }
 
+    const handleToggleChange = (e: any) => {
+        console.log('toggle state')
+        weather.toggleUnits();
+        console.log(weather.getUnits());
+        if (weather.getUnits() === "IMPERIAL") {
+            setIsToggled(false);
+        } else {
+            setIsToggled(true);
+        }
+        console.log(toggled)
+    }
+
+    const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const setWeatherUnits = () => {
+       // console.log(weather.getUnits());
+    }
+
     useEffect(() => {
-        setOneCallWeatherData()
-    }, []);
+        setOneCallWeatherData();
+        setWeatherUnits;
+    }, [weather, toggled]);
 
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather} rounded={true}/>
+                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
+                    <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
                 </ForecastHeader>
             </div>

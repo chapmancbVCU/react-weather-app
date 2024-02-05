@@ -15,11 +15,13 @@ import { Weather } from "../ts/Weather";
 interface UnitsToggleSwitchProps {
     weather: Weather
     rounded: boolean
+    isToggled: boolean
+    handleToggleChange: any
 }
 
 
 const UnitToggleSwitch : 
-    FC<UnitsToggleSwitchProps> = ({ weather, rounded = false }): JSX.Element => {
+    FC<UnitsToggleSwitchProps> = ({ weather, rounded = false, isToggled, handleToggleChange }): JSX.Element => {
 
     /**
      * @prop Free tier data to display current conditions.
@@ -27,7 +29,7 @@ const UnitToggleSwitch :
     const [freeTierData, setFreeTierData] = useState<any>();
 
     // value of input
-    const [isToggled, setIsToggled] = useState<boolean>(false);
+   // const [isToggled, setIsToggled] = useState<boolean>(false);
 
     /**
      * Sets state for free tier data.
@@ -45,11 +47,11 @@ const UnitToggleSwitch :
     });
     const [unitsLabel, setUnitsLabel] = useState("");
 
-    const handleToggleChange = (e: any) => {
-        console.log(e.target.checked)
-        weather.toggleUnits();
-        setWeatherUnits()
-    }
+    // const handleToggleChange = (e: any) => {
+    //     console.log(e.target.checked)
+    //     weather.toggleUnits();
+    //     setWeatherUnits()
+    // }
     
     const setWeatherUnits = () => {
         const weatherUnits = weather.getUnits();
@@ -57,19 +59,46 @@ const UnitToggleSwitch :
         let weatherUnitsLabel;
         if(weatherUnits === "IMPERIAL") {
             weatherUnitsLabel = "F";
-            setIsToggled(false);
+            //setIsToggled(false);
         } else {
             weatherUnitsLabel = "C";
-            setIsToggled(true);
+            //setIsToggled(true);
         }
         setUnitsLabel(weatherUnitsLabel);
     }
 
+    const updateUnitsLabel = () => {
+        const weatherUnits = weather.getUnits();
+        let weatherUnitsLabel;
+        if(weatherUnits === "IMPERIAL") {
+            weatherUnitsLabel = "F";
+            setIsToggledState(false)
+            //setIsToggled(false);
+        } else {
+            weatherUnitsLabel = "C";
+            setIsToggledState(true)
+            //setIsToggled(true);
+        }
+
+        setUnitsLabel(weatherUnitsLabel);
+    }
+
+    const [isToggledState, setIsToggledState] = useState<boolean>(false);
+    const foo = () => {
+        if (weather.getUnits() === "IMPERIAL") {
+            setIsToggledState(false)
+        } else {
+            setIsToggledState(true)
+        }
+    }
+
     useEffect(() => {
         setFreeTierWeatherData();
-        setWeatherUnits();
-        console.log(isToggled)
-    }, []);
+        updateUnitsLabel();
+        //foo();
+        // console.log("units")
+        // console.log(weather.getUnits())
+    }, [weather, isToggled, isToggledState]);
 
     return (
         <div className="toggle-switch-container">

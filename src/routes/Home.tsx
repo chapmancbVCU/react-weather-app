@@ -78,27 +78,47 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setOneCallData(data);
     }
 
+    const handleToggleChange = (e: any) => {
+        console.log("checked")
+        console.log(e.target.checked)
+       // console.log('toggle state')
+        weather.toggleUnits();
+       // console.log(weather.getUnits());
+        if (weather.getUnits() === "IMPERIAL") {
+            setIsToggled(false);
+        } else {
+            setIsToggled(true);
+        }
+        //console.log(toggled)
+    }
+
+    const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const setWeatherUnits = () => {
+        // console.log("Units - Home")
+        // console.log(weather.getUnits());
+    }
+
     useEffect(() => {
-        console.log("---test")
-        console.log(weather.getUnits())
         setCityName();
         setCountryName();
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
+        setWeatherUnits();
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
         // console.log("One call data");
         // console.log(oneCallData);
         // console.log("\n\n\----------------------------------------\n\n")
-    }, [weather]);
+    }, [weather, toggled]);
 
     
     return (
         <div className='clear-sky content'>
             <div className='forecast'>
                 <ForecastHeader>
-                    <UnitToggleSwitch weather={weather} rounded={true}/>
+                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>

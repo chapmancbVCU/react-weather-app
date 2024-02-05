@@ -31,11 +31,11 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
     const [toggled, setIsToggled] = useState<boolean>(false);
 
-    const handleToggleChange = (e: any) => {
+    const handleToggleChange = () => {
         weather.toggleUnits();
         setWeatherUnits();
     }
-    
+
     /**
      * Sets state for one call tier data.
      */

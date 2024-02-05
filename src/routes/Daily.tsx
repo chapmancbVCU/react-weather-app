@@ -33,7 +33,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
 
     const [toggled, setIsToggled] = useState<boolean>(false);
 
-    const handleToggleChange = (e: any) => {
+    const handleToggleChange = () => {
         weather.toggleUnits();
         setWeatherUnits();
     }

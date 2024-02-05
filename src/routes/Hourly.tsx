@@ -25,6 +25,11 @@ interface HourlyPageProps {
 // @ts-ignore
 const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     /**
+     * @prop Free tier data to display current conditions.
+     */
+    const [freeTierData, setFreeTierData] = useState<any>();
+
+    /**
      * @prop One call tier data for displaying hourly and daily forecast.
      */
     const [oneCallData, setOneCallData] = useState<any>();
@@ -41,6 +46,14 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     const handleToggleChange = (): void => {
         weather.toggleUnits();
         setToggleCheckedState();
+    }
+
+    /**
+     * Sets state for free tier data.
+     */
+    const setFreeTierWeatherData = (): void => {
+        const data = weather.getJSONCityData();
+        setFreeTierData(data);
     }
 
     /**
@@ -64,8 +77,12 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     }
 
     useEffect(() => {
+        setFreeTierWeatherData(); 
         setOneCallWeatherData();
         setToggleCheckedState();
+
+        console.log("Free tier data (ctrl+s if no output on page load):");
+        console.log(freeTierData);
         console.log("One call data");
         console.log(oneCallData);
     }, [weather, toggled]);
@@ -78,6 +95,8 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Hourly Forecast</h2>
+                    <h3>Free Tier Data</h3>
+                    <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                     <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
                 </ForecastHeader>
             </div>

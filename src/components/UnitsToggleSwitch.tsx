@@ -31,8 +31,8 @@ const UnitToggleSwitch :
     /**
      * Sets state for free tier data.
      */
-    const setFreeTierWeatherData = async () => {
-        setFreeTierData( await weather.getJSONCityData());
+    const setFreeTierWeatherData = () => {
+        setFreeTierData(weather.getJSONCityData());
     }
 
     /**
@@ -41,15 +41,20 @@ const UnitToggleSwitch :
     const sliderCX = cx('slider', {
         'rounded': rounded
     });
+
+    /**
+     * @prop Label for unit of temperature measure (Ex: C or F).
+     */
     const [unitsLabel, setUnitsLabel] = useState("");
    
+    /**
+     * Set the value for the units label prop to C or F.
+     * @returns when nothing else to do.
+     */
     const updateUnitsLabel = () => {
-        const weatherUnits = weather.getUnits();
-        let weatherUnitsLabel;
-        if (weatherUnits === "IMPERIAL") weatherUnitsLabel = "F";
-        else if (weatherUnits === "METRIC" ) weatherUnitsLabel = "C";
+        if (weather.getUnits() === "IMPERIAL") setUnitsLabel("F");
+        else if (weather.getUnits() === "METRIC" ) setUnitsLabel("C");
         else return;
-        setUnitsLabel(weatherUnitsLabel);
     }
 
     useEffect(() => {

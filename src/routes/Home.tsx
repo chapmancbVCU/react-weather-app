@@ -47,6 +47,11 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     const [oneCallData, setOneCallData] = useState<any>();
 
     /**
+     * @prop The current time.
+     */
+    const [time, setTime] = useState<Date>(new Date());
+
+    /**
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
@@ -111,12 +116,14 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setOneCallWeatherData();
         setToggleCheckedState();
 
+        // Set time to be rendered and refresh every second.
+        setInterval(() => setTime(new Date()), 1000);
+
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
         console.log("One call data");
         console.log(oneCallData);
-        // console.log("\n\n\----------------------------------------\n\n")
     }, [weather, toggled]);
 
     
@@ -126,7 +133,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <p>{weather.getUnits()}</p>
-                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
+                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
                 </ForecastHeader>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>

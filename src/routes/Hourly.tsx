@@ -93,7 +93,6 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
             <div className='forecast'>
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
-                    <p>{weather.getUnits()}</p>
                     <h2 className='page-title'>Hourly Forecast</h2>
                     <h3>Free Tier Data</h3>
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>

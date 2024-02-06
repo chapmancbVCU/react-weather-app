@@ -15,6 +15,7 @@ import { Weather } from "../ts/Weather";
  * between components.
  */
 interface HomePageProps {
+    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -24,13 +25,14 @@ interface HomePageProps {
  * @returns JSX.Element that contains the current conditions forecast 
  * component.
  */
-const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
+const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
     /**
      * @prop Name of city for current or remote location we are getting the 
      * weather forecast.
      */
     const [city, setCity] = useState(Object);
 
+    const [date, setDate] = useState<string>("");
     /**
      * @prop Name of country where city is located.
      */
@@ -84,6 +86,12 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setCountry(await weather.getCountryName());
     }
 
+    const setCurrentDate = (): void => {
+        let localDateTime = dateTimeUtility.getDateTime(oneCallData?.current.dt, oneCallData?.timezone_offset);
+        let currentDate = dateTimeUtility.getDateInfo(localDateTime)
+        setDate(currentDate);
+    }
+    
     /**
      * Sets state for free tier data.
      */
@@ -111,7 +119,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
     }
 
     /**
-     * Sets value for variable toggled depending on what units is being used 
+     * Sets value for variable "toggled" depending on what units is being used 
      * by the Weather class instance.
      */
     const setToggleCheckedState = (): void => {
@@ -126,7 +134,8 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
         setOneCallWeatherData();
         setToggleCheckedState();
         setTemperatureProp();
-
+        setCurrentDate();
+        console.log(date);
         // Set time to be rendered and refresh every second.
         setInterval(() => setTime(new Date()), 1000);
 
@@ -148,12 +157,15 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                         rounded={true} 
                         isToggled={toggled} 
                         handleToggleChange={handleToggleChange}/>
-                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
+                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                     <p>{temperature}</p>
                 </ForecastHeader>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
-
+                        <div className="date-time-container">
+                            <div>{date}</div>
+                            <div>{time.toLocaleTimeString()}</div>
+                        </div>
                     </div>
                     <div className='current-conditions-right'></div>
                 </div>             

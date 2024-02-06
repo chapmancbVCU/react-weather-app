@@ -43,8 +43,7 @@ export class DateTimeUtility {
      * @param {String} localDateTime The local timestamp.
      */
     getDateInfo(localDateTime: String) {
-        const dateInfo = document.querySelector('#date-info');
-        dateInfo!.textContent = this.getDayOfWeek(localDateTime) + ', ' + 
+        return this.getDayOfWeek(localDateTime) + ', ' + 
             this.getFullMonthName(localDateTime) + ' ' + 
             this.getDayOfMonth(localDateTime) + ', ' + 
             localDateTime.slice(12, 16);

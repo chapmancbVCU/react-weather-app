@@ -148,8 +148,7 @@ const Home : FC<HomePageProps> = ({ weather }): JSX.Element => {
                         rounded={true} 
                         isToggled={toggled} 
                         handleToggleChange={handleToggleChange}/>
-                    <h2 className='page-title'>Current conditions in 
-                        {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
+                    <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null} at {time.toLocaleTimeString()}</h2>
                     <p>{temperature}</p>
                 </ForecastHeader>
                 <div className='current-conditions-container'>

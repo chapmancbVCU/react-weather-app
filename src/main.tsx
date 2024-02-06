@@ -21,6 +21,7 @@ import { Weather } from './ts/Weather.ts';
 
 // Instantiate objects here so they are available across application.
 const weather = new Weather();
+const dateTimeUtility = new DateTimeUtility();
 
 /*
  Perform initial query of current location upon start of application.  Then 
@@ -34,9 +35,9 @@ try {
 
     weather.setJSONCityData(cityData);
 
-    // const descriptiveWeatherData = 
-    //   await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
-    // weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
+    const descriptiveWeatherData = 
+      await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
+    weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
 } catch (error) {
     console.log(error)
 }
@@ -52,7 +53,8 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/react-weather-app/",
-                element: <Home weather={weather}
+                element: <Home dateTimeUtility={dateTimeUtility}
+                    weather={weather}
                 />,
             },
                 {

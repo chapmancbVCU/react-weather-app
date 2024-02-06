@@ -66,8 +66,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     return (
         <div className="toggle-switch-container">
             <h3>
-                {freeTierData && freeTierData.sys.country} | 
-                {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
+                {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
             </h3>
             <label className="toggle-switch">
                 <input type="checkbox" 

@@ -37,6 +37,7 @@ export class DateTimeUtility {
         return new Date((timezoneOffset + unixTime) * 1000).toUTCString();
     }
 
+    
     /**
      * This function reports the local date in the following format: 
      * <day_of_week>, <month> <day_of_month>, <year>.
@@ -65,6 +66,7 @@ export class DateTimeUtility {
         }
     }
 
+
     /**
      * Returns the full day of the week using the ISO string as a parameter.
      * @param {String} dateTimeStamp Date and time information in the form of 
@@ -84,6 +86,7 @@ export class DateTimeUtility {
         }
     }
 
+
     /**
      * Returns a string containing the day of week, month, and day of month.
      * @param {String} dateTimeStamp Date and time information in the form of 
@@ -96,6 +99,7 @@ export class DateTimeUtility {
             this.getFullMonthName(dateTimeStamp) + " " + 
             this.getDayOfMonth(dateTimeStamp);
     }
+
 
     /**
      * Returns the full name of the month using the ISO string as a parameter.
@@ -117,6 +121,7 @@ export class DateTimeUtility {
             }
         }
     }
+
 
     /**
      * This function reports the local time.

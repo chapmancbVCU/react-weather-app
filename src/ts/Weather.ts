@@ -30,6 +30,7 @@ export class Weather {
         this.units = "";
     }
 
+
     /**
      * Converts the temperature retrieved from Open Weather Map as Kelvin to 
      * either Fahrenheit or Celsius.
@@ -45,6 +46,7 @@ export class Weather {
         }
     }
 
+    
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {string} city The locality whose weather we want to retrieve.

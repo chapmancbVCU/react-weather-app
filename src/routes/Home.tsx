@@ -101,6 +101,10 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCountry(await weather.getCountryName());
     }
 
+    /**
+     * Gets date time stamp from one call data and sets date as string using 
+     * the format: <day_of_week>, <month> <day_of_month>, <year>.
+     */
     const setCurrentDate = (): void => {
         let localDateTime = dateTimeUtility.getDateTime(
             oneCallData?.current.dt, oneCallData?.timezone_offset);

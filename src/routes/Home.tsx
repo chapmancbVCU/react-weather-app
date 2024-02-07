@@ -67,7 +67,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
-    const [unitsLabel, setUnitsLabel] = useState<string>("");
+    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
 
     /**
      * This function is called when state of units toggle switch is updated.
@@ -135,9 +135,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * Set the value for the units label prop to C or F.
      */
-    const updateUnitsLabel = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setUnitsLabel("F");
-        else if (weather.getUnits() === "METRIC" ) setUnitsLabel("C");
+    const updateTemperatureUnitsLabel = (): void => {
+        if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
+        else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
     useEffect(() => {
@@ -148,7 +148,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setToggleCheckedState();
         setTemperatureProp();
         setCurrentDate();
-        updateUnitsLabel();
+        updateTemperatureUnitsLabel();
         console.log(date);
         // Set time to be rendered and refresh every second.
         setInterval(() => setTime(new Date()), 1000);
@@ -179,7 +179,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div>{date}</div>
                             <div>{time.toLocaleTimeString()}</div>
                         </div>
-                        <div className='current-temperature'>{temperature} {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}</div>
+                        <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                     </div>
                     <div className='current-conditions-right'></div>
                 </div>             

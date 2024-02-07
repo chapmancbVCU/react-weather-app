@@ -40,7 +40,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
-    const [unitsLabel, setUnitsLabel] = useState<string>("");
+    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
    
     /**
      * Sets state for free tier data.
@@ -52,21 +52,21 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     /**
      * Set the value for the units label prop to C or F.
      */
-    const updateUnitsLabel = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setUnitsLabel("F");
-        else if (weather.getUnits() === "METRIC" ) setUnitsLabel("C");
+    const updateTemperatureUnitsLabel = (): void => {
+        if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
+        else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
     useEffect(() => {
         setFreeTierWeatherData();
-        updateUnitsLabel();
+        updateTemperatureUnitsLabel();
         console.log(weather.getUnits())
     }, [weather, isToggled]);
 
     return (
         <div className="toggle-switch-container">
             <h3>
-                {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}
+                {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
             </h3>
             <label className="toggle-switch">
                 <input type="checkbox" 

@@ -39,6 +39,11 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [country, setCountry] = useState(Object);
 
     /**
+     * @prop Property for feels like temperature.
+     */
+    const [feelsLikeTemperature, setFeelsLikeTemperature] = useState<string>("")
+
+    /**
      * @prop Free tier data to display current conditions.
      */
     const [freeTierData, setFreeTierData] = useState<any>();
@@ -51,7 +56,12 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * @prop Property for current temperature.
      */
-    const [temperature, setTemperature] = useState<string>("");
+    const [temperature, setTemperature] = useState<number>();
+
+    /**
+     * @prop Label for unit of temperature measure (Ex: C or F).
+     */
+    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
 
     /**
      * @prop The current time.
@@ -63,11 +73,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * checked.
      */
     const [toggled, setIsToggled] = useState<boolean>(false);
-
-    /**
-     * @prop Label for unit of temperature measure (Ex: C or F).
-     */
-    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
 
     /**
      * This function is called when state of units toggle switch is updated.
@@ -96,7 +101,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         let currentDate = dateTimeUtility.getDateInfo(localDateTime)
         setDate(currentDate);
     }
-    
+
     /**
      * Sets state for free tier data.
      */
@@ -109,18 +114,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const setOneCallWeatherData = (): void => {
         setOneCallData(weather.getJSONDescriptiveWeatherData());
-    }
-
-    /**
-     * Updates the temperature prop depending on unit of measurement type.
-     */
-    const setTemperatureProp = (): void => {
-        if (weather.getUnits() === "IMPERIAL") {
-            setTemperature(((
-                freeTierData?.main.temp - 273.15) * 9/5 + 32).toFixed(0));
-        } else if (weather.getUnits() === "METRIC") {
-            setTemperature((freeTierData?.main.temp - 273.15).toFixed(0));
-        }
     }
 
     /**
@@ -146,13 +139,17 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setFreeTierWeatherData(); 
         setOneCallWeatherData();
         setToggleCheckedState();
-        setTemperatureProp();
-        setCurrentDate();
         updateTemperatureUnitsLabel();
-        console.log(date);
+
         // Set time to be rendered and refresh every second.
         setInterval(() => setTime(new Date()), 1000);
+        setCurrentDate();
 
+        // Temperature props.
+        setTemperature(weather.calculateTemperature(freeTierData?.main.temp));
+        setFeelsLikeTemperature(weather.calculateTemperature(
+            freeTierData.main.feels_like));
+        
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
@@ -181,7 +178,15 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         </div>
                         <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                     </div>
-                    <div className='current-conditions-right'></div>
+                    <div className='current-conditions-right'>
+                        <div className='current-conditions-info'>
+                            <img src="./icons/temperature-feels-like.svg"></img>
+                            <div className='current-conditions-info-description'>
+                                Feels Like
+                                <div>{feelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>             
             </div>
             <div className='forecast'>

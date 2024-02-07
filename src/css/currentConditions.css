@@ -1,3 +1,11 @@
+/******************************************************************************
+ * DESCRIPTION: Stylesheet current conditions container.                      *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
+.conditions-icon {
+    height: 33px;
+}
+
 .current-conditions-container {
     display: flex;
     flex-direction: column;
@@ -11,7 +19,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     margin-right: 15px;
-    
+
     font-size: 16px;
 }
 

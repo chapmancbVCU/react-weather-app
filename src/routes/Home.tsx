@@ -177,6 +177,14 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         <div className='today-high-low-temperature'>Today's High: {highTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         <div className='today-high-low-temperature'>Today's Low: {lowTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        <div className='description-container'>
+                            <div className='current-conditions-description'>
+                                {freeTierData && freeTierData.weather[0].description}
+                            </div>
+                            <img className='description-icon' 
+                                src={`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`}>
+                            </img>
+                        </div>
                     </div>
                     <div className='current-conditions-right'>
                         <div className='current-conditions-info'>

@@ -41,13 +41,6 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
     const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
-   
-    /**
-     * Sets state for free tier data.
-     */
-    const setFreeTierWeatherData = (): void => {
-        setFreeTierData(weather.getJSONCityData());
-    }
 
     /**
      * Set the value for the units label prop to C or F.
@@ -58,7 +51,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     }
 
     useEffect(() => {
-        setFreeTierWeatherData();
+        setFreeTierData(weather.getJSONCityData());
         updateTemperatureUnitsLabel();
         console.log(weather.getUnits())
     }, [weather, isToggled]);

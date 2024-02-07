@@ -49,20 +49,6 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     }
 
     /**
-     * Sets state for free tier data.
-     */
-    const setFreeTierWeatherData = (): void => {
-        setFreeTierData(weather.getJSONCityData());
-    }
-
-    /**
-     * Sets state for one call tier data.
-     */
-    const setOneCallWeatherData = (): void => {
-        setOneCallData(weather.getJSONDescriptiveWeatherData());
-    }
-
-    /**
      * Sets value for variable toggled depending on what units is being used 
      * by the Weather class instance.
      */
@@ -72,8 +58,8 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     }
 
     useEffect(() => {
-        setFreeTierWeatherData(); 
-        setOneCallWeatherData();
+        setFreeTierData(weather.getJSONCityData());
+        setOneCallData(weather.getJSONDescriptiveWeatherData());
         setToggleCheckedState();
 
         console.log("Free tier data (ctrl+s if no output on page load):");

@@ -13,6 +13,24 @@
     min-height: 30px;
 }
 
+.current-temperature {
+    font-size: x-large;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.date-time-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 @media only screen and (min-width: 900px) {
     .current-conditions-container {
         flex-direction: row;
@@ -23,5 +41,15 @@
 
     .current-conditions-right {
         width: 50%;
+    }
+
+    .current-temperature {
+        margin-left: 15px;
+        text-align: left;
+    }
+
+    .date-time-container {
+        margin-left: 15px;
+        align-items: flex-start;
     }
 }

@@ -30,7 +30,21 @@ export class Weather {
         this.units = "";
     }
 
-    
+    /**
+     * Converts the temperature retrieved from Open Weather Map as Kelvin to 
+     * either Fahrenheit or Celsius.
+     * @param temperature The temperature in Kelvin that we want to convert to 
+     * either Fahrenheit or Celsius.
+     * @returns The temperature in either Fahrenheit or Celsius.
+     */
+    calculateTemperature(temperature: number): number|any {
+        if (this.getUnits() === "IMPERIAL") {
+            return ((temperature - 273.15) * 9/5 + 32).toFixed(0);
+        } else if (this.getUnits() === "METRIC") {
+            return ((temperature - 273.15).toFixed(0))
+        }
+    }
+
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {string} city The locality whose weather we want to retrieve.

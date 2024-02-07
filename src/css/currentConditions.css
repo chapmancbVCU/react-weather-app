@@ -40,7 +40,6 @@
 .current-temperature {
     font-size: x-large;
     margin-top: 15px;
-    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -53,6 +52,13 @@
     justify-content: center;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.today-high-low-temperature {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 @media only screen and (min-width: 900px) {
@@ -80,5 +86,10 @@
     .date-time-container {
         margin-left: 15px;
         align-items: flex-start;
+    }
+
+    .today-high-low-temperature {
+        text-align: left;
+        margin-left: 15px;
     }
 }

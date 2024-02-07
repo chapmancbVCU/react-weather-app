@@ -53,6 +53,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [freeTierData, setFreeTierData] = useState<any>();
 
+    const [highTemperature, setHighTemperature] = useState<number>();
+    const [lowTemperature, setLowTemperature] = useState<number>();
     /**
      * @prop One call tier data for displaying hourly and daily forecast.
      */
@@ -144,7 +146,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setTemperature(weather.calculateTemperature(freeTierData?.main.temp));
         setFeelsLikeTemperature(weather.calculateTemperature(
             freeTierData?.main.feels_like));
-        
+        setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
+        setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
@@ -172,6 +175,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div>{time.toLocaleTimeString()}</div>
                         </div>
                         <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        <div className='today-high-low-temperature'>Today's High: {highTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        <div className='today-high-low-temperature'>Today's Low: {lowTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                     </div>
                     <div className='current-conditions-right'>
                         <div className='current-conditions-info'>
@@ -179,6 +184,13 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div className='current-conditions-info-description'>
                                 Feels Like
                                 <div>{feelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                            </div>
+                        </div>
+                        <div className='current-conditions-info'>
+                        <img className="conditions-icon" src="./icons/humidity.png"></img>
+                            <div className='current-conditions-info-description'>
+                                Humidity
+                                <div>{freeTierData && freeTierData.main.humidity}%</div>
                             </div>
                         </div>
                     </div>

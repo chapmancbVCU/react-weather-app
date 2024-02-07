@@ -56,8 +56,8 @@ export class DateTimeUtility {
      * an ISO string.
      * @returns The day of month contained in ISO timestamp string.
      */
-    getDayOfMonth(localDateTime: String) {
-        let dayOfMonth:any = localDateTime.slice(5, 7);
+    getDayOfMonth(dateTimeStamp: String) {
+        let dayOfMonth:any = dateTimeStamp.slice(5, 7);
         if (dayOfMonth < 10) {
             return dayOfMonth.slice(1, 2);
         } else {

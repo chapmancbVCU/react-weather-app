@@ -32,7 +32,12 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [city, setCity] = useState(Object);
 
+    /**
+     * @prop for date in the following format: 
+     * <day_of_week>, <month> <day_of_month>, <year>.
+     */
     const [date, setDate] = useState<string>("");
+
     /**
      * @prop Name of country where city is located.
      */
@@ -97,23 +102,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     }
 
     const setCurrentDate = (): void => {
-        let localDateTime = dateTimeUtility.getDateTime(oneCallData?.current.dt, oneCallData?.timezone_offset);
-        let currentDate = dateTimeUtility.getDateInfo(localDateTime)
-        setDate(currentDate);
-    }
-
-    /**
-     * Sets state for free tier data.
-     */
-    const setFreeTierWeatherData = (): void => {
-        setFreeTierData(weather.getJSONCityData());
-    }
-
-    /**
-     * Sets state for one call tier data.
-     */
-    const setOneCallWeatherData = (): void => {
-        setOneCallData(weather.getJSONDescriptiveWeatherData());
+        let localDateTime = dateTimeUtility.getDateTime(
+            oneCallData?.current.dt, oneCallData?.timezone_offset);
+        setDate(dateTimeUtility.getDateInfo(localDateTime));
     }
 
     /**
@@ -136,8 +127,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     useEffect(() => {
         setCityName();
         setCountryName();
-        setFreeTierWeatherData(); 
-        setOneCallWeatherData();
+        setFreeTierData(weather.getJSONCityData());
+        setOneCallData(weather.getJSONDescriptiveWeatherData());
         setToggleCheckedState();
         updateTemperatureUnitsLabel();
 
@@ -148,7 +139,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         // Temperature props.
         setTemperature(weather.calculateTemperature(freeTierData?.main.temp));
         setFeelsLikeTemperature(weather.calculateTemperature(
-            freeTierData.main.feels_like));
+            freeTierData?.main.feels_like));
         
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");

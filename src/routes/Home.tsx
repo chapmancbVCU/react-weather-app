@@ -65,6 +65,11 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [toggled, setIsToggled] = useState<boolean>(false);
 
     /**
+     * @prop Label for unit of temperature measure (Ex: C or F).
+     */
+    const [unitsLabel, setUnitsLabel] = useState<string>("");
+
+    /**
      * This function is called when state of units toggle switch is updated.
      */
     const handleToggleChange = (): void => {
@@ -127,6 +132,14 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         else if (weather.getUnits() === "METRIC") setIsToggled(true);
     }
 
+    /**
+     * Set the value for the units label prop to C or F.
+     */
+    const updateUnitsLabel = (): void => {
+        if (weather.getUnits() === "IMPERIAL") setUnitsLabel("F");
+        else if (weather.getUnits() === "METRIC" ) setUnitsLabel("C");
+    }
+
     useEffect(() => {
         setCityName();
         setCountryName();
@@ -135,6 +148,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setToggleCheckedState();
         setTemperatureProp();
         setCurrentDate();
+        updateUnitsLabel();
         console.log(date);
         // Set time to be rendered and refresh every second.
         setInterval(() => setTime(new Date()), 1000);
@@ -158,7 +172,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         isToggled={toggled} 
                         handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
-                    <p>{temperature}</p>
                 </ForecastHeader>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
@@ -166,6 +179,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div>{date}</div>
                             <div>{time.toLocaleTimeString()}</div>
                         </div>
+                        <div className='current-temperature'>{temperature} {'\xB0'}{typeof unitsLabel === 'string' ? unitsLabel : null}</div>
                     </div>
                     <div className='current-conditions-right'></div>
                 </div>             

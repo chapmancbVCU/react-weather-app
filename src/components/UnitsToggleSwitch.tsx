@@ -51,7 +51,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     }
 
     useEffect(() => {
-        setFreeTierData(weather.getJSONCityData());
+        setFreeTierData(weather.getJSONFreeTierData());
         updateTemperatureUnitsLabel();
         console.log(weather.getUnits())
     }, [weather, isToggled]);

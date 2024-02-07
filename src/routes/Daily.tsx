@@ -59,8 +59,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     }
 
     useEffect(() => {
-        setFreeTierData(weather.getJSONCityData());
-        setOneCallData(weather.getJSONDescriptiveWeatherData());
+        setFreeTierData(weather.getJSONFreeTierData());
+        setOneCallData(weather.getJSONOneCallWeatherData());
         setToggleCheckedState();
 
         console.log("Free tier data (ctrl+s if no output on page load):");

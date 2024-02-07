@@ -131,8 +131,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     useEffect(() => {
         setCityName();
         setCountryName();
-        setFreeTierData(weather.getJSONCityData());
-        setOneCallData(weather.getJSONDescriptiveWeatherData());
+        setFreeTierData(weather.getJSONFreeTierData());
+        setOneCallData(weather.getJSONOneCallWeatherData());
         setToggleCheckedState();
         updateTemperatureUnitsLabel();
 

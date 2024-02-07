@@ -46,7 +46,7 @@ export class Weather {
         }
     }
 
-    
+
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {string} city The locality whose weather we want to retrieve.
@@ -141,7 +141,7 @@ export class Weather {
      * Getter function for returning city data as a JSON object.
      * @returns JSON object containing city data.
      */
-    getJSONCityData(): any {
+    getJSONFreeTierData(): any {
         return this.JSONCityData;
     }
 
@@ -150,7 +150,7 @@ export class Weather {
      * Getter function for returning descriptive weather data as a JSON object.
      * @returns JSON object containing descriptive weather data.
      */
-    getJSONDescriptiveWeatherData(): string {
+    getJSONOneCallWeatherData(): string {
         return this.JSONDescriptiveWeatherData;
     }
 
@@ -238,7 +238,7 @@ export class Weather {
      * Setter function for simple weather data in the form of a JSON object.
      * @param {string} cityData JSON string containing weather data. 
      */
-    setJSONCityData(cityData:string|any): void {
+    setJSONFreeTierData(cityData:string|any): void {
         this.JSONCityData = cityData;
     }
 
@@ -249,7 +249,7 @@ export class Weather {
      * @param {string} descriptiveWeatherData JSON string containing descriptive 
      * weather data.
      */
-    setJSONDescriptiveWeatherData(descriptiveWeatherData:string|any): void {
+    setJSONOneCallWeatherData(descriptiveWeatherData:string|any): void {
         this.JSONDescriptiveWeatherData = descriptiveWeatherData;
     }
 

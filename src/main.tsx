@@ -33,11 +33,11 @@ try {
     const countryName = await weather.getCountryName();
     weather.setUnits(countryName);
 
-    weather.setJSONCityData(cityData);
+    weather.setJSONFreeTierData(cityData);
 
     const descriptiveWeatherData = 
       await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
-    weather.setJSONDescriptiveWeatherData(descriptiveWeatherData);
+    weather.setJSONOneCallWeatherData(descriptiveWeatherData);
 } catch (error) {
     console.log(error)
 }

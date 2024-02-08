@@ -32,6 +32,13 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [city, setCity] = useState(Object);
 
+    const [conditionsClassName, setConditionsClassName] = useState<string>("");
+
+    /**
+     * @prop Name of country where city is located.
+     */
+    const [country, setCountry] = useState(Object);
+
     /**
      * @prop Description of current conditions outside.
      */
@@ -44,15 +51,11 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [date, setDate] = useState<string>("");
 
     /**
-     * @prop Name of country where city is located.
-     */
-    const [country, setCountry] = useState(Object);
-
-    /**
      * @prop Property for feels like temperature.
      */
     const [feelsLikeTemperature, setFeelsLikeTemperature] = useState<string>("")
 
+    const [forecastTime, setForecastTime] = useState<string>("");
     /**
      * @prop Free tier data to display current conditions.
      */
@@ -62,6 +65,11 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * @prop Current day high temperature.
      */
     const [highTemperature, setHighTemperature] = useState<number>();
+
+    /**
+     * @prop The current time.
+     */
+    const [localTime, setLocalTime] = useState<Date>(new Date());
 
     /**
      * @prop Current day low temperature.
@@ -82,11 +90,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
     const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
-
-    /**
-     * @prop The current time.
-     */
-    const [time, setTime] = useState<Date>(new Date());
 
     /**
      * @prop Property for checkbox depending on whether or not it is
@@ -121,11 +124,21 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const setCurrentConditionsDescription = async (): Promise<void> => {
         const originalStatement: string = await freeTierData?.weather[0].description;
+        console.log("current conditions:");
+        console.log(originalStatement);
         const wordsArray: string[] = originalStatement.split(" ");
         for(let i: number = 0; i < wordsArray.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
         }
         setCurrentConditions(wordsArray.join(" "));
+
+        if(originalStatement === "clear sky") {
+            setConditionsClassName("clear-sky content");
+        } else if (originalStatement === "scattered clouds") {
+            setConditionsClassName("scattered-clouds content");
+        } else {
+            setConditionsClassName("clear-sky content");
+        }
     }
  
     /**
@@ -136,6 +149,12 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         let localDateTime = dateTimeUtility.getDateTime(
             oneCallData?.current.dt, oneCallData?.timezone_offset);
         setDate(dateTimeUtility.getDateInfo(localDateTime));
+    }
+
+    const setForecastTimeInformation = (): void => {
+        let localDateTime = dateTimeUtility.getDateTime(
+            oneCallData?.current.dt, oneCallData?.timezone_offset);
+        setForecastTime(dateTimeUtility.getTimeInfo(localDateTime));
     }
 
     /**
@@ -164,7 +183,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         updateTemperatureUnitsLabel();
 
         // Set time to be rendered and refresh every second.
-        setInterval(() => setTime(new Date()), 1000);
+        setInterval(() => setLocalTime(new Date()), 1000);
+        setForecastTimeInformation();
         setCurrentDate();
 
         // Temperature props.
@@ -187,7 +207,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
     
     return (
-        <div className='clear-sky content'>
+        <div className={conditionsClassName}>
             <div className='forecast'>
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} 
@@ -200,7 +220,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                     <div className='current-conditions-left'>
                         <div className="date-time-container">
                             <div>{date}</div>
-                            <div>{time.toLocaleTimeString()}</div>
+                            <div>Local Time: {localTime.toLocaleTimeString()}</div>
+                            <div>Forecast Time: {typeof forecastTime === 'string' ? forecastTime : null}</div>
                         </div>
                         <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         <div className='today-high-low-temperature'>Today's High: {highTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
@@ -242,7 +263,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                                 Winds
                                 <div>{weather.getWindSpeed(freeTierData?.wind.speed)}, {weather.getWindDirection(freeTierData?.wind.deg)}</div>
                                 Wind Gusts
-                                <div>{weather.getWindSpeed(oneCallData?.current.wind_gust)}</div>
+                                <div>{weather.getWindSpeed(oneCallData?.daily[0].wind_gust)}</div>
                             </div>
                         </div>
                     </div>

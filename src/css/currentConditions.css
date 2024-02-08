@@ -33,16 +33,9 @@
     margin-left: 10px;
 }
 
-.current-conditions-left {
-    border: solid black 1px;
-    min-height: 30px;
-}
-
 .current-conditions-right {
     display: flex;
     flex-direction: column;
-    border: solid black 1px;
-    min-height: 30px;
 }
 
 .current-temperature {
@@ -91,6 +84,7 @@
 
     .current-conditions-right {
         margin-left: auto;
+        margin-bottom: 15px;
     }
 
     .current-temperature {

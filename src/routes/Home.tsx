@@ -240,9 +240,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <img className="conditions-icon" src="./icons/weather-windy.png"></img>
                             <div className='current-conditions-info-description'>
                                 Winds
-                                <div>{weather.getWindSpeed(freeTierData.wind.speed)}, {weather.getWindDirection(freeTierData.wind.deg)}</div>
+                                <div>{weather.getWindSpeed(freeTierData?.wind.speed)}, {weather.getWindDirection(freeTierData?.wind.deg)}</div>
                                 Wind Gusts
-                                <div>{weather.getWindSpeed(oneCallData.current.wind_gust)}</div>
+                                <div>{weather.getWindSpeed(oneCallData?.current.wind_gust)}</div>
                             </div>
                         </div>
                     </div>

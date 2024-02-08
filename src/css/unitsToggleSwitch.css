@@ -34,6 +34,16 @@ input:checked + .slider:before {
     transition: 0.4s;
 }
 
+/* Modified outside grey area */
+.slider.rounded {
+    border-radius: 34px;
+}
+
+/* Modifies white area inside */
+.slider.rounded:before {
+    border-radius: 50%;
+}
+
 .toggle-switch {
     position: relative;
     display: inline-block;

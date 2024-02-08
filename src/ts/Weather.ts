@@ -235,6 +235,47 @@ export class Weather {
 
 
     /**
+     * Returns either N, NE, E, SE, S, SW, W, or NW depending on wind 
+     * direction.
+     * @param {Number} deg The direction of the winds. 
+     * @returns A string value indicating general direction of the winds.
+     */
+    getWindDirection(deg: number) {
+        if ((deg >= 337.6 && deg <= 359.9) || deg >= 0 && deg <= 22.5) {
+            return 'S';
+        } else if (deg >= 22.6 && deg <= 67.5) {
+            return 'SW';
+        } else if (deg >= 67.6 && deg <= 112.5) {
+            return 'W';
+        } else if (deg >= 112.6 && deg <= 157.5) {
+            return 'NW';
+        } else if (deg >= 157.6 && deg <= 202.5) {
+            return 'N';
+        } else if (deg >= 202.6 && deg <= 247.5) {
+            return 'NE';
+        } else if (deg >= 247.6 && deg <= 292.5) {
+            return 'E';
+        } else if (deg >= 292.6 && deg <= 337.5) {
+            return 'SE';
+        }
+    }
+
+
+    /**
+     * Returns wind as mph or km/h depending of location.
+     * @param {Number} wind The wind speed expressed in meters per second. 
+     * @returns The wind speed in mph or km/h.
+     */
+    getWindSpeed(wind: number) {
+        if (this.getUnits() === 'IMPERIAL') {
+            return (wind * 2.2369).toFixed(1) + ' mph';
+        } else {
+            return (wind * (18/5)).toFixed(1) + ' km/h'
+        }
+    }
+
+
+    /**
      * Setter function for simple weather data in the form of a JSON object.
      * @param {string} cityData JSON string containing weather data. 
      */

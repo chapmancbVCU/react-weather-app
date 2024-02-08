@@ -223,10 +223,26 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             </div>
                         </div>
                         <div className='current-conditions-info'>
-                        <img className="conditions-icon" src="./icons/humidity.png"></img>
+                            <img className="conditions-icon" src="./icons/humidity.png"></img>
                             <div className='current-conditions-info-description'>
                                 Humidity
                                 <div>{freeTierData && freeTierData.main.humidity}%</div>
+                            </div>
+                        </div>
+                        <div className='current-conditions-info'>
+                            <img className="conditions-icon" src="./icons/weather-pouring.png"></img>
+                            <div className='current-conditions-info-description'>
+                                Chance of PPT
+                                <div>{oneCallData && (oneCallData.daily[0].pop * 100).toFixed(0)}%</div>
+                            </div>
+                        </div>
+                        <div className='current-conditions-info'>
+                            <img className="conditions-icon" src="./icons/weather-windy.png"></img>
+                            <div className='current-conditions-info-description'>
+                                Winds
+                                <div>{weather.getWindSpeed(freeTierData.wind.speed)}, {weather.getWindDirection(freeTierData.wind.deg)}</div>
+                                Wind Gusts
+                                <div>{weather.getWindSpeed(oneCallData.current.wind_gust)}</div>
                             </div>
                         </div>
                     </div>

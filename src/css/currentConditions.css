@@ -21,8 +21,6 @@
     justify-content: center;
     
     margin-top: 15px;
-    margin-bottom: 15px;
-    /* margin-right: 15px; */
 
     font-size: 16px;
 }
@@ -41,6 +39,8 @@
 }
 
 .current-conditions-right {
+    display: flex;
+    flex-direction: column;
     border: solid black 1px;
     min-height: 30px;
 }
@@ -85,24 +85,19 @@
     }
 
     .current-conditions-info {
-        justify-content: flex-end;
-    }
-
-    .current-conditions-left {
-        width: 50%;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .current-conditions-right {
-        width: 50%;
+        margin-left: auto;
     }
 
     .current-temperature {
-        /* margin-left: 15px; */
         text-align: left;
     }
 
     .date-time-container {
-        /* margin-left: 15px; */
         align-items: flex-start;
     }
 
@@ -112,6 +107,5 @@
 
     .today-high-low-temperature {
         text-align: left;
-        /* margin-left: 15px; */
     }
 }

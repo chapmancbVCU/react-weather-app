@@ -37,7 +37,7 @@ export class DateTimeUtility {
         return new Date((timezoneOffset + unixTime) * 1000).toUTCString();
     }
 
-    
+
     /**
      * This function reports the local date in the following format: 
      * <day_of_week>, <month> <day_of_month>, <year>.
@@ -129,7 +129,7 @@ export class DateTimeUtility {
      * @param {HTMLDivElement} timeContainer The element whose text we will 
      * set with the time.
      */
-    getTimeInfo(localDateTime: String, timeContainer: any) {
+    getTimeInfo(localDateTime: String) {
         let hours: any = localDateTime.slice(17, 19);
         let minutes: any = localDateTime.slice(20, 22);
 
@@ -160,6 +160,6 @@ export class DateTimeUtility {
         }
 
         //const currentTime = document.querySelector('#current-time');
-        timeContainer.textContent = hours + ':' + minutes + ' ' + timePeriod;
+        return hours + ':' + minutes + ' ' + timePeriod;
     }
 }

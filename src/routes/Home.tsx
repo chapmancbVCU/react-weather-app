@@ -32,6 +32,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [city, setCity] = useState(Object);
 
+    /**
+     * @prop Description of current conditions outside.
+     */
     const [currentConditions, setCurrentConditions] = useState<string>();
 
     /**
@@ -55,8 +58,16 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [freeTierData, setFreeTierData] = useState<any>();
 
+    /**
+     * @prop Current day high temperature.
+     */
     const [highTemperature, setHighTemperature] = useState<number>();
+
+    /**
+     * @prop Current day low temperature.
+     */
     const [lowTemperature, setLowTemperature] = useState<number>();
+
     /**
      * @prop One call tier data for displaying hourly and daily forecast.
      */
@@ -105,14 +116,15 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCountry(await weather.getCountryName());
     }
 
+    /**
+     * Capitalize first letter of each word of current conditions description.
+     */
     const setCurrentConditionsDescription = async () => {
         const originalStatement: string = await freeTierData?.weather[0].description;
         const wordsArray: string[] = originalStatement.split(" ");
         for(let i: number = 0; i < wordsArray.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
         }
-
-        wordsArray.join(" ");
         setCurrentConditions(wordsArray.join(" "));
     }
  

@@ -119,7 +119,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * Capitalize first letter of each word of current conditions description.
      */
-    const setCurrentConditionsDescription = async () => {
+    const setCurrentConditionsDescription = async (): Promise<void> => {
         const originalStatement: string = await freeTierData?.weather[0].description;
         const wordsArray: string[] = originalStatement.split(" ");
         for(let i: number = 0; i < wordsArray.length; i++) {
@@ -183,7 +183,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, toggled, temperature, freeTierData]);
+    }, [weather, toggled, temperature]);
 
     
     return (

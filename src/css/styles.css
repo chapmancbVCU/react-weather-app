@@ -53,12 +53,6 @@ body, html {
     height: 100%;
 }
 
-/* Modified outside grey area */
-.slider.rounded {
-    border-radius: 34px;
-}
-
-/* Modifies white area inside */
-.slider.rounded:before {
-    border-radius: 50%;
+.clear-sky {
+    background-image: url('/images/clear-sky.jpg');
 }

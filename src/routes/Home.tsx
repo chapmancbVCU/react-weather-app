@@ -32,6 +32,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [city, setCity] = useState(Object);
 
+    const [currentConditions, setCurrentConditions] = useState<string>();
+
     /**
      * @prop for date in the following format: 
      * <day_of_week>, <month> <day_of_month>, <year>.
@@ -103,6 +105,17 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCountry(await weather.getCountryName());
     }
 
+    const setCurrentConditionsDescription = async () => {
+        const originalStatement: string = await freeTierData?.weather[0].description;
+        const wordsArray: string[] = originalStatement.split(" ");
+        for(let i: number = 0; i < wordsArray.length; i++) {
+            wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
+        }
+
+        wordsArray.join(" ");
+        setCurrentConditions(wordsArray.join(" "));
+    }
+ 
     /**
      * Gets date time stamp from one call data and sets date as string using 
      * the format: <day_of_week>, <month> <day_of_month>, <year>.
@@ -148,6 +161,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
             freeTierData?.main.feels_like));
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
+
+        setCurrentConditionsDescription();
+
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
@@ -155,7 +171,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, toggled, temperature]);
+    }, [weather, toggled, temperature, freeTierData]);
 
     
     return (
@@ -179,7 +195,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         <div className='today-high-low-temperature'>Today's Low: {lowTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         <div className='description-container'>
                             <div className='current-conditions-description'>
-                                {freeTierData && freeTierData.weather[0].description}
+                                {typeof currentConditions === 'string' ? currentConditions : null}
                             </div>
                             <img className='description-icon' 
                                 src={`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`}>

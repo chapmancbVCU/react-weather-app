@@ -123,19 +123,33 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * Capitalize first letter of each word of current conditions description.
      */
     const setCurrentConditionsDescription = async (): Promise<void> => {
-        const originalStatement: string = await freeTierData?.weather[0].description;
+        const currentConditions: string = await freeTierData?.weather[0].description;
         console.log("current conditions:");
-        console.log(originalStatement);
-        const wordsArray: string[] = originalStatement.split(" ");
+        console.log(currentConditions);
+        const wordsArray: string[] = currentConditions.split(" ");
         for(let i: number = 0; i < wordsArray.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
         }
         setCurrentConditions(wordsArray.join(" "));
 
-        if(originalStatement === "clear sky") {
+        if (currentConditions === "clear sky") {
             setConditionsClassName("clear-sky content");
-        } else if (originalStatement === "scattered clouds") {
+        } else if (currentConditions === "scattered clouds") {
             setConditionsClassName("scattered-clouds content");
+        } else if (currentConditions === "few clouds") {
+            setConditionsClassName("few-clouds content");
+        } else if (currentConditions === "broken clouds") {
+            setConditionsClassName("broken-clouds content");
+        } else if (currentConditions === "shower rain") {
+            setConditionsClassName("shower-rain content");
+        } else if (currentConditions === "rain") {
+            setConditionsClassName("rain content");
+        } else if (currentConditions === "thunder storm") {
+            setConditionsClassName("thunder-storm content");
+        } else if (currentConditions === "snow") {
+            setConditionsClassName("snow content");
+        } else if (currentConditions === "mist") {
+            setConditionsClassName("mist content");
         } else {
             setConditionsClassName("clear-sky content");
         }
@@ -203,7 +217,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, toggled, temperature]);
+    }, [weather, toggled, temperature, currentConditions, freeTierData]);
 
     
     return (

@@ -19,6 +19,10 @@ body, html {
     height: 100%;
 }
 
+.broken-clouds {
+    background-image: url('/images/broken-clouds.jpg');
+}
+
 .clear-sky {
     background-image: url('/images/clear-sky.jpg');
 }
@@ -42,9 +46,21 @@ body, html {
     flex-direction: column;
 }
 
+.few-clouds {
+    background-image: url('/images/few-clouds.jpg');
+}
+
+.mist {
+    background-image: url('/images/mist.jpg');
+}
+
 .page-title {
     margin: 15px 0 15px 0;
     text-align: center;
+}
+
+.rain {
+    background-image: url('/images/rain.jpg');
 }
 
 #root {
@@ -53,6 +69,18 @@ body, html {
     height: 100%;
 }
 
-.clear-sky {
-    background-image: url('/images/clear-sky.jpg');
+.scattered-clouds {
+    background-image: url('/images/scattered-clouds.jpg');
+}
+
+.shower-rain {
+    background-image: url('/images/shower-rain.jpg');
+}
+
+.snow {
+    background-image: url('/images/snow.jpg');
+}
+
+.thunder-storm {
+    background-image: url('/images/thunder-storm.jpg');
 }

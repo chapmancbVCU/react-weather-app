@@ -24,6 +24,8 @@ interface HourlyPageProps {
  */
 // @ts-ignore
 const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
+    const [conditionsClassName, setConditionsClassName] = useState<string>("");
+
     /**
      * @prop Free tier data to display current conditions.
      */
@@ -48,6 +50,34 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         setToggleCheckedState();
     }
 
+    const setConditionsClass = async (): Promise<void> => {
+        const currentConditions: string = await freeTierData?.weather[0].description;
+        console.log("current conditions:");
+        console.log(currentConditions);
+
+        if (currentConditions === "clear sky") {
+            setConditionsClassName("clear-sky content");
+        } else if (currentConditions === "scattered clouds") {
+            setConditionsClassName("scattered-clouds content");
+        } else if (currentConditions === "few clouds") {
+            setConditionsClassName("few-clouds content");
+        } else if (currentConditions === "broken clouds") {
+            setConditionsClassName("broken-clouds content");
+        } else if (currentConditions === "shower rain") {
+            setConditionsClassName("shower-rain content");
+        } else if (currentConditions === "rain") {
+            setConditionsClassName("rain content");
+        } else if (currentConditions === "thunder storm") {
+            setConditionsClassName("thunder-storm content");
+        } else if (currentConditions === "snow") {
+            setConditionsClassName("snow content");
+        } else if (currentConditions === "mist") {
+            setConditionsClassName("mist content");
+        } else {
+            setConditionsClassName("clear-sky content");
+        }
+    }
+
     /**
      * Sets value for variable toggled depending on what units is being used 
      * by the Weather class instance.
@@ -61,16 +91,17 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
         setToggleCheckedState();
+        setConditionsClass();
 
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
         console.log("One call data");
         console.log(oneCallData);
-    }, [weather, toggled]);
+    }, [weather, toggled, freeTierData]);
 
 
     return (
-        <div className='clear-sky content'>
+        <div className={conditionsClassName}>
             <div className='forecast'>
                 <ForecastHeader>
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>

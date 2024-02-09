@@ -275,6 +275,14 @@ export class Weather {
     }
 
 
+    /**
+     * Sets string for content div to contain content class selector along 
+     * with class selector for specific background images.
+     * @param {string } currentConditions Description of current conditions in 
+     * current forecast.
+     * @returns A string containing current conditions description along with 
+     * another class for content.
+     */
     setConditionsClass(currentConditions: string): string {
         if (currentConditions === "clear sky") {
             return "clear-sky content";
@@ -299,6 +307,7 @@ export class Weather {
         }
     }
 
+    
     /**
      * Setter function for simple weather data in the form of a JSON object.
      * @param {string} cityData JSON string containing weather data. 

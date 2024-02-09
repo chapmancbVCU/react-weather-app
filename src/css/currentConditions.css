@@ -62,6 +62,10 @@
     justify-content: center;
 }
 
+.hr-border {
+    border: solid 3px rgb(57, 169, 244);
+}
+
 .today-high-low-temperature {
     font-size: 18px;
     text-align: center;

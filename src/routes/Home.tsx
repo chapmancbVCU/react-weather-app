@@ -279,7 +279,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             </div>
                         </div>
                     </div>
-                </div>             
+                </div>  
+                <hr className='hr-border'></hr>
+                <div>foo</div>           
             </div>
             <div className='forecast'>
                 <h3>Free Tier Data</h3>

@@ -4,12 +4,12 @@
  */
 export class Weather {
     // Instance variables
-    private city: object;
+    private city: Promise<string|void>;
     private geoLocationInfo: string;
     private countryName: any;
     private initialUnits: string;
-    private JSONCityData: any;
-    private JSONDescriptiveWeatherData: any;
+    private JSONCityData: Promise<string|void>;
+    private JSONDescriptiveWeatherData: Promise<string|void>;
     private latitude: number;
     private longitude: number;
     private units: string;
@@ -34,9 +34,9 @@ export class Weather {
     /**
      * Converts the temperature retrieved from Open Weather Map as Kelvin to 
      * either Fahrenheit or Celsius.
-     * @param temperature The temperature in Kelvin that we want to convert to 
+     * @param {number} temperature The temperature in Kelvin that we want to convert to 
      * either Fahrenheit or Celsius.
-     * @returns The temperature in either Fahrenheit or Celsius.
+     * @returns {number|any}The temperature in either Fahrenheit or Celsius.
      */
     calculateTemperature(temperature: number): number|any {
         if (this.getUnits() === "IMPERIAL") {
@@ -50,9 +50,10 @@ export class Weather {
     /**
      * Returns the limited weather data using api call based on city name.
      * @param {string} city The locality whose weather we want to retrieve.
-     * @returns The limited local weather data as a JSON Object.
+     * @returns {Promise<string|void>} The limited local weather data as a JSON 
+     * Object.
      */
-    async getCityData(city: any) {
+    async getCityData(city: any): Promise<string|void> {
         try {
             const response = await fetch(
                 `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
@@ -69,9 +70,10 @@ export class Weather {
     /**
      * Get the name of city that is detected using geolocation based on 
      * localhost's location.
-     * @returns The name of the city when using geolocation to detect location.
+     * @returns {Promise<string|void>} The name of the city when using 
+     * geolocation to detect location.
      */
-    getCityInfo(): Object {
+    getCityInfo(): Promise<string|void> {
         return this.city;
     }
 
@@ -80,9 +82,9 @@ export class Weather {
      * The name of the country where the user resides.
      * @param {string} geoLocationInfo JSON string that contains information 
      * about user's current location.
-     * @returns The country where the user resides.
+     * @returns {Promise<string|void>} The country where the user resides.
      */
-    async getCountryInformation(geoLocationInfo: string) {
+    async getCountryInformation(geoLocationInfo: string): Promise<string|undefined> {
         try {
             const response = await fetch(geoLocationInfo);
             const data = await response.json();
@@ -95,7 +97,7 @@ export class Weather {
 
     /**
      * Detect location of localhost so we can get local weather on page load.
-     * @returns The string representation of locality information in form of 
+     * @returns {string} The string representation of locality information in form of 
      * URL that references an API.
      */
     getGeoLocationInformation(): string {
@@ -119,7 +121,7 @@ export class Weather {
 
      /**
      * Getter function for retrieving the users country.
-     * @returns The nation where the user resides.
+     * @returns {string} The nation where the user resides.
      */
      getCountryName(): string {
         return this.countryName;
@@ -129,7 +131,7 @@ export class Weather {
     /**
      * Getter function for initial unit system.  It can be either IMPERIAL or 
      * METRIC.
-     * @returns The initial units that were set upon location detection when 
+     * @returns {string} The initial units that were set upon location detection when 
      * the user loads the page.
      */
     getInitialUnits(): string {
@@ -139,9 +141,9 @@ export class Weather {
 
     /**
      * Getter function for returning city data as a JSON object.
-     * @returns JSON object containing city data.
+     * @returns {Promise<string|void>} JSON object containing city data.
      */
-    getJSONFreeTierData(): any {
+    getJSONFreeTierData(): Promise<string|void> {
         return this.JSONCityData;
     }
 
@@ -150,7 +152,7 @@ export class Weather {
      * Getter function for returning descriptive weather data as a JSON object.
      * @returns JSON object containing descriptive weather data.
      */
-    getJSONOneCallWeatherData(): string {
+    getJSONOneCallWeatherData(): Promise<string|void> {
         return this.JSONDescriptiveWeatherData;
     }
 
@@ -204,7 +206,7 @@ export class Weather {
      * query.
      * @returns Detailed weather data as a JSON object.
      */
-    async getOneCallWeatherData(latitude: number, longitude: number) {
+    async getOneCallWeatherData(latitude: number, longitude: number): Promise<string|void> {
         let units = '';
         if(this.getUnits() === 'IMPERIAL') {
             units = 'imperial';
@@ -240,7 +242,7 @@ export class Weather {
      * @param {Number} deg The direction of the winds. 
      * @returns A string value indicating general direction of the winds.
      */
-    getWindDirection(deg: number) {
+    getWindDirection(deg: number): string|any {
         if ((deg >= 337.6 && deg <= 359.9) || deg >= 0 && deg <= 22.5) {
             return 'S';
         } else if (deg >= 22.6 && deg <= 67.5) {
@@ -266,7 +268,7 @@ export class Weather {
      * @param {Number} wind The wind speed expressed in meters per second. 
      * @returns The wind speed in mph or km/h.
      */
-    getWindSpeed(wind: number) {
+    getWindSpeed(wind: number): string {
         if (this.getUnits() === 'IMPERIAL') {
             return (wind * 2.2369).toFixed(1) + ' mph';
         } else {
@@ -307,7 +309,7 @@ export class Weather {
         }
     }
 
-    
+
     /**
      * Setter function for simple weather data in the form of a JSON object.
      * @param {string} cityData JSON string containing weather data. 
@@ -369,7 +371,7 @@ export class Weather {
     /**
      * Toggles the this.units instance variable between IMPERIAL and METRIC.
      */
-    toggleUnits() {
+    toggleUnits(): void {
         if(this.units === 'IMPERIAL') {
             this.units = 'METRIC';
         } else {

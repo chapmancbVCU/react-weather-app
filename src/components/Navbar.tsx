@@ -76,6 +76,16 @@ function Navbar(): JSX.Element {
                                     Hourly
                                 </NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink 
+                                    to="/react-weather-app/favorites" 
+                                    className={({ isActive } ) => 
+                                        "nav-links" + (isActive ? " activated" : "")
+                                        }
+                                        onClick={closeMobileMenu}>
+                                    Favorites
+                                </NavLink>
+                            </li>
                         </ul>
                     </StyledNavbarContainer>
                 </StyledNav>

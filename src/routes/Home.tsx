@@ -328,7 +328,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                 <hr></hr>
                 <h3>One Call Data</h3>
                 {/* oneCallData? to prevent undefined property error */}
-                <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
+                <p>{JSON.stringify(oneCallData)}</p>
             </div>
         </div> 
     )

@@ -7,6 +7,7 @@ import AppLayout  from './components/AppLayout';
 import Daily from './routes/Daily';
 import { DateTimeUtility } from './ts/DateTimeUtility.ts'; 
 import ErrorPage from './routes/ErrorPage.tsx';
+import Favorites from './routes/Favorites.tsx';
 import Home from './routes/Home';
 import Hourly from './routes/Hourly';
 import React from 'react';
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
             {
                 path: "/react-weather-app/hourly",
                 element: <Hourly weather={weather}
+                />,
+            },
+            {
+                path: "/react-weather-app/favorites",
+                element: <Favorites weather={weather}
                 />,
             },
         ],

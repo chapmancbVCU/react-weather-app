@@ -1,4 +1,8 @@
-
+/******************************************************************************
+ * DESCRIPTION: Stylesheet for setting background image based on current      *
+ *              conditions.                                                   *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
 .broken-clouds {
     background-image: url('/images/broken-clouds.jpg');
 }

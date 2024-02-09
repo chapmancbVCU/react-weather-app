@@ -205,7 +205,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, toggled, temperature, currentConditions, freeTierData]);
+    }, [weather, toggled, temperature, freeTierData]);
 
     
     return (
@@ -223,7 +223,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         <div className="date-time-container">
                             <div>{date}</div>
                             <div>Local Time: {localTime.toLocaleTimeString()}</div>
-                            <div>Forecast Time: {typeof forecastTime === 'string' ? forecastTime : null}</div>
+                            <div>Forecast Location Time: {typeof forecastTime === 'string' ? forecastTime : null}</div>
                         </div>
                         <div className='current-temperature'>{temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         <div className='today-high-low-temperature'>Today's High: {highTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>

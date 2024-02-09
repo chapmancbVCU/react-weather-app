@@ -2,6 +2,7 @@
  * @file Contains functions related to rendering the hourly forecast.
  * @author Chad Chapman
  */
+import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';

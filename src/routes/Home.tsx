@@ -2,8 +2,9 @@
  * @file Contains functions related to rendering the current conditions.
  * @author Chad Chapman
  */
-import { DateTimeUtility } from '../ts/DateTimeUtility';
 import '../css/currentConditions.css';
+import '../css/currentConditionsBackground.css';
+import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC, useState, useEffect } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';

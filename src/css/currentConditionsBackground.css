@@ -1,0 +1,32 @@
+
+.broken-clouds {
+    background-image: url('/images/broken-clouds.jpg');
+}
+
+.clear-sky {
+    background-image: url('/images/clear-sky.jpg');
+}
+
+.few-clouds {
+    background-image: url('/images/few-clouds.jpg');
+}
+
+.mist {
+    background-image: url('/images/mist.jpg');
+}
+
+.scattered-clouds {
+    background-image: url('/images/scattered-clouds.jpg');
+}
+
+.shower-rain {
+    background-image: url('/images/shower-rain.jpg');
+}
+
+.snow {
+    background-image: url('/images/snow.jpg');
+}
+
+.thunder-storm {
+    background-image: url('/images/thunder-storm.jpg');
+}

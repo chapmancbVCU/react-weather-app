@@ -2,8 +2,8 @@
  * @file Contains functions related to rendering the daily forecast.
  * @author Chad Chapman
  */
+import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../ts/DateTimeUtility';
-import '../css/currentConditions.css';
 import { FC, useEffect, useState} from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';

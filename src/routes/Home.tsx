@@ -54,6 +54,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [date, setDate] = useState<string>("");
 
+    const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
+
     /**
      * @prop Property for feels like temperature.
      */
@@ -148,15 +150,22 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * the format: <day_of_week>, <month> <day_of_month>, <year>.
      */
     const setCurrentDate = (): void => {
-        let localDateTime = dateTimeUtility.getDateTime(
-            oneCallData?.current.dt, oneCallData?.timezone_offset);
-        setDate(dateTimeUtility.getDateInfo(localDateTime));
+        setDate(dateTimeUtility.getDateInfo(dateTimeStamp));
     }
 
+    /**
+     * Sets date-time stamp for GMT.
+     */
+    const setDateTime = (): void => {
+        setDateTimeStamp(dateTimeUtility.getDateTime(
+            oneCallData?.current.dt, oneCallData?.timezone_offset));
+    }
+
+    /**
+     * Sets the time for location we are fetching data.
+     */
     const setForecastTimeInformation = (): void => {
-        let localDateTime = dateTimeUtility.getDateTime(
-            oneCallData?.current.dt, oneCallData?.timezone_offset);
-        setForecastTime(dateTimeUtility.getTimeInfo(localDateTime));
+        setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
     }
 
     /**
@@ -186,6 +195,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
         // Set time to be rendered and refresh every second.
         setInterval(() => setLocalTime(new Date()), 1000);
+        setDateTime();
         setForecastTimeInformation();
         setCurrentDate();
 

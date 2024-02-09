@@ -122,7 +122,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * Capitalize first letter of each word of current conditions description.
      */
-    const setCurrentConditionsDescription = async (): Promise<void> => {
+    const setCurrentConditionsProps = async (): Promise<void> => {
         const currentConditions: string = await freeTierData?.weather[0].description;
         console.log("current conditions:");
         console.log(currentConditions);
@@ -130,29 +130,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         for(let i: number = 0; i < wordsArray.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
         }
-        setCurrentConditions(wordsArray.join(" "));
 
-        if (currentConditions === "clear sky") {
-            setConditionsClassName("clear-sky content");
-        } else if (currentConditions === "scattered clouds") {
-            setConditionsClassName("scattered-clouds content");
-        } else if (currentConditions === "few clouds") {
-            setConditionsClassName("few-clouds content");
-        } else if (currentConditions === "broken clouds") {
-            setConditionsClassName("broken-clouds content");
-        } else if (currentConditions === "shower rain") {
-            setConditionsClassName("shower-rain content");
-        } else if (currentConditions === "rain") {
-            setConditionsClassName("rain content");
-        } else if (currentConditions === "thunder storm") {
-            setConditionsClassName("thunder-storm content");
-        } else if (currentConditions === "snow") {
-            setConditionsClassName("snow content");
-        } else if (currentConditions === "mist") {
-            setConditionsClassName("mist content");
-        } else {
-            setConditionsClassName("clear-sky content");
-        }
+        setCurrentConditions(wordsArray.join(" "));
+        setConditionsClassName(weather.setConditionsClass(currentConditions));
     }
  
     /**
@@ -208,7 +188,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
 
-        setCurrentConditionsDescription();
+        setCurrentConditionsProps();
 
         console.log(city + ", " + country);
         console.log("Free tier data (ctrl+s if no output on page load):");

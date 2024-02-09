@@ -275,6 +275,30 @@ export class Weather {
     }
 
 
+    setConditionsClass(currentConditions: string): string {
+        if (currentConditions === "clear sky") {
+            return "clear-sky content";
+        } else if (currentConditions === "scattered clouds") {
+            return "scattered-clouds content";
+        } else if (currentConditions === "few clouds") {
+            return "few-clouds content";
+        } else if (currentConditions === "broken clouds") {
+            return "broken-clouds content";
+        } else if (currentConditions === "shower rain") {
+            return "shower-rain content";
+        } else if (currentConditions === "rain") {
+            return "rain content";
+        } else if (currentConditions === "thunder storm") {
+            return "thunder-storm content";
+        } else if (currentConditions === "snow") {
+            return "snow content";
+        } else if (currentConditions === "mist") {
+            return "mist content";
+        } else {
+            return "clear-sky content";
+        }
+    }
+
     /**
      * Setter function for simple weather data in the form of a JSON object.
      * @param {string} cityData JSON string containing weather data. 

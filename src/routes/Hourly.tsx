@@ -52,30 +52,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
     const setConditionsClass = async (): Promise<void> => {
         const currentConditions: string = await freeTierData?.weather[0].description;
-        console.log("current conditions:");
-        console.log(currentConditions);
-
-        if (currentConditions === "clear sky") {
-            setConditionsClassName("clear-sky content");
-        } else if (currentConditions === "scattered clouds") {
-            setConditionsClassName("scattered-clouds content");
-        } else if (currentConditions === "few clouds") {
-            setConditionsClassName("few-clouds content");
-        } else if (currentConditions === "broken clouds") {
-            setConditionsClassName("broken-clouds content");
-        } else if (currentConditions === "shower rain") {
-            setConditionsClassName("shower-rain content");
-        } else if (currentConditions === "rain") {
-            setConditionsClassName("rain content");
-        } else if (currentConditions === "thunder storm") {
-            setConditionsClassName("thunder-storm content");
-        } else if (currentConditions === "snow") {
-            setConditionsClassName("snow content");
-        } else if (currentConditions === "mist") {
-            setConditionsClassName("mist content");
-        } else {
-            setConditionsClassName("clear-sky content");
-        }
+        setConditionsClassName(weather.setConditionsClass(currentConditions));
     }
 
     /**

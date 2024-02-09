@@ -32,6 +32,10 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [city, setCity] = useState(Object);
 
+    /**
+     * @prop Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
     const [conditionsClassName, setConditionsClassName] = useState<string>("");
 
     /**
@@ -59,7 +63,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * @prop Represents time forecast data was fetched for a particular location.
      */
     const [forecastTime, setForecastTime] = useState<string>("");
-    
+
     /**
      * @prop Free tier data to display current conditions.
      */

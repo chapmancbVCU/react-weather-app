@@ -54,6 +54,9 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         setToggleCheckedState();
     }
 
+    /**
+     * Sets className for background image based on current conditions.
+     */
     const setConditionsClass = async (): Promise<void> => {
         const currentConditions: string = await freeTierData?.weather[0].description;
         setConditionsClassName(weather.setConditionsClass(currentConditions));

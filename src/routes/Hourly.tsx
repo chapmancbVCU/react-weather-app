@@ -24,6 +24,10 @@ interface HourlyPageProps {
  */
 // @ts-ignore
 const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
+    /**
+     * @prop Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
     const [conditionsClassName, setConditionsClassName] = useState<string>("");
 
     /**

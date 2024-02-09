@@ -55,7 +55,11 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [feelsLikeTemperature, setFeelsLikeTemperature] = useState<string>("")
 
+    /**
+     * @prop Represents time forecast data was fetched for a particular location.
+     */
     const [forecastTime, setForecastTime] = useState<string>("");
+    
     /**
      * @prop Free tier data to display current conditions.
      */

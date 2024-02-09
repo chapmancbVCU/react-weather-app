@@ -25,6 +25,10 @@ interface DailyPageProps {
  */
 // @ts-ignore
 const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
+    /**
+     * @prop Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
     const [conditionsClassName, setConditionsClassName] = useState<string>("");
 
     /**
@@ -51,6 +55,9 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         setToggleCheckedState();
     }
 
+    /**
+     * Sets className for background image based on current conditions.
+     */
     const setConditionsClass = async (): Promise<void> => {
         const currentConditions: string = await freeTierData?.weather[0].description;
         setConditionsClassName(weather.setConditionsClass(currentConditions));

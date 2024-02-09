@@ -229,7 +229,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>
-                <p className='daily-description'>{oneCallData.daily[0].summary}</p>
+                <p className='daily-description'>{oneCallData?.daily[0].summary}</p>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
                         <div className="date-time-container">

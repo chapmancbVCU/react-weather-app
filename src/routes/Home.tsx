@@ -188,7 +188,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
-    const [searchCity, setSearchCity] = useState<optionType | null>(null);
+    const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
 
     /**
      * @prop The available location suggestions presented to the user.
@@ -232,33 +232,33 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     }
 
     const onOptionSelect = async (option: optionType) => {
-        setSearchCity(option);
+        setSelectedCity(option);
         console.log(option.name);
     }
 
-    const getForecast = async (city: optionType) => {
+    const getForecast = async (selectedCity: optionType) => {
         console.log("Search Data");
-        const freeTier =  await weather.getCityData(`${city.name},${city.state}`);
-        setCity(`${city.name},${city.state}`);
+        const freeTier =  await weather.getCityData(`${selectedCity.name},${selectedCity.state}`);
+        setCity(`${selectedCity.name},${selectedCity.state}`);
         console.log(city);
         weather.setJSONFreeTierData(freeTier);
         setFreeTierData(freeTier);
         console.log(freeTier)
-        const oneCall =  await weather.getOneCallWeatherData(city.lat, city.lon);
+        const oneCall =  await weather.getOneCallWeatherData(selectedCity.lat, selectedCity.lon);
         weather.setJSONOneCallWeatherData(oneCall);
         setOneCallData(oneCall);
         console.log(oneCall);
     }
 
     const onSubmit = () => {
-        if(!searchCity) return;
-        getForecast(searchCity);
+        if(!selectedCity) return;
+        getForecast(selectedCity);
     }
 
     useEffect(() => {
-        if(searchCity) {
-            setSearchTerm(searchCity.name);
-            setCity(`${searchCity.name},${searchCity.state}`);
+        if(selectedCity) {
+            setSearchTerm(selectedCity.name);
+            setCity(`${selectedCity.name},${selectedCity.state}`);
             setOptions([]);
         } else {
             setCityName();

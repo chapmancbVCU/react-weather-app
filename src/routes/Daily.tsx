@@ -4,11 +4,12 @@
  */
 import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../ts/DateTimeUtility';
-import { FC, useEffect, useState} from 'react';
+import { ChangeEvent, FC, useEffect, useState} from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
+import { optionType } from '../ts/Option.ts';
 
 
 /**
@@ -27,6 +28,12 @@ interface DailyPageProps {
 // @ts-ignore
 const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
     /**
+     * @prop Name of city for current or remote location we are getting the 
+     * weather forecast.
+     */
+    const [city, setCity] = useState<any>();
+    
+    /**
      * @prop Used to set background of app based on current conditions based 
      * on free tier data.
      */
@@ -43,10 +50,51 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     const [oneCallData, setOneCallData] = useState<any>();
 
     /**
+     * @prop The available location suggestions presented to the user.
+     */
+    const [options, setOptions] = useState<[]>([]);
+
+    /**
+     * @prop The search term that the user enters into the search bar.
+     */
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
+
+    /**
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
     const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const getForecast = async (selectedCity: optionType) => {
+        console.log("Search Data");
+        const freeTier =  await weather.getCityData(`${selectedCity.name},${selectedCity.state}`);
+        setCity(`${selectedCity.name},${selectedCity.state}`);
+        console.log(city);
+        weather.setJSONFreeTierData(freeTier);
+        setFreeTierData(freeTier);
+        console.log(freeTier)
+        const oneCall =  await weather.getOneCallWeatherData(selectedCity.lat, selectedCity.lon);
+        weather.setJSONOneCallWeatherData(oneCall);
+        setOneCallData(oneCall);
+        console.log(oneCall);
+    }
+
+    /**
+     * Retrieves suggested names for locations when user types query into 
+     * the search bar.
+     * @param value Input for search bar.
+     */
+    const getSearchOptions = (value: string) => {
+        fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
+        .then((response) => response.json())
+        .then(res => {
+            if (res.data) {
+                setOptions(res.data);
+            }
+        })
+    }
 
     /**
      * This function is called when state of units toggle switch is updated.
@@ -56,6 +104,32 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         setToggleCheckedState();
     }
 
+    /**
+     * Detects input from search field and sets search term and search options 
+     * that will be presented to the user.
+     * @param e Event for when new input is detected in the search field.
+     * @returns 
+     */
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        
+        // Return if empty.
+        if (value === '') return;
+        getSearchOptions(value);
+        console.log(options)
+    }
+
+    const onOptionSelect = async (option: optionType) => {
+        setSelectedCity(option);
+        console.log(option.name);
+    }
+
+    const onSubmit = () => {
+        if(!selectedCity) return;
+        getForecast(selectedCity);
+    }
+    
     /**
      * Sets className for background image based on current conditions.
      */
@@ -74,6 +148,12 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     }
 
     useEffect(() => {
+        if(selectedCity) {
+            setSearchTerm(selectedCity.name);
+            setCity(`${selectedCity.name},${selectedCity.state}`);
+            setOptions([]);
+        } 
+
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
         setToggleCheckedState();
@@ -88,7 +168,12 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         <div className={conditionsClassName}>
             <div className='forecast'>
                 <ForecastHeader>
-                    <SearchBar weather={weather}/>
+                <SearchBar searchTerm={searchTerm}
+                        options={options}
+                        onInputChange={onInputChange}
+                        onOptionSelect={onOptionSelect}
+                        onSubmit={onSubmit}  />
+
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
                     <h3>Free Tier Data</h3>

@@ -5,7 +5,6 @@
 import {FC} from 'react';
 import Navbar from "./Navbar"
 import { Outlet, } from 'react-router-dom';
-import SearchBar from "./SearchBar";
 import { Weather } from "../ts/Weather";
 
 interface AppLayoutProps {
@@ -15,11 +14,10 @@ interface AppLayoutProps {
  * Renders the Navbar and Outlet components.
  * @returns JSX.Element that contains general layout for the page.
  */
-const AppLayout : FC<AppLayoutProps> = ({weather}): JSX.Element => {
+function AppLayout(): JSX.Element {
     return (
         <>
             <Navbar />
-            <SearchBar weather={weather}/>
             <Outlet />
         </>
     )

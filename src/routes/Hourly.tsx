@@ -6,6 +6,7 @@ import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../ts/DateTimeUtility';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
 
@@ -89,6 +90,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         <div className={conditionsClassName}>
             <div className='forecast'>
                 <ForecastHeader>
+                    <SearchBar weather={weather}/>
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Hourly Forecast</h2>
                     <h3>Free Tier Data</h3>

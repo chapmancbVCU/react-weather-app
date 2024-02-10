@@ -5,8 +5,10 @@
 import '../css/currentConditions.css';
 import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../ts/DateTimeUtility';
-import { FC, useState, useEffect } from 'react';
+import { ChangeEvent, FC, useState, useEffect } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import { optionType } from '../ts/Option';
+import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import { Weather } from "../ts/Weather";
 
@@ -31,7 +33,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * @prop Name of city for current or remote location we are getting the 
      * weather forecast.
      */
-    const [city, setCity] = useState(Object);
+    const [city, setCity] = useState<any>();
 
     /**
      * @prop Used to set background of app based on current conditions based 
@@ -186,8 +188,82 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
+    const [searchCity, setSearchCity] = useState<optionType | null>(null);
+
+    /**
+     * @prop The available location suggestions presented to the user.
+     */
+    const [options, setOptions] = useState<[]>([]);
+
+    /**
+     * @prop The search term that the user enters into the search bar.
+     */
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    
+    /**
+     * Retrieves suggested names for locations when user types query into 
+     * the search bar.
+     * @param value Input for search bar.
+     */
+    const getSearchOptions = (value: string) => {
+        fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
+        .then((response) => response.json())
+        .then(res => {
+            if (res.data) {
+                setOptions(res.data);
+            }
+        })
+    }
+
+    /**
+     * Detects input from search field and sets search term and search options 
+     * that will be presented to the user.
+     * @param e Event for when new input is detected in the search field.
+     * @returns 
+     */
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        
+        // Return if empty.
+        if (value === '') return;
+        getSearchOptions(value);
+        console.log(options)
+    }
+
+    const onOptionSelect = async (option: optionType) => {
+        setSearchCity(option);
+        console.log(option.name);
+    }
+
+    const getForecast = async (city: optionType) => {
+        console.log("Search Data");
+        const freeTier =  await weather.getCityData(`${city.name},${city.state}`);
+        setCity(`${city.name},${city.state}`);
+        console.log(city);
+        weather.setJSONFreeTierData(freeTier);
+        setFreeTierData(freeTier);
+        console.log(freeTier)
+        const oneCall =  await weather.getOneCallWeatherData(city.lat, city.lon);
+        weather.setJSONOneCallWeatherData(oneCall);
+        setOneCallData(oneCall);
+        console.log(oneCall);
+    }
+
+    const onSubmit = () => {
+        if(!searchCity) return;
+        getForecast(searchCity);
+    }
+
     useEffect(() => {
-        setCityName();
+        if(searchCity) {
+            setSearchTerm(searchCity.name);
+            setCity(`${searchCity.name},${searchCity.state}`);
+            setOptions([]);
+        } else {
+            setCityName();
+        }
+        
         setCountryName();
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
@@ -223,6 +299,12 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         <div className={conditionsClassName}>
             <div className='forecast'>
                 <ForecastHeader>
+                    <SearchBar searchTerm={searchTerm}
+                        options={options}
+                        onInputChange={onInputChange}
+                        onOptionSelect={onOptionSelect}
+                        onSubmit={onSubmit}  />
+
                     <UnitToggleSwitch weather={weather} 
                         rounded={true} 
                         isToggled={toggled} 

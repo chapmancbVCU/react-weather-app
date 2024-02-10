@@ -5,7 +5,7 @@
 import cx from "classnames";
 import { FC, useEffect, useState } from "react";
 import "../css/unitsToggleSwitch.css"
-import { Weather } from "../ts/Weather";
+import { Weather } from "../classes/Weather";
 
 
 /**

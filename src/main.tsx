@@ -5,7 +5,7 @@
  */
 import AppLayout  from './components/AppLayout';
 import Daily from './routes/Daily';
-import { DateTimeUtility } from './ts/DateTimeUtility.ts'; 
+import { DateTimeUtility } from './classes/DateTimeUtility.ts'; 
 import ErrorPage from './routes/ErrorPage.tsx';
 import Favorites from './routes/Favorites.tsx';
 import Home from './routes/Home';
@@ -17,7 +17,7 @@ import {
     RouterProvider
 } from 'react-router-dom';
 import './css/styles.css';
-import { Weather } from './ts/Weather.ts';
+import { Weather } from './classes/Weather.ts';
 
 
 // Instantiate objects here so they are available across application.

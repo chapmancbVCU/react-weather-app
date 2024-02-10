@@ -4,13 +4,13 @@
  */
 import '../css/currentConditions.css';
 import '../css/currentConditionsBackground.css';
-import { DateTimeUtility } from '../ts/DateTimeUtility';
+import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { ChangeEvent, FC, useState, useEffect } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
-import { optionType } from '../ts/Option';
+import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
-import { Weather } from "../ts/Weather";
+import { Weather } from "../classes/Weather.ts";
 
 
 /**

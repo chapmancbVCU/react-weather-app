@@ -4,9 +4,9 @@
  */
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Form } from 'react-router-dom';
-import { optionType } from '../ts/Option';
+import { optionType } from '../types/Option';
 import '../css/searchbar.css';
-import { Weather } from '../ts/Weather';
+import { Weather } from '../classes/Weather';
 
 interface SearchBarProps {
     searchTerm: string

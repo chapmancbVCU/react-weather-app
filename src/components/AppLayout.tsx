@@ -5,7 +5,7 @@
 import {FC} from 'react';
 import Navbar from "./Navbar"
 import { Outlet, } from 'react-router-dom';
-import { Weather } from "../ts/Weather";
+import { Weather } from "../classes/Weather";
 
 interface AppLayoutProps {
     weather: Weather

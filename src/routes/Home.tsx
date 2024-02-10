@@ -10,6 +10,7 @@ import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
 
 
@@ -108,15 +109,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
-    const [toggled, setIsToggled] = useState<boolean>(false);
-
-    /**
-     * This function is called when state of units toggle switch is updated.
-     */
-    const handleToggleChange = (): void => {
-        weather.toggleUnits();
-        setToggleCheckedState();
-    }
+    const { toggled, handleToggleChange} = useUnitsToggle(weather);
 
     /**
      * Sets state for current city.
@@ -169,15 +162,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const setForecastTimeInformation = (): void => {
         setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
-    }
-
-    /**
-     * Sets value for variable "toggled" depending on what units is being used 
-     * by the Weather class instance.
-     */
-    const setToggleCheckedState = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setIsToggled(false);
-        else if (weather.getUnits() === "METRIC") setIsToggled(true);
     }
 
     /**
@@ -254,7 +238,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         if(!selectedCity) return;
         getForecast(selectedCity);
     }
-
+    
     useEffect(() => {
         if(selectedCity) {
             setSearchTerm(selectedCity.name);
@@ -267,7 +251,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCountryName();
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
-        setToggleCheckedState();
         updateTemperatureUnitsLabel();
 
         // Set time to be rendered and refresh every second.
@@ -292,9 +275,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, toggled, temperature, freeTierData]);
+    }, [weather, temperature, freeTierData, toggled]);
 
-    
     return (
         <div className={conditionsClassName}>
             <div className='forecast'>

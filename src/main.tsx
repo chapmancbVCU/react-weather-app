@@ -49,7 +49,7 @@ try {
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <AppLayout />,
+        element: <AppLayout weather={weather}/>,
         errorElement: <ErrorPage />,
         children: [
             {

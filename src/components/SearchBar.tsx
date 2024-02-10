@@ -2,18 +2,24 @@
  * @file Supports ability to search for weather.
  * @author Chad Chapman
  */
-import { ChangeEvent, useState } from 'react';
-import { Form, useLoaderData } from 'react-router-dom';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Form } from 'react-router-dom';
 import { optionType } from '../ts/Option';
 import '../css/searchbar.css';
+import { Weather } from '../ts/Weather';
 
+interface SearchBarProps {
+    weather: Weather
+}
 
 /**
  * Responsible for rendering search bar, handling suggestions, and search 
  * operations.
  * @returns JSX.Element that contains the search bar.
  */
-function SearchBar(): JSX.Element {
+const SearchBar: FC<SearchBarProps> = ({weather}): JSX.Element => {
+    const [city, setCity] = useState<optionType | null>(null);
+
     /**
      * @prop The available location suggestions presented to the user.
      */
@@ -55,15 +61,39 @@ function SearchBar(): JSX.Element {
         console.log(options)
     }
 
-    const onOptionSelect = (option: optionType) => {
+    const onOptionSelect = async (option: optionType) => {
+        setCity(option);
         console.log(option.name);
     }
+
+    const getForecast = async (city: optionType) => {
+        console.log("Search Data");
+        const freeTier =  await weather.getCityData(`${city.name},${city.state}`);
+        weather.setJSONFreeTierData(freeTier);
+        console.log(freeTier)
+        const oneCall =  await weather.getOneCallWeatherData(city.lat, city.lon);
+        weather.setJSONOneCallWeatherData(oneCall);
+        console.log(oneCall);
+    }
+
+    const onSubmit = () => {
+        if(!city) return;
+        getForecast(city);
+    }
+
+    useEffect(() => {
+        if(city) {
+            setSearchTerm(city.name);
+            setOptions([]);
+        }
+    }, [city])
+
 
     return (
         <div className="search-bar">
             <Form className="search-form">
                 <input id="q"
-                    type="search"
+                    type="text"
                     aria-label="Get weather conditions"
                     placeholder="City or Zip Code"
                     value={searchTerm}
@@ -79,12 +109,15 @@ function SearchBar(): JSX.Element {
                     {options.map((option: optionType, index: number) => (
                         <li key={option.name + '-' + index}>
                             <button onClick={() => onOptionSelect(option)}>
-                                {option.name}, {option.state}
+                                {option.name}, {option.state}, {option.country}
                             </button>
                         </li>
                     ))}
                 </ul>
+                
             </Form>
+            <button className='search-button'
+                onClick={onSubmit}>Search</button>
         </div>
     )
 }

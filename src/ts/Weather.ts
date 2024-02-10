@@ -150,7 +150,8 @@ export class Weather {
 
     /**
      * Getter function for returning descriptive weather data as a JSON object.
-     * @returns JSON object containing descriptive weather data.
+     * @returns {Promise<string|void>} JSON object containing descriptive 
+     * weather data.
      */
     getJSONOneCallWeatherData(): Promise<string|void> {
         return this.JSONDescriptiveWeatherData;
@@ -159,7 +160,7 @@ export class Weather {
 
     /**
      * Getter function for the latitude.
-     * @returns The latitude of the user or search query
+     * @returns {number} The latitude of the user or search query
      */
     getLatitude(): number {
         return this.latitude;
@@ -170,7 +171,7 @@ export class Weather {
      * Retrieves locality information of user upon initialization of page.
      * @param {string} geoLocationInfo JSON string that contains information 
      * about user's current location.
-     * @returns The locality of where the user resides.
+     * @returns {Promise<string|void>} The locality of where the user resides.
      */
     async getLocalityInformation(geoLocationInfo: string): Promise<string|void> {              
         try {
@@ -190,7 +191,7 @@ export class Weather {
 
     /**
      * Getter function for the longitude.
-     * @returns The longitude of the user or search query
+     * @returns {number} The longitude of the user or search query
      */
     getLongitude(): number {
         return this.longitude;
@@ -204,7 +205,7 @@ export class Weather {
      * query.
      * @param {number} longitude The longitude of user's location or search 
      * query.
-     * @returns Detailed weather data as a JSON object.
+     * @returns {Promise<string|void> } Detailed weather data as a JSON object.
      */
     async getOneCallWeatherData(latitude: number, longitude: number): Promise<string|void> {
         let units = '';
@@ -228,8 +229,8 @@ export class Weather {
     /**
      * Getter function that retrieves the units.  This value can be METRIC or 
      * IMPERIAL.
-     * @returns The units name that the user as selected or detected based on 
-     * the user's location.
+     * @returns {string} The units name that the user as selected or detected 
+     * based on the user's location.
      */
     getUnits(): string {
         return this.units;
@@ -240,7 +241,7 @@ export class Weather {
      * Returns either N, NE, E, SE, S, SW, W, or NW depending on wind 
      * direction.
      * @param {Number} deg The direction of the winds. 
-     * @returns A string value indicating general direction of the winds.
+     * @returns {string|any} A string value indicating general direction of the winds.
      */
     getWindDirection(deg: number): string|any {
         if ((deg >= 337.6 && deg <= 359.9) || deg >= 0 && deg <= 22.5) {
@@ -265,8 +266,8 @@ export class Weather {
 
     /**
      * Returns wind as mph or km/h depending of location.
-     * @param {Number} wind The wind speed expressed in meters per second. 
-     * @returns The wind speed in mph or km/h.
+     * @param {number} wind The wind speed expressed in meters per second. 
+     * @returns {string} The wind speed in mph or km/h.
      */
     getWindSpeed(wind: number): string {
         if (this.getUnits() === 'IMPERIAL') {
@@ -282,7 +283,7 @@ export class Weather {
      * with class selector for specific background images.
      * @param {string } currentConditions Description of current conditions in 
      * current forecast.
-     * @returns A string containing current conditions description along with 
+     * @returns {string} A string containing current conditions description along with 
      * another class for content.
      */
     setConditionsClass(currentConditions: string): string {

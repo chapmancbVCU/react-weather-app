@@ -125,16 +125,21 @@ const useForecast = (weather: Weather) => {
             setSearchTerm(selectedCity.name);
             weather.setCity(`${selectedCity.name}, ${selectedCity.state}`);
             setCity(weather.getCityInfo());
-            
+            weather.setCountry(freeTierData.sys.country);
+            setCountryName();
             setOptions([]);
         }
         
         if (weather.getInit() === true) {
             setCityName();
+            setCountryName();
             weather.setInitFalse();
-        } else setCityName();
+        } else {
+            setCityName();
+            setCountryName();
+        }
 
-        setCountryName();
+        
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
         console.log(city + ", " + country);

@@ -288,6 +288,10 @@ export class Weather {
         this.city = city;
     }
 
+    setCountry(country: string): void {
+        this.countryName = country
+    }
+    
     /**
      * Sets string for content div to contain content class selector along 
      * with class selector for specific background images.

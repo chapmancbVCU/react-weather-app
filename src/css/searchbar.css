@@ -43,8 +43,8 @@
 
     /* Force search bar to always be visible and in same spot as user 
        scrolls */
-    position: sticky;
-    top: 80px;
+    /* position: sticky;
+    top: 80px; */
 }
 
 .search-button {

@@ -150,7 +150,11 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                         onInputChange={onInputChange}
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
-                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange} useUnitsToggle={useUnitsToggle}/>
+                    <UnitToggleSwitch weather={weather}
+                        rounded={true}
+                        isToggled={toggled} 
+                        handleToggleChange={handleToggleChange} 
+                        useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Favorite Locations</h2>
                     <h3>Free Tier Data</h3>
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>

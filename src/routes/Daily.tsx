@@ -148,7 +148,11 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         onInputChange={onInputChange}
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
-                    <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange} useUnitsToggle={useUnitsToggle}/>
+                    <UnitToggleSwitch weather={weather}
+                        rounded={true}
+                        isToggled={toggled}
+                        handleToggleChange={handleToggleChange}
+                        useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
                     <h3>Free Tier Data</h3>
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>

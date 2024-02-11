@@ -34,8 +34,16 @@ const useForecast = (weather: Weather) => {
      */
     const [searchTerm, setSearchTerm] = useState<string>('');
 
+    /**
+     * @prop The city the user selects from the dropdown suggestions.
+     */
     const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
 
+    /**
+     * Performs the fetch request to Open Weather Map after a user selects 
+     * a location in the search field.
+     * @param selectedCity The city whose forecast we want to retrieve.
+     */
     const getForecast = async (selectedCity: optionType) => {
         console.log("Search Data");
         const freeTier =  await weather.getCityData(`${selectedCity.name},${selectedCity.state}`);
@@ -70,7 +78,7 @@ const useForecast = (weather: Weather) => {
      * @param e Event for when new input is detected in the search field.
      * @returns 
      */
-    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const value = e.target.value;
         setSearchTerm(value);
         
@@ -80,12 +88,20 @@ const useForecast = (weather: Weather) => {
         console.log(options)
     }
 
-    const onOptionSelect = async (option: optionType) => {
+    /**
+     * Event handler that detects when the user selects a location in the 
+     * options dropdown.
+     * @param option The option the user selected.
+     */
+    const onOptionSelect = async (option: optionType): Promise<void> => {
         setSelectedCity(option);
         console.log(option.name);
     }
 
-    const onSubmit = () => {
+    /**
+     * Listens for when user clicks submit on search button.
+     */
+    const onSubmit = (): void => {
         if(!selectedCity) return;
         getForecast(selectedCity);
     }

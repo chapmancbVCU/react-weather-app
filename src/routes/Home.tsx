@@ -112,7 +112,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     }
     
     const {
-
         freeTierData,
         oneCallData,
         searchTerm,
@@ -125,7 +124,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     } = useForecast(weather);
 
     /**
-     * @prop Used to set background of app based on current conditions based 
+     * Used to set background of app based on current conditions based 
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);

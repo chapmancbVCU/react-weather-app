@@ -41,7 +41,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onSubmit
     } = useForecast(weather);
     /**
-     * @prop Used to set background of app based on current conditions based 
+     * Used to set background of app based on current conditions based 
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
@@ -53,23 +53,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         temperatureUnitsLabel,
         toggled,
     } = useUnitsToggle(weather);
-
-    // useEffect(() => {
-    //     if(selectedCity) {
-    //         setSearchTerm(selectedCity.name);
-    //         setCity(`${selectedCity.name},${selectedCity.state}`);
-    //         setOptions([]);
-    //     } else {
-    //         setCityName();
-    //     }
-
-    //     setFreeTierData(weather.getJSONFreeTierData());
-    //     setOneCallData(weather.getJSONOneCallWeatherData());
-    //     console.log("Free tier data (ctrl+s if no output on page load):");
-    //     console.log(freeTierData);
-    //     console.log("One call data");
-    //     console.log(oneCallData);
-    // }, [weather, toggled, freeTierData, city]);
 
     return (
         <div className={conditionsClassName}>
@@ -85,7 +68,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         isToggled={toggled}
                         handleToggleChange={handleToggleChange}
                         useUnitsToggle={useUnitsToggle}/>
-                    <h2 className='page-title'>Your 7 Day Forecast</h2>
+                    <h2 className='page-title'>Your 7 Day Forecast for {typeof city === 'string' ? city : null}</h2>
                     <h3>Free Tier Data</h3>
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                     <p>{typeof oneCallData && oneCallData?.current.clouds}</p>

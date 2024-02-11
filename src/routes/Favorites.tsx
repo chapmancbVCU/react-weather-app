@@ -30,7 +30,6 @@ interface HourlyPageProps {
 const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
       
     const {
-
         freeTierData,
         oneCallData,
         searchTerm,
@@ -42,17 +41,10 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         onSubmit
     } = useForecast(weather);
     /**
-     * @prop Used to set background of app based on current conditions based 
+     * Used to set background of app based on current conditions based 
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
-
-    // /**
-    //  * Sets state for current city.
-    //  */
-    // const setCityName = async (): Promise<void> => {
-    //     setCity(await weather.getCityInfo());
-    // }
 
     /**
      * Set toggle switch for units.
@@ -61,23 +53,6 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         temperatureUnitsLabel,
         toggled,
     } = useUnitsToggle(weather);
-
-    // useEffect(() => {
-    //     if(selectedCity) {
-    //         setSearchTerm(selectedCity.name);
-    //         setCity(`${selectedCity.name},${selectedCity.state}`);
-    //         setOptions([]);
-    //     } else {
-    //         setCityName();
-    //     }
-
-    //     setFreeTierData(weather.getJSONFreeTierData());
-    //     setOneCallData(weather.getJSONOneCallWeatherData());
-    //     console.log("Free tier data (ctrl+s if no output on page load):");
-    //     console.log(freeTierData);
-    //     console.log("One call data");
-    //     console.log(oneCallData);
-    // }, [weather, toggled, freeTierData, city]);
 
     return (
         <div className={conditionsClassName}>

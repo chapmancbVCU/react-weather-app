@@ -31,7 +31,6 @@ interface HourlyPageProps {
 const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         
     const {
-
         freeTierData,
         oneCallData,
         searchTerm,
@@ -43,7 +42,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         onSubmit
     } = useForecast(weather);
     /**
-     * @prop Used to set background of app based on current conditions based 
+     * Used to set background of app based on current conditions based 
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
@@ -70,7 +69,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                         isToggled={toggled}
                         handleToggleChange={handleToggleChange}
                         useUnitsToggle={useUnitsToggle}/>
-                    <h2 className='page-title'>Hourly Forecast</h2>
+                    <h2 className='page-title'>Hourly Forecast for {typeof city === 'string' ? city : null}</h2>
                     <h3>Free Tier Data</h3>
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                     <p>{typeof oneCallData && oneCallData?.current.clouds}</p>

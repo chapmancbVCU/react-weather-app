@@ -234,6 +234,19 @@ export class Weather {
 
 
     /**
+     * Converts pressure in hectoPascals(hPa) to inches.
+     * @param {Number} pressureInhPa in hectoPascals (hPa).
+     * @returns The pressure represented in inches.
+     */
+    getPressure(pressureInhPa: number) {
+        if(this.getUnits() === "IMPERIAL") {
+            const PRESSURE_CONVERSION_CONSTANT: number = 0.0295;
+            return (pressureInhPa * PRESSURE_CONVERSION_CONSTANT).toFixed(1) + " psi";
+        } else {
+            return pressureInhPa + " mbar";
+         }
+    }
+    /**
      * Getter function that retrieves the units.  This value can be METRIC or 
      * IMPERIAL.
      * @returns {string} The units name that the user as selected or detected 
@@ -241,6 +254,22 @@ export class Weather {
      */
     getUnits(): string {
         return this.units;
+    }
+
+
+    /**
+     * Converts visibility in meters to kilometers or miles depending on which 
+     * units are selected.
+     * @param {JSON} cityData string containing weather data for locality.
+     * @returns Visibility represented as miles or kilometers depending on 
+     * which units of measurement is selected.
+     */
+    getVisibility(visibility: number): string {
+        if (this.getUnits() === 'IMPERIAL') {
+            return (visibility / 1609.344).toFixed(1) + ' miles';
+        } else {
+            return (visibility / 1000).toFixed(1) + ' km';
+        }
     }
 
 
@@ -291,7 +320,7 @@ export class Weather {
     setCountry(country: string): void {
         this.countryName = country
     }
-    
+
     /**
      * Sets string for content div to contain content class selector along 
      * with class selector for specific background images.

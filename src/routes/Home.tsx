@@ -40,7 +40,15 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [date, setDate] = useState<string>("");
 
+    /**
+     * @prop Date time string derived from Unix time.
+     */
     const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
+
+    /**
+     * @prop Temperature for dew point.
+     */
+    const [dewPoint, setDewPoint] = useState<number>();
 
     /**
      * @prop Property for feels like temperature.
@@ -149,6 +157,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
             freeTierData?.main.feels_like));
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
+        setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
 
         setCurrentConditionsProps();
 
@@ -225,7 +234,36 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                     </div>
                 </div>  
                 <hr className='hr-border'></hr>
-                <div>foo</div>           
+                <div className='current-conditions-container daily-conditions'>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/dew-point.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Dew Point
+                            <div>{dewPoint} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/UVI.png'></img>
+                        <div className='current-conditions-info-description'>
+                            UV Index
+                            <div>{(oneCallData?.daily[0].uvi.toFixed(0))} out of 10</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/air-pressure.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Pressure
+                            <div>{weather.getPressure(freeTierData?.main.pressure)}</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/visibility.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Visibility
+                            <div>{weather.getVisibility(freeTierData?.visibility)}</div>
+                        </div>
+                    </div>
+                </div>           
             </div>
             <div className='forecast'>
                 <h3>Free Tier Data</h3>

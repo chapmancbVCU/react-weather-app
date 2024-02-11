@@ -9,6 +9,8 @@
 .current-conditions-container {
     display: flex;
     flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .current-conditions-description {
@@ -44,6 +46,18 @@
     text-align: center;
 }
 
+.daily-conditions {
+    align-items: center;
+}
+
+.daily-conditions-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    
+    font-size: 16px;
+}
+
 .daily-description {
     margin-top: 10px;
     text-align: center;
@@ -60,7 +74,6 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
-
 
 .description-container {
     display: flex;
@@ -83,7 +96,6 @@
 @media only screen and (min-width: 900px) {
     .current-conditions-container {
         flex-direction: row;
-        align-items: flex-start;
         margin-left: 25px;
         margin-right: 25px;
     }
@@ -100,6 +112,15 @@
 
     .current-temperature {
         text-align: left;
+    }
+
+    .daily-conditions {
+        justify-content: space-evenly;
+    }
+
+    .daily-conditions-info {
+        align-items: space-between;
+        justify-content: space-between;
     }
 
     .date-time-container {

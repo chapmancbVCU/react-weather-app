@@ -6,11 +6,11 @@ import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { ChangeEvent, FC, useEffect, useState} from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
-import { optionType } from '../types/Option.ts';
-
 
 /**
  * @interface HomePageProps The interface that describes props
@@ -19,7 +19,6 @@ import { optionType } from '../types/Option.ts';
 interface DailyPageProps {
     weather: Weather;
 }
-
 
 /**
  * Renders the daily forecast component.
@@ -65,7 +64,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
-    const [toggled, setIsToggled] = useState<boolean>(false);
+    const { toggled, handleToggleChange} = useUnitsToggle(weather);
 
     const getForecast = async (selectedCity: optionType) => {
         console.log("Search Data");
@@ -94,14 +93,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 setOptions(res.data);
             }
         })
-    }
-
-    /**
-     * This function is called when state of units toggle switch is updated.
-     */
-    const handleToggleChange = (): void => {
-        weather.toggleUnits();
-        setToggleCheckedState();
     }
 
     /**
@@ -138,15 +129,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         setConditionsClassName(weather.setConditionsClass(currentConditions));
     }
 
-    /**
-     * Sets value for variable toggled depending on what units is being used 
-     * by the Weather class instance.
-     */
-    const setToggleCheckedState = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setIsToggled(false);
-        else if (weather.getUnits() === "METRIC") setIsToggled(true);
-    }
-
     useEffect(() => {
         if(selectedCity) {
             setSearchTerm(selectedCity.name);
@@ -156,7 +138,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
 
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
-        setToggleCheckedState();
         setConditionsClass();
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);
@@ -173,7 +154,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         onInputChange={onInputChange}
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
-
                     <UnitToggleSwitch weather={weather} rounded={true} isToggled={toggled} handleToggleChange={handleToggleChange}/>
                     <h2 className='page-title'>Your 7 Day Forecast</h2>
                     <h3>Free Tier Data</h3>

@@ -13,7 +13,6 @@ import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
 
-
 /**
  * @interface HomePageProps The interface that describes props that are shared 
  * between components.
@@ -22,7 +21,6 @@ interface HomePageProps {
     dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
-
 
 /**
  * Renders the current conditions forecast component.
@@ -286,7 +284,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         onInputChange={onInputChange}
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
-
                     <UnitToggleSwitch weather={weather} 
                         rounded={true} 
                         isToggled={toggled} 

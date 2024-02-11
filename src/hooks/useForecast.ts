@@ -121,16 +121,18 @@ const useForecast = (weather: Weather) => {
     }
 
     useEffect(() => {
-        if(selectedCity) {
+        if (selectedCity) {
             setSearchTerm(selectedCity.name);
-            setCity(`${selectedCity.name}, ${selectedCity.state}`);
-            weather.setCity(`${selectedCity.name}, ${selectedCity.state}`)
+            weather.setCity(`${selectedCity.name}, ${selectedCity.state}`);
+            setCity(weather.getCityInfo());
+            
             setOptions([]);
         }
         
-        if (weather.getInit() === true){
+        if (weather.getInit() === true) {
             setCityName();
-        }
+            weather.setInitFalse();
+        } else setCityName();
 
         setCountryName();
         setFreeTierData(weather.getJSONFreeTierData());

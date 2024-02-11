@@ -17,6 +17,7 @@ interface UnitsToggleSwitchProps {
     rounded: boolean
     isToggled: boolean
     handleToggleChange: any
+    useUnitsToggle: any
 }
 
 
@@ -24,7 +25,8 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
         weather, 
         rounded = false, 
         isToggled, 
-        handleToggleChange
+        handleToggleChange,
+        useUnitsToggle
     }): JSX.Element => {
 
     /**
@@ -37,22 +39,27 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
      */
     const sliderCX: string = cx('slider', { 'rounded': rounded });
 
-    /**
-     * @prop Label for unit of temperature measure (Ex: C or F).
-     */
-    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
+    // /**
+    //  * @prop Label for unit of temperature measure (Ex: C or F).
+    //  */
+    // const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
+
+    // /**
+    //  * Set the value for the units label prop to C or F.
+    //  */
+    // const updateTemperatureUnitsLabel = (): void => {
+    //     if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
+    //     else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
+    // }
 
     /**
-     * Set the value for the units label prop to C or F.
+     * Set toggle switch for units.
      */
-    const updateTemperatureUnitsLabel = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
-        else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
-    }
+    const { temperatureUnitsLabel } = useUnitsToggle(weather);
 
     useEffect(() => {
         setFreeTierData(weather.getJSONFreeTierData());
-        updateTemperatureUnitsLabel();
+        // updateTemperatureUnitsLabel();
         console.log(weather.getUnits())
     }, [weather, isToggled]);
 

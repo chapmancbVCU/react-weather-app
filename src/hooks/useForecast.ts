@@ -128,9 +128,7 @@ const useForecast = (weather: Weather) => {
             weather.setCountry(freeTierData.sys.country);
             setCountryName();
             setOptions([]);
-        }
-        
-        if (weather.getInit() === true) {
+        } else if (!selectedCity && weather.getInit() === true) {
             setCityName();
             setCountryName();
             weather.setInitFalse();
@@ -139,7 +137,6 @@ const useForecast = (weather: Weather) => {
             setCountryName();
         }
 
-        
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
         console.log(city + ", " + country);

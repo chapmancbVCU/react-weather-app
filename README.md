@@ -18,6 +18,3 @@ Still a work in progress, it currently supports the ability to switch between me
 6. Rename the .env.sample file to .env and set your ip address or hostname to that of the Node.JS weather-api-server project.
 7. Run the command "npm run dev" or "npm run dev -- --host" if you are accessing the site from another computer.
 8. Navigate to the site ${hostname/ip_address}:5173/react-weather-app
-
-## Gallery
-Since we are still working to deploy a live version we have featured an image gallery below:

@@ -4,9 +4,10 @@
  */
 export class Weather {
     // Instance variables
-    private city: Promise<string|void>;
+    private city: any;
     private geoLocationInfo: string;
     private countryName: any;
+    private init: boolean;
     private initialUnits: string;
     private JSONCityData: Promise<string|void>;
     private JSONDescriptiveWeatherData: Promise<string|void>;
@@ -22,6 +23,7 @@ export class Weather {
         this.geoLocationInfo = this.getGeoLocationInformation();
         this.city = this.getLocalityInformation(this.geoLocationInfo);
         this.countryName = this.getCountryInformation(this.geoLocationInfo);
+        this.init = true;
         this.initialUnits = "";
         this.JSONCityData = null!;
         this.JSONDescriptiveWeatherData = null!;
@@ -73,7 +75,7 @@ export class Weather {
      * @returns {Promise<string|void>} The name of the city when using 
      * geolocation to detect location.
      */
-    getCityInfo(): Promise<string|void> {
+    getCityInfo(): any {
         return this.city;
     }
 
@@ -125,6 +127,11 @@ export class Weather {
      */
      getCountryName(): string {
         return this.countryName;
+    }
+
+
+    getInit(): boolean {
+        return this.init;
     }
 
 
@@ -277,6 +284,9 @@ export class Weather {
         }
     }
 
+    setCity(city: string): void {
+        this.city = city;
+    }
 
     /**
      * Sets string for content div to contain content class selector along 
@@ -310,6 +320,10 @@ export class Weather {
         }
     }
 
+
+    setInitFalse() {
+        this.init = false;
+    }
 
     /**
      * Setter function for simple weather data in the form of a JSON object.

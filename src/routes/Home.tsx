@@ -110,8 +110,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const setForecastTimeInformation = (): void => {
         setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
     }
-
-    const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
     
     const {
 
@@ -155,12 +153,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
 
         setCurrentConditionsProps();
-
-        console.log(city + ", " + country);
-        console.log("Free tier data (ctrl+s if no output on page load):");
-        console.log(freeTierData);
-        console.log("One call data");
-        console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
     }, [weather, temperature, freeTierData, toggled, city]);

@@ -10,6 +10,7 @@ import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
@@ -29,17 +30,6 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
-    /**
-     * @prop Name of city for current or remote location we are getting the 
-     * weather forecast.
-     */
-    const [city, setCity] = useState<any>();
-
-    /**
-     * @prop Name of country where city is located.
-     */
-    const [country, setCountry] = useState(Object);
-
     /**
      * @prop Description of current conditions outside.
      */
@@ -64,11 +54,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [forecastTime, setForecastTime] = useState<string>("");
 
     /**
-     * @prop Free tier data to display current conditions.
-     */
-    const [freeTierData, setFreeTierData] = useState<any>();
-
-    /**
      * @prop Current day high temperature.
      */
     const [highTemperature, setHighTemperature] = useState<number>();
@@ -84,28 +69,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [lowTemperature, setLowTemperature] = useState<number>();
 
     /**
-     * @prop One call tier data for displaying hourly and daily forecast.
-     */
-    const [oneCallData, setOneCallData] = useState<any>();
-
-    /**
      * @prop Property for current temperature.
      */
     const [temperature, setTemperature] = useState<number>();
-
-    /**
-     * Sets state for current city.
-     */
-    const setCityName = async (): Promise<void> => {
-        setCity(await weather.getCityInfo());
-    }
-
-    /**
-     * Sets state for country for where current city is located.
-     */
-    const setCountryName = async (): Promise<void> => {
-        setCountry(await weather.getCountryName());
-    }
 
     /**
      * Capitalize first letter of each word of current conditions description.
@@ -146,72 +112,20 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     }
 
     const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
-
-    /**
-     * @prop The available location suggestions presented to the user.
-     */
-    const [options, setOptions] = useState<[]>([]);
-
-    /**
-     * @prop The search term that the user enters into the search bar.
-     */
-    const [searchTerm, setSearchTerm] = useState<string>('');
     
-    /**
-     * Retrieves suggested names for locations when user types query into 
-     * the search bar.
-     * @param value Input for search bar.
-     */
-    const getSearchOptions = (value: string) => {
-        fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SEARCH_TERM&&searchTerm=${value.trim()}`)
-        .then((response) => response.json())
-        .then(res => {
-            if (res.data) {
-                setOptions(res.data);
-            }
-        })
-    }
+    const {
 
-    /**
-     * Detects input from search field and sets search term and search options 
-     * that will be presented to the user.
-     * @param e Event for when new input is detected in the search field.
-     * @returns 
-     */
-    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setSearchTerm(value);
-        
-        // Return if empty.
-        if (value === '') return;
-        getSearchOptions(value);
-        console.log(options)
-    }
+        freeTierData,
+        oneCallData,
+        searchTerm,
+        options,
+        city,
+        country,
+        onInputChange,
+        onOptionSelect,
+        onSubmit
+    } = useForecast(weather);
 
-    const onOptionSelect = async (option: optionType) => {
-        setSelectedCity(option);
-        console.log(option.name);
-    }
-
-    const getForecast = async (selectedCity: optionType) => {
-        console.log("Search Data");
-        const freeTier =  await weather.getCityData(`${selectedCity.name},${selectedCity.state}`);
-        setCity(`${selectedCity.name},${selectedCity.state}`);
-        console.log(city);
-        weather.setJSONFreeTierData(freeTier);
-        setFreeTierData(freeTier);
-        console.log(freeTier)
-        const oneCall =  await weather.getOneCallWeatherData(selectedCity.lat, selectedCity.lon);
-        weather.setJSONOneCallWeatherData(oneCall);
-        setOneCallData(oneCall);
-        console.log(oneCall);
-    }
-
-    const onSubmit = () => {
-        if(!selectedCity) return;
-        getForecast(selectedCity);
-    }
-    
     /**
      * @prop Used to set background of app based on current conditions based 
      * on free tier data.
@@ -227,18 +141,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     } = useUnitsToggle(weather);
 
     useEffect(() => {
-        if(selectedCity) {
-            setSearchTerm(selectedCity.name);
-            setCity(`${selectedCity.name},${selectedCity.state}`);
-            setOptions([]);
-        } else {
-            setCityName();
-        }
-        
-        setCountryName();
-        setFreeTierData(weather.getJSONFreeTierData());
-        setOneCallData(weather.getJSONOneCallWeatherData());
-
         // Set time to be rendered and refresh every second.
         setInterval(() => setLocalTime(new Date()), 1000);
         setDateTime();
@@ -261,7 +163,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         console.log(oneCallData);
 
         // If something isn't right add prop to dependency array.
-    }, [weather, temperature, freeTierData, toggled]);
+    }, [weather, temperature, freeTierData, toggled, city]);
 
     return (
         <div className={conditionsClassName}>

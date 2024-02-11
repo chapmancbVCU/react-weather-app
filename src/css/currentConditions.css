@@ -84,6 +84,7 @@
 
 .hr-border {
     border: solid 3px rgb(57, 169, 244);
+    margin-bottom: 10px;
 }
 
 .today-high-low-temperature {

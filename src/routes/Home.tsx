@@ -75,6 +75,12 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [lowTemperature, setLowTemperature] = useState<number>();
 
+    const [moonRise, setMoonRise] = useState<string>("");
+    const [moonSet, setMoonSet] = useState<string>("");
+    const [sunRise, setSunRise] = useState<string>("");
+
+    const [sunSet, setSunSet] = useState<string>("");
+
     /**
      * @prop Property for current temperature.
      */
@@ -136,6 +142,30 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
 
+    const setMoonRiseTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            oneCallData?.daily[0].moonrise, oneCallData?.timezone_offset);
+        setMoonRise(dateTimeUtility.getTimeInfo(time));
+    }
+
+    const setMoonSetTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            oneCallData?.daily[0].moonset, oneCallData?.timezone_offset);
+        setMoonSet(dateTimeUtility.getTimeInfo(time));
+    }
+
+    const setSunRiseTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            oneCallData?.daily[0].sunrise, oneCallData?.timezone_offset);
+        setSunRise(dateTimeUtility.getTimeInfo(time));
+    }
+
+    const setSunSetTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            oneCallData?.daily[0].sunset, oneCallData?.timezone_offset);
+        setSunSet(dateTimeUtility.getTimeInfo(time));
+    }
+
     /**
      * Set toggle switch for units.
      */
@@ -161,6 +191,10 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
         setCurrentConditionsProps();
 
+        setSunRiseTime();
+        setSunSetTime();
+        setMoonRiseTime();
+        setMoonSetTime();
         // If something isn't right add prop to dependency array.
     }, [weather, temperature, freeTierData, toggled, city]);
 
@@ -263,7 +297,38 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div>{weather.getVisibility(freeTierData?.visibility)}</div>
                         </div>
                     </div>
-                </div>           
+                </div>
+                <hr className='hr-border'></hr>
+                <div className='current-conditions-container daily-conditions'>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/sun-rise.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Sun Rise
+                            <div>{sunRise}</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/sun-set.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Sun Set
+                            <div>{sunSet}</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/moon-rise.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Moon Rise
+                            <div>{moonRise}</div>
+                        </div>
+                    </div>
+                    <div className='daily-conditions-info'>
+                        <img className='conditions-icon' src='./icons/moon-set.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Moon Set
+                            <div>{moonSet}</div>
+                        </div>
+                    </div>
+                </div>         
             </div>
             <div className='forecast'>
                 <h3>Free Tier Data</h3>

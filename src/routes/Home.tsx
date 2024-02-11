@@ -99,15 +99,14 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [temperature, setTemperature] = useState<number>();
 
     /**
-     * @prop Label for unit of temperature measure (Ex: C or F).
-     */
-    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
-
-    /**
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
-    const { toggled, handleToggleChange} = useUnitsToggle(weather);
+    const { handleToggleChange,
+        temperatureUnitsLabel,
+        toggled,
+        updateTemperatureUnitsLabel
+    } = useUnitsToggle(weather);
 
     /**
      * Sets state for current city.
@@ -160,14 +159,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const setForecastTimeInformation = (): void => {
         setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
-    }
-
-    /**
-     * Set the value for the units label prop to C or F.
-     */
-    const updateTemperatureUnitsLabel = (): void => {
-        if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
-        else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
     const [selectedCity, setSelectedCity] = useState<optionType | null>(null);

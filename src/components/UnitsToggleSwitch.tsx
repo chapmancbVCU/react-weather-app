@@ -70,12 +70,8 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
                 <span className={sliderCX} />
             </label>
             <h3>Select Units</h3>
-        </div>
-        
+        </div> 
     );
-        
-    
 };
-
 
 export default UnitToggleSwitch;

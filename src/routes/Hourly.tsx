@@ -65,7 +65,11 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
      * @prop Property for checkbox depending on whether or not it is
      * checked.
      */
-    const { toggled, handleToggleChange} = useUnitsToggle(weather);
+    const { handleToggleChange,
+        temperatureUnitsLabel,
+        toggled,
+        updateTemperatureUnitsLabel
+    } = useUnitsToggle(weather);
 
     const getForecast = async (selectedCity: optionType) => {
         console.log("Search Data");

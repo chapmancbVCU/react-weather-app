@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 
 const useUnitsToggle = (weather: Weather) => {
+       /**
+     * @prop Label for unit of temperature measure (Ex: C or F).
+     */
+       const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
+
     /**
      * @prop Property for checkbox depending on whether or not it is
      * checked.
@@ -18,6 +23,14 @@ const useUnitsToggle = (weather: Weather) => {
     const handleToggleChange = (): void => {
         weather.toggleUnits();
         setToggleCheckedState();
+    }
+
+    /**
+     * Set the value for the units label prop to C or F.
+     */
+    const updateTemperatureUnitsLabel = (): void => {
+        if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
+        else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
     }
 
     /**
@@ -34,8 +47,10 @@ const useUnitsToggle = (weather: Weather) => {
     }, [toggled, handleToggleChange])
 
     return {
+        handleToggleChange,
+        temperatureUnitsLabel,
         toggled,
-        handleToggleChange
+        updateTemperatureUnitsLabel
     }
 }
 

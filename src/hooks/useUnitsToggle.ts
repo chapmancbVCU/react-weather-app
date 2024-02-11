@@ -44,13 +44,13 @@ const useUnitsToggle = (weather: Weather) => {
 
     useEffect(() => {
         setToggleCheckedState();
+        updateTemperatureUnitsLabel();
     }, [toggled, handleToggleChange])
 
     return {
         handleToggleChange,
         temperatureUnitsLabel,
-        toggled,
-        updateTemperatureUnitsLabel
+        toggled
     }
 }
 

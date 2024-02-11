@@ -224,7 +224,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-        updateTemperatureUnitsLabel
     } = useUnitsToggle(weather);
 
     useEffect(() => {
@@ -239,7 +238,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCountryName();
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
-        updateTemperatureUnitsLabel();
 
         // Set time to be rendered and refresh every second.
         setInterval(() => setLocalTime(new Date()), 1000);

@@ -123,7 +123,6 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-        updateTemperatureUnitsLabel
     } = useUnitsToggle(weather);
 
     useEffect(() => {

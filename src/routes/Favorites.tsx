@@ -9,6 +9,7 @@ import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import { optionType } from '../types/Option';
 import SearchBar from '../components/SearchBar';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather";
 
@@ -33,12 +34,6 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     const [city, setCity] = useState<any>();
 
     /**
-     * @prop Used to set background of app based on current conditions based 
-     * on free tier data.
-     */
-    const [conditionsClassName, setConditionsClassName] = useState<string>("");
-
-    /**
      * @prop Free tier data to display current conditions.
      */
     const [freeTierData, setFreeTierData] = useState<any>();
@@ -59,16 +54,6 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     const [selectedCity, setSelectedCity] = useState<optionType | null>(null);
-    
-    /**
-     * @prop Property for checkbox depending on whether or not it is
-     * checked.
-     */
-    const { handleToggleChange,
-        temperatureUnitsLabel,
-        toggled,
-        updateTemperatureUnitsLabel
-    } = useUnitsToggle(weather);
 
     const getForecast = async (selectedCity: optionType) => {
         console.log("Search Data");
@@ -126,12 +111,19 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     }
 
     /**
-     * Sets className for background image based on current conditions.
+     * @prop Used to set background of app based on current conditions based 
+     * on free tier data.
      */
-    const setConditionsClass = async (): Promise<void> => {
-        const currentConditions: string = await freeTierData?.weather[0].description;
-        setConditionsClassName(weather.setConditionsClass(currentConditions));
-    }
+    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
+
+    /**
+     * Set toggle switch for units.
+     */
+    const { handleToggleChange,
+        temperatureUnitsLabel,
+        toggled,
+        updateTemperatureUnitsLabel
+    } = useUnitsToggle(weather);
 
     useEffect(() => {
         if(selectedCity) {
@@ -142,7 +134,6 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
         setFreeTierData(weather.getJSONFreeTierData());
         setOneCallData(weather.getJSONOneCallWeatherData());
-        setConditionsClass();
 
         console.log("Free tier data (ctrl+s if no output on page load):");
         console.log(freeTierData);

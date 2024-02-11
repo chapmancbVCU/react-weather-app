@@ -10,6 +10,7 @@ import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
 
@@ -33,12 +34,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * weather forecast.
      */
     const [city, setCity] = useState<any>();
-
-    /**
-     * @prop Used to set background of app based on current conditions based 
-     * on free tier data.
-     */
-    const [conditionsClassName, setConditionsClassName] = useState<string>("");
 
     /**
      * @prop Name of country where city is located.
@@ -99,16 +94,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [temperature, setTemperature] = useState<number>();
 
     /**
-     * @prop Property for checkbox depending on whether or not it is
-     * checked.
-     */
-    const { handleToggleChange,
-        temperatureUnitsLabel,
-        toggled,
-        updateTemperatureUnitsLabel
-    } = useUnitsToggle(weather);
-
-    /**
      * Sets state for current city.
      */
     const setCityName = async (): Promise<void> => {
@@ -135,7 +120,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         }
 
         setCurrentConditions(wordsArray.join(" "));
-        setConditionsClassName(weather.setConditionsClass(currentConditions));
     }
  
     /**
@@ -228,6 +212,21 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         getForecast(selectedCity);
     }
     
+    /**
+     * @prop Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
+    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
+
+    /**
+     * Set toggle switch for units.
+     */
+    const { handleToggleChange,
+        temperatureUnitsLabel,
+        toggled,
+        updateTemperatureUnitsLabel
+    } = useUnitsToggle(weather);
+
     useEffect(() => {
         if(selectedCity) {
             setSearchTerm(selectedCity.name);

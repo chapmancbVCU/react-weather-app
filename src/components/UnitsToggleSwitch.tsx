@@ -39,19 +39,6 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
      */
     const sliderCX: string = cx('slider', { 'rounded': rounded });
 
-    // /**
-    //  * @prop Label for unit of temperature measure (Ex: C or F).
-    //  */
-    // const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
-
-    // /**
-    //  * Set the value for the units label prop to C or F.
-    //  */
-    // const updateTemperatureUnitsLabel = (): void => {
-    //     if (weather.getUnits() === "IMPERIAL") setTemperatureUnitsLabel("F");
-    //     else if (weather.getUnits() === "METRIC" ) setTemperatureUnitsLabel("C");
-    // }
-
     /**
      * Set toggle switch for units.
      */
@@ -59,7 +46,6 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
 
     useEffect(() => {
         setFreeTierData(weather.getJSONFreeTierData());
-        // updateTemperatureUnitsLabel();
         console.log(weather.getUnits())
     }, [weather, isToggled]);
 

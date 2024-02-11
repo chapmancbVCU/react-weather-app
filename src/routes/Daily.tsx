@@ -4,9 +4,8 @@
  */
 import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
-import { ChangeEvent, FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
-import { optionType } from '../types/Option.ts';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import useForecast from '../hooks/useForecast.ts';

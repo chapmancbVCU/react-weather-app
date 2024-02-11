@@ -140,7 +140,6 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
         console.log(oneCallData);
     }, [weather, toggled, freeTierData]);
 
-
     return (
         <div className={conditionsClassName}>
             <div className='forecast'>

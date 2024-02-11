@@ -54,7 +54,4 @@ const useUnitsToggle = (weather: Weather) => {
     }
 }
 
-
-
-
 export default useUnitsToggle;

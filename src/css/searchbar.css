@@ -3,9 +3,42 @@
  *              styled with styled components.                                *
  *      AUTHOR: Chad Chapman                                                  *
  *****************************************************************************/
+ input {
+    font-size: 1rem;
+    font-family: inherit;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+    background-color: white;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.options-list {
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.options-list-item {
+    list-style: none;
+}
+
+.options-list-item button {
+    width: 100%;
+    height: 30px;
+    text-align: left;
+    background-color: whitesmoke;
+    border: none;
+}
+
+.options-list-item button:hover {
+    color: whitesmoke;
+    background-color: grey;
+}
+
 .search-bar {
-    border: solid black 1px;
     display: flex;
+    flex-direction: row;
     width: 100%;
 
     /* Force search bar to always be visible and in same spot as user 
@@ -14,6 +47,33 @@
     top: 80px;
 }
 
+.search-button {
+    background-color: orange;
+    border: none;
+
+    font-size: 16px;
+    font-weight: bold;
+    
+    vertical-align: middle;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.search-form {
+    position: relative;
+    width: 100%;
+}
+  
+.search-form input[type="text"] {
+    width: 100%;
+    padding-left: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='%23999' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0.625rem 0.75rem;
+    background-size: 1rem;
+    position: relative;
+}
 
 #search-spinner {
     width: 1rem;
@@ -36,30 +96,3 @@
     white-space: nowrap;
     border-width: 0;
 }
-
-.search-form {
-    position: relative;
-    width: 100%;
-}
-  
-.search-form input[type="text"] {
-    width: 100%;
-    padding-left: 2rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='%23999' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' /%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 0.625rem 0.75rem;
-    background-size: 1rem;
-    position: relative;
-}
-
-input {
-    font-size: 1rem;
-    font-family: inherit;
-    border: none;
-    padding: 0.5rem 0.75rem;
-    box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
-    background-color: white;
-    line-height: 1.5;
-    margin: 0;
-}
-

@@ -2,9 +2,10 @@
  * @file Manages hooks and props for current day forecast data.
  * @author Chad Chapman
  */
-import { useEffect, useState } from "react";
 import { DateTimeUtility } from "../classes/DateTimeUtility";
+import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
+
 const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: any, oneCallData: any, weather: Weather, toggled: boolean) => {
     /**
      * @prop Description of current conditions outside.

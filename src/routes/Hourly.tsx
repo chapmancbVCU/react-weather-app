@@ -6,6 +6,7 @@ import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import QuickFavorites from '../components/QuickFavorites.tsx';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import useForecast from '../hooks/useForecast.ts';
@@ -56,6 +57,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
     return (
         <div className={conditionsClassName}>
+            <QuickFavorites />
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

@@ -1,3 +1,8 @@
+/**
+ * @file Contains functions setting weather data and updating data after the 
+ * user performs a search.
+ * @author Chad Chapman
+ */
 import { ChangeEvent, useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 import { optionType } from "../types/Option";

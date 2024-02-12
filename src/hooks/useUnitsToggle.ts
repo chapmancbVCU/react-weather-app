@@ -9,7 +9,7 @@ const useUnitsToggle = (weather: Weather) => {
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
-       const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
+    const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");
 
     /**
      * @prop Property for checkbox depending on whether or not it is

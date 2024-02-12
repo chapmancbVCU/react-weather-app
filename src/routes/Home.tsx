@@ -110,7 +110,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         morningFeelsLikeTemperature,
         nightTemperature,
         nightFeelsLikeTemperature,
-       
         sunRise,
         sunSet,
         temperature,
@@ -321,7 +320,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                 </div>      
             </div>
         </div> 
-    )
+    );
 };
 
 export default Home;

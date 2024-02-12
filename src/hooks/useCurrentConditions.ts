@@ -11,10 +11,26 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
      */
     const [currentConditions, setCurrentConditions] = useState<string>();
 
+    /**
+     * @prop Describes day time temperature.
+     */
     const [dayTemperature, setDayTemperature] = useState<number>();
+
+    /**
+     * @prop Describes day time feels like temperature.
+     */
     const [dayFeelsLikeTemperature, setDayFeelsLikeTemperature] = useState<number>();
+
+    /**
+     * @prop Describes evening temperature.
+     */
     const [eveningTemperature, setEveningTemperature] = useState<number>();
+
+    /**
+     * @prop Describes evening feels like temperature.
+     */
     const [eveningFeelsLikeTemperature, setEveningFeelsLikeTemperature] = useState<number>();
+
     /**
      * @prop Temperature for dew point.
      */
@@ -35,16 +51,44 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
      */
     const [lowTemperature, setLowTemperature] = useState<number>();
 
+    /**
+     * @prop Describes time the moon rises.
+     */
     const [moonRise, setMoonRise] = useState<string>("");
 
+    /**
+     * @prop Describes time when moon sets.
+     */
     const [moonSet, setMoonSet] = useState<string>("");
 
+    /**
+     * @prop Describes morning temperature.
+     */
     const [morningTemperature, setMorningTemperature] = useState<number>();
+
+    /**
+     * @prop Describes morning feels like temperature.
+     */
     const [morningFeelsLikeTemperature, setMorningFeelsLikeTemperature] = useState<number>();
+
+    /**
+     * @prop Describes night time temperature.
+     */
     const [nightTemperature, setNightTemperature] = useState<number>();
+
+    /**
+     * @prop Describes night time feels like temperature.
+     */
     const [nightFeelsLikeTemperature, setNightFeelsLikeTemperature] = useState<number>();
+
+    /**
+     * @prop Describes time the sun rises.
+     */
     const [sunRise, setSunRise] = useState<string>("");
 
+    /**
+     * @prop Describes time the sun sets.
+     */
     const [sunSet, setSunSet] = useState<string>("");
 
     /**
@@ -67,24 +111,36 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setCurrentConditions(wordsArray.join(" "));
     }
 
+    /**
+     * Sets time that the moon rises.
+     */
     const setMoonRiseTime = (): void => {
         const time = dateTimeUtility.getDateTime(
             oneCallData?.daily[0].moonrise, oneCallData?.timezone_offset);
         setMoonRise(dateTimeUtility.getTimeInfo(time));
     }
 
+    /**
+     * Sets time that the moon sets.
+     */
     const setMoonSetTime = (): void => {
         const time = dateTimeUtility.getDateTime(
             oneCallData?.daily[0].moonset, oneCallData?.timezone_offset);
         setMoonSet(dateTimeUtility.getTimeInfo(time));
     }
 
+    /**
+     * Describes the time that the sun rises.
+     */
     const setSunRiseTime = (): void => {
         const time = dateTimeUtility.getDateTime(
             oneCallData?.daily[0].sunrise, oneCallData?.timezone_offset);
         setSunRise(dateTimeUtility.getTimeInfo(time));
     }
 
+    /**
+     * Describes the time that the sun sets.
+     */
     const setSunSetTime = (): void => {
         const time = dateTimeUtility.getDateTime(
             oneCallData?.daily[0].sunset, oneCallData?.timezone_offset);
@@ -112,6 +168,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();
 
+        // Moon and sun props.
         setSunRiseTime();
         setSunSetTime();
         setMoonRiseTime();
@@ -134,11 +191,10 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         morningFeelsLikeTemperature,
         nightTemperature,
         nightFeelsLikeTemperature,
- 
         sunRise,
         sunSet,
         temperature,
-    }
-}
+    };
+};
 
 export default useCurrentConditions;

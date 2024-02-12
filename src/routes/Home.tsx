@@ -9,6 +9,7 @@ import { FC, useState, useEffect } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
+import useCurrentConditions from '../hooks/useCurrentConditions.ts';
 import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
@@ -29,12 +30,7 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
-    /**
-     * @prop Description of current conditions outside.
-     */
-    const [currentConditions, setCurrentConditions] = useState<string>();
-
-    /**
+     /**
      * @prop for date in the following format: 
      * <day_of_week>, <month> <day_of_month>, <year>.
      */
@@ -45,71 +41,15 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
 
-    const [dayTemperature, setDayTemperature] = useState<number>();
-    const [dayFeelsLikeTemperature, setDayFeelsLikeTemperature] = useState<number>();
-    const [eveningTemperature, setEveningTemperature] = useState<number>();
-    const [eveningFeelsLikeTemperature, setEveningFeelsLikeTemperature] = useState<number>();
-    /**
-     * @prop Temperature for dew point.
-     */
-    const [dewPoint, setDewPoint] = useState<number>();
-
-    /**
-     * @prop Property for feels like temperature.
-     */
-    const [feelsLikeTemperature, setFeelsLikeTemperature] = useState<string>("")
-
     /**
      * @prop Represents time forecast data was fetched for a particular location.
      */
     const [forecastTime, setForecastTime] = useState<string>("");
 
     /**
-     * @prop Current day high temperature.
-     */
-    const [highTemperature, setHighTemperature] = useState<number>();
-
-    /**
      * @prop The current time.
      */
     const [localTime, setLocalTime] = useState<Date>(new Date());
-
-    /**
-     * @prop Current day low temperature.
-     */
-    const [lowTemperature, setLowTemperature] = useState<number>();
-
-    const [moonRise, setMoonRise] = useState<string>("");
-
-    const [moonSet, setMoonSet] = useState<string>("");
-
-    const [morningTemperature, setMorningTemperature] = useState<number>();
-    const [morningFeelsLikeTemperature, setMorningFeelsLikeTemperature] = useState<number>();
-    const [nightTemperature, setNightTemperature] = useState<number>();
-    const [nightFeelsLikeTemperature, setNightFeelsLikeTemperature] = useState<number>();
-    const [sunRise, setSunRise] = useState<string>("");
-
-    const [sunSet, setSunSet] = useState<string>("");
-
-    /**
-     * @prop Property for current temperature.
-     */
-    const [temperature, setTemperature] = useState<number>();
-
-    /**
-     * Capitalize first letter of each word of current conditions description.
-     */
-    const setCurrentConditionsProps = async (): Promise<void> => {
-        const currentConditions: string = await freeTierData?.weather[0].description;
-        console.log("current conditions:");
-        console.log(currentConditions);
-        const wordsArray: string[] = currentConditions.split(" ");
-        for(let i: number = 0; i < wordsArray.length; i++) {
-            wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
-        }
-
-        setCurrentConditions(wordsArray.join(" "));
-    }
  
     /**
      * Gets date time stamp from one call data and sets date as string using 
@@ -147,42 +87,40 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     } = useForecast(weather);
 
     /**
-     * Used to set background of app based on current conditions based 
-     * on free tier data.
-     */
-    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
-
-    const setMoonRiseTime = (): void => {
-        const time = dateTimeUtility.getDateTime(
-            oneCallData?.daily[0].moonrise, oneCallData?.timezone_offset);
-        setMoonRise(dateTimeUtility.getTimeInfo(time));
-    }
-
-    const setMoonSetTime = (): void => {
-        const time = dateTimeUtility.getDateTime(
-            oneCallData?.daily[0].moonset, oneCallData?.timezone_offset);
-        setMoonSet(dateTimeUtility.getTimeInfo(time));
-    }
-
-    const setSunRiseTime = (): void => {
-        const time = dateTimeUtility.getDateTime(
-            oneCallData?.daily[0].sunrise, oneCallData?.timezone_offset);
-        setSunRise(dateTimeUtility.getTimeInfo(time));
-    }
-
-    const setSunSetTime = (): void => {
-        const time = dateTimeUtility.getDateTime(
-            oneCallData?.daily[0].sunset, oneCallData?.timezone_offset);
-        setSunSet(dateTimeUtility.getTimeInfo(time));
-    }
-
-    /**
      * Set toggle switch for units.
      */
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
     } = useUnitsToggle(weather);
+    
+    const { 
+        currentConditions,
+        dayTemperature,
+        dayFeelsLikeTemperature,
+        eveningTemperature,
+        eveningFeelsLikeTemperature,
+        dewPoint,
+        feelsLikeTemperature,
+        highTemperature,
+        lowTemperature,
+        moonRise,
+        moonSet,
+        morningTemperature,
+        morningFeelsLikeTemperature,
+        nightTemperature,
+        nightFeelsLikeTemperature,
+       
+        sunRise,
+        sunSet,
+        temperature,
+    } = useCurrentConditions(dateTimeUtility, freeTierData, oneCallData, weather, toggled);
+
+    /**
+     * Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
+    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
 
     useEffect(() => {
         // Set time to be rendered and refresh every second.
@@ -191,34 +129,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setForecastTimeInformation();
         setCurrentDate();
 
-        // Temperature props.
-        setTemperature(weather.calculateTemperature(freeTierData?.main.temp));
-        setFeelsLikeTemperature(weather.calculateTemperature(
-            freeTierData?.main.feels_like));
-        setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
-        setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
-
-        setMorningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.morn));
-        setDayTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.day));
-        setEveningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.eve));
-        setNightTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.night));
-
-        setMorningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.morn));
-        setDayFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.day));
-        setEveningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.eve));
-        setNightFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.night));
-
-        setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
-        setCurrentConditionsProps();
-
-        setSunRiseTime();
-        setSunSetTime();
-        setMoonRiseTime();
-        setMoonSetTime();
-
-        
         // If something isn't right add prop to dependency array.
-    }, [weather, temperature, freeTierData, toggled, city]);
+    }, [weather, freeTierData, toggled, city, temperature]);
 
     return (
         <div className={conditionsClassName}>

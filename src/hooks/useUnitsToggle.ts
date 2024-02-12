@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 
 const useUnitsToggle = (weather: Weather) => {
-       /**
+    /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
        const [temperatureUnitsLabel, setTemperatureUnitsLabel] = useState<string>("");

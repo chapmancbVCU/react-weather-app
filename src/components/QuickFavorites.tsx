@@ -3,13 +3,19 @@
  * route page.
  * @author Chad Chapman
  */
+import '../css/quickFavorites.css';
 
 const QuickFavorites = (): JSX.Element => {
 
     return (
-        <>
-            Favorites
-        </>
+        <div className="quick-favorites-container">
+            <h3>Favorites</h3>
+            <div className='quick-favorites-content'>
+                <div className='favorites-card'>test</div>
+                <div className='favorites-card'>test</div>
+                <div className='favorites-card'>test</div>
+            </div>
+        </div>
     )
 }
 

@@ -7,6 +7,7 @@ import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { FC, useState, useEffect } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import QuickFavorites from '../components/QuickFavorites.tsx';
 import SearchBar  from '../components/SearchBar.tsx';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
 import useCurrentConditions from '../hooks/useCurrentConditions.ts';
@@ -140,6 +141,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
     return (
         <div className={conditionsClassName}>
+            <QuickFavorites />
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

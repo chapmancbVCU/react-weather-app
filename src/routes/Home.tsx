@@ -45,6 +45,10 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      */
     const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
 
+    const [dayTemperature, setDayTemperature] = useState<number>();
+    const [dayFeelsLikeTemperature, setDayFeelsLikeTemperature] = useState<number>();
+    const [eveningTemperature, setEveningTemperature] = useState<number>();
+    const [eveningFeelsLikeTemperature, setEveningFeelsLikeTemperature] = useState<number>();
     /**
      * @prop Temperature for dew point.
      */
@@ -76,7 +80,13 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const [lowTemperature, setLowTemperature] = useState<number>();
 
     const [moonRise, setMoonRise] = useState<string>("");
+
     const [moonSet, setMoonSet] = useState<string>("");
+
+    const [morningTemperature, setMorningTemperature] = useState<number>();
+    const [morningFeelsLikeTemperature, setMorningFeelsLikeTemperature] = useState<number>();
+    const [nightTemperature, setNightTemperature] = useState<number>();
+    const [nightFeelsLikeTemperature, setNightFeelsLikeTemperature] = useState<number>();
     const [sunRise, setSunRise] = useState<string>("");
 
     const [sunSet, setSunSet] = useState<string>("");
@@ -187,14 +197,26 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
             freeTierData?.main.feels_like));
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
-        setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
 
+        setMorningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.morn));
+        setDayTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.day));
+        setEveningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.eve));
+        setNightTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.night));
+
+        setMorningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.morn));
+        setDayFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.day));
+        setEveningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.eve));
+        setNightFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.night));
+
+        setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();
 
         setSunRiseTime();
         setSunSetTime();
         setMoonRiseTime();
         setMoonSetTime();
+
+        
         // If something isn't right add prop to dependency array.
     }, [weather, temperature, freeTierData, toggled, city]);
 
@@ -328,56 +350,63 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <div>{moonSet}</div>
                         </div>
                     </div>
-                </div>         
-            </div>
-            <div className='forecast'>
-                <h3>Free Tier Data</h3>
-                <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
-                <p>cod: {freeTierData && freeTierData.cod}</p>
-                <br></br>
-                <h4>coord:</h4>
-                <p>lat:{freeTierData && freeTierData.coord.lat}</p>
-                <p>lon:{freeTierData && freeTierData.coord.lon}</p>
-                <br></br>
-                <p>dt: {freeTierData && freeTierData.dt}</p>
-                <p>id: {freeTierData && freeTierData.id}</p>
-                <br></br>
-                <h4>main:</h4>
-                <p>feels_like: {freeTierData && freeTierData.main.feels_like}</p>
-                <p>humidity: {freeTierData && freeTierData.main.humidity}</p>
-                <p>pressure: {freeTierData && freeTierData.main.pressure}</p>
-                <p>temp: {freeTierData && freeTierData.main.temp}</p>
-                <p>temp_max: {freeTierData && freeTierData.main.temp_max}</p>
-                <p>temp_min: {freeTierData && freeTierData.main.temp_min}</p>
-                <p>name: {freeTierData && freeTierData.name}</p>
-                <br></br>
-                <h4>sys:</h4>
-                <p>country: {freeTierData && freeTierData.sys.country}</p>
-                <p>id: {freeTierData && freeTierData.sys.id}</p>
-                <p>sunrise: {freeTierData && freeTierData.sys.sunrise}</p>
-                <p>sunset: {freeTierData && freeTierData.sys.sunset}</p>
-                <p>type: {freeTierData && freeTierData.sys.type}</p>
-                <br></br>
-                <p>timezone: {freeTierData && freeTierData.timezone}</p>
-                <p>visibility: {freeTierData && freeTierData.visibility}</p>
-                <br></br>
-                <h4>weather: Array[1]</h4>
-                <p>description: {freeTierData && freeTierData.weather[0].description}</p>
-                <p>icon:</p>
-                {/* freeTierData? to prevent undefined property error */}
-                <div><img src={`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`}></img></div>
-                <p>id: {freeTierData && freeTierData.weather[0].id}</p>
-                <p>main: {freeTierData && freeTierData.weather[0].main}</p>
-                <br></br>
-                <h4>wind:</h4>
-                <p>deg: {freeTierData && freeTierData.wind.deg}</p>
-                <p>gust: {freeTierData && freeTierData.wind.gust}</p>
-                <p>speed: {freeTierData && freeTierData.wind.speed}</p>
-                <br></br>
-                <hr></hr>
-                <h3>One Call Data</h3>
-                {/* oneCallData? to prevent undefined property error */}
-                <p>{JSON.stringify(oneCallData)}</p>
+                </div>
+                <hr className='hr-border'></hr>
+                <h3>Temperature Range</h3>
+                <div className='current-conditions-container daily-conditions'>
+                    <div className='additional-information-item'>
+                        <h4>Morning</h4>
+                        <div className='additional-information-data'>
+                            {morningTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Day</h4>
+                        <div className='additional-information-data'>
+                            {dayTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Evening</h4>
+                        <div className='additional-information-data'>
+                            {eveningTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Night</h4>
+                        <div className='additional-information-data'>
+                            {nightTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                </div>
+                <hr className='hr-border'></hr>
+                <h3>Feels Like Temperature Range</h3>
+                <div className='current-conditions-container daily-conditions'>
+                    <div className='additional-information-item'>
+                        <h4>Morning</h4>
+                        <div className='additional-information-data'>
+                            {morningFeelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Day</h4>
+                        <div className='additional-information-data'>
+                            {dayFeelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Evening</h4>
+                        <div className='additional-information-data'>
+                            {eveningFeelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Night</h4>
+                        <div className='additional-information-data'>
+                            {nightFeelsLikeTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                </div>      
             </div>
         </div> 
     )

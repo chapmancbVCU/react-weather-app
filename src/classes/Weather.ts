@@ -416,6 +416,7 @@ export class Weather {
         }
     }
 
+    
     /**
      * Toggles the this.units instance variable between IMPERIAL and METRIC.
      */

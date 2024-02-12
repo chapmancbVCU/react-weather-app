@@ -23,7 +23,7 @@ body, html {
     background-size: 100%;
     display: flex;
     flex-flow: column;
-    height: 1000px;
+    height: 1300px;
 }
 
 .forecast {

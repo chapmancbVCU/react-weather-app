@@ -74,6 +74,10 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
     }
     
+    /**
+     * Manages setup of weather data during initial startup and after a user 
+     * performs a search.
+     */
     const {
         freeTierData,
         oneCallData,
@@ -94,6 +98,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         toggled,
     } = useUnitsToggle(weather);
     
+    /**
+     * Manages most of daily forecast state data.
+     */
     const { 
         currentConditions,
         dayTemperature,

@@ -118,12 +118,12 @@ function Navbar(): JSX.Element {
                                     Favorites
                                 </NavLink>
                             </li>
-                            <li className='login-button-content'>
+                            {/* <li className='login-button-content'>
                                 <button className='login-button' onClick={createWithGoogle}>
                                     <FaGoogle />Login
                                 </button>
                                 <p>{user?.displayName}</p>
-                            </li>
+                            </li> */}
                         </ul>
                     </StyledNavbarContainer>
                 </StyledNav>

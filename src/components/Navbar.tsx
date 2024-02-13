@@ -2,8 +2,9 @@
  * @file Contains functions related to rendering the navigation bar.
  * @author Chad Chapman
  */
-
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { auth } from '../helpers/firebaseHelper';
+import { FaBars, FaGoogle, FaTimes } from 'react-icons/fa';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { IconContext } from 'react-icons/lib';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -17,7 +18,36 @@ import StyledNavbarContainer from './NavbarContainer/NavbarContainer.styles';
  * @returns JSX.Element that contains the navigation bar.
  */
 function Navbar(): JSX.Element {
-    const [click, setClick] = useState(false);
+
+    const createWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential!.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            console.log(user);
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+    }
+    
+    /**
+     * @prop State of menu button.
+     */
+    const [click, setClick] = useState<boolean>(false);
 
     /**
      * Calls the setClick function and sets click to false.
@@ -30,6 +60,8 @@ function Navbar(): JSX.Element {
      * @returns boolean value that is opposite of current value of click.
      */
     const handleClick = () => setClick(!click);
+
+    const user = auth.currentUser;
 
     return (
         <>
@@ -85,6 +117,12 @@ function Navbar(): JSX.Element {
                                         onClick={closeMobileMenu}>
                                     Favorites
                                 </NavLink>
+                            </li>
+                            <li className='login-button-content'>
+                                <button className='login-button' onClick={createWithGoogle}>
+                                    <FaGoogle />Login
+                                </button>
+                                <p>{user?.displayName}</p>
                             </li>
                         </ul>
                     </StyledNavbarContainer>

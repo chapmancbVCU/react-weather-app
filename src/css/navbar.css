@@ -12,6 +12,11 @@
     color: #fff;
 }
 
+.login-button {
+    width: 100px;
+    height: 30px;
+}
+
 .menu-icon {
     display: none;
 }
@@ -58,6 +63,11 @@
 }
   
 @media screen and (max-width: 960px) {
+    .login-button {
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+
     .NavbarItems {
         position: relative;
     }

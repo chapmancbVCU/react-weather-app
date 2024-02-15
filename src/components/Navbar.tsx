@@ -61,7 +61,7 @@ function Navbar(): JSX.Element {
      */
     const handleClick = () => setClick(!click);
 
-    const user = auth.currentUser;
+    //const user = auth.currentUser;
 
     return (
         <>

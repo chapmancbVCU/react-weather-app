@@ -15,6 +15,7 @@ import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
+import { DailyForecastCardType } from '../types/DailyForecastCardType.ts';
 
 /**
  * @interface HomePageProps The interface that describes props
@@ -42,6 +43,12 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onOptionSelect,
         onSubmit
     } = useForecast(weather);
+
+    /**
+     * @prop Describes array for DailyForecastCardType.
+     */
+    const [dailyForecastCard, setDailyForecastCard] = useState<DailyForecastCardType[]>([]);
+
     /**
      * Used to set background of app based on current conditions based 
      * on free tier data.
@@ -55,6 +62,28 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         temperatureUnitsLabel,
         toggled,
     } = useUnitsToggle(weather);
+
+    const setDailyForecastCardType = () => {
+        console.log("forecast card type");
+
+        for (let i: number = 0; i < 8; i++) {
+            let description = oneCallData?.daily[i].weather[0].description;
+            console.log(`Description: ${description}`);
+            let dt = oneCallData?.daily[i].dt;
+            console.log(`DT: ${dt}`);
+            let icon = oneCallData?.daily[i].weather[0].icon;
+            console.log(`Icon: ${icon}`);
+            let min = oneCallData?.daily[i].temp.min;
+            console.log(`Min: ${min}`);
+            let max = oneCallData?.daily[i].temp.max;
+            console.log(`Max: ${max}`);
+            console.log("-------------------");
+        }
+    }
+
+    useEffect(() => {
+        setDailyForecastCardType();
+    }, [oneCallData]);
 
     return (
         <div className={conditionsClassName}>

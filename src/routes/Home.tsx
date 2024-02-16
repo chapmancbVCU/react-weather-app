@@ -156,7 +156,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Current conditions in {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>
-                <p className='daily-description'>{oneCallData?.daily[0].summary}</p>
+                <p className='today-description'>{oneCallData?.daily[0].summary}</p>
                 <div className='current-conditions-container'>
                     <div className='current-conditions-left'>
                         <div className="date-time-container">
@@ -210,29 +210,29 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                     </div>
                 </div>  
                 <hr className='hr-border'></hr>
-                <div className='current-conditions-container daily-conditions'>
-                    <div className='daily-conditions-info'>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/dew-point.png'></img>
                         <div className='current-conditions-info-description'>
                             Dew Point
                             <div>{dewPoint} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/UVI.png'></img>
                         <div className='current-conditions-info-description'>
                             UV Index
                             <div>{(oneCallData?.daily[0].uvi.toFixed(0))} out of 10</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/air-pressure.png'></img>
                         <div className='current-conditions-info-description'>
                             Pressure
                             <div>{weather.getPressure(freeTierData?.main.pressure)}</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/visibility.png'></img>
                         <div className='current-conditions-info-description'>
                             Visibility
@@ -241,29 +241,29 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                     </div>
                 </div>
                 <hr className='hr-border'></hr>
-                <div className='current-conditions-container daily-conditions'>
-                    <div className='daily-conditions-info'>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/sun-rise.png'></img>
                         <div className='current-conditions-info-description'>
                             Sun Rise
                             <div>{sunRise}</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/sun-set.png'></img>
                         <div className='current-conditions-info-description'>
                             Sun Set
                             <div>{sunSet}</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/moon-rise.png'></img>
                         <div className='current-conditions-info-description'>
                             Moon Rise
                             <div>{moonRise}</div>
                         </div>
                     </div>
-                    <div className='daily-conditions-info'>
+                    <div className='today-conditions-info'>
                         <img className='conditions-icon' src='./icons/moon-set.png'></img>
                         <div className='current-conditions-info-description'>
                             Moon Set
@@ -273,7 +273,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                 </div>
                 <hr className='hr-border'></hr>
                 <h3>Temperature Range</h3>
-                <div className='current-conditions-container daily-conditions'>
+                <div className='current-conditions-container today-conditions'>
                     <div className='additional-information-item'>
                         <h4>Morning</h4>
                         <div className='additional-information-data'>
@@ -301,7 +301,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                 </div>
                 <hr className='hr-border'></hr>
                 <h3>Feels Like Temperature Range</h3>
-                <div className='current-conditions-container daily-conditions'>
+                <div className='current-conditions-container today-conditions'>
                     <div className='additional-information-item'>
                         <h4>Morning</h4>
                         <div className='additional-information-data'>

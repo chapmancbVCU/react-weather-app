@@ -15,7 +15,7 @@
     justify-content: center;
 }
 
- .conditions-icon {
+.conditions-icon {
     height: 33px;
 }
 
@@ -59,24 +59,6 @@
     text-align: center;
 }
 
-.daily-conditions {
-    align-items: center;
-}
-
-.daily-conditions-info {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 15px;
-    
-    font-size: 16px;
-}
-
-.daily-description {
-    margin-top: 10px;
-    text-align: center;
-    font-size: larger;
-}
-
 .date-time-container {
     display: flex;
     flex-direction: column;
@@ -102,6 +84,24 @@ h3 {
 .hr-border {
     border: solid 3px rgb(57, 169, 244);
     margin-bottom: 10px;
+}
+
+.today-conditions {
+    align-items: center;
+}
+
+.today-conditions-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    
+    font-size: 16px;
+}
+
+.today-description {
+    margin-top: 10px;
+    text-align: center;
+    font-size: larger;
 }
 
 .today-high-low-temperature {
@@ -132,21 +132,21 @@ h3 {
         text-align: left;
     }
 
-    .daily-conditions {
-        justify-content: space-evenly;
-    }
-
-    .daily-conditions-info {
-        align-items: space-between;
-        justify-content: space-between;
-    }
-
     .date-time-container {
         align-items: flex-start;
     }
 
     .description-container {
         justify-content: flex-start;
+    }
+
+    .today-conditions {
+        justify-content: space-evenly;
+    }
+
+    .today-conditions-info {
+        align-items: space-between;
+        justify-content: space-between;
     }
 
     .today-high-low-temperature {

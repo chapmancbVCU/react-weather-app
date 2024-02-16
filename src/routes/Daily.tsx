@@ -3,6 +3,8 @@
  * @author Chad Chapman
  */
 import '../css/currentConditionsBackground.css';
+import DailyForecastCard from '../components/DailyForecastCard.tsx';
+import DetailedDailyForecast from '../components/DetailedDailyForecast.tsx';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';

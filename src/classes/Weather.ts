@@ -11,8 +11,8 @@ export class Weather {
     private initialUnits: string;
     private JSONCityData: Promise<string|void>;
     private JSONDescriptiveWeatherData: Promise<string|void>;
-    private latitude: number;
-    private longitude: number;
+    private latitude: Promise<number|void>;
+    private longitude: Promise<number|void>;
     private units: string;
 
 
@@ -27,11 +27,33 @@ export class Weather {
         this.initialUnits = "";
         this.JSONCityData = null!;
         this.JSONDescriptiveWeatherData = null!;
-        this.latitude = 0;
-        this.longitude = 0;
+        this.latitude = this.getInitialLatitude(this.geoLocationInfo)!;
+        this.longitude = this.getInitialLongitude(this.geoLocationInfo)!;
+        // console.log(`Latitude: ${this.latitude}`);
+        // console.log(`Longitude: ${this.longitude}`)
         this.units = "";
     }
 
+
+    async getInitialLatitude(geoLocationInfo: string): Promise<number|undefined> {
+        try {
+            const response = await fetch(geoLocationInfo);
+            const data = await response.json();
+            return data.latitude;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getInitialLongitude(geoLocationInfo: string): Promise<number|undefined> {
+        try {
+            const response = await fetch(geoLocationInfo);
+            const data = await response.json();
+            return data.longitude;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     /**
      * Converts the temperature retrieved from Open Weather Map as Kelvin to 
@@ -169,7 +191,7 @@ export class Weather {
      * Getter function for the latitude.
      * @returns {number} The latitude of the user or search query
      */
-    getLatitude(): number {
+    getLatitude(): any {
         return this.latitude;
     }
 
@@ -200,7 +222,7 @@ export class Weather {
      * Getter function for the longitude.
      * @returns {number} The longitude of the user or search query
      */
-    getLongitude(): number {
+    getLongitude(): any {
         return this.longitude;
     }
 
@@ -246,6 +268,23 @@ export class Weather {
             return pressureInhPa + " mbar";
          }
     }
+
+    getTemperature(temperature: number|any): number|any {
+        if (this.getInitialUnits() == 'IMPERIAL') {
+            if(this.getUnits() == 'IMPERIAL') {
+                return temperature//.toFixed(0)!;
+            } else {
+                return ((temperature - 32) * (5/9))//.toFixed(0)!;
+            }   
+        } else if (this.getInitialUnits() == 'METRIC') {
+            if(this.getUnits() == 'IMPERIAL') {
+                return ((temperature * 1.8) + 32)//.toFixed(0)!;
+            } else {
+                return temperature;
+            }
+        }
+    }
+
     /**
      * Getter function that retrieves the units.  This value can be METRIC or 
      * IMPERIAL.
@@ -383,7 +422,7 @@ export class Weather {
      * @param {number} latitude The latitude of the user's location or search 
      * query.
      */
-    setLatitude(latitude: number): void {
+    setLatitude(latitude: any): void {
         this.latitude = latitude;
     } 
 
@@ -394,7 +433,7 @@ export class Weather {
      * @param {number} longitude The longitude of the user's location or search 
      * query.
      */
-    setLongitude(longitude: number): void {
+    setLongitude(longitude: any): void {
         this.longitude = longitude;
     }
 

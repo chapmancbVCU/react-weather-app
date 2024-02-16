@@ -156,17 +156,17 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
 
-        setMorningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.morn));
-        setDayTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.day));
-        setEveningTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.eve));
-        setNightTemperature(weather.calculateTemperature(oneCallData?.daily[0].temp.night));
+        setMorningTemperature(weather.getTemperature(oneCallData?.daily[0].temp.morn));
+        setDayTemperature(weather.getTemperature(oneCallData?.daily[0].temp.day));
+        setEveningTemperature(weather.getTemperature(oneCallData?.daily[0].temp.eve));
+        setNightTemperature(weather.getTemperature(oneCallData?.daily[0].temp.night));
 
-        setMorningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.morn));
-        setDayFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.day));
-        setEveningFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.eve));
-        setNightFeelsLikeTemperature(weather.calculateTemperature(oneCallData?.daily[0].feels_like.night));
+        setMorningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.morn));
+        setDayFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.day));
+        setEveningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.eve));
+        setNightFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.night));
 
-        setDewPoint(weather.calculateTemperature(oneCallData?.current.dew_point));
+        setDewPoint(weather.getTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();
 
         // Moon and sun props.

@@ -5,6 +5,8 @@
 
 export type DailyForecastCardType = {
     description: string
+    dt: number
     icon: string
-    temp: number
+    max: number
+    min: number
 }

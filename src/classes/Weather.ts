@@ -35,26 +35,6 @@ export class Weather {
     }
 
 
-    async getInitialLatitude(geoLocationInfo: string): Promise<number|undefined> {
-        try {
-            const response = await fetch(geoLocationInfo);
-            const data = await response.json();
-            return data.latitude;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async getInitialLongitude(geoLocationInfo: string): Promise<number|undefined> {
-        try {
-            const response = await fetch(geoLocationInfo);
-            const data = await response.json();
-            return data.longitude;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     /**
      * Converts the temperature retrieved from Open Weather Map as Kelvin to 
      * either Fahrenheit or Celsius.
@@ -120,6 +100,15 @@ export class Weather {
 
 
     /**
+     * Getter function for retrieving the users country.
+     * @returns {string} The nation where the user resides.
+     */
+    getCountryName(): string {
+        return this.countryName;
+    }
+
+
+    /**
      * Detect location of localhost so we can get local weather on page load.
      * @returns {string} The string representation of locality information in form of 
      * URL that references an API.
@@ -143,17 +132,56 @@ export class Weather {
     }
 
 
-     /**
-     * Getter function for retrieving the users country.
-     * @returns {string} The nation where the user resides.
+    /**
+     * Returns a boolean value based on state of the application.  When the 
+     * application is started this value is set to true.  When a fetch for 
+     * data is made it is set to false.  Use this function to test for 
+     * conditions based on whether or not the application has just started.
+     * @returns True if application has just been initialized and false 
+     * otherwise.
      */
-     getCountryName(): string {
-        return this.countryName;
+    getInit(): boolean {
+        return this.init;
+    }
+
+    
+    /**
+     * Returns the original latitude used to get weather data on application 
+     * startup.  It uses the geoLocationInfo JSON string to get this 
+     * information.
+     * @param geoLocationInfo A string containing information pulled upon 
+     * application start to determine the user's location.
+     * @returns {Promise<number|undefined>} The latitude based on a fetch 
+     * request used to get initial location information.
+     */
+    async getInitialLatitude(geoLocationInfo: string): Promise<number|undefined> {
+        try {
+            const response = await fetch(geoLocationInfo);
+            const data = await response.json();
+            return data.latitude;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
-    getInit(): boolean {
-        return this.init;
+    /**
+     * Returns the original longitude used to get weather data on application 
+     * startup.  It uses the geoLocationInfo JSON string to get this 
+     * information.
+     * @param geoLocationInfo A string containing information pulled upon 
+     * application start to determine the user's location.
+     * @returns {Promise<number|undefined>} The longitude based on a fetch 
+     * request used to get initial location information.
+     */
+    async getInitialLongitude(geoLocationInfo: string): Promise<number|undefined> {
+        try {
+            const response = await fetch(geoLocationInfo);
+            const data = await response.json();
+            return data.longitude;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 

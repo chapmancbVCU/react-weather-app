@@ -1,5 +1,5 @@
 /**
- * @file Defines complete data for daily forecast card.
+ * @file Defines complete data for daily forecast component.
  * @author Chad Chapman
  */
 

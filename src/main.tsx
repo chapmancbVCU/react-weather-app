@@ -34,12 +34,12 @@ try {
     const countryName = await weather.getCountryName();
     weather.setUnits(countryName);
 
-    setTimeout('', 5000);
     weather.setJSONFreeTierData(cityData);
 
     const descriptiveWeatherData = 
       await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
     weather.setJSONOneCallWeatherData(descriptiveWeatherData);
+    setTimeout('', 5000);
 } catch (error) {
     console.log(error)
 }

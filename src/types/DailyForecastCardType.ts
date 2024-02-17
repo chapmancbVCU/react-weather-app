@@ -6,8 +6,8 @@
 export type DailyForecastType = {
     clouds: number
     description: string
-    dt: number
     dew_point: number
+    dt: number
     feels_like: {
         day: number
         eve: number
@@ -16,8 +16,6 @@ export type DailyForecastType = {
     }
     humidity: number
     icon: string
-    max: number
-    min: number
     moon_phase: number
     moonrise: number
     moonset: number

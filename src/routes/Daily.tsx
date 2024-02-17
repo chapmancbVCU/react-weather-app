@@ -71,14 +71,48 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         console.log("forecast card type");
         let typeArray: DailyForecastType[] = []; 
         for (let i: number = 0; i < 8; i++) {
-            let temp: DailyForecastType = {
+            let setData: DailyForecastType = {
+                clouds: oneCallData?.daily[i].clouds,
                 description: oneCallData?.daily[i].weather[0].description,
+                dew_point: oneCallData?.daily[i].dew_point,
                 dt: oneCallData?.daily[i].dt,
+                feels_like: {
+                    day: oneCallData?.daily[i].feels_like.day,
+                    eve: oneCallData?.daily[i].feels_like.eve,
+                    morn: oneCallData?.daily[i].feels_like.morn,
+                    night: oneCallData?.daily[i].feels_like.night,
+                },
+                humidity: oneCallData?.daily[i].humidity,
                 icon: oneCallData?.daily[i].weather[0].icon,
-                min: oneCallData?.daily[i].temp.min,
-                max: oneCallData?.daily[i].temp.max
+                moon_phase: oneCallData?.daily[i].moon_phase,
+                moonrise: oneCallData?.daily[i].moonrise,
+                moonset: oneCallData?.daily[i].moonset,
+                pop: oneCallData?.daily[i].pop,
+                pressure: oneCallData?.daily[i].pressure,
+                rain: oneCallData?.daily[i].rain,
+                summary: oneCallData?.daily[i].summary,
+                sunrise: oneCallData?.daily[i].sunrise,
+                sunset: oneCallData?.daily[i].sunset,
+                temp: {
+                    day: oneCallData?.daily[i].temp.day,
+                    eve: oneCallData?.daily[i].temp.eve,
+                    max: oneCallData?.daily[i].temp.max,
+                    min: oneCallData?.daily[i].temp.min,
+                    morn: oneCallData?.daily[i].temp.morn,
+                    night: oneCallData?.daily[i].temp.night
+                },
+                uvi: oneCallData?.daily[i].number,
+                weather: {
+                    description: oneCallData?.daily[i].weather.description,
+                    icon: oneCallData?.daily[i].weather.string,
+                },
+                winds: {
+                    deg: oneCallData?.daily[i].winds.deg,
+                    gust: oneCallData?.daily[i].winds.gust,
+                    speed: oneCallData?.daily[i].winds.gust,
+                }
             }
-            typeArray.push(temp);
+            typeArray.push(setData);
         }
         setDailyForecast(typeArray);
     }
@@ -89,8 +123,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
             console.log(`Description: ${dailyForecast[i].description}`);
             console.log(`DT: ${dailyForecast[i].dt}`);
             console.log(`Icon: ${dailyForecast[i].icon}`);
-            console.log(`Min: ${dailyForecast[i].min}`);
-            console.log(`Max: ${dailyForecast[i].max}`);
             console.log("-------------------");
         }
     }, [oneCallData]);

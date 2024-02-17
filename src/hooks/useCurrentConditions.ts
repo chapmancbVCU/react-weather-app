@@ -83,6 +83,10 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [nightFeelsLikeTemperature, setNightFeelsLikeTemperature] = useState<number>();
 
     /**
+     * @prop The summary for today's weather.
+     */
+    const [summary, setSummary] = useState<string>("");
+    /**
      * @prop Describes time the sun rises.
      */
     const [sunRise, setSunRise] = useState<string>("");
@@ -169,12 +173,13 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setDewPoint(weather.getTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();
 
+        setSummary(oneCallData?.daily[0]?.summary);
         // Moon and sun props.
         setSunRiseTime();
         setSunSetTime();
         setMoonRiseTime();
         setMoonSetTime();
-    }, [weather, freeTierData, oneCallData, toggled]);
+    }, [weather, freeTierData, oneCallData, toggled, currentConditions]);
 
     return {
         currentConditions,
@@ -192,6 +197,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         morningFeelsLikeTemperature,
         nightTemperature,
         nightFeelsLikeTemperature,
+        summary,
         sunRise,
         sunSet,
         temperature,

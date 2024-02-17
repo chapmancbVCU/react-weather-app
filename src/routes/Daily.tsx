@@ -3,8 +3,6 @@
  * @author Chad Chapman
  */
 import '../css/currentConditionsBackground.css';
-import DailyForecastCard from '../components/DailyForecastCard.tsx';
-import DetailedDailyForecast from '../components/DetailedDailyForecast.tsx';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
@@ -107,9 +105,9 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     icon: oneCallData?.daily[i].weather.string,
                 },
                 winds: {
-                    deg: oneCallData?.daily[i].winds.deg,
-                    gust: oneCallData?.daily[i].winds.gust,
-                    speed: oneCallData?.daily[i].winds.gust,
+                    deg: oneCallData?.daily[i].winds_deg,
+                    gust: oneCallData?.daily[i].wind_gust,
+                    speed: oneCallData?.daily[i].winds_speed,
                 }
             }
             typeArray.push(setData);
@@ -144,8 +142,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Your 7 Day Forecast for {typeof city === 'string' ? city : null}</h2>
                     <h3>Free Tier Data</h3>
-                    <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
-                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
+                    {/* <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
+                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p> */}
                 </ForecastHeader>
             </div>
         </div>

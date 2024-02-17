@@ -3,6 +3,6 @@
  * @author Chad Chapman
  */
 
-export type HourlyCardType = {
+export type HourlyType = {
     
 }

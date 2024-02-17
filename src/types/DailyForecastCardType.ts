@@ -3,7 +3,7 @@
  * @author Chad Chapman
  */
 
-export type DailyForecastCardType = {
+export type DailyForecastType = {
     description: string
     dt: number
     icon: string

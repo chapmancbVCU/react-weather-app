@@ -15,7 +15,7 @@ import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
-import { DailyForecastCardType } from '../types/DailyForecastCardType.ts';
+import { DailyForecastType } from '../types/DailyForecastCardType.ts';
 
 /**
  * @interface HomePageProps The interface that describes props
@@ -47,7 +47,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     /**
      * @prop Describes array for DailyForecastCardType.
      */
-    const [dailyForecastCard, setDailyForecastCard] = useState<DailyForecastCardType[]>([]);
+    const [dailyForecast, setDailyForecast] = useState<DailyForecastType[]>([]);
 
     /**
      * Used to set background of app based on current conditions based 
@@ -67,11 +67,11 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
      * Setup DailyForecastCard array for handling data for daily forecast 
      * cards.
      */
-    const setDailyForecastCardType = () => {
+    const setDailyForecastData = () => {
         console.log("forecast card type");
-        let typeArray: DailyForecastCardType[] = []; 
+        let typeArray: DailyForecastType[] = []; 
         for (let i: number = 0; i < 8; i++) {
-            let temp: DailyForecastCardType = {
+            let temp: DailyForecastType = {
                 description: oneCallData?.daily[i].weather[0].description,
                 dt: oneCallData?.daily[i].dt,
                 icon: oneCallData?.daily[i].weather[0].icon,
@@ -80,17 +80,17 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
             }
             typeArray.push(temp);
         }
-        setDailyForecastCard(typeArray);
+        setDailyForecast(typeArray);
     }
 
     useEffect(() => {
-        setDailyForecastCardType();
-        for(let i: number = 0; i < dailyForecastCard.length; i++) {
-            console.log(`Description: ${dailyForecastCard[i].description}`);
-            console.log(`DT: ${dailyForecastCard[i].dt}`);
-            console.log(`Icon: ${dailyForecastCard[i].icon}`);
-            console.log(`Min: ${dailyForecastCard[i].min}`);
-            console.log(`Max: ${dailyForecastCard[i].max}`);
+        setDailyForecastData();
+        for(let i: number = 0; i < dailyForecast.length; i++) {
+            console.log(`Description: ${dailyForecast[i].description}`);
+            console.log(`DT: ${dailyForecast[i].dt}`);
+            console.log(`Icon: ${dailyForecast[i].icon}`);
+            console.log(`Min: ${dailyForecast[i].min}`);
+            console.log(`Max: ${dailyForecast[i].max}`);
             console.log("-------------------");
         }
     }, [oneCallData]);

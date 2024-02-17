@@ -63,26 +63,36 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         toggled,
     } = useUnitsToggle(weather);
 
+    /**
+     * Setup DailyForecastCard array for handling data for daily forecast 
+     * cards.
+     */
     const setDailyForecastCardType = () => {
         console.log("forecast card type");
-
+        let typeArray: DailyForecastCardType[] = []; 
         for (let i: number = 0; i < 8; i++) {
-            let description = oneCallData?.daily[i].weather[0].description;
-            console.log(`Description: ${description}`);
-            let dt = oneCallData?.daily[i].dt;
-            console.log(`DT: ${dt}`);
-            let icon = oneCallData?.daily[i].weather[0].icon;
-            console.log(`Icon: ${icon}`);
-            let min = oneCallData?.daily[i].temp.min;
-            console.log(`Min: ${min}`);
-            let max = oneCallData?.daily[i].temp.max;
-            console.log(`Max: ${max}`);
-            console.log("-------------------");
+            let temp: DailyForecastCardType = {
+                description: oneCallData?.daily[i].weather[0].description,
+                dt: oneCallData?.daily[i].dt,
+                icon: oneCallData?.daily[i].weather[0].icon,
+                min: oneCallData?.daily[i].temp.min,
+                max: oneCallData?.daily[i].temp.max
+            }
+            typeArray.push(temp);
         }
+        setDailyForecastCard(typeArray);
     }
 
     useEffect(() => {
         setDailyForecastCardType();
+        for(let i: number = 0; i < dailyForecastCard.length; i++) {
+            console.log(`Description: ${dailyForecastCard[i].description}`);
+            console.log(`DT: ${dailyForecastCard[i].dt}`);
+            console.log(`Icon: ${dailyForecastCard[i].icon}`);
+            console.log(`Min: ${dailyForecastCard[i].min}`);
+            console.log(`Max: ${dailyForecastCard[i].max}`);
+            console.log("-------------------");
+        }
     }, [oneCallData]);
 
     return (

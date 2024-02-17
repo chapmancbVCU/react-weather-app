@@ -137,7 +137,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         setCurrentDate();
 
         // If something isn't right add prop to dependency array.
-    }, [weather, freeTierData, toggled, city, temperature]);
+    }, [weather, freeTierData, oneCallData, toggled, city, temperature]);
 
     return (
         <div className={conditionsClassName}>

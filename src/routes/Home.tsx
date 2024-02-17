@@ -102,7 +102,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     /**
      * Manages most of daily forecast state data.
      */
-    const { 
+    const {
+        conditionIcon,
         currentConditions,
         dayTemperature,
         dayFeelsLikeTemperature,
@@ -118,10 +119,13 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         morningFeelsLikeTemperature,
         nightTemperature,
         nightFeelsLikeTemperature,
+        pop,
         summary,
         sunRise,
         sunSet,
         temperature,
+        windGust,
+        uvi
     } = useCurrentConditions(dateTimeUtility, freeTierData, oneCallData, weather, toggled);
 
     /**
@@ -173,7 +177,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                                 {typeof currentConditions === 'string' ? currentConditions : null}
                             </div>
                             <img className='description-icon' 
-                                src={`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`}>
+                                src={conditionIcon}>
                             </img>
                         </div>
                     </div>
@@ -196,7 +200,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                             <img className="conditions-icon" src="./icons/weather-pouring.png"></img>
                             <div className='current-conditions-info-description'>
                                 Chance of PPT
-                                <div>{oneCallData && (oneCallData.daily[0].pop * 100).toFixed(0)}%</div>
+                                <div>{pop}%</div>
                             </div>
                         </div>
                         <div className='current-conditions-info'>
@@ -205,7 +209,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                                 Winds
                                 <div>{weather.getWindSpeed(freeTierData?.wind.speed)}, {weather.getWindDirection(freeTierData?.wind.deg)}</div>
                                 Wind Gusts
-                                <div>{weather.getWindSpeed(oneCallData?.daily[0].wind_gust)}</div>
+                                <div>{windGust}</div>
                             </div>
                         </div>
                     </div>
@@ -223,7 +227,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
                         <img className='conditions-icon' src='./icons/UVI.png'></img>
                         <div className='current-conditions-info-description'>
                             UV Index
-                            <div>{(oneCallData?.daily[0].uvi.toFixed(0))} out of 10</div>
+                            <div>{uvi} out of 10</div>
                         </div>
                     </div>
                     <div className='today-conditions-info'>

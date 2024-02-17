@@ -34,6 +34,7 @@ try {
     const countryName = await weather.getCountryName();
     weather.setUnits(countryName);
 
+    setTimeout('', 5000);
     weather.setJSONFreeTierData(cityData);
 
     const descriptiveWeatherData = 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 
 const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: any, oneCallData: any, weather: Weather, toggled: boolean) => {
+    const [conditionIcon, setConditionIcon] = useState<string>("");
     /**
      * @prop Description of current conditions outside.
      */
@@ -83,9 +84,15 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [nightFeelsLikeTemperature, setNightFeelsLikeTemperature] = useState<number>();
 
     /**
+     * @prop The chance of precipitation.
+     */
+    const [pop, setPop] = useState<string>("");
+
+    /**
      * @prop The summary for today's weather.
      */
     const [summary, setSummary] = useState<string>("");
+
     /**
      * @prop Describes time the sun rises.
      */
@@ -102,18 +109,28 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [temperature, setTemperature] = useState<number>();
 
     /**
+     * @prop Property for current wind gusts.
+     */
+    const [windGust, setWindGust] = useState<string>("");
+
+    /**
+     * @prop Property for ultraviolet index.
+     */
+    const [uvi, setUVI] = useState<number>();
+
+    /**
      * Capitalize first letter of each word of current conditions description.
      */
     const setCurrentConditionsProps = async (): Promise<void> => {
-        const currentConditions: string = await freeTierData?.weather[0].description;
+        const currentConditions: string = await freeTierData?.weather[0]?.description!;
         console.log("current conditions:");
         console.log(currentConditions);
-        const wordsArray: string[] = currentConditions.split(" ");
-        for(let i: number = 0; i < wordsArray.length; i++) {
+        const wordsArray: string[] = currentConditions?.split(" ");
+        for(let i: number = 0; i < wordsArray?.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);
         }
 
-        setCurrentConditions(wordsArray.join(" "));
+        setCurrentConditions(wordsArray?.join(" "));
     }
 
     /**
@@ -173,7 +190,14 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setDewPoint(weather.getTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();
 
-        setSummary(oneCallData?.daily[0]?.summary);
+        setSummary(oneCallData?.daily[0].summary);
+        setPop((oneCallData?.daily[0]?.pop * 100).toFixed(0));
+
+        setWindGust(weather.getWindSpeed(oneCallData?.daily[0].wind_gust));
+
+        setUVI((oneCallData?.daily[0].uvi.toFixed(0)));
+        setConditionIcon(`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`);
+
         // Moon and sun props.
         setSunRiseTime();
         setSunSetTime();
@@ -182,6 +206,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     }, [weather, freeTierData, oneCallData, toggled, currentConditions]);
 
     return {
+        conditionIcon,
         currentConditions,
         dayTemperature,
         dayFeelsLikeTemperature,
@@ -197,10 +222,13 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         morningFeelsLikeTemperature,
         nightTemperature,
         nightFeelsLikeTemperature,
+        pop,
         summary,
         sunRise,
         sunSet,
         temperature,
+        windGust,
+        uvi
     };
 };
 

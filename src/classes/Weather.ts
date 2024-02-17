@@ -298,17 +298,19 @@ export class Weather {
     }
 
     getTemperature(temperature: number|any): number|any {
-        if (this.getInitialUnits() == 'IMPERIAL') {
-            if(this.getUnits() == 'IMPERIAL') {
-                return temperature//.toFixed(0)!;
-            } else {
-                return ((temperature - 32) * (5/9))//.toFixed(0)!;
-            }   
-        } else if (this.getInitialUnits() == 'METRIC') {
-            if(this.getUnits() == 'IMPERIAL') {
-                return ((temperature * 1.8) + 32)//.toFixed(0)!;
-            } else {
-                return temperature;
+        if(temperature != undefined){
+            if (this.getInitialUnits() == 'IMPERIAL') {
+                if(this.getUnits() == 'IMPERIAL') {
+                    return temperature.toFixed(0)!;
+                } else {
+                    return ((temperature - 32) * (5/9)).toFixed(0)!;
+                }   
+            } else if (this.getInitialUnits() == 'METRIC') {
+                if(this.getUnits() == 'IMPERIAL') {
+                    return ((temperature * 1.8) + 32).toFixed(0)!;
+                } else {
+                    return temperature;
+                }
             }
         }
     }

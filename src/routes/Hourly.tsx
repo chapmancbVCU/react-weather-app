@@ -96,7 +96,7 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
 
     useEffect(() => {
         for(let i: number = 0; i < 1; i++) {
-            console.log("clouds: " + hourlyForecast[i]?.clouds);
+            console.log("Clouds: " + hourlyForecast[i]?.clouds);
             console.log("Dew Point: " + hourlyForecast[i]?.dew_point);
             console.log(`DT: ${hourlyForecast[i]?.dt}`);
             console.log("Feels Like: " + hourlyForecast[i]?.feels_like);

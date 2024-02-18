@@ -3,6 +3,8 @@
  * @author Chad Chapman
  */
 import '../css/currentConditionsBackground.css';
+import DailyForecastCard from '../components/DailyForecastCard.tsx';
+import { DailyForecastType } from '../types/DailyForecastType.ts';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import '../css/dailyForecast.css';
 import { FC, useEffect, useState } from 'react';
@@ -14,13 +16,13 @@ import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
-import { DailyForecastType } from '../types/DailyForecastType.ts';
 
 /**
  * @interface HomePageProps The interface that describes props
  * that are shared between components.
  */
 interface DailyPageProps {
+    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -175,7 +177,11 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     <h3>Free Tier Data</h3>
                 </ForecastHeader>
                 <div className='daily-forecast-container'>{dailyForecast.map((daily: DailyForecastType, index: number) => (
-                    <div className='daily-forecast-card'>{daily.clouds}</div>
+                    <DailyForecastCard key={index}
+                        daily={daily}
+                        dateTimeUtility={dateTimeUtility}
+                        weather={weather}>
+                    </DailyForecastCard>
                 ))}</div>
             </div>
         </div>

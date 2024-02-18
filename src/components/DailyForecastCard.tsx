@@ -3,6 +3,7 @@
  * forecast data.
  * @author Chad Chapman
  */
+import "../css/dailyForecast.css";
 import { DateTimeUtility } from "../classes/DateTimeUtility";
 import { FC } from "react";
 import { Weather } from "../classes/Weather";

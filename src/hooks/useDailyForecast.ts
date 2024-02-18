@@ -6,6 +6,11 @@
 import { DailyForecastType } from "../types/DailyForecastType";
 import { useEffect, useState } from "react";
 
+/**
+ * Functions supporting DailyForecastType Array.
+ * @param oneCallData Use this data to populate array of DailyForecastType.
+ * @returns { DailyForecastType[] } Array of Daily/forecastType
+ */
 const useDailyForecast = (oneCallData: any) => {
     /**
      * @prop Describes array for DailyForecastCardType.

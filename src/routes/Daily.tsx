@@ -4,6 +4,7 @@
  */
 import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
+import '../css/dailyForecast.css';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import QuickFavorites from '../components/QuickFavorites.tsx';
@@ -99,14 +100,14 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     morn: oneCallData?.daily[i]?.temp.morn,
                     night: oneCallData?.daily[i]?.temp.night
                 },
-                uvi: oneCallData?.daily[i]?.number,
+                uvi: oneCallData?.daily[i]?.uvi,
                 weather: {
-                    description: oneCallData?.daily[i]?.weather.description,
-                    icon: oneCallData?.daily[i]?.weather.string,
+                    description: oneCallData?.daily[i].weather[0].description,
+                    icon: oneCallData?.daily[i].weather[0].icon,
                 },
-                wind_deg: oneCallData?.daily[i]?.winds_deg,
+                wind_deg: oneCallData?.daily[i]?.wind_deg,
                 wind_gust: oneCallData?.daily[i]?.wind_gust,
-                wind_speed: oneCallData?.daily[i]?.winds_speed,
+                wind_speed: oneCallData?.daily[i]?.wind_speed,
             }
             typeArray.push(setData);
         }
@@ -172,9 +173,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Your 7 Day Forecast for {typeof city === 'string' ? city : null}</h2>
                     <h3>Free Tier Data</h3>
-                    {/* <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
-                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p> */}
                 </ForecastHeader>
+                <div className='daily-forecast-container'>{dailyForecast.map((daily: DailyForecastType, index: number) => (
+                    <div className='daily-forecast-card'>{daily.clouds}</div>
+                ))}</div>
             </div>
         </div>
     )

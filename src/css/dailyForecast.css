@@ -1,0 +1,17 @@
+/******************************************************************************
+ * DESCRIPTION: Stylesheet daily forecast content.                            *
+ *      AUTHOR: Chad Chapman                                                  *
+ *****************************************************************************/
+ .daily-forecast-container {
+    display: flex;
+    flex-direction: row;
+
+    border: solid black 1px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+ .daily-forecast-card {
+    border: solid black 1px;
+ }

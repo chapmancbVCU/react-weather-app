@@ -6,6 +6,7 @@ import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import { FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
+import HourlyForecastCard from '../components/HourlyForecastCard.tsx';
 import { HourlyType } from '../types/HourlyType.ts';
 import QuickFavorites from '../components/QuickFavorites.tsx';
 import SearchBar  from '../components/SearchBar.tsx';
@@ -20,6 +21,7 @@ import { Weather } from "../classes/Weather.ts";
  * that are shared between components.
  */
 interface HourlyPageProps {
+    dateTimeUtility: DateTimeUtility;
     weather: Weather;
 }
 
@@ -29,7 +31,7 @@ interface HourlyPageProps {
  * @returns JSX.Element that contains the hourly forecast component.
  */
 // @ts-ignore
-const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
+const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element => {
     const [hourlyForecast, setHourlyForecast] = useState<HourlyType[]>([]);
 
     /**
@@ -135,9 +137,13 @@ const Hourly : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                     <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
                     <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
                 </ForecastHeader>
-                {/* <div>{hourlyForecast.map((hourly: HourlyType, index: number) => (
-                    <p>{hourly.clouds}</p>
-                ))}</div> */}
+                <div className='hourly-forecast-container'>{hourlyForecast.map((hourly: HourlyType, index: number) => (
+                    <HourlyForecastCard key={index}
+                        hourly={hourly}
+                        dateTimeUtility={dateTimeUtility}
+                        weather={weather}>
+                    </HourlyForecastCard>
+                ))}</div>
             </div>
         </div>
     )

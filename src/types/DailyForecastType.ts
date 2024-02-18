@@ -38,9 +38,7 @@ export type DailyForecastType = {
         description: string
         icon: string
     }
-    winds: {
-        deg: number
-        gust: number
-        speed: number
-    }
+    wind_deg: number
+    wind_gust: number
+    wind_speed: number
 }

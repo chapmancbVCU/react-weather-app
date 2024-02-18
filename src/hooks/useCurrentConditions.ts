@@ -123,8 +123,8 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
      */
     const setCurrentConditionsProps = async (): Promise<void> => {
         const currentConditions: string = await freeTierData?.weather[0]?.description!;
-        console.log("current conditions:");
-        console.log(currentConditions);
+        // console.log("current conditions:");
+        // console.log(currentConditions);
         const wordsArray: string[] = currentConditions?.split(" ");
         for(let i: number = 0; i < wordsArray?.length; i++) {
             wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].substring(1);

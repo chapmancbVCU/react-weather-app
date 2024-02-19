@@ -26,7 +26,6 @@ const useDailyForecast = (oneCallData: any) => {
             console.log(`Clouds: ${dailyForecast[i]?.clouds}`);
             console.log(`Description: ${dailyForecast[i]?.description}`);
             console.log(`Dew Point: ${dailyForecast[i]?.dew_point}`);
-            console.log(`Timezone Offset: ${dailyForecast[i]?.timezone_offset}`);
             console.log(`DT: ${dailyForecast[i]?.dt}`);
             console.log(`Feels Like Day: ${dailyForecast[i]?.feels_like.day}`);
             console.log(`Feels Like Eve: ${dailyForecast[i]?.feels_like.eve}`);
@@ -49,6 +48,7 @@ const useDailyForecast = (oneCallData: any) => {
             console.log(`Temp Min: ${dailyForecast[i]?.temp.min}`);
             console.log(`Temp Morn: ${dailyForecast[i]?.temp.morn}`);
             console.log(`Temp Night: ${dailyForecast[i]?.temp.night}`);
+            console.log(`Timezone Offset: ${dailyForecast[i]?.timezone_offset}`);
             console.log(`UVI: ${dailyForecast[i]?.uvi}`);
             console.log(`Weather Description: ${dailyForecast[i]?.weather.description}`);
             console.log(`Weather Icon: ${dailyForecast[i]?.weather.icon}`);
@@ -69,7 +69,6 @@ const useDailyForecast = (oneCallData: any) => {
                 clouds: oneCallData?.daily[i]?.clouds,
                 description: oneCallData?.daily[i]?.weather[0].description,
                 dew_point: oneCallData?.daily[i]?.dew_point,
-                timezone_offset: oneCallData?.timezone_offset,
                 dt: oneCallData?.daily[i]?.dt,
                 feels_like: {
                     day: oneCallData?.daily[i]?.feels_like.day,
@@ -96,6 +95,7 @@ const useDailyForecast = (oneCallData: any) => {
                     morn: oneCallData?.daily[i]?.temp.morn,
                     night: oneCallData?.daily[i]?.temp.night
                 },
+                timezone_offset: oneCallData?.timezone_offset,
                 uvi: oneCallData?.daily[i]?.uvi,
                 weather: {
                     description: oneCallData?.daily[i].weather[0].description,

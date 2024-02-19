@@ -25,17 +25,20 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
 
     const [date, setDate] = useState<string>("");
 
+    const [icon, setIcon] = useState<string>("");
     useEffect(() => {
         setDt(dateTimeUtility.getDateTime(daily.dt, daily.timezone_offset)) 
     }, [daily, weather])
 
     useEffect(() => {
         setDate(dateTimeUtility.getForecastDate(dt));
+        setIcon(`https://openweathermap.org/img/wn/${daily.weather.icon}@2x.png`)
     }, [dt, daily])
     return (
         <div className="daily-forecast-card">
             <h4>{date}</h4>
             <p>{daily.description}</p>
+            <img src={icon} alt={daily.description}></img>
         </div>
     );
 };

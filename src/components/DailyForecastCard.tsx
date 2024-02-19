@@ -52,7 +52,7 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
         setLowTemperature(weather.getTemperature(daily.temp.min));
         setHighTemperature(weather.getTemperature(daily.temp.max));
         setIcon(`https://openweathermap.org/img/wn/${daily.weather.icon}@2x.png`)
-    }, [dt, daily])
+    }, [dt, daily, toggled])
     return (
         <div className="daily-forecast-card">
             <h4>{date}</h4>

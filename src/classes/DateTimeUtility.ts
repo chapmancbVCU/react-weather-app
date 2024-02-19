@@ -43,11 +43,11 @@ export class DateTimeUtility {
      * <day_of_week>, <month> <day_of_month>, <year>.
      * @param {String} localDateTime The local timestamp.
      */
-    getDateInfo(localDateTime: String) {
+    getDateInfo(localDateTime: string): string {
         return this.getDayOfWeek(localDateTime) + ', ' + 
             this.getFullMonthName(localDateTime) + ' ' + 
             this.getDayOfMonth(localDateTime) + ', ' + 
-            localDateTime.slice(12, 16);
+            localDateTime?.slice(12, 16);
     }
 
 
@@ -57,10 +57,10 @@ export class DateTimeUtility {
      * an ISO string.
      * @returns The day of month contained in ISO timestamp string.
      */
-    getDayOfMonth(dateTimeStamp: String) {
-        let dayOfMonth:any = dateTimeStamp.slice(5, 7);
+    getDayOfMonth(dateTimeStamp: string): string {
+        let dayOfMonth:any = dateTimeStamp?.toString().slice(5, 7);
         if (dayOfMonth < 10) {
-            return dayOfMonth.slice(1, 2);
+            return dayOfMonth?.slice(1, 2);
         } else {
             return dayOfMonth;
         }
@@ -69,19 +69,19 @@ export class DateTimeUtility {
 
     /**
      * Returns the full day of the week using the ISO string as a parameter.
-     * @param {String} dateTimeStamp Date and time information in the form of 
+     * @param {string} dateTimeStamp Date and time information in the form of 
      * an ISO string.
      * @returns Full day of week name.
      */
-    getDayOfWeek(dateTimeStamp: String): String|void {
+    getDayOfWeek(dateTimeStamp: string): string|void {
         let days = [['Sunday', 'Sun'], ['Monday', 'Mon'], ['Tuesday', 'Tue'],
             ['Wednesday', 'Wed'], ['Thursday', 'Thu'], ['Friday', 'Fri'],
             ['Saturday', 'Sat']];
 
-        let dayOfWeek = dateTimeStamp.slice(0, 3);
+        let dayOfWeek = dateTimeStamp?.toString().slice(0, 3);
         for (let i = 0; i < days.length; i++) {
-            if (dayOfWeek.includes(days[i][1])) {
-                return dayOfWeek.replace(days[i][1], days[i][0]);
+            if (dayOfWeek?.includes(days[i][1])) {
+                return dayOfWeek?.replace(days[i][1], days[i][0]);
             }
         }
     }
@@ -94,7 +94,8 @@ export class DateTimeUtility {
      * @returns String in the following format: <day of week>, <month> 
      * <day of month>.
      */
-    getForecastDate(dateTimeStamp: String) {
+    getForecastDate(dateTimeStamp: string) {
+        console.log("local" + dateTimeStamp)
         return this.getDayOfWeek(dateTimeStamp) + ", " + 
             this.getFullMonthName(dateTimeStamp) + " " + 
             this.getDayOfMonth(dateTimeStamp);
@@ -107,17 +108,17 @@ export class DateTimeUtility {
      * an ISO string.
      * @returns Full name of the month.
      */
-    getFullMonthName(dateTimeStamp: String) {
+    getFullMonthName(dateTimeStamp: string) {
         let months = [['January', 'Jan'], ['February', 'Feb'],
             ['March', 'Mar'], ['April', 'Apr'], ['May', 'May'],
             ['June', 'Jun'], ['July', 'Jul'], ['August', 'Aug'],
             ['September', 'Sep'], ['October', 'Oct'], ['November', 'Nov'],
             ['December', 'Dec']];
 
-        let monthName = dateTimeStamp.slice(8, 11);
+        let monthName = dateTimeStamp?.toString().slice(8, 11);
         for (let i = 0; i < months.length; i++) {
-            if (monthName.includes(months[i][1])) {
-                return monthName.replace(months[i][1], months[i][0]);
+            if (monthName?.includes(months[i][1])) {
+                return monthName?.replace(months[i][1], months[i][0]);
             }
         }
     }

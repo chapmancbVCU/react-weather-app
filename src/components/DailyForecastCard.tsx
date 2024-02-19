@@ -5,7 +5,7 @@
  */
 import "../css/dailyForecast.css";
 import { DateTimeUtility } from "../classes/DateTimeUtility";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 import { DailyForecastType } from "../types/DailyForecastType";
 
@@ -20,9 +20,21 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
         dateTimeUtility, 
         weather
     }): JSX.Element => {
+
+    const [dt, setDt] = useState<string>("");
+
+    const [date, setDate] = useState<string>("");
+
+    useEffect(() => {
+        setDt(dateTimeUtility.getDateTime(daily.dt, daily.timezone_offset)) 
+    }, [daily, weather])
+
+    useEffect(() => {
+        setDate(dateTimeUtility.getForecastDate(dt));
+    }, [dt, daily])
     return (
         <div className="daily-forecast-card">
-            {daily.clouds}
+            <h4>{date}</h4>
         </div>
     );
 };

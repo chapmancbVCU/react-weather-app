@@ -33,6 +33,7 @@ export type DailyForecastType = {
         morn: number
         night: number
     }
+    timezone_offset: number
     uvi: number
     weather: {
         description: string

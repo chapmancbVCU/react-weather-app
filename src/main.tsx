@@ -61,12 +61,14 @@ const router = createBrowserRouter([
             },
                 {
                 path: "/react-weather-app/daily",
-                element: <Daily weather={weather}
+                element: <Daily  dateTimeUtility={dateTimeUtility}
+                    weather={weather}
                 />,
             },
             {
                 path: "/react-weather-app/hourly",
-                element: <Hourly weather={weather}
+                element: <Hourly  dateTimeUtility={dateTimeUtility}
+                    weather={weather}
                 />,
             },
             {

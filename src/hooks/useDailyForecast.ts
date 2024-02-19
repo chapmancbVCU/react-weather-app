@@ -26,6 +26,7 @@ const useDailyForecast = (oneCallData: any) => {
             console.log(`Clouds: ${dailyForecast[i]?.clouds}`);
             console.log(`Description: ${dailyForecast[i]?.description}`);
             console.log(`Dew Point: ${dailyForecast[i]?.dew_point}`);
+            console.log(`Timezone Offset: ${dailyForecast[i]?.timezone_offset}`);
             console.log(`DT: ${dailyForecast[i]?.dt}`);
             console.log(`Feels Like Day: ${dailyForecast[i]?.feels_like.day}`);
             console.log(`Feels Like Eve: ${dailyForecast[i]?.feels_like.eve}`);
@@ -68,6 +69,7 @@ const useDailyForecast = (oneCallData: any) => {
                 clouds: oneCallData?.daily[i]?.clouds,
                 description: oneCallData?.daily[i]?.weather[0].description,
                 dew_point: oneCallData?.daily[i]?.dew_point,
+                timezone_offset: oneCallData?.timezone_offset,
                 dt: oneCallData?.daily[i]?.dt,
                 feels_like: {
                     day: oneCallData?.daily[i]?.feels_like.day,

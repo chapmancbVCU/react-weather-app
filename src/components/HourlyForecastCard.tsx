@@ -5,7 +5,7 @@
  */
 import { DateTimeUtility } from "../classes/DateTimeUtility";
 import "../css/hourlyForecast.css";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { HourlyType } from "../types/HourlyType";
 import { Weather } from "../classes/Weather";
 
@@ -20,9 +20,25 @@ const HourlyForecastCard : FC<HourlyForecastCardProps> = ({
         dateTimeUtility, 
         weather
     }): JSX.Element => {
+
+    const [dt, setDt] = useState<string>("");
+
+    const [date, setDate] = useState<string>("");
+
+    const [time, setTime] = useState<string>("");
+
+    useEffect(() => {
+        setDt(dateTimeUtility.getDateTime(hourly.dt, hourly.timezone_offset)) 
+    }, [hourly, weather])
+
+    useEffect(() => {
+        setDate(dateTimeUtility.getForecastDate(dt));
+        setTime(dateTimeUtility.getTimeInfo(dt));
+    }, [dt, hourly])
     return (
         <div className="hourly-forecast-card">
-            {hourly.clouds}
+            <p>{date}</p>
+            <p>{time}</p>
         </div>
     );
 };

@@ -81,9 +81,6 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                         handleToggleChange={handleToggleChange}
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Hourly Forecast for {typeof city === 'string' ? city : null}</h2>
-                    <h3>Free Tier Data</h3>
-                    <p>clouds: {freeTierData && freeTierData.clouds.all}</p>
-                    <p>{typeof oneCallData && oneCallData?.current.clouds}</p>
                 </ForecastHeader>
                 <div className='hourly-forecast-container'>{hourlyForecast.map((hourly: HourlyType, index: number) => (
                     <HourlyForecastCard key={index}

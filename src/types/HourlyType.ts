@@ -13,6 +13,7 @@ export type HourlyType = {
     pressure: number
     temp: number
     uvi: number
+    timezone_offset: number
     visibility: number
     weather: {
         description: string

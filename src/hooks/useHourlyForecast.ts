@@ -25,6 +25,7 @@ const useHourlyForecast = (oneCallData: any) => {
             console.log("Visibility: " + hourlyForecast[i]?.visibility);
             console.log(`Description: ${hourlyForecast[i]?.weather.description}`);
             console.log(`Icon: ${hourlyForecast[i]?.weather.icon}`);
+            console.log(`Timezone Offset: ${hourlyForecast[i]?.timezone_offset}`);
             console.log("Wind Deg: " + hourlyForecast[i]?.wind_deg);
             console.log("Wind Gust: " + hourlyForecast[i]?.wind_gust);
             console.log("Wind Speed: " + hourlyForecast[i]?.wind_speed);
@@ -50,6 +51,7 @@ const useHourlyForecast = (oneCallData: any) => {
                 pressure: oneCallData?.hourly[i]?.pressure,
                 temp: oneCallData?.hourly[i]?.temp,
                 uvi: oneCallData?.hourly[i]?.uvi,
+                timezone_offset: oneCallData?.timezone_offset,
                 visibility: oneCallData?.hourly[i]?.visibility,
                 weather: {
                     description: oneCallData?.hourly[i].weather[0].description,

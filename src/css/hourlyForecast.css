@@ -13,5 +13,7 @@
  }
 
  .hourly-forecast-card {
+   text-align: center;
     border: solid black 1px;
+    min-width: 250px;
  }

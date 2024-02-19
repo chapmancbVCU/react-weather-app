@@ -51,15 +51,6 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
-
-    /** 
-     * Hook for dailyForecastType
-     */
-    const {
-        dailyForecast
-    } = useDailyForecast(oneCallData)
-
-    const [selectedCard, setSelectedCard] = useState<DailyForecastType>();
     
     /**
      * Set toggle switch for units.
@@ -69,19 +60,14 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         toggled,
     } = useUnitsToggle(weather);
 
-    const onCardClick = (e: number) => {
-        setSelectedCard(dailyForecast[e]);
-    }
-
-    const [selTemp, setSelTemp] = useState<number>();
-    
-    useEffect(() => {
-        setSelectedCard(dailyForecast[0])
-    }, [dailyForecast]);
-
-    useEffect(() => {
-        setSelTemp(weather.getTemperature(selectedCard?.temp.day));
-    }, [selectedCard, toggled]);
+    /** 
+     * Hook for dailyForecastType
+     */
+    const {
+        dailyForecast,
+        onCardClick,
+        selectedCardTemp
+    } = useDailyForecast(oneCallData, toggled, weather);
 
     return (
         <div className={conditionsClassName}>
@@ -112,7 +98,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 ))}</div>
                 <hr className='hr-border'></hr>
                 <div>
-                    {selTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                    {selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
  * data.
  * @author Chad Chapman
  */
+import { Weather } from "../classes/Weather";
 import { DailyForecastType } from "../types/DailyForecastType";
 import { useEffect, useState } from "react";
 
@@ -11,12 +12,15 @@ import { useEffect, useState } from "react";
  * @param oneCallData Use this data to populate array of DailyForecastType.
  * @returns { DailyForecastType[] } Array of Daily/forecastType
  */
-const useDailyForecast = (oneCallData: any) => {
+const useDailyForecast = (oneCallData: any, toggled: boolean, weather: Weather) => {
     /**
      * @prop Describes array for DailyForecastCardType.
      */
     const [dailyForecast, setDailyForecast] = useState<DailyForecastType[]>([]);
 
+    const [selectedCard, setSelectedCard] = useState<DailyForecastType>();
+
+    const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
     /**
      * Function for logging test data for debugging".
      */
@@ -58,6 +62,11 @@ const useDailyForecast = (oneCallData: any) => {
             console.log("-------------------");
         }
     }
+
+    const onCardClick = (e: number) => {
+        setSelectedCard(dailyForecast[e]);
+    }
+
     /**
      * Setup DailyForecastCard array for handling data for daily forecast 
      * cards.
@@ -115,11 +124,18 @@ const useDailyForecast = (oneCallData: any) => {
     }, [oneCallData]);
 
     useEffect(() => {
+        setSelectedCard(dailyForecast[0]);
         logData();
     }, [dailyForecast]);
 
+    useEffect(() => {
+        setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
+    }, [selectedCard, toggled]);
+
     return {
-        dailyForecast
+        dailyForecast,
+        onCardClick,
+        selectedCardTemp
     }
 }
 

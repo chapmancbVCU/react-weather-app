@@ -23,4 +23,15 @@
    border: 3px solid rgb(57, 169, 244);
    border-radius: 5px;
    min-width: 250px;
- }
+}
+
+.daily-forecast-card h4,
+.daily-forecast-card p {
+   margin-top: 5px;
+   margin-bottom: 5px;
+}
+
+.hr-border {
+   border: solid 3px rgb(57, 169, 244);
+   margin-bottom: 10px;
+}

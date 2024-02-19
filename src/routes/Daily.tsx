@@ -83,8 +83,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         handleToggleChange={handleToggleChange}
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Your 7 Day Forecast for {typeof city === 'string' ? city : null}</h2>
-                    <h3>Free Tier Data</h3>
                 </ForecastHeader>
+                <hr className='hr-border'></hr>
                 <div className='daily-forecast-container'>{dailyForecast.map((daily: DailyForecastType, index: number) => (
                     <DailyForecastCard key={index}
                         daily={daily}
@@ -92,6 +92,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         weather={weather}>
                     </DailyForecastCard>
                 ))}</div>
+                <hr className='hr-border'></hr>
             </div>
         </div>
     )

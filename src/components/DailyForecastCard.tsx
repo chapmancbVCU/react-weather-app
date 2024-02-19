@@ -35,6 +35,7 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
     return (
         <div className="daily-forecast-card">
             <h4>{date}</h4>
+            <p>{daily.description}</p>
         </div>
     );
 };

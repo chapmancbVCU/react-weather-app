@@ -31,9 +31,11 @@
    min-width: 250px;
 }
 
-.daily-forecast-card:hover {
+.daily-forecast-card:hover,
+.daily-forecast-card:focus {
    border: 3px solid rgb(27, 80, 114);
 }
+
 
 .daily-forecast-card h4,
 .daily-forecast-card p {

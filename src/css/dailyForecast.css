@@ -2,6 +2,11 @@
  * DESCRIPTION: Stylesheet daily forecast content.                            *
  *      AUTHOR: Chad Chapman                                                  *
  *****************************************************************************/
+.card-temps {
+   display: flex;
+
+}
+
 .daily-forecast-container {
    display: flex;
    flex-direction: row;
@@ -25,6 +30,10 @@
    min-width: 250px;
 }
 
+.daily-forecast-card:hover {
+   border: 3px solid rgb(27, 80, 114);
+}
+
 .daily-forecast-card h4,
 .daily-forecast-card p {
    margin-top: 5px;
@@ -37,5 +46,13 @@
 
    margin-left: auto;
    margin-right: auto;
+   margin-bottom: 15px;
+}
+
+.temperature {
+   width: 50%;
+}
+
+.temperature h5 {
    margin-bottom: 15px;
 }

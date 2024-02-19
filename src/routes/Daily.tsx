@@ -87,12 +87,13 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 <hr className='hr-border'></hr>
                 <div className='daily-forecast-container'>{dailyForecast.map((daily: DailyForecastType, index: number) => (
                     <DailyForecastCard key={index}
-                        daily={daily}
-                        dateTimeUtility={dateTimeUtility}
-                        weather={weather}>
+                    daily={daily}
+                    dateTimeUtility={dateTimeUtility}
+                    weather={weather} index={index}>
                     </DailyForecastCard>
                 ))}</div>
                 <hr className='hr-border'></hr>
+                
             </div>
         </div>
     )

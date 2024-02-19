@@ -2,18 +2,19 @@
  * DESCRIPTION: Stylesheet hourly forecast content.                           *
  *      AUTHOR: Chad Chapman                                                  *
  *****************************************************************************/
- .hourly-forecast-container {
-    display: flex;
-    flex-direction: row;
+.hourly-forecast-container {
+   display: flex;
+   flex-direction: row;
+   gap: 5px;
 
-    border: solid black 1px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
- }
+   border: solid black 1px;
+   width: 90%;
+   margin-left: auto;
+   margin-right: auto;
+}
 
- .hourly-forecast-card {
+.hourly-forecast-card {
    text-align: center;
-    border: solid black 1px;
-    min-width: 250px;
+   border: solid black 1px;
+   min-width: 250px;
  }

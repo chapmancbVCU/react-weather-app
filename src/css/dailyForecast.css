@@ -26,6 +26,7 @@
    margin: 5px;
    text-align: center;
    border: 3px solid rgb(57, 169, 244);
+   background-color: rgb(111, 200, 230);
    border-radius: 5px;
    min-width: 250px;
 }

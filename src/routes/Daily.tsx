@@ -7,7 +7,7 @@ import DailyForecastCard from '../components/DailyForecastCard.tsx';
 import { DailyForecastType } from '../types/DailyForecastType.ts';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
 import '../css/dailyForecast.css';
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import QuickFavorites from '../components/QuickFavorites.tsx';
 import SearchBar  from '../components/SearchBar.tsx';
@@ -46,6 +46,12 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onSubmit
     } = useForecast(weather);
 
+    /**
+     * Used to set background of app based on current conditions based 
+     * on free tier data.
+     */
+    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
+
     /** 
      * Hook for dailyForecastType
      */
@@ -53,12 +59,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         dailyForecast
     } = useDailyForecast(oneCallData)
 
-    /**
-     * Used to set background of app based on current conditions based 
-     * on free tier data.
-     */
-    const { conditionsClassName } =  useSetBackground(freeTierData, weather);
-
+    const [selectedCard, setSelectedCard] = useState<DailyForecastType>();
+    
     /**
      * Set toggle switch for units.
      */
@@ -66,6 +68,20 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         temperatureUnitsLabel,
         toggled,
     } = useUnitsToggle(weather);
+
+    const onCardClick = (e: number) => {
+        setSelectedCard(dailyForecast[e]);
+    }
+
+    const [selTemp, setSelTemp] = useState<number>();
+    
+    useEffect(() => {
+        setSelectedCard(dailyForecast[0])
+    }, [dailyForecast]);
+
+    useEffect(() => {
+        setSelTemp(weather.getTemperature(selectedCard?.temp.day));
+    }, [selectedCard, toggled]);
 
     return (
         <div className={conditionsClassName}>
@@ -88,12 +104,16 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 <div className='daily-forecast-container'>{dailyForecast.map((daily: DailyForecastType, index: number) => (
                     <DailyForecastCard key={index}
                     daily={daily}
+                    onCardClick={onCardClick}
                     dateTimeUtility={dateTimeUtility}
-                    weather={weather} index={index}>
+                    weather={weather} 
+                    index={index}>
                     </DailyForecastCard>
                 ))}</div>
                 <hr className='hr-border'></hr>
-                
+                <div>
+                    {selTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                </div>
             </div>
         </div>
     )

@@ -309,7 +309,7 @@ export class Weather {
                 if(this.getUnits() == 'IMPERIAL') {
                     return ((temperature * 1.8) + 32).toFixed(0)!;
                 } else {
-                    return temperature;
+                    return temperature.toFixed(0)!;
                 }
             }
         }

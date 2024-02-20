@@ -60,7 +60,6 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
             <p>{daily.description}</p>
             <img src={icon} alt={daily.description}></img>
             <div className="card-temps">
-                <div>{index}</div>
                 <div className="temperature">
                     <h2>{lowTemperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h2>
                     <h5>Low</h5>

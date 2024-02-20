@@ -51,6 +51,13 @@
    margin-bottom: 15px;
 }
 
+.selected-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .selected-daily-forecast {
     margin-top: 15px;
     margin-left: auto;
@@ -59,8 +66,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 80%
+}
+
+.selected-daily-forecast h4 {
+    text-align: center;
 }
 
 .selected-daily-forecast .selected-summary {
@@ -78,5 +88,8 @@
 }
 
 @media only screen and (min-width: 900px) {
-
+    .selected-card-content {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }

@@ -68,7 +68,9 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedHighTemp,
         selectedIcon,
+        selectedLowTemp,
         selectedSummary
     } = useDailyForecast(dateTimeUtility, oneCallData, toggled, weather);
 
@@ -106,6 +108,16 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     <div className='selected-card-content'>
                         <img src={`https://openweathermap.org/img/wn/${selectedIcon}@2x.png`}></img>
                         <h4>{selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
+                    </div>
+                    <div className='selected-card-content'>
+                        <div>
+                            <h4>{selectedLowTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
+                            <h4>Low</h4>
+                        </div>
+                        <div>
+                            <h4>{selectedHighTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
+                            <h4>High</h4>
+                        </div>
                     </div>
                 </div>
             </div>

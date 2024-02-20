@@ -41,9 +41,19 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
 
     /**
+     * @prop High temperature for selected card.
+     */
+    const [selectedHighTemp, setSelectedHighTemp] = useState<number>();
+
+    /**
      * @prop Icon for selected card.
      */
     const [selectedIcon, setSelectedIcon] = useState<string>();
+
+    /**
+     * @prop Low temperature for selected card.
+     */
+    const [selectedLowTemp, setSelectedLowTemp] = useState<number>();
 
     /**
      * @prop The summary for selected card.
@@ -160,17 +170,23 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     useEffect(() => {
         setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
         setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
+
+        // Temperatures
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
+        setSelectedHighTemp(weather.getTemperature(selectedCard?.temp.max));
+        setSelectedLowTemp(weather.getTemperature(selectedCard?.temp.min));
         setSelectedIcon(selectedCard?.icon);
         setSelectedSummary(selectedCard?.summary!);
-    }, [selectedCard, toggled, selectedDt, selectedSummary]);
+    }, [selectedCard, toggled, selectedDt]);
 
     return {
         dailyForecast,
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedHighTemp,
         selectedIcon,
+        selectedLowTemp,
         selectedSummary
     }
 }

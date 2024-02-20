@@ -33,7 +33,7 @@ export class DateTimeUtility {
      * @param {String} timezoneOffset The timezone offset.
      * @returns A string containing a timestamp.
      */
-    getDateTime(unixTime:Number, timezoneOffset:any) {
+    getDateTime(unixTime:number, timezoneOffset:any) {
         return new Date((timezoneOffset + unixTime) * 1000).toUTCString();
     }
 

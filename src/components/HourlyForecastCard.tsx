@@ -29,7 +29,7 @@ const HourlyForecastCard : FC<HourlyForecastCardProps> = ({
 
     useEffect(() => {
         setDt(dateTimeUtility.getDateTime(hourly.dt, hourly.timezone_offset)) 
-    }, [hourly, weather])
+    }, [hourly])
 
     useEffect(() => {
         setDate(dateTimeUtility.getForecastDate(dt));

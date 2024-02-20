@@ -5,7 +5,7 @@
  */
 import "../css/dailyForecast.css";
 import { DateTimeUtility } from "../classes/DateTimeUtility";
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 import { DailyForecastType } from "../types/DailyForecastType";
 import useUnitsToggle from "../hooks/useUnitsToggle";

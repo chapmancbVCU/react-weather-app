@@ -39,7 +39,12 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      * @prop The temperature for the selected card.
      */
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
-    
+
+    /**
+     * @prop The summary for selected card.
+     */
+    const[selectedSummary, setSelectedSummary] = useState<string>("");
+
     /**
      * Function for logging test data for debugging".
      */
@@ -151,13 +156,15 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
         setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
-    }, [selectedCard, toggled, selectedDt]);
+        setSelectedSummary(selectedCard?.summary!);
+    }, [selectedCard, toggled, selectedDt, selectedSummary]);
 
     return {
         dailyForecast,
         onCardClick,
         selectedCardTemp,
-        selectedDate
+        selectedDate,
+        selectedSummary
     }
 }
 

@@ -67,7 +67,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         dailyForecast,
         onCardClick,
         selectedCardTemp,
-        selectedDate
+        selectedDate,
+        selectedSummary
     } = useDailyForecast(dateTimeUtility, oneCallData, toggled, weather);
 
     return (
@@ -99,7 +100,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 ))}</div>
                 <hr className='hr-border'></hr>
                 <div className='selected-daily-forecast'>
-                    {selectedDate}
+                    <h4>{selectedDate}</h4>
+                    <div className='selected-summary'>{selectedSummary}</div>
                 </div>
             </div>
         </div>

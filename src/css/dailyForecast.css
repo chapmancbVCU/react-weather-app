@@ -4,7 +4,6 @@
  *****************************************************************************/
 .card-temps {
    display: flex;
-
 }
 
 .daily-forecast-container {
@@ -56,7 +55,17 @@
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    /* width: 80% */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%
+}
+
+.selected-daily-forecast .selected-summary {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .temperature {
@@ -65,4 +74,8 @@
 
 .temperature h5 {
    margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 900px) {
+
 }

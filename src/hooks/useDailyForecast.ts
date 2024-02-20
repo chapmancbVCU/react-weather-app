@@ -3,24 +3,43 @@
  * data.
  * @author Chad Chapman
  */
-import { Weather } from "../classes/Weather";
 import { DailyForecastType } from "../types/DailyForecastType";
+import { DateTimeUtility } from "../classes/DateTimeUtility";
 import { useEffect, useState } from "react";
+import { Weather } from "../classes/Weather";
 
 /**
  * Functions supporting DailyForecastType Array.
  * @param oneCallData Use this data to populate array of DailyForecastType.
  * @returns { DailyForecastType[] } Array of Daily/forecastType
  */
-const useDailyForecast = (oneCallData: any, toggled: boolean, weather: Weather) => {
+const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, toggled: boolean, weather: Weather) => {
     /**
      * @prop Describes array for DailyForecastCardType.
      */
     const [dailyForecast, setDailyForecast] = useState<DailyForecastType[]>([]);
 
+    /**
+     * @prop The selected card which is of type DailyForecastType.
+     */
     const [selectedCard, setSelectedCard] = useState<DailyForecastType>();
 
+    /**
+     * @prop Date for selected card on format <Day of week>, <Month> 
+     * <Day of Month>
+     */
+    const [selectedDate, setSelectedDate] = useState<string>("");
+
+    /**
+     * @prop String for date converted from Unix time. 
+     */
+    const [selectedDt, setSelectedDt] = useState<string>("");
+
+    /**
+     * @prop The temperature for the selected card.
+     */
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
+    
     /**
      * Function for logging test data for debugging".
      */
@@ -129,13 +148,16 @@ const useDailyForecast = (oneCallData: any, toggled: boolean, weather: Weather) 
     }, [dailyForecast]);
 
     useEffect(() => {
+        setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
+        setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
-    }, [selectedCard, toggled]);
+    }, [selectedCard, toggled, selectedDt]);
 
     return {
         dailyForecast,
         onCardClick,
-        selectedCardTemp
+        selectedCardTemp,
+        selectedDate
     }
 }
 

@@ -66,8 +66,9 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     const {
         dailyForecast,
         onCardClick,
-        selectedCardTemp
-    } = useDailyForecast(oneCallData, toggled, weather);
+        selectedCardTemp,
+        selectedDate
+    } = useDailyForecast(dateTimeUtility, oneCallData, toggled, weather);
 
     return (
         <div className={conditionsClassName}>
@@ -98,7 +99,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 ))}</div>
                 <hr className='hr-border'></hr>
                 <div className='selected-daily-forecast'>
-                    {selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                    {selectedDate}
                 </div>
             </div>
         </div>

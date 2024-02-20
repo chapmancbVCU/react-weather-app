@@ -97,7 +97,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     </DailyForecastCard>
                 ))}</div>
                 <hr className='hr-border'></hr>
-                <div>
+                <div className='selected-daily-forecast'>
                     {selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
                 </div>
             </div>

@@ -52,6 +52,13 @@
    margin-bottom: 15px;
 }
 
+.selected-daily-forecast {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 80% */
+}
+
 .temperature {
    width: 50%;
 }

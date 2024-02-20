@@ -105,7 +105,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     <div className='selected-summary'>{selectedSummary}</div>
                     <div className='selected-card-content'>
                         <img src={`https://openweathermap.org/img/wn/${selectedIcon}@2x.png`}></img>
-                        <div>{selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        <h4>{selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
                     </div>
                 </div>
             </div>

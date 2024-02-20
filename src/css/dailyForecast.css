@@ -60,12 +60,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%
+    width: 80%
 }
 
 .selected-daily-forecast .selected-summary {
     margin-top: 10px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .temperature {

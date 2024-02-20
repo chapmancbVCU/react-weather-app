@@ -41,6 +41,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
 
     /**
+     * @prop Icon for selected card.
+     */
+    const [selectedIcon, setSelectedIcon] = useState<string>();
+
+    /**
      * @prop The summary for selected card.
      */
     const[selectedSummary, setSelectedSummary] = useState<string>("");
@@ -156,6 +161,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
         setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
+        setSelectedIcon(selectedCard?.icon);
         setSelectedSummary(selectedCard?.summary!);
     }, [selectedCard, toggled, selectedDt, selectedSummary]);
 
@@ -164,6 +170,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedIcon,
         selectedSummary
     }
 }

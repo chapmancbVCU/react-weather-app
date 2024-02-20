@@ -46,14 +46,14 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
     
     useEffect(() => {
         setDt(dateTimeUtility.getDateTime(daily.dt, daily.timezone_offset)) 
-    }, [daily, weather])
+    }, [daily])
 
     useEffect(() => {
         setDate(dateTimeUtility.getForecastDate(dt));
         setLowTemperature(weather.getTemperature(daily.temp.min));
         setHighTemperature(weather.getTemperature(daily.temp.max));
         setIcon(`https://openweathermap.org/img/wn/${daily.weather.icon}@2x.png`)
-    }, [dt, daily, toggled])
+    }, [dt, toggled])
     return (
         <button className="daily-forecast-card" onClick={() => onCardClick(index)}>
             <h4>{date}</h4>

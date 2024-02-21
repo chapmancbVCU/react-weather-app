@@ -40,11 +40,29 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      */
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
 
+    /**
+     * @prop The evening temperature for the selected card.
+     */
     const [selectedEveTemp, setSelectedEveTemp] = useState<number>();
 
+    /**
+     * @prop The daytime feels like temperature for the selected card.
+     */
     const [selectedFLDayTemp, setSelectedFLDayTemp] = useState<number>();
+
+    /**
+     * @prop The evening feels like temperature for the selected card.
+     */
     const [selectedFLEveTemp, setSelectedFLEveTemp] = useState<number>();
+
+    /**
+     * @prop The morning feels like temperature for the selected card.
+     */
     const [selectedFLMornTemp, setSelectedFLMornTemp] = useState<number>();
+
+    /**
+     * @prop The night time feels like temperature for the selected card.
+     */
     const [selectedFLNightTemp, setSelectedFLNightTemp] = useState<number>();
 
     /**
@@ -52,8 +70,14 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      */
     const [selectedHighTemp, setSelectedHighTemp] = useState<number>();
 
+    /**
+     * @prop Morning temperature for the selected card.
+     */
     const [selectedMornTemp, setSelectedMornTemp] = useState<number>();
 
+    /**
+     * @prop Night time temperature for the selected card.
+     */
     const [selectedNightTemp, setSelectedNightTemp] = useState<number>();
 
     /**
@@ -85,6 +109,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      * @prop Wind speed for selected card.
      */
     const [selectedWindSpeed, setSelectedWindSpeed] = useState<string>("");
+
     /**
      * Function for logging test data for debugging".
      */
@@ -127,6 +152,10 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         }
     }
 
+    /**
+     * Event listener that sets value of selected card when a card is clicked.
+     * @param e Value associated with event.
+     */
     const onCardClick = (e: number) => {
         setSelectedCard(dailyForecast[e]);
     }

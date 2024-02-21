@@ -42,6 +42,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
 
     const [selectedEveTemp, setSelectedEveTemp] = useState<number>();
 
+    const [selectedFLDayTemp, setSelectedFLDayTemp] = useState<number>();
+    const [selectedFLEveTemp, setSelectedFLEveTemp] = useState<number>();
+    const [selectedFLMornTemp, setSelectedFLMornTemp] = useState<number>();
+    const [selectedFLNightTemp, setSelectedFLNightTemp] = useState<number>();
+
     /**
      * @prop High temperature for selected card.
      */
@@ -199,6 +204,12 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedMornTemp(weather.getTemperature(selectedCard?.temp.morn));
         setSelectedNightTemp(weather.getTemperature(selectedCard?.temp.night));
 
+        // Feels like
+        setSelectedFLDayTemp(weather.getTemperature(selectedCard?.feels_like.day));
+        setSelectedFLEveTemp(weather.getTemperature(selectedCard?.feels_like.eve));
+        setSelectedFLMornTemp(weather.getTemperature(selectedCard?.feels_like.morn));
+        setSelectedFLNightTemp(weather.getTemperature(selectedCard?.feels_like.night));
+
         // Winds
         setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
         setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!));
@@ -212,6 +223,10 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedFLDayTemp,
+        selectedFLEveTemp,
+        selectedFLMornTemp,
+        selectedFLNightTemp,
         selectedEveTemp,
         selectedHighTemp,
         selectedMornTemp,

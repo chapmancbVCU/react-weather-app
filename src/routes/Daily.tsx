@@ -68,6 +68,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedFLDayTemp,
+        selectedFLEveTemp,
+        selectedFLMornTemp,
+        selectedFLNightTemp,
         selectedEveTemp,
         selectedHighTemp,
         selectedMornTemp,
@@ -109,7 +113,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                 ))}</div>
                 <hr className='hr-border'></hr>
                 <div className='selected-daily-forecast'>
-                    <h4>{selectedDate}</h4>
+                    <h3>{selectedDate}</h3>
                     <div className='selected-summary'>{selectedSummary}</div>
                     <div className='selected-card-content'>
                         <img src={`https://openweathermap.org/img/wn/${selectedIcon}@2x.png`}></img>
@@ -136,7 +140,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                     </div>
                 </div>
                 <hr className='hr-border'></hr>
-                <h4>Temperature Ranges</h4>
+                <h3>Temperature Ranges</h3>
                 <div className='current-conditions-container today-conditions'>
                     <div className='additional-information-item'>
                         <h4>Morning</h4>
@@ -163,6 +167,34 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         </div>
                     </div>
                 </div>
+                <hr className='hr-border'></hr>
+                <h3>Feels Like Temperature Ranges</h3>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='additional-information-item'>
+                        <h4>Morning</h4>
+                        <div className='additional-information-data'>
+                            {selectedFLMornTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Day</h4>
+                        <div className='additional-information-data'>
+                            {selectedFLDayTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Evening</h4>
+                        <div className='additional-information-data'>
+                            {selectedFLEveTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Night</h4>
+                        <div className='additional-information-data'>
+                            {selectedFLNightTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                </div>      
             </div>
         </div>
     )

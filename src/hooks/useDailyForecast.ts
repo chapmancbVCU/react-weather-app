@@ -58,8 +58,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     /**
      * @prop The summary for selected card.
      */
-    const[selectedSummary, setSelectedSummary] = useState<string>("");
+    const [selectedSummary, setSelectedSummary] = useState<string>("");
 
+    const [selectedWindDegrees, setSelectedWindDegrees] = useState<number>();
+    const [selectedWindGust, setSelectedWindGust] = useState<string>("");
+    const [selectedWindSpeed, setSelectedWindSpeed] = useState<string>("");
     /**
      * Function for logging test data for debugging".
      */
@@ -175,6 +178,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
         setSelectedHighTemp(weather.getTemperature(selectedCard?.temp.max));
         setSelectedLowTemp(weather.getTemperature(selectedCard?.temp.min));
+
+        // Winds
+        setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
+        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!));
+        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!));
         setSelectedIcon(selectedCard?.icon);
         setSelectedSummary(selectedCard?.summary!);
     }, [selectedCard, toggled, selectedDt]);
@@ -187,7 +195,10 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         selectedHighTemp,
         selectedIcon,
         selectedLowTemp,
-        selectedSummary
+        selectedSummary,
+        selectedWindGust,
+        selectedWindSpeed,
+        selectedWindDegrees,
     }
 }
 

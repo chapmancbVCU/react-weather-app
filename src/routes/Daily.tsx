@@ -2,7 +2,7 @@
  * @file Contains functions related to rendering the daily forecast.
  * @author Chad Chapman
  */
-import '../css/currentConditionsBackground.css';
+//import '../css/currentConditionsBackground.css';
 import DailyForecastCard from '../components/DailyForecastCard.tsx';
 import { DailyForecastType } from '../types/DailyForecastType.ts';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
@@ -71,7 +71,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         selectedHighTemp,
         selectedIcon,
         selectedLowTemp,
-        selectedSummary
+        selectedSummary,
+        selectedWindDegrees,
+        selectedWindGust,
+        selectedWindSpeed
     } = useDailyForecast(dateTimeUtility, oneCallData, toggled, weather);
 
     return (
@@ -110,13 +113,22 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         <h4>{selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
                     </div>
                     <div className='selected-card-content'>
-                        <div>
+                        <div className='daily-conditions'>
                             <h4>{selectedLowTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
                             <h4>Low</h4>
                         </div>
-                        <div>
+                        <div className='daily-conditions'>
                             <h4>{selectedHighTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
                             <h4>High</h4>
+                        </div>
+                        <div className='daily-conditions daily-conditions-info'>
+                            <img className="daily-conditions-icon" src="./icons/weather-windy.png"></img>
+                            <div className='daily-conditions-info-description'>
+                                Winds
+                                <div>{selectedWindSpeed}, {selectedWindDegrees}</div>
+                                Wind Gusts
+                                <div>{selectedWindGust}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

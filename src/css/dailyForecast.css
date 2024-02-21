@@ -6,6 +6,26 @@
    display: flex;
 }
 
+.daily-conditions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.daily-conditions-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.daily-conditions-icon {
+    height: 33px;
+}
+
+.daily-conditions-info-description {
+    margin-left: 10px;
+}
+
 .daily-forecast-container {
    display: flex;
    flex-direction: row;
@@ -88,6 +108,13 @@
 }
 
 @media only screen and (min-width: 900px) {
+    .daily-conditions {
+        margin-top: 0;
+    }
+    .daily-conditions-info {
+        justify-content: flex-start;
+        align-items: center;
+    }
     .selected-card-content {
         flex-direction: row;
         justify-content: space-evenly;

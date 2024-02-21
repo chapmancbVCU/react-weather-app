@@ -40,10 +40,16 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      */
     const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
 
+    const [selectedEveTemp, setSelectedEveTemp] = useState<number>();
+
     /**
      * @prop High temperature for selected card.
      */
     const [selectedHighTemp, setSelectedHighTemp] = useState<number>();
+
+    const [selectedMornTemp, setSelectedMornTemp] = useState<number>();
+
+    const [selectedNightTemp, setSelectedNightTemp] = useState<number>();
 
     /**
      * @prop Icon for selected card.
@@ -60,8 +66,19 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      */
     const [selectedSummary, setSelectedSummary] = useState<string>("");
 
+    /**
+     * @prop Wind degrees for selected card.
+     */
     const [selectedWindDegrees, setSelectedWindDegrees] = useState<number>();
+
+    /**
+     * @prop Wind gust for selected card.
+     */
     const [selectedWindGust, setSelectedWindGust] = useState<string>("");
+
+    /**
+     * @prop Wind speed for selected card.
+     */
     const [selectedWindSpeed, setSelectedWindSpeed] = useState<string>("");
     /**
      * Function for logging test data for debugging".
@@ -176,8 +193,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
 
         // Temperatures
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
+        setSelectedEveTemp(weather.getTemperature(selectedCard?.temp.eve));
         setSelectedHighTemp(weather.getTemperature(selectedCard?.temp.max));
         setSelectedLowTemp(weather.getTemperature(selectedCard?.temp.min));
+        setSelectedMornTemp(weather.getTemperature(selectedCard?.temp.morn));
+        setSelectedNightTemp(weather.getTemperature(selectedCard?.temp.night));
 
         // Winds
         setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
@@ -192,7 +212,10 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedEveTemp,
         selectedHighTemp,
+        selectedMornTemp,
+        selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
         selectedSummary,

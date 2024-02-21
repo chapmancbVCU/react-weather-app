@@ -62,6 +62,11 @@
    margin-bottom: 5px;
 }
 
+h4 {
+    margin-top: 15px;
+    text-align: center;
+}
+
 .hr-border {
    width: 90%;
    border: solid 3px rgb(57, 169, 244);
@@ -79,7 +84,6 @@
 }
 
 .selected-daily-forecast {
-    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
 
@@ -87,10 +91,6 @@
     flex-direction: column;
     justify-content: center;
     width: 90%
-}
-
-.selected-daily-forecast h4 {
-    text-align: center;
 }
 
 .selected-daily-forecast .selected-summary {

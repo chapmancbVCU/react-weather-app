@@ -2,7 +2,7 @@
  * @file Contains functions related to rendering the daily forecast.
  * @author Chad Chapman
  */
-//import '../css/currentConditionsBackground.css';
+import '../css/currentConditionsBackground.css';
 import DailyForecastCard from '../components/DailyForecastCard.tsx';
 import { DailyForecastType } from '../types/DailyForecastType.ts';
 import { DateTimeUtility } from '../classes/DateTimeUtility.ts';
@@ -68,13 +68,16 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         onCardClick,
         selectedCardTemp,
         selectedDate,
+        selectedEveTemp,
         selectedHighTemp,
+        selectedMornTemp,
+        selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
         selectedSummary,
-        selectedWindDegrees,
         selectedWindGust,
-        selectedWindSpeed
+        selectedWindSpeed,
+        selectedWindDegrees,
     } = useDailyForecast(dateTimeUtility, oneCallData, toggled, weather);
 
     return (
@@ -129,6 +132,34 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                                 Wind Gusts
                                 <div>{selectedWindGust}</div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <hr className='hr-border'></hr>
+                <h4>Temperature Ranges</h4>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='additional-information-item'>
+                        <h4>Morning</h4>
+                        <div className='additional-information-data'>
+                            {selectedMornTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Day</h4>
+                        <div className='additional-information-data'>
+                            {selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Evening</h4>
+                        <div className='additional-information-data'>
+                            {selectedEveTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                        </div>
+                    </div>
+                    <div className='additional-information-item'>
+                        <h4>Night</h4>
+                        <div className='additional-information-data'>
+                            {selectedNightTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
                         </div>
                     </div>
                 </div>

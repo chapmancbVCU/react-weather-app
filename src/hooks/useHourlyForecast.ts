@@ -3,10 +3,12 @@
  * data.
  * @author Chad Chapman
  */
+import { DateTimeUtility } from "../classes/DateTimeUtility";
 import { HourlyType } from "../types/HourlyType";
 import { useEffect, useState } from "react";
+import { Weather } from "../classes/Weather";
 
-const useHourlyForecast = (oneCallData: any) => {
+const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, toggled: boolean, weather: Weather) => {
     /**
      * @prop Describes array of HourlyType.
      */
@@ -16,6 +18,19 @@ const useHourlyForecast = (oneCallData: any) => {
      * @prop The selected card which is of type DailyForecastType.
      */
     const [selectedCard, setSelectedCard] = useState<HourlyType>();
+
+    /**
+     * @prop Date for selected card on format <Day of week>, <Month> 
+     * <Day of Month>
+     */
+    const [selectedDate, setSelectedDate] = useState<string>("");
+
+    /**
+     * @prop String for date converted from Unix time. 
+     */
+    const [selectedDt, setSelectedDt] = useState<string>("");
+
+    const [selectedTime, setSelectedTime] = useState<string>("");
 
     const logData = () => {
         console.log("hourly card type");
@@ -86,12 +101,21 @@ const useHourlyForecast = (oneCallData: any) => {
     }, [oneCallData]);
 
     useEffect(() => {
+        setSelectedCard(hourlyForecast[0]);
         logData();
     }, [hourlyForecast]);
 
+    useEffect(() => {
+        setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
+        setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
+        setSelectedTime(dateTimeUtility.getTimeInfo(selectedDt));
+    }, [selectedCard, toggled, selectedDt]);
     return {
         hourlyForecast,
-        onCardClick
+        onCardClick,
+        selectedCard,
+        selectedDate,
+        selectedTime
     }
 }
 

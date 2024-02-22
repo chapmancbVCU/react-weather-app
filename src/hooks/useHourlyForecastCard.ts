@@ -1,7 +1,6 @@
 /**
  * @file Describes functions related hook used for hourly forecast state data
  * on hourly cards.
- * data.
  * @author Chad Chapman
  */
 import { DateTimeUtility } from "../classes/DateTimeUtility";

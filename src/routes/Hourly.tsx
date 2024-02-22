@@ -83,6 +83,7 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                         useUnitsToggle={useUnitsToggle}/>
                     <h2 className='page-title'>Hourly Forecast for {typeof city === 'string' ? city : null}</h2>
                 </ForecastHeader>
+                <hr className='hr-border'></hr>
                 <div className='hourly-forecast-container'>{hourlyForecast.map((hourly: HourlyType, index: number) => (
                     <HourlyForecastCard key={index}
                         hourly={hourly}
@@ -92,6 +93,7 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                         index={index}>
                     </HourlyForecastCard>
                 ))}</div>
+                <hr className='hr-border'></hr>
             </div>
         </div>
     )

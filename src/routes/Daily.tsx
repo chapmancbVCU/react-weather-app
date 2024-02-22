@@ -80,6 +80,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
+        selectedRain,
         selectedSummary,
         selectedUVI,
         selectedWindGust,
@@ -226,6 +227,37 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         <div className='current-conditions-info-description'>
                             Cloudiness
                             <div>{selectedCard?.clouds!} %</div>
+                        </div>
+                    </div>
+                </div>    
+                <hr className='hr-border'></hr>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/humidity.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Humidity
+                            <div>{selectedCard?.humidity} %</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/weather-pouring.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Rain
+                            <div>{selectedRain} mm</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/weather-pouring.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Chance of PPT
+                            <div>{weather.getPressure(selectedCard?.pressure!)}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/moon-rise.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Moon Phase
+                            <div>{selectedCard?.moon_phase!}</div>
                         </div>
                     </div>
                 </div>     

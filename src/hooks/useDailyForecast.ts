@@ -96,6 +96,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     const [selectedLowTemp, setSelectedLowTemp] = useState<number>();
 
     /**
+     * @prop Rain volume in mm.
+     */
+    const [selectedRain, setSelectedRain] = useState<number>();
+
+    /**
      * @prop The summary for selected card.
      */
     const [selectedSummary, setSelectedSummary] = useState<string>("");
@@ -222,6 +227,18 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setDailyForecast(typeArray);
     }
 
+    /**
+     * Sets amount of rain.  Handles case where value is undefined and set 
+     * value to 0.
+     */
+    const setRain = () => {
+        if(selectedCard?.rain == null) {
+            setSelectedRain(0);
+        } else {
+            setSelectedRain(selectedCard?.rain);
+        }
+    }
+
     useEffect(() => {
         setDailyForecastData();
     }, [oneCallData]);
@@ -258,6 +275,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedSummary(selectedCard?.summary!);
 
         setSelectedUVI(selectedCard?.uvi?.toFixed(0)!);
+        setRain();
     }, [selectedCard, toggled, selectedDt]);
 
     return {
@@ -277,6 +295,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
+        selectedRain,
         selectedSummary,
         selectedUVI,
         selectedWindGust,

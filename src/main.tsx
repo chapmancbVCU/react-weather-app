@@ -35,11 +35,17 @@ try {
     weather.setUnits(countryName);
 
     weather.setJSONFreeTierData(cityData);
+} catch (error) {
+    console.log(error)
+}
 
+/*
+ Second try catch block to resolve issue of getting one call data on app start.
+ */
+try {
     const descriptiveWeatherData = 
       await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
     weather.setJSONOneCallWeatherData(descriptiveWeatherData);
-    setTimeout('', 5000);
 } catch (error) {
     console.log(error)
 }

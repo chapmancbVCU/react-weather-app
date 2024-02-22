@@ -9,6 +9,7 @@ import { FC, useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 import { DailyForecastType } from "../types/DailyForecastType";
 import useUnitsToggle from "../hooks/useUnitsToggle";
+import useDailyForecastCard from "../hooks/useDailyForecastCard";
 
 interface DailyForecastCardProps {
     daily: DailyForecastType;
@@ -26,15 +27,12 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
         weather
     }): JSX.Element => {
 
-    const [dt, setDt] = useState<string>("");
-
-    const [date, setDate] = useState<string>("");
-
-    const [icon, setIcon] = useState<string>("");
-
-    const [highTemperature, setHighTemperature] = useState<number>();
-
-    const [lowTemperature, setLowTemperature] = useState<number>();
+    const {
+        date,
+        icon,
+        highTemperature,
+        lowTemperature
+    } = useDailyForecastCard(dateTimeUtility, daily, weather);
 
     /**
      * Set toggle switch for units.
@@ -44,16 +42,6 @@ const DailyForecastCard : FC<DailyForecastCardProps> = ({
         toggled,
     } = useUnitsToggle(weather);
     
-    useEffect(() => {
-        setDt(dateTimeUtility.getDateTime(daily.dt, daily.timezone_offset)) 
-    }, [daily])
-
-    useEffect(() => {
-        setDate(dateTimeUtility.getForecastDate(dt));
-        setLowTemperature(weather.getTemperature(daily.temp.min));
-        setHighTemperature(weather.getTemperature(daily.temp.max));
-        setIcon(`https://openweathermap.org/img/wn/${daily.weather.icon}@2x.png`)
-    }, [dt, toggled])
     return (
         <button className="daily-forecast-card" onClick={() => onCardClick(index)}>
             <h4>{date}</h4>

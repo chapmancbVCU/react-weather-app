@@ -40,3 +40,8 @@
     border-radius: 10px;
     min-width: 200px;
  }
+
+.hourly-forecast-card:hover,
+.hourly-forecast-card:focus {
+   border: 3px solid rgb(27, 80, 114);
+}

@@ -10,16 +10,34 @@ import useUnitsToggle from "./useUnitsToggle";
 import { Weather } from "../classes/Weather";
 
 const useHourlyForecastCard = (dateTimeUtility: DateTimeUtility, hourly: HourlyType, weather: Weather) => {
+    /**
+     * @prop Written out time stamp.
+     */
     const [dt, setDt] = useState<string>("");
 
+    /**
+     * @prop Date in <Day>, <Month> <Day of Month> format.
+     */
     const [date, setDate] = useState<string>("");
 
+    /**
+     * @prop Hourly feels like temperature.
+     */
     const [hourlyFeelsLike, setHourlyFeelsLike] = useState<number>();
 
+    /**
+     * @prop Hourly actual temperature.
+     */
     const [hourlyTemperature, setHourlyTemperature] = useState<number>();
 
+    /**
+     * @prop Icon that describes conditions.
+     */
     const [icon, setIcon] = useState<string>("");
 
+    /**
+     * @prop Time of day for hourly card.
+     */
     const [time, setTime] = useState<string>("");
 
     /**

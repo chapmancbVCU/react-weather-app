@@ -10,14 +10,29 @@ import useUnitsToggle from "./useUnitsToggle";
 import { Weather } from "../classes/Weather";
 
 const useDailyForecastCard = (dateTimeUtility: DateTimeUtility, daily: DailyForecastType, weather: Weather) => {
+    /**
+     * @prop Written out time stamp.
+     */
     const [dt, setDt] = useState<string>("");
 
+    /**
+     * @prop Date in <Day>, <Month> <Day of Month> format.
+     */
     const [date, setDate] = useState<string>("");
 
+    /**
+     * @prop Icon that describes conditions.
+     */
     const [icon, setIcon] = useState<string>("");
 
+    /**
+     * @prop Daily high temperature.
+     */
     const [highTemperature, setHighTemperature] = useState<number>();
 
+    /**
+     * @prop Daily low temperature
+     */
     const [lowTemperature, setLowTemperature] = useState<number>();
 
     /**

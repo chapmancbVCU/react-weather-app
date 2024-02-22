@@ -76,6 +76,16 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     const [selectedHighTemp, setSelectedHighTemp] = useState<number>();
 
     /**
+     * @prop Describes time the moon rises.
+     */
+    const [selectedMoonRise, setSelectedMoonRise] = useState<string>("");
+
+    /**
+     * @prop Describes time when moon sets.
+     */
+    const [selectedMoonSet, setSelectedMoonSet] = useState<string>("");
+
+    /**
      * @prop Morning temperature for the selected card.
      */
     const [selectedMornTemp, setSelectedMornTemp] = useState<number>();
@@ -104,6 +114,16 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      * @prop The summary for selected card.
      */
     const [selectedSummary, setSelectedSummary] = useState<string>("");
+
+    /**
+     * @prop Describes time the sun rises.
+     */
+    const [selectedSunRise, setSelectedSunRise] = useState<string>("");
+
+    /**
+     * @prop Describes time the sun sets.
+     */
+    const [selectedSundSet, setSelectedSunSet] = useState<string>("");
 
     /**
      * @prop The ultraviolet index for the selected card.
@@ -228,6 +248,24 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     }
 
     /**
+     * Describes the time that the sun rises.
+     */
+    const setSunRiseTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            selectedCard?.sunrise!, selectedCard?.timezone_offset);
+        setSelectedSunRise(dateTimeUtility.getTimeInfo(time));
+    }
+
+    /**
+     * Describes the time that the sun sets.
+     */
+    const setSunSetTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            selectedCard?.sunset!, selectedCard?.timezone_offset);
+        setSelectedSunSet(dateTimeUtility.getTimeInfo(time));
+    }
+
+    /**
      * Sets amount of rain.  Handles case where value is undefined and set 
      * value to 0.
      */
@@ -237,6 +275,24 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         } else {
             setSelectedRain(selectedCard?.rain);
         }
+    }
+
+    /**
+     * Sets time that the moon rises.
+     */
+    const setMoonRiseTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            selectedCard?.moonrise!, selectedCard?.timezone_offset);
+        setSelectedMoonRise(dateTimeUtility.getTimeInfo(time));
+    }
+
+    /**
+     * Sets time that the moon sets.
+     */
+    const setMoonSetTime = (): void => {
+        const time = dateTimeUtility.getDateTime(
+            selectedCard?.moonset!, selectedCard?.timezone_offset);
+        setSelectedMoonSet(dateTimeUtility.getTimeInfo(time));
     }
 
     useEffect(() => {
@@ -276,6 +332,12 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
 
         setSelectedUVI(selectedCard?.uvi?.toFixed(0)!);
         setRain();
+
+        // Moon and sun props.
+        setSunRiseTime();
+        setSunSetTime();
+        setMoonRiseTime();
+        setMoonSetTime();
     }, [selectedCard, toggled, selectedDt]);
 
     return {
@@ -291,12 +353,16 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         selectedFLNightTemp,
         selectedEveTemp,
         selectedHighTemp,
+        selectedMoonRise,
+        selectedMoonSet,
         selectedMornTemp,
         selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
         selectedRain,
         selectedSummary,
+        selectedSunRise,
+        selectedSundSet,
         selectedUVI,
         selectedWindGust,
         selectedWindSpeed,

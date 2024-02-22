@@ -76,12 +76,16 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         selectedFLNightTemp,
         selectedEveTemp,
         selectedHighTemp,
+        selectedMoonRise,
+        selectedMoonSet,
         selectedMornTemp,
         selectedNightTemp,
         selectedIcon,
         selectedLowTemp,
         selectedRain,
         selectedSummary,
+        selectedSunRise,
+        selectedSundSet,
         selectedUVI,
         selectedWindGust,
         selectedWindSpeed,
@@ -260,7 +264,38 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                             <div>{selectedCard?.moon_phase!}</div>
                         </div>
                     </div>
-                </div>     
+                </div>  
+                <hr className='hr-border'></hr>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/sun-rise.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Sun Rise
+                            <div>{selectedSunRise}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/sun-set.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Sun Set
+                            <div>{selectedSundSet}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/moon-rise.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Moon Rise
+                            <div>{selectedMoonRise}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/moon-set.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Moon Set
+                            <div>{selectedMoonSet}</div>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
     )

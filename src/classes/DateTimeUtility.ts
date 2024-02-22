@@ -95,7 +95,6 @@ export class DateTimeUtility {
      * <day of month>.
      */
     getForecastDate(dateTimeStamp: string) {
-        console.log("local" + dateTimeStamp)
         return this.getDayOfWeek(dateTimeStamp) + ", " + 
             this.getFullMonthName(dateTimeStamp) + " " + 
             this.getDayOfMonth(dateTimeStamp);

@@ -100,30 +100,6 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                 <div className='selected-daily-forecast'>
                     <h3>{selectedDate}</h3>
                     <h3>{selectedTime}</h3>
-                    {/* <div className='selected-summary'>{selectedSummary}</div>
-                    <div className='selected-card-content'>
-                        <img src={`https://openweathermap.org/img/wn/${selectedIcon}@2x.png`}></img>
-                        <h4>{selectedCardTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
-                    </div>
-                    <div className='selected-card-content'>
-                        <div className='daily-conditions'>
-                            <h4>{selectedLowTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
-                            <h4>Low</h4>
-                        </div>
-                        <div className='daily-conditions'>
-                            <h4>{selectedHighTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
-                            <h4>High</h4>
-                        </div>
-                        <div className='daily-conditions daily-conditions-info'>
-                            <img className="daily-conditions-icon" src="./icons/weather-windy.png"></img>
-                            <div className='daily-conditions-info-description'>
-                                Winds
-                                <div>{selectedWindSpeed}, {selectedWindDegrees}</div>
-                                Wind Gusts
-                                <div>{selectedWindGust}</div>
-                            </div>
-                        </div> */}
-                    {/* </div> */}
                 </div>
             </div>
         </div>

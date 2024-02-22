@@ -66,8 +66,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
     const {
         dailyForecast,
         onCardClick,
+        selectedCard,
         selectedCardTemp,
         selectedDate,
+        selectedDewPoint,
         selectedFLDayTemp,
         selectedFLEveTemp,
         selectedFLMornTemp,
@@ -79,6 +81,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         selectedIcon,
         selectedLowTemp,
         selectedSummary,
+        selectedUVI,
         selectedWindGust,
         selectedWindSpeed,
         selectedWindDegrees,
@@ -194,7 +197,38 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                             {selectedFLNightTemp} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
                         </div>
                     </div>
-                </div>      
+                </div> 
+                <hr className='hr-border'></hr>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/dew-point.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Dew Point
+                            <div>{selectedDewPoint} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/UVI.png'></img>
+                        <div className='current-conditions-info-description'>
+                            UV Index
+                            <div>{selectedUVI} out of 10</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/air-pressure.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Pressure
+                            <div>{weather.getPressure(selectedCard?.pressure!)}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/visibility.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Clouds
+                            <div>{selectedCard?.clouds!}</div>
+                        </div>
+                    </div>
+                </div>     
             </div>
         </div>
     )

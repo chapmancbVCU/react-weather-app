@@ -25,20 +25,25 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     const [selectedCard, setSelectedCard] = useState<DailyForecastType>();
 
     /**
+     * @prop The temperature for the selected card.
+     */
+    const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
+
+    /**
      * @prop Date for selected card on format <Day of week>, <Month> 
      * <Day of Month>
      */
     const [selectedDate, setSelectedDate] = useState<string>("");
 
     /**
+     * @prop The dew point for the selected card.
+     */
+    const [selectedDewPoint, setSelectedDewPoint] = useState<number>();
+
+    /**
      * @prop String for date converted from Unix time. 
      */
     const [selectedDt, setSelectedDt] = useState<string>("");
-
-    /**
-     * @prop The temperature for the selected card.
-     */
-    const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
 
     /**
      * @prop The evening temperature for the selected card.
@@ -94,6 +99,11 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
      * @prop The summary for selected card.
      */
     const [selectedSummary, setSelectedSummary] = useState<string>("");
+
+    /**
+     * @prop The ultraviolet index for the selected card.
+     */
+    const [selectedUVI, setSelectedUVI] = useState<string>("");
 
     /**
      * @prop Wind degrees for selected card.
@@ -227,6 +237,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
 
         // Temperatures
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp.day));
+        setSelectedDewPoint(weather.getTemperature(selectedCard?.dew_point));
         setSelectedEveTemp(weather.getTemperature(selectedCard?.temp.eve));
         setSelectedHighTemp(weather.getTemperature(selectedCard?.temp.max));
         setSelectedLowTemp(weather.getTemperature(selectedCard?.temp.min));
@@ -245,13 +256,17 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!));
         setSelectedIcon(selectedCard?.icon);
         setSelectedSummary(selectedCard?.summary!);
+
+        setSelectedUVI(selectedCard?.uvi?.toFixed(0)!);
     }, [selectedCard, toggled, selectedDt]);
 
     return {
         dailyForecast,
         onCardClick,
+        selectedCard,
         selectedCardTemp,
         selectedDate,
+        selectedDewPoint,
         selectedFLDayTemp,
         selectedFLEveTemp,
         selectedFLMornTemp,
@@ -263,6 +278,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         selectedIcon,
         selectedLowTemp,
         selectedSummary,
+        selectedUVI,
         selectedWindGust,
         selectedWindSpeed,
         selectedWindDegrees,

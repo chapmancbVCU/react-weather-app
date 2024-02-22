@@ -27,7 +27,8 @@ const HourlyForecastCard : FC<HourlyForecastCardProps> = ({
         weather
     }): JSX.Element => {
 
-    const {date,
+    const {
+        date,
         hourlyFeelsLike,
         hourlyTemperature,
         icon,

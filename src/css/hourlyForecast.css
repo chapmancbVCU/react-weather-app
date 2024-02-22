@@ -2,16 +2,30 @@
  * DESCRIPTION: Stylesheet hourly forecast content.                           *
  *      AUTHOR: Chad Chapman                                                  *
  *****************************************************************************/
+.card-temperature {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.hourly-card-date{
+    margin-top: 10px;
+}
+
+.hourly-card-description {
+    margin-bottom: 10px;
+    font-size: large;
+}
+
 .hourly-forecast-container {
    display: flex;
    flex-direction: row;
    gap: 5px;
 
-   border: solid black 1px;
    width: 90%;
    margin-left: auto;
    margin-right: auto;
    margin-bottom: 15px;
+
    /* Enable horizontal scrolling. */
    overflow-x: auto;
    overflow-y: hidden;
@@ -19,7 +33,10 @@
 }
 
 .hourly-forecast-card {
-   text-align: center;
-   border: solid black 1px;
-   min-width: 250px;
+    margin: 5px;
+    text-align: center;
+    border: 3px solid rgb(57, 169, 244);
+    background-color: rgb(111, 200, 230);
+    border-radius: 10px;
+    min-width: 200px;
  }

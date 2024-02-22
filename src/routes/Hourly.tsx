@@ -62,7 +62,8 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
     } = useUnitsToggle(weather);
 
     const {
-        hourlyForecast
+        hourlyForecast,
+        onCardClick
     } = useHourlyForecast(oneCallData);
     
     return (
@@ -86,7 +87,9 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                     <HourlyForecastCard key={index}
                         hourly={hourly}
                         dateTimeUtility={dateTimeUtility}
-                        weather={weather}>
+                        onCardClick={onCardClick}
+                        weather={weather}
+                        index={index}>
                     </HourlyForecastCard>
                 ))}</div>
             </div>

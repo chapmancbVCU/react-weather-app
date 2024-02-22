@@ -10,6 +10,11 @@ const useHourlyForecast = (oneCallData: any) => {
 
     const [hourlyForecast, setHourlyForecast] = useState<HourlyType[]>([]);
 
+    /**
+     * @prop The selected card which is of type DailyForecastType.
+     */
+    const [selectedCard, setSelectedCard] = useState<HourlyType>();
+
     const logData = () => {
         console.log("hourly card type");
         for(let i: number = 0; i < 1; i++) {
@@ -66,6 +71,14 @@ const useHourlyForecast = (oneCallData: any) => {
         setHourlyForecast(typeArray);
     }
 
+    /**
+     * Event listener that sets value of selected card when a card is clicked.
+     * @param e Value associated with event.
+     */
+    const onCardClick = (e: number) => {
+        setSelectedCard(hourlyForecast[e]);
+    }
+
     useEffect(() => {
         setHourlyForecastData();
     }, [oneCallData]);
@@ -75,7 +88,8 @@ const useHourlyForecast = (oneCallData: any) => {
     }, [hourlyForecast]);
 
     return {
-        hourlyForecast
+        hourlyForecast,
+        onCardClick
     }
 }
 

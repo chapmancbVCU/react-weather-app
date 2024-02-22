@@ -7,7 +7,9 @@ import { HourlyType } from "../types/HourlyType";
 import { useEffect, useState } from "react";
 
 const useHourlyForecast = (oneCallData: any) => {
-
+    /**
+     * @prop Describes array of HourlyType.
+     */
     const [hourlyForecast, setHourlyForecast] = useState<HourlyType[]>([]);
 
     /**

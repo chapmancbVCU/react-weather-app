@@ -254,7 +254,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         <img className='conditions-icon' src='./icons/weather-pouring.png'></img>
                         <div className='current-conditions-info-description'>
                             Chance of PPT
-                            <div>{weather.getPressure(selectedCard?.pressure!)}</div>
+                            <div>{(selectedCard?.pop! * 100).toFixed(0)} %</div>
                         </div>
                     </div>
                     <div className='today-conditions-info'>

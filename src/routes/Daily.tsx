@@ -222,10 +222,10 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         </div>
                     </div>
                     <div className='today-conditions-info'>
-                        <img className='conditions-icon' src='./icons/visibility.png'></img>
+                        <img className='conditions-icon' src='./icons/clouds.png'></img>
                         <div className='current-conditions-info-description'>
-                            Clouds
-                            <div>{selectedCard?.clouds!}</div>
+                            Cloudiness
+                            <div>{selectedCard?.clouds!} %</div>
                         </div>
                     </div>
                 </div>     

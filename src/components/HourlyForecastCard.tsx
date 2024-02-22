@@ -9,6 +9,7 @@ import { FC, useEffect, useState } from "react";
 import { HourlyType } from "../types/HourlyType";
 import useUnitsToggle from "../hooks/useUnitsToggle";
 import { Weather } from "../classes/Weather";
+import useHourlyForecastCard from "../hooks/useHourlyForecastCard";
 
 interface HourlyForecastCardProps {
     index: number
@@ -26,17 +27,12 @@ const HourlyForecastCard : FC<HourlyForecastCardProps> = ({
         weather
     }): JSX.Element => {
 
-    const [dt, setDt] = useState<string>("");
-
-    const [date, setDate] = useState<string>("");
-
-    const [hourlyFeelsLike, setHourlyFeelsLike] = useState<number>();
-
-    const [hourlyTemperature, setHourlyTemperature] = useState<number>();
-
-    const [icon, setIcon] = useState<string>("");
-
-    const [time, setTime] = useState<string>("");
+    const {date,
+        hourlyFeelsLike,
+        hourlyTemperature,
+        icon,
+        time
+    } = useHourlyForecastCard(dateTimeUtility, hourly, weather);
 
     /**
      * Set toggle switch for units.
@@ -46,17 +42,7 @@ const HourlyForecastCard : FC<HourlyForecastCardProps> = ({
         toggled,
     } = useUnitsToggle(weather);
     
-    useEffect(() => {
-        setDt(dateTimeUtility.getDateTime(hourly.dt, hourly.timezone_offset)) 
-    }, [hourly])
-
-    useEffect(() => {
-        setDate(dateTimeUtility.getForecastDate(dt));
-        setTime(dateTimeUtility.getTimeInfo(dt));
-        setHourlyTemperature(weather.getTemperature(hourly.temp));
-        setHourlyFeelsLike(weather.getTemperature(hourly.feels_like));
-        setIcon(`https://openweathermap.org/img/wn/${hourly.weather.icon}@2x.png`)
-    }, [dt, toggled])
+    
     return (
         <button className="hourly-forecast-card" onClick={() => onCardClick(index)}>
             <h4 className="hourly-card-date">{date}</h4>

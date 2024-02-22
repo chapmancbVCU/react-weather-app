@@ -123,7 +123,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
     /**
      * @prop Describes time the sun sets.
      */
-    const [selectedSundSet, setSelectedSunSet] = useState<string>("");
+    const [selectedSunSet, setSelectedSunSet] = useState<string>("");
 
     /**
      * @prop The ultraviolet index for the selected card.
@@ -362,7 +362,7 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
         selectedRain,
         selectedSummary,
         selectedSunRise,
-        selectedSundSet,
+        selectedSunSet,
         selectedUVI,
         selectedWindGust,
         selectedWindSpeed,

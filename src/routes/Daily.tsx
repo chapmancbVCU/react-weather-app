@@ -85,7 +85,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
         selectedRain,
         selectedSummary,
         selectedSunRise,
-        selectedSundSet,
+        selectedSunSet,
         selectedUVI,
         selectedWindGust,
         selectedWindSpeed,
@@ -278,7 +278,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
                         <img className='conditions-icon' src='./icons/sun-set.png'></img>
                         <div className='current-conditions-info-description'>
                             Sun Set
-                            <div>{selectedSundSet}</div>
+                            <div>{selectedSunSet}</div>
                         </div>
                     </div>
                     <div className='today-conditions-info'>

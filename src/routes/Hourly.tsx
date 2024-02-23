@@ -65,7 +65,9 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
         hourlyForecast,
         onCardClick,
         selectedCard,
+        selectedDescription,
         selectedCardFeelsLike,
+        selectedIcon,
         selectedCardTemp,
         selectedDate,
         selectedTime
@@ -111,7 +113,14 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                         <h4>{selectedCardFeelsLike}  {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
                         <h4>Feels Like</h4>
                     </div>
+                    <div className='hourly-conditions'>
+                        <img src={`https://openweathermap.org/img/wn/${selectedIcon}@2x.png`}></img>
+                    </div>
+                    <div className='hourly-conditions'>
+                        <h4>{selectedDescription}</h4>
+                    </div>
                 </div>
+                <hr className='hr-border'></hr>
             </div>
         </div>
     )

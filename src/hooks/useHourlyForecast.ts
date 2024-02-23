@@ -36,9 +36,19 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
     const [selectedDate, setSelectedDate] = useState<string>("");
 
     /**
+     * @prop Description of weather for selected card.
+     */
+    const [selectedDescription, setSelectedDescription] = useState<string>("");
+
+    /**
      * @prop String for date converted from Unix time. 
      */
     const [selectedDt, setSelectedDt] = useState<string>("");
+
+    /**
+     * @prop Icon for selected card.
+     */
+    const [selectedIcon, setSelectedIcon] = useState<string>();
 
     /**
      * @prop String for displaying time of day of selected card.
@@ -127,12 +137,17 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp));
         setSelectedCardFeelsLike(weather.getTemperature(selectedCard?.feels_like));
 
+        setSelectedDescription(selectedCard?.weather.description!);
+        setSelectedIcon(selectedCard?.weather.icon);
+
     }, [selectedCard, toggled, selectedDt]);
     return {
         hourlyForecast,
         onCardClick,
         selectedCard,
+        selectedDescription,
         selectedCardFeelsLike,
+        selectedIcon,
         selectedCardTemp,
         selectedDate,
         selectedTime

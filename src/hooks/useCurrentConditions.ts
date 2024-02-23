@@ -193,7 +193,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setSummary(oneCallData?.daily[0].summary);
         setPop((oneCallData?.daily[0]?.pop * 100).toFixed(0));
 
-        setWindGust(weather.getWindSpeed(oneCallData?.daily[0].wind_gust));
+        //setWindGust(weather.getWindSpeed(oneCallData?.daily[0].wind_gust, toggled));
 
         setUVI((oneCallData?.daily[0].uvi.toFixed(0)));
         setConditionIcon(`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`);

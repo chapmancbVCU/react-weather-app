@@ -325,8 +325,8 @@ const useDailyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, to
 
         // Winds
         setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
-        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!));
-        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!));
+        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!, toggled));
+        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!, toggled));
         setSelectedIcon(selectedCard?.icon);
         setSelectedSummary(selectedCard?.summary!);
 

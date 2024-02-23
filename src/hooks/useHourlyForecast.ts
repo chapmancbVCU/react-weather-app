@@ -168,8 +168,8 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
 
         // Winds
         setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
-        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!));
-        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!));
+        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!, toggled));
+        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!, toggled));
 
         setSelectedUVI(selectedCard?.uvi?.toFixed(0)!);
     }, [selectedCard, toggled, selectedDt]);

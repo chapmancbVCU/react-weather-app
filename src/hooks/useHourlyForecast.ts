@@ -41,6 +41,11 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
     const [selectedDescription, setSelectedDescription] = useState<string>("");
 
     /**
+     * @prop The dew point for the selected card.
+     */
+    const [selectedDewPoint, setSelectedDewPoint] = useState<number>();
+
+    /**
      * @prop String for date converted from Unix time. 
      */
     const [selectedDt, setSelectedDt] = useState<string>("");
@@ -54,6 +59,26 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
      * @prop String for displaying time of day of selected card.
      */
     const [selectedTime, setSelectedTime] = useState<string>("");
+
+    /**
+     * @prop The ultraviolet index for the selected card.
+     */
+    const [selectedUVI, setSelectedUVI] = useState<string>("");
+
+    /**
+     * @prop Wind degrees for selected card.
+     */
+    const [selectedWindDegrees, setSelectedWindDegrees] = useState<number>();
+
+    /**
+     * @prop Wind gust for selected card.
+     */
+    const [selectedWindGust, setSelectedWindGust] = useState<string>("");
+
+    /**
+     * @prop Wind speed for selected card.
+     */
+    const [selectedWindSpeed, setSelectedWindSpeed] = useState<string>("");
 
     const logData = () => {
         console.log("hourly card type");
@@ -136,21 +161,33 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
         // Set temperatures
         setSelectedCardTemp(weather.getTemperature(selectedCard?.temp));
         setSelectedCardFeelsLike(weather.getTemperature(selectedCard?.feels_like));
+        setSelectedDewPoint(weather.getTemperature(selectedCard?.dew_point));
 
         setSelectedDescription(selectedCard?.weather.description!);
         setSelectedIcon(selectedCard?.weather.icon);
 
+        // Winds
+        setSelectedWindDegrees(weather.getWindDirection(selectedCard?.wind_deg!));
+        setSelectedWindGust(weather.getWindSpeed(selectedCard?.wind_gust!));
+        setSelectedWindSpeed(weather.getWindSpeed(selectedCard?.wind_speed!));
+
+        setSelectedUVI(selectedCard?.uvi?.toFixed(0)!);
     }, [selectedCard, toggled, selectedDt]);
     return {
         hourlyForecast,
         onCardClick,
         selectedCard,
-        selectedDescription,
         selectedCardFeelsLike,
+        selectedDescription,
+        selectedDewPoint,
         selectedIcon,
         selectedCardTemp,
         selectedDate,
-        selectedTime
+        selectedTime,
+        selectedUVI,
+        selectedWindGust,
+        selectedWindSpeed,
+        selectedWindDegrees,
     }
 }
 

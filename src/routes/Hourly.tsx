@@ -65,12 +65,17 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
         hourlyForecast,
         onCardClick,
         selectedCard,
-        selectedDescription,
         selectedCardFeelsLike,
+        selectedDescription,
+        selectedDewPoint,
         selectedIcon,
         selectedCardTemp,
         selectedDate,
-        selectedTime
+        selectedTime,
+        selectedUVI,
+        selectedWindGust,
+        selectedWindSpeed,
+        selectedWindDegrees,
     } = useHourlyForecast(dateTimeUtility,oneCallData, toggled, weather);
     
     return (
@@ -121,6 +126,69 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                     </div>
                 </div>
                 <hr className='hr-border'></hr>
+                <div className='selected-card-content'>
+                    <div className='hourly-conditions hourly-conditions-info'>
+                        <img className="hourly-conditions-icon" src="./icons/weather-windy.png"></img>
+                        <div className='hourly-conditions-info-description'>
+                            Winds
+                            <div>{selectedWindSpeed}, {selectedWindDegrees}</div>
+                            Wind Gusts
+                            <div>{selectedWindGust}</div>
+                        </div>
+                    </div>
+                    <div className='hourly-conditions-info'>
+                        <img className='hourly-conditions-icon' src='./icons/weather-pouring.png'></img>
+                        <div className='hourly-conditions-info-description'>
+                            Chance of PPT
+                            <div>{(selectedCard?.pop! * 100).toFixed(0)} %</div>
+                        </div>
+                    </div>
+                    <div className='hourly-conditions-info'>
+                        <img className='hourly-conditions-icon' src='./icons/visibility.png'></img>
+                        <div className='hourly-conditions-info-description'>
+                            Visibility
+                            <div>{weather.getVisibility(selectedCard?.visibility!)}</div>
+                        </div>
+                    </div>
+                    <div className='hourly-conditions-info'>
+                        <img className='hourly-conditions-icon' src='./icons/visibility.png'></img>
+                        <div className='hourly-conditions-info-description'>
+                            Humidity
+                            <div>{selectedCard?.humidity}%</div>
+                        </div>
+                    </div>
+                </div>
+                <hr className='hr-border'></hr>
+                <div className='current-conditions-container today-conditions'>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/dew-point.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Dew Point
+                            <div>{selectedDewPoint} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/UVI.png'></img>
+                        <div className='current-conditions-info-description'>
+                            UV Index
+                            <div>{selectedUVI} out of 10</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/air-pressure.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Pressure
+                            <div>{weather.getPressure(selectedCard?.pressure!)}</div>
+                        </div>
+                    </div>
+                    <div className='today-conditions-info'>
+                        <img className='conditions-icon' src='./icons/clouds.png'></img>
+                        <div className='current-conditions-info-description'>
+                            Cloudiness
+                            <div>{selectedCard?.clouds!} %</div>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </div>
     )

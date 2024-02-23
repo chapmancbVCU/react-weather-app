@@ -395,21 +395,21 @@ export class Weather {
      * @param {number} wind The wind speed expressed in meters per second. 
      * @returns {string} The wind speed in mph or km/h.
      */
-    getCurrentWindSpeed(wind: number, toggled: boolean): string | any {
-       if (this.getInitialUnits() === 'IMPERIAL') {
-            if (toggled === false) {
-                return wind?.toFixed(1) + ' mph';
-            } else {
-                return (wind * 1.609)?.toFixed(1) + ' km/h';
-            }
-        } else if (this.getInitialUnits() === 'METRIC') {
-            if (toggled === false) {
-                return wind?.toFixed(1) + ' km/h';
-            } else {
-                return (wind / 1.609)?.toFixed(1) + ' km/h';
-            }
-        }
-    }
+    // getCurrentWindSpeed(wind: number, toggled: boolean): string | any {
+    //    if (this.getInitialUnits() === 'IMPERIAL') {
+    //         if (toggled === false) {
+    //             return wind?.toFixed(1) + ' mph';
+    //         } else {
+    //             return (wind * 1.609)?.toFixed(1) + ' km/h';
+    //         }
+    //     } else if (this.getInitialUnits() === 'METRIC') {
+    //         if (toggled === false) {
+    //             return wind?.toFixed(1) + ' km/h';
+    //         } else {
+    //             return (wind / 1.609)?.toFixed(1) + ' km/h';
+    //         }
+    //     }
+    // }
 
 
     /**

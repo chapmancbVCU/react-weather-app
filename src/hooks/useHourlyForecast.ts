@@ -19,6 +19,12 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
      */
     const [selectedCard, setSelectedCard] = useState<HourlyType>();
 
+    const [selectedCardFeelsLike, setSelectedCardFeelsLike] = useState<number>();
+    /**
+     * @prop The temperature for the selected card.
+     */
+    const [selectedCardTemp, setSelectedCardTemp] = useState<number>();
+
     /**
      * @prop Date for selected card on format <Day of week>, <Month> 
      * <Day of Month>
@@ -109,11 +115,18 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
         setSelectedDt(dateTimeUtility.getDateTime(selectedCard?.dt!, oneCallData?.timezone_offset));
         setSelectedDate(dateTimeUtility.getForecastDate(selectedDt));
         setSelectedTime(dateTimeUtility.getTimeInfo(selectedDt));
+
+        // Set temperatures
+        setSelectedCardTemp(weather.getTemperature(selectedCard?.temp));
+        setSelectedCardFeelsLike(weather.getTemperature(selectedCard?.feels_like));
+
     }, [selectedCard, toggled, selectedDt]);
     return {
         hourlyForecast,
         onCardClick,
         selectedCard,
+        selectedCardFeelsLike,
+        selectedCardTemp,
         selectedDate,
         selectedTime
     }

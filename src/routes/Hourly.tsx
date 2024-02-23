@@ -65,6 +65,8 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
         hourlyForecast,
         onCardClick,
         selectedCard,
+        selectedCardFeelsLike,
+        selectedCardTemp,
         selectedDate,
         selectedTime
     } = useHourlyForecast(dateTimeUtility,oneCallData, toggled, weather);
@@ -98,8 +100,17 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
                 ))}</div>
                 <hr className='hr-border'></hr>
                 <div className='selected-daily-forecast'>
-                    <h3>{selectedDate}</h3>
-                    <h3>{selectedTime}</h3>
+                    <h3>{selectedDate}, {selectedTime}</h3>
+                </div>
+                <div className='selected-card-content'>
+                    <div className='hourly-conditions'>
+                        <h4>{selectedCardTemp}  {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
+                        <h4>Temperature</h4>
+                    </div>
+                    <div className='hourly-conditions'>
+                        <h4>{selectedCardFeelsLike}  {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}</h4>
+                        <h4>Feels Like</h4>
+                    </div>
                 </div>
             </div>
         </div>

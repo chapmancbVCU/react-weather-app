@@ -16,6 +16,11 @@
     font-size: large;
 }
 
+.hourly-conditions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .hourly-forecast-container {
    display: flex;
    flex-direction: row;
@@ -44,4 +49,23 @@
 .hourly-forecast-card:hover,
 .hourly-forecast-card:focus {
    border: 3px solid rgb(27, 80, 114);
+}
+
+.selected-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@media only screen and (min-width: 900px) {
+    .hourly-conditions {
+        margin-top: 15px;
+    }
+
+    .selected-card-content {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }

@@ -19,7 +19,11 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
      */
     const [selectedCard, setSelectedCard] = useState<HourlyType>();
 
+    /**
+     * @prop Feels like for selected card.
+     */
     const [selectedCardFeelsLike, setSelectedCardFeelsLike] = useState<number>();
+
     /**
      * @prop The temperature for the selected card.
      */
@@ -36,6 +40,9 @@ const useHourlyForecast = (dateTimeUtility: DateTimeUtility, oneCallData: any, t
      */
     const [selectedDt, setSelectedDt] = useState<string>("");
 
+    /**
+     * @prop String for displaying time of day of selected card.
+     */
     const [selectedTime, setSelectedTime] = useState<string>("");
 
     const logData = () => {

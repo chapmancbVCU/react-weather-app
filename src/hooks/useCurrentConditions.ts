@@ -109,11 +109,6 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [temperature, setTemperature] = useState<number>();
 
     /**
-     * @prop Property for current wind gusts.
-     */
-    const [windGust, setWindGust] = useState<string>("");
-
-    /**
      * @prop Property for ultraviolet index.
      */
     const [uvi, setUVI] = useState<number>();
@@ -227,7 +222,6 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         sunRise,
         sunSet,
         temperature,
-        windGust,
         uvi
     };
 };

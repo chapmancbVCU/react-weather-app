@@ -411,10 +411,21 @@ export class Weather {
         // }
 
     }
+
+
+    /**
+     * Sets name of current city.
+     * @param {string} city The name of the city.
+     */
     setCity(city: string): void {
         this.city = city;
     }
 
+
+    /**
+     * Sets name of current country.
+     * @param {string} country The name of the country.
+     */
     setCountry(country: string): void {
         this.countryName = country
     }

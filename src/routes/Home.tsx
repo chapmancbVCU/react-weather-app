@@ -124,7 +124,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
         sunRise,
         sunSet,
         temperature,
-        windGust,
         uvi
     } = useCurrentConditions(dateTimeUtility, freeTierData, oneCallData, weather, toggled);
 

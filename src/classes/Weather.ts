@@ -374,42 +374,41 @@ export class Weather {
      * @param {number} wind The wind speed expressed in meters per second. 
      * @returns {string} The wind speed in mph or km/h.
      */
-    getCurrentWindSpeed(wind: number, toggled: boolean): string | any {
-        // //if (this.getUnits() === 'METRIC') {
-        //     if (toggled === true) {
-        //         return (wind * 1.609)?.toFixed(1) + ' km/h';
-        //     } else {
-        //         return wind?.toFixed(1) + ' mph';
-        //     }
-        // } else if (this.getUnits() === 'IMPERIAL') {
-        //     if (toggled === true) {
-        //         return wind?.toFixed(1) + ' km/h';
-        //     } else {
-        //         return (wind * 2.2369)?.toFixed(1) + ' mph';
-        //     }
-        // }
+    getWindSpeed(wind: number, toggled: boolean): string | any {
+        if (this.getInitialUnits() === 'METRIC') {
+            if (toggled === false) {
+                return (wind / 1.609)?.toFixed(1) + ' mph';
+            } else {
+                return wind?.toFixed(1) + ' km/h';
+            }
+        } else if (this.getInitialUnits() === 'IMPERIAL') {
+            if (toggled === false) {
+                return wind?.toFixed(1) + ' mph';
+            } else {
+                return (wind * 1.609)?.toFixed(1) + ' km/h';
+            }
+        }
     }
 
     /**
-     * Returns wind as mph or km/h depending of location.
+     * Returns current wind as mph or km/h depending of location.
      * @param {number} wind The wind speed expressed in meters per second. 
      * @returns {string} The wind speed in mph or km/h.
      */
-    getWindSpeed(wind: number, toggled: boolean): string | any {
-       // if (this.getUnits() === 'IMPERIAL') {
-        if (toggled === false) {
-            return wind?.toFixed(1) + ' mph';
-        } else {
-            return (wind * 1.609)?.toFixed(1) + ' km/h';
+    getCurrentWindSpeed(wind: number, toggled: boolean): string | any {
+       if (this.getInitialUnits() === 'IMPERIAL') {
+            if (toggled === false) {
+                return wind?.toFixed(1) + ' mph';
+            } else {
+                return (wind * 1.609)?.toFixed(1) + ' km/h';
+            }
+        } else if (this.getInitialUnits() === 'METRIC') {
+            if (toggled === false) {
+                return wind?.toFixed(1) + ' km/h';
+            } else {
+                return (wind / 1.609)?.toFixed(1) + ' km/h';
+            }
         }
-        // } else if (this.getUnits() === 'METRIC') {
-        //     if (toggled === false) {
-        //         return wind?.toFixed(1) + ' km/h';
-        //     } else {
-        //         return (wind * (18/5))?.toFixed(1) + ' km/h';
-        //     }
-        // }
-
     }
 
 

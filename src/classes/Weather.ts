@@ -49,15 +49,15 @@ export class Weather {
 
     /**
      * The latitude for the current city.
-     * @type { Promise<number | void> }
+     * @type { Promise<number | void> | number }
      */
-    private latitude: Promise<number | void>;
+    private latitude: Promise<number | void> | number;
 
     /**
      * The longitude for the current city.
-     * @type { Promise<number | void> }
+     * @type { Promise<number | void> | number }
      */
-    private longitude: Promise<number | void>;
+    private longitude: Promise<number | void> | number;
 
     /**
      * The current units selected by the user.
@@ -251,7 +251,7 @@ export class Weather {
      * @returns { Promise<number | void> } The latitude of the user or search 
      * query.
      */
-    getLatitude(): Promise<number | void> {
+    getLatitude(): Promise<number | void> | number {
         return this.latitude;
     }
 
@@ -276,10 +276,10 @@ export class Weather {
 
     /**
      * Getter function for the longitude.
-     * @returns { Promise<number | void>} The longitude of the user or search 
-     * query
+     * @returns { Promise<number | void> | number } The longitude of the user or 
+     * search query
      */
-    getLongitude(): Promise<number | void> {
+    getLongitude(): Promise<number | void> | number {
         return this.longitude;
     }
 
@@ -503,20 +503,20 @@ export class Weather {
 
     /**
      * Setter function for the latitude of the user's location or search query.
-     * @param { Promise<number | void> } latitude The latitude of the user's 
-     * location or search query.
+     * @param { Promise<number | void> | number } latitude The latitude of the 
+     * user's location or search query.
      */
-    setLatitude(latitude: Promise<number | void>): void {
+    setLatitude(latitude: Promise<number | void> | number): void {
         this.latitude = latitude;
     } 
 
     /**
      * Setter function for the longitude of the user's location or search 
      * query.
-     * @param {Promise<number | void>} longitude The longitude of the user's 
-     * location or search query.
+     * @param {Promise<number | void> | number } longitude The longitude of 
+     * the user's location or search query.
      */
-    setLongitude(longitude: Promise<number | void>): void {
+    setLongitude(longitude: Promise<number | void> | number): void {
         this.longitude = longitude;
     }
 

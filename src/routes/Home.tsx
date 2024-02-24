@@ -31,50 +31,6 @@ interface HomePageProps {
  * component.
  */
 const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
-     /**
-     * @prop for date in the following format: 
-     * <day_of_week>, <month> <day_of_month>, <year>.
-     */
-    const [date, setDate] = useState<string>("");
-
-    /**
-     * @prop Date time string derived from Unix time.
-     */
-    const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
-
-    /**
-     * @prop Represents time forecast data was fetched for a particular location.
-     */
-    const [forecastTime, setForecastTime] = useState<string>("");
-
-    /**
-     * @prop The current time.
-     */
-    const [localTime, setLocalTime] = useState<Date>(new Date());
- 
-    /**
-     * Gets date time stamp from one call data and sets date as string using 
-     * the format: <day_of_week>, <month> <day_of_month>, <year>.
-     */
-    const setCurrentDate = (): void => {
-        setDate(dateTimeUtility.getDateInfo(dateTimeStamp));
-    }
-
-    /**
-     * Sets date-time stamp for GMT.
-     */
-    const setDateTime = (): void => {
-        setDateTimeStamp(dateTimeUtility.getDateTime(
-            oneCallData?.current.dt, oneCallData?.timezone_offset));
-    }
-
-    /**
-     * Sets the time for location we are fetching data.
-     */
-    const setForecastTimeInformation = (): void => {
-        setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
-    }
-    
     /**
      * Manages setup of weather data during initial startup and after a user 
      * performs a search.
@@ -105,13 +61,16 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
     const {
         conditionIcon,
         currentConditions,
+        date,
         dayTemperature,
         dayFeelsLikeTemperature,
         eveningTemperature,
         eveningFeelsLikeTemperature,
         dewPoint,
         feelsLikeTemperature,
+        forecastTime,
         highTemperature,
+        localTime,
         lowTemperature,
         moonRise,
         moonSet,
@@ -132,16 +91,6 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
      * on free tier data.
      */
     const { conditionsClassName } =  useSetBackground(freeTierData, weather);
-
-    useEffect(() => {
-        // Set time to be rendered and refresh every second.
-        setInterval(() => setLocalTime(new Date()), 1000);
-        setDateTime();
-        setForecastTimeInformation();
-        setCurrentDate();
-
-        // If something isn't right add prop to dependency array.
-    }, [weather, freeTierData, oneCallData, toggled, city, temperature]);
 
     return (
         <div className={conditionsClassName}>

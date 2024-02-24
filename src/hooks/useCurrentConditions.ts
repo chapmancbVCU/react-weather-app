@@ -7,11 +7,25 @@ import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 
 const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: any, oneCallData: any, weather: Weather, toggled: boolean) => {
+    
+    
     const [conditionIcon, setConditionIcon] = useState<string>("");
+    
     /**
      * @prop Description of current conditions outside.
      */
     const [currentConditions, setCurrentConditions] = useState<string>();
+
+    /**
+     * @prop for date in the following format: 
+     * <day_of_week>, <month> <day_of_month>, <year>.
+     */
+    const [date, setDate] = useState<string>("");
+
+    /**
+     * @prop Date time string derived from Unix time.
+     */
+    const [dateTimeStamp, setDateTimeStamp] = useState<string>("");
 
     /**
      * @prop Describes day time temperature.
@@ -24,6 +38,11 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [dayFeelsLikeTemperature, setDayFeelsLikeTemperature] = useState<number>();
 
     /**
+     * @prop Temperature for dew point.
+     */
+    const [dewPoint, setDewPoint] = useState<number>();
+
+    /**
      * @prop Describes evening temperature.
      */
     const [eveningTemperature, setEveningTemperature] = useState<number>();
@@ -34,19 +53,24 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     const [eveningFeelsLikeTemperature, setEveningFeelsLikeTemperature] = useState<number>();
 
     /**
-     * @prop Temperature for dew point.
-     */
-    const [dewPoint, setDewPoint] = useState<number>();
-
-    /**
      * @prop Property for feels like temperature.
      */
     const [feelsLikeTemperature, setFeelsLikeTemperature] = useState<string>("");
 
     /**
+     * @prop Represents time forecast data was fetched for a particular location.
+     */
+    const [forecastTime, setForecastTime] = useState<string>("");
+
+    /**
      * @prop Current day high temperature.
      */
     const [highTemperature, setHighTemperature] = useState<number>();
+
+    /**
+     * @prop The current time.
+     */
+    const [localTime, setLocalTime] = useState<Date>(new Date());
 
     /**
      * @prop Current day low temperature.
@@ -129,6 +153,29 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     }
 
     /**
+     * Gets date time stamp from one call data and sets date as string using 
+     * the format: <day_of_week>, <month> <day_of_month>, <year>.
+     */
+    const setCurrentDate = (): void => {
+        setDate(dateTimeUtility.getDateInfo(dateTimeStamp));
+    }
+
+    /**
+     * Sets date-time stamp for GMT.
+     */
+    const setDateTime = (): void => {
+        setDateTimeStamp(dateTimeUtility.getDateTime(
+            oneCallData?.current.dt, oneCallData?.timezone_offset));
+    }
+
+    /**
+     * Sets the time for location we are fetching data.
+     */
+    const setForecastTimeInformation = (): void => {
+        setForecastTime(dateTimeUtility.getTimeInfo(dateTimeStamp));
+    }
+
+    /**
      * Sets time that the moon rises.
      */
     const setMoonRiseTime = (): void => {
@@ -165,6 +212,12 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     }
 
     useEffect(() => {
+        // Set time to be rendered and refresh every second.
+        setInterval(() => setLocalTime(new Date()), 1000);
+        setDateTime();
+        setForecastTimeInformation();
+        setCurrentDate();
+
         // Temperature props.
         setTemperature(weather.calculateTemperature(freeTierData?.main.temp));
         setFeelsLikeTemperature(weather.calculateTemperature(
@@ -203,13 +256,16 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
     return {
         conditionIcon,
         currentConditions,
+        date,
         dayTemperature,
         dayFeelsLikeTemperature,
         eveningTemperature,
         eveningFeelsLikeTemperature,
         dewPoint,
         feelsLikeTemperature,
+        forecastTime,
         highTemperature,
+        localTime,
         lowTemperature,
         moonRise,
         moonSet,

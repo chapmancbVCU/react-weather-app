@@ -297,6 +297,12 @@ export class Weather {
          }
     }
 
+    /**
+     * Returns temperature based on system user has application set.
+     * @param temperature Value for temperature provided by Open Weather Map.
+     * @returns { number | any } Value converted to either Fahrenheit or 
+     * Celsius.
+     */
     getTemperature(temperature: number|any): number|any {
         if(temperature != undefined){
             if (this.getInitialUnits() == 'IMPERIAL') {

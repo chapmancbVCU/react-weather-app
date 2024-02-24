@@ -49,8 +49,6 @@ input:checked + .slider:before {
     display: inline-block;
     width: 60px;
     height: 34px;
-
-    
 }
 
 .toggle-switch input {
@@ -59,11 +57,15 @@ input:checked + .slider:before {
     height: 0;
 }
 
-
 .toggle-switch-container {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: center;
     gap: 25px;
+ }
+
+ .toggle-switch-container h3 {
+    padding-bottom: 15px;
  }

@@ -94,7 +94,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
     return (
         <div className={conditionsClassName}>
-            <QuickFavorites />
+            <QuickFavorites weather={weather}/>
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

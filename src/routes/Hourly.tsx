@@ -80,7 +80,7 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
     
     return (
         <div className={conditionsClassName}>
-            <QuickFavorites />
+            <QuickFavorites weather={weather}/>
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

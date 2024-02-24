@@ -5,6 +5,8 @@
 .favorites-card {
     margin-top: 15px;
     margin-bottom: 15px;
+    border: 3px solid rgb(57, 169, 244);
+    border-radius: 5px;
 }
 
 .quick-favorites-container {
@@ -12,9 +14,8 @@
     align-self: center;
     margin-top: 25px;
     border: 3px solid rgb(57, 169, 244);
+    border-radius: 3px;
     background-color: rgba(111, 200, 230, .7);
-
-    
 }
 
 .quick-favorites-content {

@@ -8,25 +8,24 @@ import FavoritesCard from './FavoritesCard';
 import '../css/quickFavorites.css';
 import { FC, useEffect, useState } from 'react';
 import { Weather } from '../classes/Weather';
+import useUnitsToggle from '../hooks/useUnitsToggle';
 
 interface QuickFavoritesProps {
+    favorites: Favorite[];
     weather: Weather;
 }
 
-const QuickFavorites : FC<QuickFavoritesProps> = ({ weather }): JSX.Element => {
-
-    const [favorites, setFavorites] = useState<Favorite[]>([]);
-
-    const setQuickFavorites = () => {
-        const temp: Favorite[] = [];
-        temp.push(new Favorite("Newport News, Virginia", "US", 36.9788, -76.428, 5));
-        temp.push(new Favorite("Marion, Virginia", "US", 39.76844, -86.1555, 3));
-        temp.push(new Favorite("London, England", "GB", 51.5085, -0.1257, 2));
-        setFavorites(temp);
-    }
-
+const QuickFavorites : FC<QuickFavoritesProps> = ({ favorites, weather }): JSX.Element => {
+    /**
+     * Set toggle switch for units.
+     */
+    const { handleToggleChange,
+        temperatureUnitsLabel,
+        toggled,
+    } = useUnitsToggle(weather);
+    
     useEffect(() =>  {
-        setQuickFavorites();
+        // setQuickFavorites();
     }, [])
     return (
         <div className="quick-favorites-container">

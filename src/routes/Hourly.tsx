@@ -16,6 +16,7 @@ import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
 import useHourlyForecast from '../hooks/useHourlyForecast.ts';
+import { Favorite } from '../classes/Favorite.ts';
 
 /**
  * @interface HourlyPageProps The interface that describes props
@@ -23,6 +24,7 @@ import useHourlyForecast from '../hooks/useHourlyForecast.ts';
  */
 interface HourlyPageProps {
     dateTimeUtility: DateTimeUtility;
+    favorites: Favorite[];
     weather: Weather;
 }
 
@@ -32,7 +34,7 @@ interface HourlyPageProps {
  * @returns JSX.Element that contains the hourly forecast component.
  */
 // @ts-ignore
-const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element => {
+const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, favorites, weather }): JSX.Element => {
     
 
     const {
@@ -80,7 +82,8 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, weather }): JSX.Element 
     
     return (
         <div className={conditionsClassName}>
-            <QuickFavorites weather={weather}/>
+            <QuickFavorites favorites={favorites}
+                weather={weather}/>
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

@@ -15,6 +15,7 @@ import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
+import { Favorite } from '../classes/Favorite.ts';
 
 /**
  * @interface HomePageProps The interface that describes props that are shared 
@@ -22,6 +23,7 @@ import { Weather } from "../classes/Weather.ts";
  */
 interface HomePageProps {
     dateTimeUtility: DateTimeUtility;
+    favorites: Favorite[];
     weather: Weather;
 }
 
@@ -30,7 +32,7 @@ interface HomePageProps {
  * @returns JSX.Element that contains the current conditions forecast 
  * component.
  */
-const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
+const Home : FC<HomePageProps> = ({ dateTimeUtility, favorites, weather }): JSX.Element => {
     /**
      * Manages setup of weather data during initial startup and after a user 
      * performs a search.
@@ -94,7 +96,9 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, weather }): JSX.Element => 
 
     return (
         <div className={conditionsClassName}>
-            <QuickFavorites weather={weather}/>
+            <QuickFavorites 
+                favorites={favorites}
+                weather={weather}/>
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

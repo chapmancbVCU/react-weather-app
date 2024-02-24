@@ -18,11 +18,17 @@ import {
 } from 'react-router-dom';
 import './css/styles.css';
 import { Weather } from './classes/Weather.ts';
+import { Favorite } from './classes/Favorite.ts';
 
 
 // Instantiate objects here so they are available across application.
 const weather = new Weather();
 const dateTimeUtility = new DateTimeUtility();
+
+const favorites: Favorite[] = [];
+favorites.push(new Favorite("Newport News, Virginia", "US", 36.9788, -76.428, 5));
+favorites.push(new Favorite("Marion, Virginia", "US", 39.76844, -86.1555, 3));
+favorites.push(new Favorite("London, England", "GB", 51.5085, -0.1257, 2));
 
 /*
  Perform initial query of current location upon start of application.  Then 
@@ -62,18 +68,21 @@ const router = createBrowserRouter([
             {
                 path: "/react-weather-app/",
                 element: <Home dateTimeUtility={dateTimeUtility}
+                    favorites={favorites}
                     weather={weather}
                 />,
             },
                 {
                 path: "/react-weather-app/daily",
                 element: <Daily  dateTimeUtility={dateTimeUtility}
+                    favorites={favorites}
                     weather={weather}
                 />,
             },
             {
                 path: "/react-weather-app/hourly",
                 element: <Hourly  dateTimeUtility={dateTimeUtility}
+                    favorites={favorites}
                     weather={weather}
                 />,
             },

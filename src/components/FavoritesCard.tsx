@@ -20,15 +20,14 @@ const FavoritesCard : FC<FavoritesCardProps> = ({favorite, weather}): JSX.Elemen
 
     const [temperature, setTemperature] = useState<number>();
     const freeTier = async () => {
-        // try {
-        //     const response = await fetch(
-        //         `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
-        //     const res = await response.json()
-        //     if (res.data) { 
-        //         setFreeTierData(res.data) 
-        //     }
-        // } catch (error) { console.log(error); }
-        setFreeTierData(await weather.getCityData(city));
+        try {
+            const response = await fetch(
+                `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
+            const res = await response.json()
+            if (res.data && res.data.cod != "400") { 
+                setFreeTierData(res.data) 
+            }
+        } catch (error) { console.log(error); }
     }
 
     /**
@@ -41,26 +40,23 @@ const FavoritesCard : FC<FavoritesCardProps> = ({favorite, weather}): JSX.Elemen
     
     useEffect(() => {
         setCity(favorite.getCity());
-        freeTier();
+    }, []);
+
+    useEffect(() => {
+        freeTier();  
     }, [city]);
 
     useEffect(() => {
         console.log("Favorites ------------------------")
         console.log(freeTierData);
-        
-    }, [freeTierData?.main?.temp, weather, city]);
+        setTemperature(weather.calculateTemperature(freeTierData?.main?.temp));
+    }, [toggled, freeTierData]);
 
-    useEffect(() => {
-        if(freeTierData != undefined) {
-            setTemperature(weather.calculateTemperature(freeTierData?.main?.temp));
-        }
-        
-    }, [toggled, city])
     return (
         <div className="favorites-card">
             <div>{city}</div>
             <div>
-                {temperature}
+                {temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
             </div>
         </div>
     )

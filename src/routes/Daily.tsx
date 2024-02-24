@@ -17,6 +17,7 @@ import useForecast from '../hooks/useForecast.ts';
 import useSetBackground from '../hooks/useSetBackground.ts';
 import useUnitsToggle from '../hooks/useUnitsToggle.ts';
 import { Weather } from "../classes/Weather.ts";
+import { Favorite } from '../classes/Favorite.ts';
 
 /**
  * @interface HomePageProps The interface that describes props
@@ -24,6 +25,7 @@ import { Weather } from "../classes/Weather.ts";
  */
 interface DailyPageProps {
     dateTimeUtility: DateTimeUtility;
+    favorites: Favorite[];
     weather: Weather;
 }
 
@@ -32,7 +34,7 @@ interface DailyPageProps {
  * @returns JSX.Element that contains the daily forecast component.
  */
 // @ts-ignore
-const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element => {
+const Daily : FC<DailyPageProps> = ({ dateTimeUtility, favorites, weather }): JSX.Element => {
         
     const {
         freeTierData,
@@ -94,7 +96,8 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, weather }): JSX.Element =
 
     return (
         <div className={conditionsClassName}>
-            <QuickFavorites weather={weather}/>
+            <QuickFavorites favorites={favorites}
+                weather={weather}/>
             <div className='forecast'>
                 <ForecastHeader>
                     <SearchBar searchTerm={searchTerm}

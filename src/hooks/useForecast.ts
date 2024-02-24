@@ -131,6 +131,8 @@ const useForecast = (weather: Weather) => {
             weather.setCity(`${selectedCity.name}, ${selectedCity.state}`);
             setCity(weather.getCityInfo());
             weather.setCountry(freeTierData.sys.country);
+            weather.setLatitude(selectedCity.lat);
+            weather.setLongitude(selectedCity.lon);
             setCountryName();
             setOptions([]);
         } else if (!selectedCity && weather.getInit() === true) {

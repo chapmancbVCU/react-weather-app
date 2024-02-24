@@ -3,18 +3,67 @@
  * @author Chad Chapman
  */
 export class Weather {
-    // Instance variables
-    private city: any;
-    private geoLocationInfo: string;
-    private countryName: any;
-    private init: boolean;
-    private initialUnits: string;
-    private JSONCityData: Promise<string|void>;
-    private JSONDescriptiveWeatherData: Promise<string|void>;
-    private latitude: Promise<number|void>;
-    private longitude: Promise<number|void>;
-    private units: string;
+    /**
+     * The city that we are currently viewing data.
+     * @type { Promise<string | void> | string }
+     */
+    private city: Promise<string | void> | string;
 
+    /**
+     * Geolocation information the application fetches upon application start.
+     * @type { string }
+     */
+    private geoLocationInfo: string;
+
+    /**
+     * The name of the country the current city is located.
+     * @type { Promise<string|void> | string }
+     */
+    private countryName: Promise<string | void> | string;
+
+    /**
+     * The state of the application.  Used for decision making.  After initial 
+     * steps to start the app is complete it gets set to false.
+     * @type { boolean }
+     */
+    private init: boolean;
+
+    /**
+     * The initial units used by the application.  It can be either metric or 
+     * imperial.
+     * @type { string }
+     */
+    private initialUnits: string;
+
+    /**
+     * JSON string containing free tier data.
+     * @type { Promise<string | void> }
+     */
+    private JSONFreeTierData: Promise<string|void>;
+
+    /**
+     * JSON string containing one call data.
+     * @type { Promise<string | void> }
+     */
+    private JSONOneCallData: Promise<string | void>;
+
+    /**
+     * The latitude for the current city.
+     * @type { Promise<number | void> }
+     */
+    private latitude: Promise<number | void>;
+
+    /**
+     * The longitude for the current city.
+     * @type { Promise<number | void> }
+     */
+    private longitude: Promise<number | void>;
+
+    /**
+     * The current units selected by the user.
+     * @type { string }
+     */
+    private units: string;
 
     /**
      * Creates instance of Weather object.
@@ -25,24 +74,22 @@ export class Weather {
         this.countryName = this.getCountryInformation(this.geoLocationInfo);
         this.init = true;
         this.initialUnits = "";
-        this.JSONCityData = null!;
-        this.JSONDescriptiveWeatherData = null!;
+        this.JSONFreeTierData = null!;
+        this.JSONOneCallData = null!;
         this.latitude = this.getInitialLatitude(this.geoLocationInfo)!;
         this.longitude = this.getInitialLongitude(this.geoLocationInfo)!;
-        // console.log(`Latitude: ${this.latitude}`);
-        // console.log(`Longitude: ${this.longitude}`)
         this.units = "";
     }
-
 
     /**
      * Converts the temperature retrieved from Open Weather Map as Kelvin to 
      * either Fahrenheit or Celsius.
-     * @param {number} temperature The temperature in Kelvin that we want to convert to 
-     * either Fahrenheit or Celsius.
-     * @returns {number|any}The temperature in either Fahrenheit or Celsius.
+     * @param { number } temperature The temperature in Kelvin that we want to 
+     * convert to either Fahrenheit or Celsius.
+     * @returns { number | any }The temperature in either Fahrenheit or 
+     * Celsius.
      */
-    calculateTemperature(temperature: number): number|any {
+    calculateTemperature(temperature: number): number | any {
         if (this.getUnits() === "IMPERIAL") {
             return ((temperature - 273.15) * 9/5 + 32).toFixed(0);
         } else if (this.getUnits() === "METRIC") {
@@ -50,68 +97,59 @@ export class Weather {
         }
     }
 
-
     /**
      * Returns the limited weather data using api call based on city name.
-     * @param {string} city The locality whose weather we want to retrieve.
-     * @returns {Promise<string|void>} The limited local weather data as a JSON 
-     * Object.
+     * @param { string } city The locality whose weather we want to retrieve.
+     * @returns { Promise<string | void> } The limited local weather data as a 
+     * JSON Object.
      */
     async getCityData(city: any): Promise<string|void> {
         try {
             const response = await fetch(
                 `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
             const res = await response.json()
-            if (res.data) {
-                return res.data;
-            }
-        } catch (error) {
-            console.log(error);
-        }
+            if (res.data) { return res.data; }
+        } catch (error) { console.log(error); }
     }
 
-    
     /**
      * Get the name of city that is detected using geolocation based on 
      * localhost's location.
-     * @returns {Promise<string|void>} The name of the city when using 
+     * @returns { Promise<string | void> | string } The name of the city when using 
      * geolocation to detect location.
      */
-    getCityInfo(): any {
+    getCityInfo(): Promise<string | void> | string {
         return this.city;
     }
 
-
     /**
      * The name of the country where the user resides.
-     * @param {string} geoLocationInfo JSON string that contains information 
+     * @param { string } geoLocationInfo JSON string that contains information 
      * about user's current location.
-     * @returns {Promise<string|void>} The country where the user resides.
+     * @returns { Promise<string | void> } The country where the user resides.
      */
-    async getCountryInformation(geoLocationInfo: string): Promise<string|undefined> {
+    async getCountryInformation(geoLocationInfo: string): 
+        Promise<string | undefined> {
         try {
             const response = await fetch(geoLocationInfo);
             const data = await response.json();
             return data.countryName;
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) { console.log(error); }
     }
-
 
     /**
      * Getter function for retrieving the users country.
-     * @returns {string} The nation where the user resides.
+     * @returns { Promise<string | void> | string } The nation where the user 
+     * resides.
      */
-    getCountryName(): string {
+    getCountryName(): Promise<string | void> | string {
         return this.countryName;
     }
 
-
     /**
      * Detect location of localhost so we can get local weather on page load.
-     * @returns {string} The string representation of locality information in form of 
-     * URL that references an API.
+     * @returns { string } The string representation of locality information 
+     * in form of URL that references an API.
      */
     getGeoLocationInformation(): string {
         let _this = this;
@@ -131,30 +169,29 @@ export class Weather {
         return bdcApi;
     }
 
-
     /**
      * Returns a boolean value based on state of the application.  When the 
      * application is started this value is set to true.  When a fetch for 
      * data is made it is set to false.  Use this function to test for 
      * conditions based on whether or not the application has just started.
-     * @returns True if application has just been initialized and false 
-     * otherwise.
+     * @returns { boolean } True if application has just been initialized and 
+     * false otherwise.
      */
     getInit(): boolean {
         return this.init;
     }
-
     
     /**
      * Returns the original latitude used to get weather data on application 
      * startup.  It uses the geoLocationInfo JSON string to get this 
      * information.
-     * @param geoLocationInfo A string containing information pulled upon 
-     * application start to determine the user's location.
-     * @returns {Promise<number|undefined>} The latitude based on a fetch 
+     * @param { string }geoLocationInfo A string containing information pulled 
+     * upon application start to determine the user's location.
+     * @returns { Promise<number | undefined> } The latitude based on a fetch 
      * request used to get initial location information.
      */
-    async getInitialLatitude(geoLocationInfo: string): Promise<number|undefined> {
+    async getInitialLatitude(geoLocationInfo: string): 
+        Promise<number | undefined> {
         try {
             const response = await fetch(geoLocationInfo);
             const data = await response.json();
@@ -164,69 +201,64 @@ export class Weather {
         }
     }
 
-
     /**
      * Returns the original longitude used to get weather data on application 
      * startup.  It uses the geoLocationInfo JSON string to get this 
      * information.
-     * @param geoLocationInfo A string containing information pulled upon 
-     * application start to determine the user's location.
-     * @returns {Promise<number|undefined>} The longitude based on a fetch 
+     * @param { string } geoLocationInfo A string containing information pulled 
+     * upon application start to determine the user's location.
+     * @returns { Promise<number | undefined> } The longitude based on a fetch 
      * request used to get initial location information.
      */
-    async getInitialLongitude(geoLocationInfo: string): Promise<number|undefined> {
+    async getInitialLongitude(geoLocationInfo: string): 
+        Promise<number | undefined> {
         try {
             const response = await fetch(geoLocationInfo);
             const data = await response.json();
             return data.longitude;
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) { console.log(error); }
     }
-
 
     /**
      * Getter function for initial unit system.  It can be either IMPERIAL or 
      * METRIC.
-     * @returns {string} The initial units that were set upon location detection when 
-     * the user loads the page.
+     * @returns { string } The initial units that were set upon location 
+     * detection when the user loads the page.
      */
     getInitialUnits(): string {
         return this.initialUnits;
     }
 
-
     /**
      * Getter function for returning city data as a JSON object.
-     * @returns {Promise<string|void>} JSON object containing city data.
+     * @returns { Promise<string | void> } JSON object containing city data.
      */
-    getJSONFreeTierData(): Promise<string|void> {
-        return this.JSONCityData;
+    getJSONFreeTierData(): Promise<string | void> {
+        return this.JSONFreeTierData;
     }
-
 
     /**
      * Getter function for returning descriptive weather data as a JSON object.
-     * @returns {Promise<string|void>} JSON object containing descriptive 
+     * @returns { Promise<string | void> } JSON object containing descriptive 
      * weather data.
      */
-    getJSONOneCallWeatherData(): Promise<string|void> {
-        return this.JSONDescriptiveWeatherData;
+    getJSONOneCallWeatherData(): Promise<string | void> {
+        return this.JSONOneCallData;
     }
-
 
     /**
      * Getter function for the latitude.
-     * @returns {number} The latitude of the user or search query
+     * @returns { Promise<number | void> } The latitude of the user or search 
+     * query.
      */
-    getLatitude(): any {
+    getLatitude(): Promise<number | void> {
         return this.latitude;
     }
 
 
     /**
      * Retrieves locality information of user upon initialization of page.
-     * @param {string} geoLocationInfo JSON string that contains information 
+     * @param { string } geoLocationInfo JSON string that contains information 
      * about user's current location.
      * @returns {Promise<string|void>} The locality of where the user resides.
      */
@@ -324,7 +356,7 @@ export class Weather {
     /**
      * Getter function that retrieves the units.  This value can be METRIC or 
      * IMPERIAL.
-     * @returns {string} The units name that the user as selected or detected 
+     * @returns { string } The units name that the user as selected or detected 
      * based on the user's location.
      */
     getUnits(): string {
@@ -335,7 +367,7 @@ export class Weather {
     /**
      * Converts visibility in meters to kilometers or miles depending on which 
      * units are selected.
-     * @param {JSON} cityData string containing weather data for locality.
+     * @param { number } visibility string containing weather data for locality.
      * @returns Visibility represented as miles or kilometers depending on 
      * which units of measurement is selected.
      */
@@ -422,7 +454,7 @@ export class Weather {
      * Sets name of current city.
      * @param {string} city The name of the city.
      */
-    setCity(city: string): void {
+    setCity(city: Promise<string|void>|string): void {
         this.city = city;
     }
 
@@ -474,21 +506,21 @@ export class Weather {
 
     /**
      * Setter function for simple weather data in the form of a JSON object.
-     * @param {string} cityData JSON string containing weather data. 
+     * @param { string } JSONFreeTierData JSON string containing weather data. 
      */
-    setJSONFreeTierData(cityData:string|any): void {
-        this.JSONCityData = cityData;
+    setJSONFreeTierData(JSONFreeTierData: string|any): void {
+        this.JSONFreeTierData = JSONFreeTierData;
     }
 
 
     /**
      * Setter function for descriptive weather data in the form of a JSON 
      * object.
-     * @param {string} descriptiveWeatherData JSON string containing descriptive 
+     * @param { string } JSONOneCallData JSON string containing descriptive 
      * weather data.
      */
-    setJSONOneCallWeatherData(descriptiveWeatherData:string|any): void {
-        this.JSONDescriptiveWeatherData = descriptiveWeatherData;
+    setJSONOneCallWeatherData(JSONOneCallData: string|any): void {
+        this.JSONOneCallData = JSONOneCallData;
     }
 
 

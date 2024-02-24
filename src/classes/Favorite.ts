@@ -3,10 +3,35 @@
  * @author Chad Chapman
  */
 export class Favorite {
+    /**
+     * The locality associated with the favorite.  It may include the city and 
+     * state as part of this string.
+     * @type { string }
+     */
     private city: string;
+
+    /**
+     * The nation for the locality we are using as a favorite.
+     * @type { string }
+     */
     private country: string;
+
+    /**
+     * The latitude for the locality.
+     * @type { number }
+     */
     private latitude: number;
+
+    /**
+     * The longitude for the locality.
+     * @type { number} 
+     */
     private longitude: number;
+
+    /**
+     * The number of times a user has visited a locality.  This will be used 
+     * to determine frequency of visits to make suggestions to the user.
+     */
     private visits: number;
 
     /**

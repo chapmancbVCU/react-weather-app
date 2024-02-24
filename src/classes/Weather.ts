@@ -255,100 +255,84 @@ export class Weather {
         return this.latitude;
     }
 
-
     /**
      * Retrieves locality information of user upon initialization of page.
      * @param { string } geoLocationInfo JSON string that contains information 
      * about user's current location.
-     * @returns {Promise<string|void>} The locality of where the user resides.
+     * @returns { Promise<string | void> } The locality of where the user 
+     * resides.
      */
-    async getLocalityInformation(geoLocationInfo: string): Promise<string|void> {              
+    async getLocalityInformation(geoLocationInfo: string): 
+        Promise<string | void> {              
         try {
             const response = await fetch(geoLocationInfo);
             const data = await response.json();
             const country = data.countryName;
             if(country.includes('United States of America')) {
                 return `${data.locality}, ${data.principalSubdivision}`;
-            } else {
-                return data.city + ", " + data.countryName;
-            }
-        } catch (error) {
-            console.log(error);
-        }
+            } else { return data.city + ", " + data.countryName; }
+        } catch (error) { console.log(error); }
     }
-
 
     /**
      * Getter function for the longitude.
-     * @returns {number} The longitude of the user or search query
+     * @returns { Promise<number | void>} The longitude of the user or search 
+     * query
      */
-    getLongitude(): any {
+    getLongitude(): Promise<number | void> {
         return this.longitude;
     }
-
 
     /**
      * Returns the detailed weather data of the user's location or search 
      * query.
-     * @param {number} latitude The latitude of user's location or search 
+     * @param { number } latitude The latitude of user's location or search 
      * query.
-     * @param {number} longitude The longitude of user's location or search 
+     * @param { number } longitude The longitude of user's location or search 
      * query.
-     * @returns {Promise<string|void> } Detailed weather data as a JSON object.
+     * @returns { Promise<string | void> } Detailed weather data as a JSON object.
      */
-    async getOneCallWeatherData(latitude: number, longitude: number): Promise<string|void> {
+    async getOneCallWeatherData(latitude: number, longitude: number): 
+        Promise<string | void> {
         let units = '';
-        if(this.getUnits() === 'IMPERIAL') {
-            units = 'imperial';
-        } else {
-            units = 'metric';
-        }        
+        this.getUnits() === 'IMPERIAL' ? units = 'imperial' : units = 'metric';
+
         try {
             const response = await fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=ONECALL&lat=${latitude}&lon=${longitude}&units=${units}`);
             const res = await response.json();
-            if (res.data) {
-                return res.data;
-            }
-        } catch (error) {
-            console.log(error);
-        }
+            if (res.data) { return res.data; }
+        } catch (error) { console.log(error); }
     }
-
 
     /**
      * Converts pressure in hectoPascals(hPa) to inches.
-     * @param {Number} pressureInhPa in hectoPascals (hPa).
+     * @param { number } pressureInhPa in hectoPascals (hPa).
      * @returns The pressure represented in inches.
      */
     getPressure(pressureInhPa: number) {
         if(this.getUnits() === "IMPERIAL") {
             const PRESSURE_CONVERSION_CONSTANT: number = 0.0295;
             return (pressureInhPa * PRESSURE_CONVERSION_CONSTANT).toFixed(1) + " psi";
-        } else {
-            return pressureInhPa + " mbar";
-         }
+        } else { return pressureInhPa + " mbar"; }
     }
 
     /**
      * Returns temperature based on system user has application set.
-     * @param temperature Value for temperature provided by Open Weather Map.
+     * @param { number | any } temperature Value for temperature provided by 
+     * Open Weather Map.
      * @returns { number | any } Value converted to either Fahrenheit or 
      * Celsius.
      */
-    getTemperature(temperature: number|any): number|any {
+    getTemperature(temperature: number | any): number | any {
         if(temperature != undefined){
             if (this.getInitialUnits() == 'IMPERIAL') {
                 if(this.getUnits() == 'IMPERIAL') {
                     return temperature.toFixed(0)!;
-                } else {
-                    return ((temperature - 32) * (5/9)).toFixed(0)!;
-                }   
+                } else { return ((temperature - 32) * (5/9)).toFixed(0)!; }   
             } else if (this.getInitialUnits() == 'METRIC') {
                 if(this.getUnits() == 'IMPERIAL') {
                     return ((temperature * 1.8) + 32).toFixed(0)!;
-                } else {
-                    return temperature.toFixed(0)!;
-                }
+                } else { return temperature.toFixed(0)!; }
             }
         }
     }
@@ -363,7 +347,6 @@ export class Weather {
         return this.units;
     }
 
-
     /**
      * Converts visibility in meters to kilometers or miles depending on which 
      * units are selected.
@@ -374,19 +357,17 @@ export class Weather {
     getVisibility(visibility: number): string {
         if (this.getUnits() === 'IMPERIAL') {
             return (visibility / 1609.344).toFixed(1) + ' miles';
-        } else {
-            return (visibility / 1000).toFixed(1) + ' km';
-        }
+        } else { return (visibility / 1000).toFixed(1) + ' km'; }
     }
-
 
     /**
      * Returns either N, NE, E, SE, S, SW, W, or NW depending on wind 
      * direction.
-     * @param {Number} deg The direction of the winds. 
-     * @returns {string|any} A string value indicating general direction of the winds.
+     * @param { number } deg The direction of the winds. 
+     * @returns { string | any } A string value indicating general direction 
+     * of the winds.
      */
-    getWindDirection(deg: number): string|any {
+    getWindDirection(deg: number): string | any {
         if ((deg >= 337.6 && deg <= 359.9) || deg >= 0 && deg <= 22.5) {
             return 'S';
         } else if (deg >= 22.6 && deg <= 67.5) {
@@ -406,25 +387,21 @@ export class Weather {
         }
     }
 
-
     /**
      * Returns wind as mph or km/h depending of location.
-     * @param {number} wind The wind speed expressed in meters per second. 
-     * @returns {string} The wind speed in mph or km/h.
+     * @param { number } wind The wind speed expressed in meters per second. 
+     * @param { boolean } toggled False if Imperial and true if metric, used 
+     * for decision making for calculating correct values.
+     * @returns { string } The wind speed in mph or km/h.
      */
     getWindSpeed(wind: number, toggled: boolean): string | any {
         if (this.getInitialUnits() === 'METRIC') {
             if (toggled === false) {
                 return (wind / 1.609)?.toFixed(1) + ' mph';
-            } else {
-                return wind?.toFixed(1) + ' km/h';
-            }
+            } else { return wind?.toFixed(1) + ' km/h'; }
         } else if (this.getInitialUnits() === 'IMPERIAL') {
-            if (toggled === false) {
-                return wind?.toFixed(1) + ' mph';
-            } else {
-                return (wind * 1.609)?.toFixed(1) + ' km/h';
-            }
+            if (toggled === false) { return wind?.toFixed(1) + ' mph'; }
+            else { return (wind * 1.609)?.toFixed(1) + ' km/h'; }
         }
     }
 
@@ -449,19 +426,17 @@ export class Weather {
     //     }
     // }
 
-
     /**
      * Sets name of current city.
-     * @param {string} city The name of the city.
+     * @param { Promise<string | void> | string } city The name of the city.
      */
-    setCity(city: Promise<string|void>|string): void {
+    setCity(city: Promise<string | void> | string): void {
         this.city = city;
     }
 
-
     /**
      * Sets name of current country.
-     * @param {string} country The name of the country.
+     * @param { string } country The name of the country.
      */
     setCountry(country: string): void {
         this.countryName = country
@@ -470,10 +445,10 @@ export class Weather {
     /**
      * Sets string for content div to contain content class selector along 
      * with class selector for specific background images.
-     * @param {string } currentConditions Description of current conditions in 
-     * current forecast.
-     * @returns {string} A string containing current conditions description along with 
-     * another class for content.
+     * @param { string } currentConditions Description of current conditions 
+     * in current forecast.
+     * @returns { string } A string containing current conditions description 
+     * along with another class for content.
      */
     setConditionsClass(currentConditions: string): string {
         if (currentConditions === "clear sky") {
@@ -499,58 +474,58 @@ export class Weather {
         }
     }
 
-
+    /**
+     * Sets value of init to false after initial steps to get application 
+     * running is completed.
+     */
     setInitFalse() {
         this.init = false;
     }
 
     /**
      * Setter function for simple weather data in the form of a JSON object.
-     * @param { string } JSONFreeTierData JSON string containing weather data. 
+     * @param { string | any } JSONFreeTierData JSON string containing weather 
+     * data. 
      */
-    setJSONFreeTierData(JSONFreeTierData: string|any): void {
+    setJSONFreeTierData(JSONFreeTierData: string | any): void {
         this.JSONFreeTierData = JSONFreeTierData;
     }
-
 
     /**
      * Setter function for descriptive weather data in the form of a JSON 
      * object.
-     * @param { string } JSONOneCallData JSON string containing descriptive 
-     * weather data.
+     * @param { string | any } JSONOneCallData JSON string containing 
+     * descriptive weather data.
      */
-    setJSONOneCallWeatherData(JSONOneCallData: string|any): void {
+    setJSONOneCallWeatherData(JSONOneCallData: string | any): void {
         this.JSONOneCallData = JSONOneCallData;
     }
 
-
     /**
      * Setter function for the latitude of the user's location or search query.
-     * @param {number} latitude The latitude of the user's location or search 
-     * query.
+     * @param { Promise<number | void> } latitude The latitude of the user's 
+     * location or search query.
      */
-    setLatitude(latitude: any): void {
+    setLatitude(latitude: Promise<number | void>): void {
         this.latitude = latitude;
     } 
-
 
     /**
      * Setter function for the longitude of the user's location or search 
      * query.
-     * @param {number} longitude The longitude of the user's location or search 
-     * query.
+     * @param {Promise<number | void>} longitude The longitude of the user's 
+     * location or search query.
      */
-    setLongitude(longitude: any): void {
+    setLongitude(longitude: Promise<number | void>): void {
         this.longitude = longitude;
     }
 
-
     /**
      * Sets the value of the units to be used based on user's location.
-     * @param {string} countryName The name of the user's nation based on 
+     * @param { string } countryName The name of the user's nation based on 
      * location detection.
      */
-    setUnits(countryName:string): void {
+    setUnits(countryName: string): void {
         if (countryName.includes('United States of America') ||
             countryName.includes('Myanmar') ||
             countryName.includes('Liberia')) {
@@ -562,15 +537,11 @@ export class Weather {
         }
     }
 
-    
     /**
      * Toggles the this.units instance variable between IMPERIAL and METRIC.
      */
     toggleUnits(): void {
-        if(this.units === 'IMPERIAL') {
-            this.units = 'METRIC';
-        } else {
-            this.units = 'IMPERIAL';
-        }
+        this.units === 'IMPERIAL' ? 
+            this.units = 'METRIC' : this.units = 'IMPERIAL';
     }
 }

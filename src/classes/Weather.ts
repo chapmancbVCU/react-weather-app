@@ -292,8 +292,8 @@ export class Weather {
      * query.
      * @returns { Promise<string | void> } Detailed weather data as a JSON object.
      */
-    async getOneCallWeatherData(latitude: number, longitude: number): 
-        Promise<string | void> {
+    async getOneCallWeatherData(latitude: Promise<number | void> | number, 
+        longitude: Promise<number | void> | number): Promise<string | void> {
         let units = '';
         this.getUnits() === 'IMPERIAL' ? units = 'imperial' : units = 'metric';
 
@@ -525,7 +525,7 @@ export class Weather {
      * @param { string } countryName The name of the user's nation based on 
      * location detection.
      */
-    setUnits(countryName: string): void {
+    setUnits(countryName: string | any): void {
         if (countryName.includes('United States of America') ||
             countryName.includes('Myanmar') ||
             countryName.includes('Liberia')) {

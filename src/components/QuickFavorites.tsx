@@ -30,14 +30,14 @@ const QuickFavorites : FC<QuickFavoritesProps> = ({ favorites, weather }): JSX.E
     return (
         <div className="quick-favorites-container">
             <h3>Favorites</h3>
-            {/* <div className='quick-favorites-content'>
+            <div className='quick-favorites-content'>
                 {favorites.map((favorite: Favorite, index: number) => (
                     <FavoritesCard key={index}
                         favorite={favorite}
                         weather={weather}>
                     </FavoritesCard>
                 ))}
-            </div> */}
+            </div>
         </div>
     )
 }

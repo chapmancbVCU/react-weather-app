@@ -65,6 +65,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
             <h3>Select Units</h3>
             <form className="set-favorite-form">
                 <input type="checkbox"
+                    name="isFavorite"
                     checked={isFavorite}
                     onChange={handleFavoriteToggleChange}></input>
             </form>

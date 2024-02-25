@@ -56,6 +56,7 @@ try {
     console.log(error)
 }
 
+
 /**
  * This function is responsible for routing within this application.
  */

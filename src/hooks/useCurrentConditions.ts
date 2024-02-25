@@ -228,14 +228,14 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
 
         setMorningTemperature(weather.getTemperature(oneCallData?.daily[0]?.temp.morn));
-        setDayTemperature(weather.getTemperature(oneCallData?.daily[0].temp.day));
-        setEveningTemperature(weather.getTemperature(oneCallData?.daily[0].temp.eve));
-        setNightTemperature(weather.getTemperature(oneCallData?.daily[0].temp.night));
+        setDayTemperature(weather.getTemperature(oneCallData?.daily[0]?.temp.day));
+        setEveningTemperature(weather.getTemperature(oneCallData?.daily[0]?.temp.eve));
+        setNightTemperature(weather.getTemperature(oneCallData?.daily[0]?.temp.night));
 
-        setMorningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.morn));
-        setDayFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.day));
-        setEveningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.eve));
-        setNightFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0].feels_like.night));
+        setMorningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0]?.feels_like.morn));
+        setDayFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0]?.feels_like.day));
+        setEveningFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0]?.feels_like.eve));
+        setNightFeelsLikeTemperature(weather.getTemperature(oneCallData?.daily[0]?.feels_like.night));
 
         setDewPoint(weather.getTemperature(oneCallData?.current.dew_point));
         setCurrentConditionsProps();

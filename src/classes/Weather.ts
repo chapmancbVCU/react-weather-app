@@ -108,7 +108,13 @@ export class Weather {
             const response = await fetch(
                 `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
             const res = await response.json()
-            if (res.data) { return res.data; }
+            // if (res.data.cod == "400") {
+            //     location.reload();
+            // }
+            if (res.data && res.data.cod != "400") 
+            { 
+                return res.data; 
+            }
         } catch (error) { console.log(error); }
     }
 
@@ -300,7 +306,10 @@ export class Weather {
         try {
             const response = await fetch(`http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=ONECALL&lat=${latitude}&lon=${longitude}&units=${units}`);
             const res = await response.json();
-            if (res.data && res.data.cod != "400") { return res.data; }
+            if (res.data && res.data.cod != "400") 
+            { 
+                return res.data; 
+            }
         } catch (error) { console.log(error); }
     }
 

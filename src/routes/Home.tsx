@@ -85,7 +85,8 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, favorites, weather }): JSX.
         sunRise,
         sunSet,
         temperature,
-        uvi
+        uvi,
+        windGust
     } = useCurrentConditions(dateTimeUtility, freeTierData, oneCallData, weather, toggled);
 
     /**
@@ -161,7 +162,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, favorites, weather }): JSX.
                                 Winds
                                 <div>{weather.getWindSpeed(freeTierData?.wind.speed, toggled)}, {weather.getWindDirection(freeTierData?.wind.deg)}</div>
                                 Wind Gusts
-                                <div>{weather.getWindSpeed(oneCallData?.daily[0].wind_gust, toggled)}</div>
+                                <div>{windGust}</div>
                             </div>
                         </div>
                     </div>

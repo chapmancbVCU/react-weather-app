@@ -137,6 +137,8 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
      */
     const [uvi, setUVI] = useState<number>();
 
+    const [windGust, setWindGust] = useState<string>("");
+
     /**
      * Capitalize first letter of each word of current conditions description.
      */
@@ -165,7 +167,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
      */
     const setDateTime = (): void => {
         setDateTimeStamp(dateTimeUtility.getDateTime(
-            oneCallData?.current.dt, oneCallData?.timezone_offset));
+            oneCallData?.current?.dt, oneCallData?.timezone_offset));
     }
 
     /**
@@ -225,7 +227,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setHighTemperature(weather.calculateTemperature(freeTierData?.main.temp_max));
         setLowTemperature(weather.calculateTemperature(freeTierData?.main.temp_min));
 
-        setMorningTemperature(weather.getTemperature(oneCallData?.daily[0].temp.morn));
+        setMorningTemperature(weather.getTemperature(oneCallData?.daily[0]?.temp.morn));
         setDayTemperature(weather.getTemperature(oneCallData?.daily[0].temp.day));
         setEveningTemperature(weather.getTemperature(oneCallData?.daily[0].temp.eve));
         setNightTemperature(weather.getTemperature(oneCallData?.daily[0].temp.night));
@@ -241,7 +243,7 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         setSummary(oneCallData?.daily[0].summary);
         setPop((oneCallData?.daily[0]?.pop * 100).toFixed(0));
 
-        //setWindGust(weather.getWindSpeed(oneCallData?.daily[0].wind_gust, toggled));
+        setWindGust(weather.getWindSpeed(oneCallData?.daily[0].wind_gust, toggled));
 
         setUVI((oneCallData?.daily[0].uvi.toFixed(0)));
         setConditionIcon(`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`);
@@ -278,7 +280,8 @@ const useCurrentConditions = (dateTimeUtility: DateTimeUtility, freeTierData: an
         sunRise,
         sunSet,
         temperature,
-        uvi
+        uvi,
+        windGust
     };
 };
 

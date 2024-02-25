@@ -16,6 +16,7 @@ const FavoritesCard : FC<FavoritesCardProps> = ({favorite, weather}): JSX.Elemen
 
     const [city, setCity] = useState<string>("");
 
+    const [icon, setIcon] = useState<string>("");
     const [freeTierData, setFreeTierData] = useState<any>();
 
     const [temperature, setTemperature] = useState<number>();
@@ -50,14 +51,17 @@ const FavoritesCard : FC<FavoritesCardProps> = ({favorite, weather}): JSX.Elemen
         console.log("Favorites ------------------------")
         console.log(freeTierData);
         setTemperature(weather.calculateTemperature(freeTierData?.main?.temp));
+        setIcon(`https://openweathermap.org/img/wn/${freeTierData?.weather[0].icon}@2x.png`)
     }, [toggled, freeTierData]);
 
     return (
         <div className="favorites-card">
-            <div>{city}</div>
-            <div>
+            <div className="city">{city}</div>
+            <div className="temp-icon">
                 {temperature} {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                <img src={icon}></img>
             </div>
+            <div className="description">{freeTierData?.weather[0].description}</div>
         </div>
     )
 }

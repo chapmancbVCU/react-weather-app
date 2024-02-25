@@ -23,7 +23,7 @@ interface UnitsToggleSwitchProps {
 
 const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({ 
         weather, 
-        rounded = false, 
+        rounded = false,  
         isToggled, 
         handleToggleChange,
         useUnitsToggle
@@ -42,7 +42,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     /**
      * Set toggle switch for units.
      */
-    const { temperatureUnitsLabel } = useUnitsToggle(weather);
+    const { isFavorite, handleFavoriteToggleChange, temperatureUnitsLabel } = useUnitsToggle(weather);
 
     useEffect(() => {
         setFreeTierData(weather.getJSONFreeTierData());
@@ -63,6 +63,11 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
                 <span className={sliderCX} />
             </label>
             <h3>Select Units</h3>
+            <form className="set-favorite-form">
+                <input type="checkbox"
+                    checked={isFavorite}
+                    onChange={handleFavoriteToggleChange}></input>
+            </form>
         </div> 
     );
 };

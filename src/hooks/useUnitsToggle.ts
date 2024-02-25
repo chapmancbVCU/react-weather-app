@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
 
 const useUnitsToggle = (weather: Weather) => {
+
+    const [isFavorite, setIsFavorite] = useState<boolean>();
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
@@ -16,6 +18,10 @@ const useUnitsToggle = (weather: Weather) => {
      * checked.
      */
     const [toggled, setIsToggled] = useState<boolean>(false);
+
+    const handleFavoriteToggleChange = (): void => {
+        setIsFavorite(!isFavorite);
+    }
 
     /**
      * This function is called when state of units toggle switch is updated.
@@ -47,8 +53,14 @@ const useUnitsToggle = (weather: Weather) => {
         updateTemperatureUnitsLabel();
     }, [toggled, handleToggleChange])
 
+    useEffect(() => {
+        console.log("favorite toggle" + isFavorite);
+    }, [isFavorite])
+
     return {
+        handleFavoriteToggleChange,
         handleToggleChange,
+        isFavorite,
         temperatureUnitsLabel,
         toggled
     }

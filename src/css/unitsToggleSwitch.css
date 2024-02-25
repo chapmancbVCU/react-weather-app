@@ -44,6 +44,23 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.set-favorite-form input[type="checkbox"] {
+    visibility:hidden;
+    font-size:30px;
+    cursor:pointer;
+    margin-bottom: 40px;
+}
+
+.set-favorite-form input[type="checkbox"]:before {
+    content: "\2605";
+    color: white;
+    visibility:visible;
+ }
+
+ .set-favorite-form input[type="checkbox"]:checked:before {
+    color: yellow;
+ }
+
 .toggle-switch {
     position: relative;
     display: inline-block;

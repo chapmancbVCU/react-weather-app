@@ -29,7 +29,8 @@ const favorites: Favorite[] = [];
 favorites.push(new Favorite("Newport News, Virginia", "US", 36.9788, -76.428, 5));
 favorites.push(new Favorite("Marion, Virginia", "US", 39.76844, -86.1555, 3));
 favorites.push(new Favorite("London, England", "GB", 51.5085, -0.1257, 2));
-
+favorites.push(new Favorite("Los Angeles, California", "US", 34.0537, -118.2428, 6));
+favorites.push(new Favorite("Fugging, Upper Austria", "AT", 48.0674, 12.8623, 69));
 /*
  Perform initial query of current location upon start of application.  Then 
  get weather data for that initial query.

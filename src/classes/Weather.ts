@@ -76,8 +76,8 @@ export class Weather {
         this.initialUnits = "";
         this.JSONFreeTierData = null!;
         this.JSONOneCallData = null!;
-        this.latitude = this.getInitialLatitude(this.geoLocationInfo)!;
-        this.longitude = this.getInitialLongitude(this.geoLocationInfo)!;
+        this.latitude = 0;
+        this.longitude = 0;
         this.units = "";
     }
 
@@ -108,9 +108,6 @@ export class Weather {
             const response = await fetch(
                 `http://${import.meta.env.VITE_API_HOSTNAME}:3000/api?type=SIMPLE&city=${city}`);
             const res = await response.json()
-            // if (res.data.cod == "400") {
-            //     location.reload();
-            // }
             if (res.data && res.data.cod != "400") 
             { 
                 return res.data; 

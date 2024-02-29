@@ -37,19 +37,14 @@ favorites.push(new Favorite("Fugging, Upper Austria", "AT", 48.0674, 12.8623, 69
  */
 try {
     const localityInfo = await weather.getCityInfo();
-    const cityData = await weather.getCityData(localityInfo);
+    const cityData: any = await weather.getCityData(localityInfo);
     const countryName = await weather.getCountryName();
     weather.setUnits(countryName);
 
     weather.setJSONFreeTierData(cityData);
-} catch (error) {
-    console.log(error)
-}
 
-/*
- Second try catch block to resolve issue of getting one call data on app start.
- */
-try {
+    weather.setLatitude(cityData.coord.lat);
+    weather.setLongitude(cityData.coord.lon);
     const descriptiveWeatherData = 
       await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
     weather.setJSONOneCallWeatherData(descriptiveWeatherData);

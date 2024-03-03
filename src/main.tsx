@@ -26,11 +26,11 @@ const weather = new Weather();
 const dateTimeUtility = new DateTimeUtility();
 
 const favorites: Favorite[] = [];
-favorites.push(new Favorite("Newport News, Virginia", "US", 36.9788, -76.428, 5));
-favorites.push(new Favorite("Marion, Virginia", "US", 39.76844, -86.1555, 3));
-favorites.push(new Favorite("London, England", "GB", 51.5085, -0.1257, 2));
-favorites.push(new Favorite("Los Angeles, California", "US", 34.0537, -118.2428, 6));
-favorites.push(new Favorite("Fugging, Upper Austria", "AT", 48.0674, 12.8623, 69));
+// favorites.push(new Favorite("Newport News, Virginia", "US", 36.9788, -76.428, 5));
+// favorites.push(new Favorite("Marion, Virginia", "US", 39.76844, -86.1555, 3));
+// favorites.push(new Favorite("London, England", "GB", 51.5085, -0.1257, 2));
+// favorites.push(new Favorite("Los Angeles, California", "US", 34.0537, -118.2428, 6));
+// favorites.push(new Favorite("Fugging, Upper Austria", "AT", 48.0674, 12.8623, 69));
 /*
  Perform initial query of current location upon start of application.  Then 
  get weather data for that initial query.
@@ -48,10 +48,29 @@ try {
     const descriptiveWeatherData = 
       await weather.getOneCallWeatherData(weather.getLatitude(), weather.getLongitude());
     weather.setJSONOneCallWeatherData(descriptiveWeatherData);
+
+    /* Determine if local storage is empty.  If empty, we set current location 
+    as a favorite.  Otherwise, we load favorites from local storage. */
+    if (localStorage.length == 0) {
+        console.log("Adding current location");
+        let localCity = new Favorite(cityData.name,
+            cityData.sys.country,
+            cityData.coord.lat,
+            cityData.coord.lon,
+            1);
+        favorites.push(localCity)
+        localCity.setFavoriteToStorage(localCity, localCity.getCity());
+    } else {
+        console.log("Not empty, loading from local storage");
+        for (let i = 0; i < localStorage.length; i++) {
+            let locationInStorage = localStorage.key(i)!;
+            favorites.push(Favorite.getFavorite(locationInStorage));
+        }
+    }
+    console.log(favorites)
 } catch (error) {
     console.log(error)
 }
-
 
 /**
  * This function is responsible for routing within this application.

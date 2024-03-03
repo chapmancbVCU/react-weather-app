@@ -60,7 +60,7 @@ export class Favorite {
      * value of.
      * @returns An instance of the Favorite class.
      */
-    getFavorite(key: string) {
+    static getFavorite(key: string) {
         let deserializedObj = JSON.parse(localStorage.getItem(key)!);
 
         const city = deserializedObj.city;

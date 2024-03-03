@@ -51,18 +51,21 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
 
     return (
         <div className="toggle-switch-container">
-            <h3>
-                {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
-            </h3>
-            <label className="toggle-switch">
-                <input type="checkbox" 
-                    name='isToggled' 
-                    id='isToggled' 
-                    checked={isToggled} 
-                    onChange={handleToggleChange}/>
-                <span className={sliderCX} />
-            </label>
-            <h3>Select Units</h3>
+            <div className="toggle-switch-content">
+                <h3>
+                    {freeTierData && freeTierData.sys.country} | {'\xB0'}{typeof temperatureUnitsLabel === 'string' ? temperatureUnitsLabel : null}
+                </h3>
+                <label className="toggle-switch">
+                    <input type="checkbox" 
+                        name='isToggled' 
+                        id='isToggled' 
+                        checked={isToggled} 
+                        onChange={handleToggleChange}/>
+                    <span className={sliderCX} />
+                </label>
+                <h3>Select Units</h3>
+            </div>
+            
             <form className="set-favorite-form">
                 <input type="checkbox"
                     name="isFavorite"

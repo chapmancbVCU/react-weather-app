@@ -48,18 +48,18 @@ input:checked + .slider:before {
     visibility:hidden;
     font-size:30px;
     cursor:pointer;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .set-favorite-form input[type="checkbox"]:before {
     content: "\2605";
     color: white;
     visibility:visible;
- }
+}
 
  .set-favorite-form input[type="checkbox"]:checked:before {
     color: yellow;
- }
+}
 
 .toggle-switch {
     position: relative;
@@ -75,14 +75,29 @@ input:checked + .slider:before {
 }
 
 .toggle-switch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.toggle-switch-content {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 25px;
- }
+}
 
- .toggle-switch-container h3 {
+.toggle-switch-container h3 {
     padding-bottom: 15px;
- }
+}
+
+@media only screen and (min-width: 900px)  {
+    .toggle-switch-container {
+        flex-direction: row;
+    }
+
+}

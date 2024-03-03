@@ -6,6 +6,7 @@ import cx from "classnames";
 import { FC, useEffect, useState } from "react";
 import "../css/unitsToggleSwitch.css"
 import { Weather } from "../classes/Weather";
+import { Favorite } from "../classes/Favorite";
 
 
 /**
@@ -14,6 +15,7 @@ import { Weather } from "../classes/Weather";
  */
 interface UnitsToggleSwitchProps {
     weather: Weather
+    favorites: Favorite[]
     rounded: boolean
     isToggled: boolean
     handleToggleChange: any
@@ -23,6 +25,7 @@ interface UnitsToggleSwitchProps {
 
 const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({ 
         weather, 
+        favorites,
         rounded = false,  
         isToggled, 
         handleToggleChange,
@@ -42,7 +45,7 @@ const UnitToggleSwitch : FC<UnitsToggleSwitchProps> = ({
     /**
      * Set toggle switch for units.
      */
-    const { isFavorite, handleFavoriteToggleChange, temperatureUnitsLabel } = useUnitsToggle(weather);
+    const { isFavorite, handleFavoriteToggleChange, temperatureUnitsLabel } = useUnitsToggle(weather, favorites, freeTierData);
 
     useEffect(() => {
         setFreeTierData(weather.getJSONFreeTierData());

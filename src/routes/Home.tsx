@@ -55,7 +55,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, favorites, weather }): JSX.
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-    } = useUnitsToggle(weather);
+    } = useUnitsToggle(weather, favorites, freeTierData);
     
     /**
      * Manages most of daily forecast state data.
@@ -108,6 +108,7 @@ const Home : FC<HomePageProps> = ({ dateTimeUtility, favorites, weather }): JSX.
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
                     <UnitToggleSwitch weather={weather} 
+                        favorites={favorites}
                         rounded={true} 
                         isToggled={toggled} 
                         handleToggleChange={handleToggleChange}

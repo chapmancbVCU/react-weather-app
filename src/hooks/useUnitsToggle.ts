@@ -4,8 +4,9 @@
  */
 import { useEffect, useState } from "react";
 import { Weather } from "../classes/Weather";
+import { Favorite } from "../classes/Favorite";
 
-const useUnitsToggle = (weather: Weather) => {
+const useUnitsToggle = (weather: Weather, favorites: Favorite[], freeTierData: any) => {
 
     const [isFavorite, setIsFavorite] = useState<boolean>();
     /**
@@ -31,6 +32,14 @@ const useUnitsToggle = (weather: Weather) => {
         setToggleCheckedState();
     }
 
+    const handleFavoriteOnInit = (): void => {
+        for (let i: number = 0; i < favorites?.length; i++) {
+            if(favorites[i].getCity() === freeTierData?.name) {
+               setIsFavorite(true);
+            }
+        }
+    }
+
     /**
      * Set the value for the units label prop to C or F.
      */
@@ -48,6 +57,9 @@ const useUnitsToggle = (weather: Weather) => {
         else if (weather.getUnits() === "METRIC") setIsToggled(true);
     }
 
+    useEffect(() => {
+        handleFavoriteOnInit();
+    }, [freeTierData, weather])
     useEffect(() => {
         setToggleCheckedState();
         updateTemperatureUnitsLabel();

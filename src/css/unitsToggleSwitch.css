@@ -49,16 +49,20 @@ input:checked + .slider:before {
     font-size:30px;
     cursor:pointer;
     margin-bottom: 20px;
+    -moz-appearance:initial;    /* Make appear on FireFox*/
 }
 
 .set-favorite-form input[type="checkbox"]:before {
     content: "\2605";
     color: white;
+    position: absolute;
     visibility:visible;
 }
 
  .set-favorite-form input[type="checkbox"]:checked:before {
+    /* content: "\2606"; */
     color: yellow;
+    position: absolute;
 }
 
 .toggle-switch {

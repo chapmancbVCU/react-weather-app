@@ -33,9 +33,15 @@ const useUnitsToggle = (weather: Weather, favorites: Favorite[], freeTierData: a
     }
 
     const handleFavoriteOnInit = (): void => {
+        console.log("testing");
+        console.log(freeTierData)
+        setIsFavorite(false);
         for (let i: number = 0; i < favorites?.length; i++) {
+            console.log(favorites[i].getCity());
+            console.log(freeTierData?.name)
             if(favorites[i].getCity() === freeTierData?.name) {
                setIsFavorite(true);
+               break;
             }
         }
     }

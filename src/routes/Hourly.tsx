@@ -61,7 +61,7 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, favorites, weather }): J
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-    } = useUnitsToggle(weather);
+    } = useUnitsToggle(weather, favorites, freeTierData);
 
     const {
         hourlyForecast,
@@ -92,6 +92,7 @@ const Hourly : FC<HourlyPageProps> =({ dateTimeUtility, favorites, weather }): J
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />   
                     <UnitToggleSwitch weather={weather} 
+                        favorites={favorites}
                         rounded={true}
                         isToggled={toggled}
                         handleToggleChange={handleToggleChange}

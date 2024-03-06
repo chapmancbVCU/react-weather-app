@@ -5,6 +5,7 @@
 import '../css/currentConditionsBackground.css';
 import { DateTimeUtility } from '../classes/DateTimeUtility';
 import { FC, useEffect, useState } from 'react';
+import { Favorite } from '../classes/Favorite.ts';
 import { ForecastHeader } from '../components/ForecastHeader/ForecastHeader';
 import SearchBar from '../components/SearchBar';
 import UnitToggleSwitch from '../components/UnitsToggleSwitch';
@@ -18,6 +19,7 @@ import { Weather } from "../classes/Weather";
  * that are shared between components.
  */
 interface HourlyPageProps {
+    favorites: Favorite[];
     weather: Weather;
 }
 
@@ -26,7 +28,7 @@ interface HourlyPageProps {
  * @returns JSX.Element that contains the hourly forecast component.
  */
 // @ts-ignore
-const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
+const Favorites : FC<HourlyPageProps> =({ favorites, weather }): JSX.Element => {
       
     const {
         freeTierData,
@@ -51,7 +53,7 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-    } = useUnitsToggle(weather);
+    } = useUnitsToggle(weather, favorites, freeTierData);
 
     return (
         <div className={conditionsClassName}>
@@ -63,6 +65,7 @@ const Favorites : FC<HourlyPageProps> =({ weather }): JSX.Element => {
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
                     <UnitToggleSwitch weather={weather}
+                        favorites={favorites}
                         rounded={true}
                         isToggled={toggled} 
                         handleToggleChange={handleToggleChange} 

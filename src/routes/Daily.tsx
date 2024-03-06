@@ -60,7 +60,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, favorites, weather }): JS
     const { handleToggleChange,
         temperatureUnitsLabel,
         toggled,
-    } = useUnitsToggle(weather);
+    } = useUnitsToggle(weather, favorites, freeTierData);
 
     /** 
      * Hook for dailyForecastType
@@ -106,6 +106,7 @@ const Daily : FC<DailyPageProps> = ({ dateTimeUtility, favorites, weather }): JS
                         onOptionSelect={onOptionSelect}
                         onSubmit={onSubmit}  />
                     <UnitToggleSwitch weather={weather}
+                        favorites={favorites}
                         rounded={true}
                         isToggled={toggled}
                         handleToggleChange={handleToggleChange}

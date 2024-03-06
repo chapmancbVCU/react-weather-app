@@ -66,6 +66,11 @@ const useUnitsToggle = (weather: Weather, favorites: Favorite[], freeTierData: a
     useEffect(() => {
         handleFavoriteOnInit();
     }, [freeTierData, weather])
+
+    useEffect(() => {
+        handleFavoriteOnInit();
+    }, [isFavorite, weather, freeTierData])
+
     useEffect(() => {
         setToggleCheckedState();
         updateTemperatureUnitsLabel();

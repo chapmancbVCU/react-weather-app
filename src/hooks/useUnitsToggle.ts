@@ -8,7 +8,7 @@ import { Favorite } from "../classes/Favorite";
 
 const useUnitsToggle = (weather: Weather, favorites: Favorite[], freeTierData: any) => {
 
-    const [isFavorite, setIsFavorite] = useState<boolean>();
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     /**
      * @prop Label for unit of temperature measure (Ex: C or F).
      */
@@ -65,11 +65,8 @@ const useUnitsToggle = (weather: Weather, favorites: Favorite[], freeTierData: a
 
     useEffect(() => {
         handleFavoriteOnInit();
-    }, [freeTierData, weather])
-
-    useEffect(() => {
-        handleFavoriteOnInit();
-    }, [isFavorite, weather, freeTierData])
+        console.log("INIT favorite toggle" + isFavorite);
+    }, [freeTierData])
 
     useEffect(() => {
         setToggleCheckedState();

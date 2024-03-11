@@ -19,4 +19,4 @@ Still a work in progress, it currently supports the ability to switch between me
 7. Run the command "npm run dev" or "npm run dev -- --host" if you are accessing the site from another computer.
 8. Navigate to the site ${hostname/ip_address}:5173/react-weather-app
 
-Link to live site: https://chapmancbvcu.github.io/react-weather-app/
+Link to live site: http://34.224.29.159:5173/react-weather-app
